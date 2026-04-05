@@ -1,54 +1,5 @@
 [
   {
-    "id": "address",
-    "type": "text",
-    "label": {
-      "en": "IP address"
-    },
-    "value": "0.0.0.0",
-    "hint": {
-      "en": "Discovered IP address of the device."
-    }
-  },
-  {
-    "type": "group",
-    "label": {
-      "en": "Discovered device information."
-    },
-    "children": [
-      {
-        "id": "version",
-        "type": "label",
-        "label": {
-          "en": "Firmware"
-        },
-        "value": "",
-        "hint": {
-          "en": "Device firmware version."
-        }
-      },
-      {
-        "id": "type",
-        "type": "label",
-        "label": {
-          "en": "Type"
-        },
-        "value": "",
-        "hint": {
-          "en": "Device type."
-        }
-      },
-      {
-        "id": "driver",
-        "type": "label",
-        "label": {
-          "en": "Driver"
-        },
-        "value": "",
-        "hint": {
-          "en": "Driver used during pairing."
-        }
-      }
-    ]
+    "$extends": ["ipaddress", "discovered"]
   }
 ]

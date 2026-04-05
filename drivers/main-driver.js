@@ -10,7 +10,6 @@ class mainDriver extends Homey.Driver {
 
   async onPair(session) {
     const deviceDriver = this.id;
-    let deviceArray = {};
 
     session.setHandler('list_devices', async () => {
       try {
@@ -35,9 +34,8 @@ class mainDriver extends Homey.Driver {
         if (results.length > 0) return results;
 
         return {};
-      } catch (e) {
-        this.log(e);
-        throw new Error(this.homey.__('pair.error'));
+      } catch (err) {
+        throw new Error(err);
       }
     });
   }

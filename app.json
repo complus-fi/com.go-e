@@ -90,22 +90,68 @@
           "template": "done"
         }
       ],
+      "capabilities": [
+        "onoff",
+        "meter_power",
+        "meter_power.charged",
+        "meter_power.discharged",
+        "measure_power",
+        "measure_voltage",
+        "measure_voltage.output",
+        "measure_current",
+        "evcharger_charging",
+        "evcharger_charging_state",
+        "target_power",
+        "target_power_mode"
+      ],
+      "capabilityOptions": {
+        "measure_voltage.output": {
+          "type": "number",
+          "title": {
+            "en": "Output Voltage"
+          },
+          "hint": {
+            "en": "Currently delivered voltage in volts."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "V"
+          },
+          "min": 0,
+          "max": 500,
+          "insights": true
+        },
+        "target_power": {
+          "min": -11000,
+          "max": 11000,
+          "step": 230,
+          "excludeMin": -1380,
+          "excludeMax": 1380
+        }
+      },
+      "energy": {
+        "evCharger": true,
+        "meterPowerImportedCapability": "meter_power.charged",
+        "meterPowerExportedCapability": "meter_power.discharged"
+      },
+      "name": {
+        "en": "PRO",
+        "nl": "PRO",
+        "de": "PRO",
+        "fr": "PRO"
+      },
+      "id": "go-eCharger_PRO",
       "settings": [
         {
           "id": "address",
-          "type": "text",
+          "type": "group",
           "label": {
-            "en": "IP address"
+            "en": "Discovered device information."
           },
           "value": "0.0.0.0",
           "hint": {
             "en": "Discovered IP address of the device."
-          }
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Discovered device information."
           },
           "children": [
             {
@@ -143,57 +189,7 @@
             }
           ]
         }
-      ],
-      "name": {
-        "en": "PRO",
-        "nl": "PRO",
-        "de": "PRO",
-        "fr": "PRO"
-      },
-      "capabilities": [
-        "onoff",
-        "measure_power",
-        "meter_power",
-        "meter_power.session",
-        "measure_voltage",
-        "measure_voltage.output",
-        "measure_current"
-      ],
-      "capabilityOptions": {
-        "meter_power.session": {
-          "type": "number",
-          "title": {
-            "en": "Energy Last Session"
-          },
-          "hint:": {
-            "en": "Energy (kWh) delivered during last session. Reset automatically when a car is connected."
-          },
-          "getable": true,
-          "setable": false,
-          "units": {
-            "en": "kWh"
-          },
-          "insights": true
-        },
-        "measure_voltage.output": {
-          "type": "number",
-          "title": {
-            "en": "Output Voltage"
-          },
-          "hint": {
-            "en": "Currently delivered voltage in volts."
-          },
-          "getable": true,
-          "setable": false,
-          "units": {
-            "en": "V"
-          },
-          "min": 0,
-          "max": 500,
-          "insights": true
-        }
-      },
-      "id": "go-eCharger_PRO"
+      ]
     }
   ],
   "discovery": {

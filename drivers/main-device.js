@@ -1,6 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
+const { sleep } = require('../lib/helpers');
 const goeCharger = require('../lib/go-eCharger-API-v2');
 
 const POLL_INTERVAL = 5000;
@@ -17,6 +18,8 @@ class mainDevice extends Homey.Device {
     this.api = new goeCharger();
     this.api.address = settings.address;
     this.api.driver = this.driver.id;
+
+    await this.checkCapabilities();
 
     this.setSettings({
       driver: this.api.driver
@@ -62,7 +65,7 @@ class mainDevice extends Homey.Device {
    * @param {string} name The new name
    */
   async onRenamed(name) {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} was renamed.`);
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} was renamed to ${name}.`);
   }
 
   /**
@@ -109,6 +112,62 @@ class mainDevice extends Homey.Device {
     //	address: this.api.address,
     //});
     //this.setUnavailable('Discovery device offline.').catch(() => {});
+  }
+
+  async clearIntervals() {
+    try {
+      this.log(`[Device] ${this.getName()}: ${this.getData().id} clearIntervals`);
+      clearInterval(this.onPollInterval);
+    } catch (error) {
+      this.log(error);
+    }
+  }
+
+  // ------------- Check if Capabilities has changed and update them -------------
+  async checkCapabilities() {
+    try {
+      const driverManifest = this.driver.manifest;
+      const driverCapabilities = driverManifest.capabilities;
+      const deviceCapabilities = this.getCapabilities();
+
+      this.log(`[Device] ${this.getName()} - checkCapabilities for`, driverManifest.id);
+      this.log(`[Device] ${this.getName()} - Found capabilities =>`, deviceCapabilities);
+
+      await this.updateCapabilities(driverCapabilities, deviceCapabilities);
+
+      return deviceCapabilities;
+    } catch (error) {
+      this.log(error);
+    }
+  }
+
+  async updateCapabilities(driverCapabilities, deviceCapabilities) {
+    try {
+      const newC = driverCapabilities.filter((d) => !deviceCapabilities.includes(d));
+      const oldC = deviceCapabilities.filter((d) => !driverCapabilities.includes(d));
+
+      this.log(`[Device] ${this.getName()} - Got old capabilities =>`, oldC);
+      this.log(`[Device] ${this.getName()} - Got new capabilities =>`, newC);
+
+      // Remove old capabilities with delay between each
+      for (const c of oldC) {
+        this.log(`[Device] ${this.getName()} - updateCapabilities => Remove `, c);
+        this.removeCapability(c);
+        await sleep(500);
+      }
+      await sleep(2000);
+
+      // Add new capabilities with delay between each
+      for (const c of newC) {
+        this.log(`[Device] ${this.getName()} - updateCapabilities => Add `, c);
+        this.addCapability(c);
+        await sleep(500);
+      }
+
+      await sleep(1000);
+    } catch (error) {
+      this.log(error);
+    }
   }
 }
 
