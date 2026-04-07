@@ -215,9 +215,17 @@ class mainDevice extends Homey.Device {
         await this.setCapabilityValue('evcharger_charging', status.alw).catch(this.error);
       }
 
-      // evcharger_charging_state from car
-      if (status.car !== undefined && statusMap[status.car]) {
-        await this.setCapabilityValue('evcharger_charging_state', statusMap[status.car]).catch(this.error);
+      // car status mapping:
+      // - status 5 (error): keep last known charging_state and raise alarm_problem
+      // - other known statuses: update charging_state and clear alarm_problem
+      if (status.car !== undefined) {
+        if (this.hasCapability('alarm_problem')) {
+          await this.setCapabilityValue('alarm_problem', status.car === 5).catch(this.error);
+        }
+
+        if (status.car !== 5 && statusMap[status.car]) {
+          await this.setCapabilityValue('evcharger_charging_state', statusMap[status.car]).catch(this.error);
+        }
       }
 
       // target_power from amp + fsp

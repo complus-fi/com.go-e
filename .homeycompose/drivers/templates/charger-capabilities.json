@@ -2,6 +2,7 @@
   "capabilities": [
     "meter_power",
     "meter_power.session",
+    "alarm_problem",
     "measure_power",
     "measure_voltage",
     "measure_voltage.output",
