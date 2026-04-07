@@ -17,3 +17,6 @@ Thumbs.db
 /node_modules/
 /.homeybuild/
 package-lock.json
+
+# Temporary files
+/OLD-app/

@@ -93,8 +93,8 @@
       "capabilities": [
         "onoff",
         "meter_power",
+        "meter_power.session",
         "meter_power.charged",
-        "meter_power.discharged",
         "measure_power",
         "measure_voltage",
         "measure_voltage.output",
@@ -105,6 +105,21 @@
         "target_power_mode"
       ],
       "capabilityOptions": {
+        "meter_power.session": {
+          "type": "number",
+          "title": {
+            "en": "Energy Last Session"
+          },
+          "hint:": {
+            "en": "Energy (kWh) delivered during last session. Reset automatically when a car is connected."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "kWh"
+          },
+          "insights": true
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -132,14 +147,10 @@
       },
       "energy": {
         "evCharger": true,
-        "meterPowerImportedCapability": "meter_power.charged",
-        "meterPowerExportedCapability": "meter_power.discharged"
+        "meterPowerImportedCapability": "meter_power.charged"
       },
       "name": {
-        "en": "PRO",
-        "nl": "PRO",
-        "de": "PRO",
-        "fr": "PRO"
+        "en": "PRO"
       },
       "id": "go-eCharger_PRO",
       "settings": [
