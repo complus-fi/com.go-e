@@ -1,9 +1,7 @@
 {
   "capabilities": [
-    "onoff",
     "meter_power",
     "meter_power.session",
-    "meter_power.charged",
     "measure_power",
     "measure_voltage",
     "measure_voltage.output",
@@ -13,7 +11,7 @@
     "target_power",
     "target_power_mode"
   ],
-  "capabilityOptions": {
+  "capabilitiesOptions": {
     "meter_power.session": {
       "type": "number",
       "title": {
@@ -47,15 +45,15 @@
       "insights": true
     },
     "target_power": {
-      "min": -11000,
-      "max": 11000,
+      "min": 0,
+      "max": 22080,
       "step": 230,
-      "excludeMin": -1380,
+      "excludeMin": 0,
       "excludeMax": 1380
     }
   },
   "energy": {
     "evCharger": true,
-    "meterPowerImportedCapability": "meter_power.charged"
+    "meterPowerImportedCapability": "meter_power"
   }
 }

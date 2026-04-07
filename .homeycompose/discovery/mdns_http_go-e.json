@@ -20,6 +20,20 @@
           "type": "string",
           "value": "goecharger"
         }
+      },
+      {
+        "field": "txt.devicetype",
+        "match": {
+          "type": "string",
+          "value": "go-eCharger_Phoenix"
+        }
+      },
+      {
+        "field": "txt.devicesubtype",
+        "match": {
+          "type": "regex",
+          "value": "^pro"
+        }
       }
     ]
   ]
