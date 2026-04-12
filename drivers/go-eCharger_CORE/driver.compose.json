@@ -1,7 +1,7 @@
 {
   "name": {
-    "en": "PRO"
+    "en": "CORE"
   },
-  "discovery": "mdns_http_go-e_pro",
+  "discovery": "mdns_http_go-e_core",
   "$extends": ["local", "charger-capabilities", "charger-settings"]
 }
