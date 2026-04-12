@@ -3,7 +3,7 @@
 const Homey = require('homey');
 const { sleep } = require('../lib/helpers');
 const goeCharger = require('../lib/go-eCharger-API-v2');
-const { getStatusAttributes, statusMap } = require('../lib/mappings');
+const { getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
 
 const POLL_INTERVAL = 5000;
 
@@ -26,9 +26,33 @@ class mainDevice extends Homey.Device {
       driver: this.api.driver
     });
 
-    this.api.attributes = getStatusAttributes(this.getCapabilities());
-    this.maxAmps = 16;
+    this.api.apiKeys = getStatusAttributes(this.getCapabilities(), { firmwareVersion: this.getSettings().version });
+    this.pollErrorMessage = null;
     this.registerCapabilityListeners();
+  }
+
+  getErrorMessage(error, fallback = 'Unknown error') {
+    if (!error) return fallback;
+    if (typeof error === 'string') return error;
+    if (error.message) return error.message;
+    return fallback;
+  }
+
+  async updateTargetPowerCapabilityMax(ama) {
+    if (!this.hasCapability('target_power')) return;
+
+    const maxAmps = Number(ama);
+    if (!Number.isFinite(maxAmps) || maxAmps <= 0) return;
+
+    // target_power max should follow charger amp limit, expressed in watts.
+    const maxWatts = Math.round(maxAmps * 690);
+    const options = this.getCapabilityOptions('target_power') || {};
+    if (options.max === maxWatts) return;
+
+    await this.setCapabilityOptions('target_power', {
+      ...options,
+      max: maxWatts
+    });
   }
 
   /**
@@ -48,7 +72,14 @@ class mainDevice extends Homey.Device {
    */
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} settings where changed: ${changedKeys}`);
-    this.api.address = newSettings.address;
+    const newAddress = typeof newSettings.address === 'string' ? newSettings.address.trim() : '';
+    const oldAddress = typeof oldSettings.address === 'string' ? oldSettings.address.trim() : '';
+
+    if (!newAddress || newAddress === oldAddress) {
+      return;
+    }
+
+    this.api.address = newAddress;
     try {
       const isConnected = await this.api.testConnection();
       if (!isConnected) {
@@ -182,121 +213,109 @@ class mainDevice extends Homey.Device {
     this.registerMultipleCapabilityListener(
       ['target_power', 'target_power_mode', 'evcharger_charging'],
       async ({ target_power, target_power_mode, evcharger_charging }) => {
-        if (target_power_mode === 'device') {
-          await this.api.setValue('frc', 0); // neutral — device controls itself
-          return;
-        }
+        try {
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { target_power, target_power_mode, evcharger_charging });
 
-        if (evcharger_charging === false) {
-          await this.api.setValue('frc', 1); // force off
-          return;
-        }
+          const context = { api: this.api, maxAmps: this.maxAmps, firmwareVersion: this.getSettings().version };
 
-        const isCharging = evcharger_charging === true || this.getCapabilityValue('evcharger_charging');
-        const watts = target_power ?? this.getCapabilityValue('target_power') ?? 0;
+          if (target_power_mode === 'device') {
+            const apiValues = mapHomeyToApiValues({ target_power_mode: 'device' }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+            await this.applyApiValues(apiValues);
+            return;
+          }
 
-        if (evcharger_charging === true || (target_power != null && isCharging)) {
-          await this.api.setValue('frc', 2); // force on
-          await this.api.setChargerPower(watts, this.maxAmps);
+          if (evcharger_charging === false) {
+            const apiValues = mapHomeyToApiValues({ evcharger_charging: false }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+            await this.applyApiValues(apiValues);
+            return;
+          }
+
+          const watts = target_power ?? this.getCapabilityValue('target_power') ?? 0;
+
+          // A target_power slider change must always issue a charger command.
+          if (target_power !== undefined) {
+            const powerValues = mapHomeyToApiValues({ target_power: watts }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+            await this.applyApiValues(powerValues);
+            return;
+          }
+
+          if (evcharger_charging === true) {
+            const forceOnValues = mapHomeyToApiValues({ evcharger_charging: true }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+            await this.applyApiValues(forceOnValues);
+          }
+        } catch (error) {
+          const message = this.getErrorMessage(error, 'Failed to apply charger command');
+          this.log(`[Device] ${this.getName()} - capability command error: ${message}`);
+          throw new Error(message);
         }
       },
       500
     );
   }
 
+  async applyApiValues(apiValues = {}) {
+    const orderedKeys = ['frc', 'amp', 'psm', 'fsp'];
+
+    const orderedApiValues = {};
+    for (const key of orderedKeys) {
+      if (apiValues[key] !== undefined) {
+        orderedApiValues[key] = apiValues[key];
+      }
+    }
+    for (const [key, value] of Object.entries(apiValues)) {
+      if (orderedKeys.includes(key)) continue;
+      if (value === undefined) continue;
+      orderedApiValues[key] = value;
+    }
+
+    if (Object.keys(orderedApiValues).length === 0) return;
+
+    try {
+      await this.api.setValues(orderedApiValues);
+    } catch (error) {
+      const message = this.getErrorMessage(error, 'Failed to apply API values');
+      throw new Error(message);
+    }
+  }
+
   async onPoll() {
     try {
       const status = await this.api.getStatus();
+      this.log(`[Device] ${this.getName()} - onPoll status:`, status);
 
-      if (status.ama !== undefined) this.maxAmps = status.ama;
-
-      // evcharger_charging from alw
-      if (status.alw !== undefined) {
-        await this.setCapabilityValue('evcharger_charging', status.alw).catch(this.error);
+      if (this.pollErrorMessage) {
+        this.pollErrorMessage = null;
+        await this.setAvailable().catch(() => {});
       }
 
-      // car status mapping:
-      // - status 5 (error): keep last known charging_state and raise alarm_problem
-      // - other known statuses: update charging_state and clear alarm_problem
-      if (status.car !== undefined) {
-        if (this.hasCapability('alarm_problem')) {
-          await this.setCapabilityValue('alarm_problem', status.car === 5).catch(this.error);
-        }
-
-        if (status.car !== 5 && statusMap[status.car]) {
-          await this.setCapabilityValue('evcharger_charging_state', statusMap[status.car]).catch(this.error);
+      if (status.fwv !== undefined && status.fwv !== null) {
+        const firmwareVersion = String(status.fwv).trim();
+        const currentVersion = String(this.getSettings().version || '').trim();
+        if (firmwareVersion && firmwareVersion !== currentVersion) {
+          await this.setSettings({ version: firmwareVersion });
+          this.api.apiKeys = getStatusAttributes(this.getCapabilities(), { firmwareVersion });
+          this.log(`[Device] ${this.getName()} - firmware updated to ${firmwareVersion}`);
         }
       }
 
-      // target_power from amp + fsp
-      if (status.amp !== undefined && status.fsp !== undefined) {
-        await this.setCapabilityValue('target_power', this.api.chargerConfigToWatts(status.amp, status.fsp)).catch(this.error);
+      if (status.ama !== undefined) {
+        this.maxAmps = Number(status.ama);
+        await this.updateTargetPowerCapabilityMax(this.maxAmps);
       }
 
-      // meter_power from eto (Wh → kWh)
-      if (status.eto > 0) {
-        await this.setCapabilityValue('meter_power', Number((status.eto / 1000).toFixed(1))).catch(this.error);
-      }
-
-      // meter_power.session from wh (Wh → kWh, resets when car connects)
-      if (status.wh !== undefined) {
-        await this.setCapabilityValue('meter_power.session', Number((status.wh / 1000).toFixed(1))).catch(this.error);
-      }
-
-      // nrg array: nrg[0-2]=V per phase, nrg[4-6]=A per phase, nrg[11]=total W
-      // pha array: pha[0-2]=output phases active, pha[3-5]=input phases active
-      if (Array.isArray(status.nrg)) {
-        if (status.nrg[11] > 0) {
-          await this.setCapabilityValue('measure_power', Number(status.nrg[11].toFixed(1))).catch(this.error);
-        }
-
-        let numPhases = 0;
-        if (status.nrg[4] > 0) numPhases++;
-        if (status.nrg[5] > 0) numPhases++;
-        if (status.nrg[6] > 0) numPhases++;
-        if (numPhases > 0) {
-          const avgCurrent = (status.nrg[4] + status.nrg[5] + status.nrg[6]) / numPhases;
-          await this.setCapabilityValue('measure_current', Number(avgCurrent.toFixed(1))).catch(this.error);
-        }
-
-        if (Array.isArray(status.pha)) {
-          let vInSum = 0;
-          let nInPhases = 0;
-          if (status.pha[3]) {
-            vInSum += status.nrg[0];
-            nInPhases++;
-          }
-          if (status.pha[4]) {
-            vInSum += status.nrg[1];
-            nInPhases++;
-          }
-          if (status.pha[5]) {
-            vInSum += status.nrg[2];
-            nInPhases++;
-          }
-          const vIn = nInPhases === 3 ? Number(((vInSum / nInPhases) * Math.sqrt(3)).toFixed(1)) : vInSum || Number(status.nrg[3].toFixed(1));
-          await this.setCapabilityValue('measure_voltage', vIn).catch(this.error);
-
-          let vOutSum = 0;
-          let nOutPhases = 0;
-          if (status.pha[0]) {
-            vOutSum += status.nrg[0];
-            nOutPhases++;
-          }
-          if (status.pha[1]) {
-            vOutSum += status.nrg[1];
-            nOutPhases++;
-          }
-          if (status.pha[2]) {
-            vOutSum += status.nrg[2];
-            nOutPhases++;
-          }
-          const vOut = nOutPhases === 3 ? Number(((vOutSum / nOutPhases) * Math.sqrt(3)).toFixed(1)) : vOutSum || Number(status.nrg[3].toFixed(1));
-          await this.setCapabilityValue('measure_voltage.output', vOut).catch(this.error);
-        }
+      const nextValues = mapStatusToCapabilities(status, this.getCapabilities(), this.api);
+      for (const [capability, value] of Object.entries(nextValues)) {
+        if (!this.hasCapability(capability)) continue;
+        if (value === undefined || value === null) continue;
+        await this.setCapabilityValue(capability, value).catch(this.error);
       }
     } catch (error) {
-      this.log(`[Device] ${this.getName()} - onPoll error:`, error);
+      const message = this.getErrorMessage(error, 'Polling failed');
+      if (this.pollErrorMessage !== message) {
+        this.pollErrorMessage = message;
+        this.log(`[Device] ${this.getName()} - onPoll error: ${message}`);
+      }
+      this.setUnavailable(`Connection issue: ${message}`).catch(() => {});
     }
   }
 }

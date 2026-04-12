@@ -91,6 +91,7 @@
         }
       ],
       "capabilities": [
+        "measure_temperature",
         "meter_power",
         "meter_power.session",
         "alarm_problem",
@@ -155,13 +156,20 @@
       "settings": [
         {
           "id": "address",
-          "type": "group",
+          "type": "text",
           "label": {
-            "en": "Discovered device information."
+            "en": "IP address"
           },
           "value": "0.0.0.0",
           "hint": {
             "en": "Discovered IP address of the device."
+          },
+          "highlight": true
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Discovered device information."
           },
           "children": [
             {

@@ -1,5 +1,6 @@
 {
   "capabilities": [
+    "measure_temperature",
     "meter_power",
     "meter_power.session",
     "alarm_problem",
