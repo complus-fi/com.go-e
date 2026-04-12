@@ -1,5 +1,8 @@
 {
   "0.1.0": {
     "en": "New official Go-e App for the Gemini, CORE and PRO evChargers"
+  },
+  "0.1.1": {
+    "en": "FIX: driver exports"
   }
 }
