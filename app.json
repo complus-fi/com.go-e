@@ -13,7 +13,19 @@
     "en": "Go-e"
   },
   "description": {
-    "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently."
+    "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently.",
+    "nl": "Laad slim en eenvoudig. Laad je elektrische auto tegen een lage kostprijs en intelligent op.",
+    "da": "Lad smart og enkelt. Lad din elbil til en lav pris og intelligent.",
+    "de": "Einfach intelligent laden. Laden Sie Ihr Elektroauto zu einem niedrigen Preis und intelligent auf.",
+    "es": "Carga inteligente y sencilla. Carga tu coche eléctrico a un bajo costo e inteligentemente.",
+    "fr": "Chargez intelligemment et simplement. Chargez votre voiture électrique à un coût bas et de manière intelligente.",
+    "it": "Carica in modo intelligente e semplice. Carica la tua auto elettrica a basso costo e in modo intelligente.",
+    "no": "Lad smart og enkelt. Lad din elbil til en lav pris og intelligent.",
+    "sv": "Ladda smart och enkelt. Ladda din elbil till en låg kostnad och intelligent.",
+    "pl": "Ładuj inteligentnie i prosto. Ładuj swój samochód elektryczny tanio i inteligentnie.",
+    "ru": "Просто заряжайте умно. Заряжайте свой электромобиль по низкой цене и интеллектуально.",
+    "ko": "스마트하고 간단하게 충전하세요. 저렴한 비용으로 전기차를 지능적으로 충전하세요.",
+    "ar": "اشحن بذكاء وببساطة. اشحن سيارتك الكهربائية بتكلفة منخفضة وبذكاء."
   },
   "category": [
     "energy"
@@ -384,17 +396,17 @@
       "name": {
         "en": "CORE",
         "nl": "CORE",
-        "da": "KERNE",
-        "de": "KERN",
-        "es": "NÚCLEO",
-        "fr": "COEUR",
+        "da": "CORE",
+        "de": "CORE",
+        "es": "CORE",
+        "fr": "CORE",
         "it": "CORE",
-        "no": "KJERNE",
-        "sv": "KÄRNA",
-        "pl": "RDZEŃ",
-        "ru": "ЯДРО",
-        "ko": "코어",
-        "ar": "النواة"
+        "no": "CORE",
+        "sv": "CORE",
+        "pl": "CORE",
+        "ru": "CORE",
+        "ko": "CORE",
+        "ar": "CORE"
       },
       "discovery": "mdns_http_go-e_core",
       "id": "go-eCharger_CORE"
@@ -725,19 +737,19 @@
         "meterPowerImportedCapability": "meter_power"
       },
       "name": {
-        "en": "CORE",
-        "nl": "KERN",
-        "da": "KERNE",
-        "de": "KERN",
-        "es": "NUCLEO",
-        "fr": "COEUR",
-        "it": "CORE",
-        "no": "KJERNE",
-        "sv": "KÄRNA",
-        "pl": "RDZEŃ",
-        "ru": "ЯДРО",
-        "ko": "코어",
-        "ar": "النواة"
+        "en": "Gemini",
+        "nl": "Gemini",
+        "da": "Gemini",
+        "de": "Gemini",
+        "es": "Gemini",
+        "fr": "Gemini",
+        "it": "Gemini",
+        "no": "Gemini",
+        "sv": "Gemini",
+        "pl": "Gemini",
+        "ru": "Gemini",
+        "ko": "Gemini",
+        "ar": "Gemini"
       },
       "discovery": "mdns_http_go-e_gemini",
       "id": "go-eCharger_Gemini"
@@ -1078,9 +1090,9 @@
         "no": "PRO",
         "sv": "PRO",
         "pl": "PRO",
-        "ru": "ПРО",
-        "ko": "프로",
-        "ar": "برو"
+        "ru": "PRO",
+        "ko": "PRO",
+        "ar": "PRO"
       },
       "discovery": "mdns_http_go-e_pro",
       "id": "go-eCharger_PRO"
