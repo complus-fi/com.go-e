@@ -5,19 +5,14 @@
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
-  "platforms": [
-    "local",
-    "cloud"
-  ],
+  "platforms": ["local", "cloud"],
   "name": {
     "en": "Go-e"
   },
   "description": {
     "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently."
   },
-  "category": [
-    "energy"
-  ],
+  "category": ["energy"],
   "permissions": [],
   "images": {
     "small": "/assets/images/small.png",
@@ -30,14 +25,7 @@
   },
   "brandColor": "#0a58a9",
   "tags": {
-    "en": [
-      "ev",
-      "electric vehicle",
-      "charge",
-      "charger",
-      "charging",
-      "car"
-    ]
+    "en": ["ev", "electric vehicle", "charge", "charger", "charging", "car"]
   },
   "contributing": {
     "donate": {
@@ -58,12 +46,8 @@
   "drivers": [
     {
       "class": "evcharger",
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "lan"
-      ],
+      "platforms": ["local"],
+      "connectivity": ["lan"],
       "images": {
         "small": "/drivers/go-eCharger_PRO/assets/images/small.png",
         "large": "/drivers/go-eCharger_PRO/assets/images/large.png",
@@ -101,8 +85,7 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
-        "target_power_mode"
+        "target_power"
       ],
       "capabilitiesOptions": {
         "meter_power.session": {

@@ -10,8 +10,7 @@
     "measure_current",
     "evcharger_charging",
     "evcharger_charging_state",
-    "target_power",
-    "target_power_mode"
+    "target_power"
   ],
   "capabilitiesOptions": {
     "meter_power.session": {

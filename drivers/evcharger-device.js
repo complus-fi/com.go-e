@@ -201,12 +201,6 @@ class mainDevice extends Homey.Device {
         this.log(`[Device] ${this.getName()} - updateCapabilities => Add `, c);
         await this.addCapability(c);
 
-        if (c === 'target_power_mode') {
-          await this.setCapabilityValue('target_power_mode', 'device').catch((error) => {
-            this.log(`[Device] ${this.getName()} - failed to initialize target_power_mode:`, error);
-          });
-        }
-
         await sleep(500);
       }
 
@@ -218,18 +212,12 @@ class mainDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['target_power', 'target_power_mode', 'evcharger_charging'],
-      async ({ target_power, target_power_mode, evcharger_charging }) => {
+      ['target_power', 'evcharger_charging'],
+      async ({ target_power, evcharger_charging }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { target_power, target_power_mode, evcharger_charging });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { target_power, evcharger_charging });
 
           const context = { api: this.api, maxAmps: this.maxAmps, firmwareVersion: this.getSettings().version };
-
-          if (target_power_mode === 'device') {
-            const apiValues = mapHomeyToApiValues({ target_power_mode: 'device' }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-            await this.applyApiValues(apiValues);
-            return;
-          }
 
           if (evcharger_charging === false) {
             const apiValues = mapHomeyToApiValues({ evcharger_charging: false }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
