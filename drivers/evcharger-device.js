@@ -22,7 +22,7 @@ class mainDevice extends Homey.Device {
 
     await this.checkCapabilities();
 
-    this.setSettings({
+    await this.setSettings({
       driver: this.api.driver
     });
 
@@ -191,7 +191,7 @@ class mainDevice extends Homey.Device {
       // Remove old capabilities with delay between each
       for (const c of oldC) {
         this.log(`[Device] ${this.getName()} - updateCapabilities => Remove `, c);
-        this.removeCapability(c);
+        await this.removeCapability(c);
         await sleep(500);
       }
       await sleep(2000);
@@ -199,7 +199,14 @@ class mainDevice extends Homey.Device {
       // Add new capabilities with delay between each
       for (const c of newC) {
         this.log(`[Device] ${this.getName()} - updateCapabilities => Add `, c);
-        this.addCapability(c);
+        await this.addCapability(c);
+
+        if (c === 'target_power_mode') {
+          await this.setCapabilityValue('target_power_mode', 'device').catch((error) => {
+            this.log(`[Device] ${this.getName()} - failed to initialize target_power_mode:`, error);
+          });
+        }
+
         await sleep(500);
       }
 
