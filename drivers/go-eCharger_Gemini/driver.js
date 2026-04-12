@@ -2,4 +2,4 @@
 
 const evChargerDriver = require('../evcharger-driver');
 
-module.exports = class goeChargerDriver extends mainDriver {};
+module.exports = class goeChargerDriver extends evChargerDriver {};

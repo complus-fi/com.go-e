@@ -332,4 +332,4 @@ class evChargerDevice extends Homey.Device {
   }
 }
 
-module.exports = mainDevice;
+module.exports = evChargerDevice;

@@ -41,4 +41,4 @@ class evChargerDriver extends Homey.Driver {
   }
 }
 
-module.exports = mainDriver;
+module.exports = evChargerDriver;
