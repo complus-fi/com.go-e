@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.go-e",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -57,6 +57,361 @@
   "support": "https://github.com/complus-fi/com.go-e/issues",
   "drivers": [
     {
+      "0": {
+        "id": "address",
+        "type": "text",
+        "label": {
+          "en": "IP address"
+        },
+        "value": "0.0.0.0",
+        "hint": {
+          "en": "Discovered IP address of the device."
+        },
+        "highlight": true
+      },
+      "1": {
+        "type": "group",
+        "label": {
+          "en": "Discovered device information."
+        },
+        "children": [
+          {
+            "id": "version",
+            "type": "label",
+            "label": {
+              "en": "Firmware"
+            },
+            "value": "",
+            "hint": {
+              "en": "Device firmware version."
+            }
+          },
+          {
+            "id": "type",
+            "type": "label",
+            "label": {
+              "en": "Type"
+            },
+            "value": "",
+            "hint": {
+              "en": "Device type."
+            }
+          },
+          {
+            "id": "driver",
+            "type": "label",
+            "label": {
+              "en": "Driver"
+            },
+            "value": "",
+            "hint": {
+              "en": "Driver used during pairing."
+            }
+          }
+        ]
+      },
+      "class": "evcharger",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/go-eCharger_CORE/assets/images/small.png",
+        "large": "/drivers/go-eCharger_CORE/assets/images/large.png",
+        "xlarge": "/drivers/go-eCharger_CORE/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "capabilities": [
+        "measure_temperature",
+        "meter_power",
+        "meter_power.session",
+        "alarm_problem",
+        "measure_power",
+        "measure_voltage",
+        "measure_voltage.output",
+        "measure_current",
+        "evcharger_charging",
+        "evcharger_charging_state",
+        "target_power",
+        "target_power_mode"
+      ],
+      "capabilitiesOptions": {
+        "meter_power.session": {
+          "type": "number",
+          "title": {
+            "en": "Energy Last Session"
+          },
+          "hint:": {
+            "en": "Energy (kWh) delivered during last session. Reset automatically when a car is connected."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "kWh"
+          },
+          "insights": true
+        },
+        "measure_voltage.output": {
+          "type": "number",
+          "title": {
+            "en": "Output Voltage"
+          },
+          "hint": {
+            "en": "Currently delivered voltage in volts."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "V"
+          },
+          "min": 0,
+          "max": 500,
+          "insights": true
+        },
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        }
+      },
+      "energy": {
+        "evCharger": true,
+        "meterPowerImportedCapability": "meter_power"
+      },
+      "name": {
+        "en": "CORE"
+      },
+      "discovery": "mdns_http_go-e_core",
+      "id": "go-eCharger_CORE"
+    },
+    {
+      "0": {
+        "id": "address",
+        "type": "text",
+        "label": {
+          "en": "IP address"
+        },
+        "value": "0.0.0.0",
+        "hint": {
+          "en": "Discovered IP address of the device."
+        },
+        "highlight": true
+      },
+      "1": {
+        "type": "group",
+        "label": {
+          "en": "Discovered device information."
+        },
+        "children": [
+          {
+            "id": "version",
+            "type": "label",
+            "label": {
+              "en": "Firmware"
+            },
+            "value": "",
+            "hint": {
+              "en": "Device firmware version."
+            }
+          },
+          {
+            "id": "type",
+            "type": "label",
+            "label": {
+              "en": "Type"
+            },
+            "value": "",
+            "hint": {
+              "en": "Device type."
+            }
+          },
+          {
+            "id": "driver",
+            "type": "label",
+            "label": {
+              "en": "Driver"
+            },
+            "value": "",
+            "hint": {
+              "en": "Driver used during pairing."
+            }
+          }
+        ]
+      },
+      "class": "evcharger",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/go-eCharger_Gemini/assets/images/small.png",
+        "large": "/drivers/go-eCharger_Gemini/assets/images/large.png",
+        "xlarge": "/drivers/go-eCharger_Gemini/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "capabilities": [
+        "measure_temperature",
+        "meter_power",
+        "meter_power.session",
+        "alarm_problem",
+        "measure_power",
+        "measure_voltage",
+        "measure_voltage.output",
+        "measure_current",
+        "evcharger_charging",
+        "evcharger_charging_state",
+        "target_power",
+        "target_power_mode"
+      ],
+      "capabilitiesOptions": {
+        "meter_power.session": {
+          "type": "number",
+          "title": {
+            "en": "Energy Last Session"
+          },
+          "hint:": {
+            "en": "Energy (kWh) delivered during last session. Reset automatically when a car is connected."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "kWh"
+          },
+          "insights": true
+        },
+        "measure_voltage.output": {
+          "type": "number",
+          "title": {
+            "en": "Output Voltage"
+          },
+          "hint": {
+            "en": "Currently delivered voltage in volts."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "V"
+          },
+          "min": 0,
+          "max": 500,
+          "insights": true
+        },
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        }
+      },
+      "energy": {
+        "evCharger": true,
+        "meterPowerImportedCapability": "meter_power"
+      },
+      "name": {
+        "en": "CORE"
+      },
+      "discovery": "mdns_http_go-e_gemini",
+      "id": "go-eCharger_Gemini"
+    },
+    {
+      "0": {
+        "id": "address",
+        "type": "text",
+        "label": {
+          "en": "IP address"
+        },
+        "value": "0.0.0.0",
+        "hint": {
+          "en": "Discovered IP address of the device."
+        },
+        "highlight": true
+      },
+      "1": {
+        "type": "group",
+        "label": {
+          "en": "Discovered device information."
+        },
+        "children": [
+          {
+            "id": "version",
+            "type": "label",
+            "label": {
+              "en": "Firmware"
+            },
+            "value": "",
+            "hint": {
+              "en": "Device firmware version."
+            }
+          },
+          {
+            "id": "type",
+            "type": "label",
+            "label": {
+              "en": "Type"
+            },
+            "value": "",
+            "hint": {
+              "en": "Device type."
+            }
+          },
+          {
+            "id": "driver",
+            "type": "label",
+            "label": {
+              "en": "Driver"
+            },
+            "value": "",
+            "hint": {
+              "en": "Driver used during pairing."
+            }
+          }
+        ]
+      },
       "class": "evcharger",
       "platforms": [
         "local"
@@ -69,7 +424,6 @@
         "large": "/drivers/go-eCharger_PRO/assets/images/large.png",
         "xlarge": "/drivers/go-eCharger_PRO/assets/images/xlarge.png"
       },
-      "discovery": "mdns_http_go-e",
       "pair": [
         {
           "id": "list_devices",
@@ -152,66 +506,78 @@
       "name": {
         "en": "PRO"
       },
-      "id": "go-eCharger_PRO",
-      "settings": [
-        {
-          "id": "address",
-          "type": "text",
-          "label": {
-            "en": "IP address"
-          },
-          "value": "0.0.0.0",
-          "hint": {
-            "en": "Discovered IP address of the device."
-          },
-          "highlight": true
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Discovered device information."
-          },
-          "children": [
-            {
-              "id": "version",
-              "type": "label",
-              "label": {
-                "en": "Firmware"
-              },
-              "value": "",
-              "hint": {
-                "en": "Device firmware version."
-              }
-            },
-            {
-              "id": "type",
-              "type": "label",
-              "label": {
-                "en": "Type"
-              },
-              "value": "",
-              "hint": {
-                "en": "Device type."
-              }
-            },
-            {
-              "id": "driver",
-              "type": "label",
-              "label": {
-                "en": "Driver"
-              },
-              "value": "",
-              "hint": {
-                "en": "Driver used during pairing."
-              }
-            }
-          ]
-        }
-      ]
+      "discovery": "mdns_http_go-e_pro",
+      "id": "go-eCharger_PRO"
     }
   ],
   "discovery": {
-    "mdns_http_go-e": {
+    "mdns_http_go-e_core": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "name": "http",
+        "protocol": "tcp"
+      },
+      "id": "{{txt.serial}}",
+      "conditions": [
+        [
+          {
+            "field": "txt.manufacturer",
+            "match": {
+              "type": "string",
+              "value": "go-e"
+            }
+          },
+          {
+            "field": "txt.devicefamily",
+            "match": {
+              "type": "string",
+              "value": "goecharger"
+            }
+          },
+          {
+            "field": "txt.devicetype",
+            "match": {
+              "type": "string",
+              "value": "go-eCharger_Pro"
+            }
+          }
+        ]
+      ]
+    },
+    "mdns_http_go-e_gemini": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "name": "http",
+        "protocol": "tcp"
+      },
+      "id": "{{txt.serial}}",
+      "conditions": [
+        [
+          {
+            "field": "txt.manufacturer",
+            "match": {
+              "type": "string",
+              "value": "go-e"
+            }
+          },
+          {
+            "field": "txt.devicefamily",
+            "match": {
+              "type": "string",
+              "value": "goecharger"
+            }
+          },
+          {
+            "field": "txt.devicetype",
+            "match": {
+              "type": "string",
+              "value": "go-eCharger_V4"
+            }
+          }
+        ]
+      ]
+    },
+    "mdns_http_go-e_pro": {
       "type": "mdns-sd",
       "mdns-sd": {
         "name": "http",

@@ -1,5 +1,8 @@
 {
   "1.0.0": {
     "en": "First version!"
+  },
+  "0.1.0": {
+    "en": "New official Go-e App for evChargers"
   }
 }
