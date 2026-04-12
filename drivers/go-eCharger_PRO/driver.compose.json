@@ -2,5 +2,5 @@
   "name": {
     "en": "PRO"
   },
-  "$extends": ["local", "charger-capabilities"]
+  "$extends": ["local", "charger-capabilities", "charger-settings"]
 }

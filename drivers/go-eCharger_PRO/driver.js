@@ -1,5 +1,5 @@
 'use strict';
 
-const mainDriver = require('../evcharger-driver');
+const evChargerDriver = require('../evcharger-driver');
 
 module.exports = class goeChargerDriver extends mainDriver {};

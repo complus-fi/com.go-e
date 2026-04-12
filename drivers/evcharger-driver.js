@@ -2,7 +2,7 @@
 
 const Homey = require('homey');
 
-class mainDriver extends Homey.Driver {
+class evChargerDriver extends Homey.Driver {
   onInit() {
     this.log('[Driver] - init', this.id);
     this.log('[Driver] - version', this.homey.app.manifest.version);

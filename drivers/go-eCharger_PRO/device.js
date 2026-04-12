@@ -1,5 +1,5 @@
 'use strict';
 
-const mainDevice = require('../evcharger-device');
+const evChargerDevice = require('../evcharger-device');
 
 module.exports = class goeChargerDevice extends mainDevice {};

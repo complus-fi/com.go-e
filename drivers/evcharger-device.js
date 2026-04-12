@@ -7,7 +7,7 @@ const { getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = re
 
 const POLL_INTERVAL = 5000;
 
-class mainDevice extends Homey.Device {
+class evChargerDevice extends Homey.Device {
   /**
    * onInit is called when the device is initialized.
    */
