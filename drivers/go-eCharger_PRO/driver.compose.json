@@ -1,7 +1,23 @@
 {
   "name": {
-    "en": "PRO"
+    "en": "PRO",
+    "nl": "PRO",
+    "da": "PRO",
+    "de": "PRO",
+    "es": "PRO",
+    "fr": "PRO",
+    "it": "PRO",
+    "no": "PRO",
+    "sv": "PRO",
+    "pl": "PRO",
+    "ru": "PRO",
+    "ko": "PRO",
+    "ar": "PRO"
   },
   "discovery": "mdns_http_go-e_pro",
-  "$extends": ["local", "charger-capabilities", "charger-settings"]
+  "$extends": [
+    "local",
+    "charger-capabilities",
+    "charger-settings"
+  ]
 }

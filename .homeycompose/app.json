@@ -12,7 +12,19 @@
     "en": "Go-e"
   },
   "description": {
-    "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently."
+    "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently.",
+    "nl": "Laad slim en eenvoudig. Laad je elektrische auto tegen een lage kostprijs en intelligent op.",
+    "da": "Lad smart og enkelt. Lad din elbil til en lav pris og intelligent.",
+    "de": "Einfach intelligent laden. Laden Sie Ihr Elektroauto zu einem niedrigen Preis und intelligent auf.",
+    "es": "Carga inteligente y sencilla. Carga tu coche eléctrico a un bajo costo e inteligentemente.",
+    "fr": "Chargez intelligemment et simplement. Chargez votre voiture électrique à un coût bas et de manière intelligente.",
+    "it": "Carica in modo intelligente e semplice. Carica la tua auto elettrica a basso costo e in modo intelligente.",
+    "no": "Lad smart og enkelt. Lad din elbil til en lav pris og intelligent.",
+    "sv": "Ladda smart och enkelt. Ladda din elbil till en låg kostnad och intelligent.",
+    "pl": "Ładuj inteligentnie i prosto. Ładuj swój samochód elektryczny tanio i inteligentnie.",
+    "ru": "Просто заряжайте умно. Заряжайте свой электромобиль по низкой цене и интеллектуально.",
+    "ko": "스마트하고 간단하게 충전하세요. 저렴한 비용으로 전기차를 지능적으로 충전하세요.",
+    "ar": "اشحن بذكاء وببساطة. اشحن سيارتك الكهربائية بتكلفة منخفضة وبذكاء."
   },
   "category": [
     "energy"

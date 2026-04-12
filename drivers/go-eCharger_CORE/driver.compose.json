@@ -1,7 +1,23 @@
 {
   "name": {
-    "en": "CORE"
+    "en": "CORE",
+    "nl": "CORE",
+    "da": "CORE",
+    "de": "CORE",
+    "es": "CORE",
+    "fr": "CORE",
+    "it": "CORE",
+    "no": "CORE",
+    "sv": "CORE",
+    "pl": "CORE",
+    "ru": "CORE",
+    "ko": "CORE",
+    "ar": "CORE"
   },
   "discovery": "mdns_http_go-e_core",
-  "$extends": ["local", "charger-capabilities", "charger-settings"]
+  "$extends": [
+    "local",
+    "charger-capabilities",
+    "charger-settings"
+  ]
 }

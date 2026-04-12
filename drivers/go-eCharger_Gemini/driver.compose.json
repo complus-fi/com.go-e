@@ -1,7 +1,23 @@
 {
   "name": {
-    "en": "CORE"
+    "en": "Gemini",
+    "nl": "Gemini",
+    "da": "Gemini",
+    "de": "Gemini",
+    "es": "Gemini",
+    "fr": "Gemini",
+    "it": "Gemini",
+    "no": "Gemini",
+    "sv": "Gemini",
+    "pl": "Gemini",
+    "ru": "Gemini",
+    "ko": "Gemini",
+    "ar": "Gemini"
   },
   "discovery": "mdns_http_go-e_gemini",
-  "$extends": ["local", "charger-capabilities", "charger-settings"]
+  "$extends": [
+    "local",
+    "charger-capabilities",
+    "charger-settings"
+  ]
 }
