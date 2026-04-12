@@ -146,11 +146,6 @@ class mainDevice extends Homey.Device {
   onDiscoveryLastSeenChanged(discoveryResult) {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} LastSeenChanged - result: ${discoveryResult.address}.`);
     this.log(`[Device] ${this.getName()}: ${this.getData().id} LastSeenChanged - result: ${discoveryResult.name}.`);
-    //this.api.address = discoveryResult.address;
-    //this.setSettings({
-    //	address: this.api.address,
-    //});
-    //this.setUnavailable('Discovery device offline.').catch(() => {});
   }
 
   async clearIntervals() {
@@ -212,12 +207,20 @@ class mainDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['target_power', 'evcharger_charging'],
-      async ({ target_power, evcharger_charging }) => {
+      ['target_power', 'target_power_mode', 'evcharger_charging'],
+      async ({ target_power, target_power_mode, evcharger_charging }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { target_power, evcharger_charging });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { target_power, target_power_mode, evcharger_charging });
 
           const context = { api: this.api, maxAmps: this.maxAmps, firmwareVersion: this.getSettings().version };
+          // Switching to device mode: let the charger resume its own scheduling (frc=0 = neutral).
+          if (target_power_mode === 'device') {
+            await this.applyApiValues({ frc: 0 });
+            return;
+          }
+
+          // Resolve the effective mode (from this batch or the current capability value).
+          const mode = target_power_mode ?? this.getCapabilityValue('target_power_mode');
 
           if (evcharger_charging === false) {
             const apiValues = mapHomeyToApiValues({ evcharger_charging: false }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
@@ -227,16 +230,30 @@ class mainDevice extends Homey.Device {
 
           const watts = target_power ?? this.getCapabilityValue('target_power') ?? 0;
 
-          // A target_power slider change must always issue a charger command.
-          if (target_power !== undefined) {
-            const powerValues = mapHomeyToApiValues({ target_power: watts }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-            await this.applyApiValues(powerValues);
+          if (evcharger_charging === true) {
+            // Start/resume charging. When target_power arrives in the same batch (e.g. from
+            // the "Set target power" flow card), combine both into a single API call so the
+            // charger receives the amp setting and the force-on command together.
+            const forceOnValues = mapHomeyToApiValues({ evcharger_charging: true }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+            if (target_power !== undefined) {
+              const powerValues = mapHomeyToApiValues({ target_power: watts }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+              await this.applyApiValues({ ...powerValues, ...forceOnValues });
+            } else {
+              await this.applyApiValues(forceOnValues);
+            }
             return;
           }
 
-          if (evcharger_charging === true) {
-            const forceOnValues = mapHomeyToApiValues({ evcharger_charging: true }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-            await this.applyApiValues(forceOnValues);
+          // Only target_power changed — update the charger amp setting without
+          // altering the current charging state (frc is intentionally excluded).
+          // Ignore if the charger is in device mode — it manages its own power.
+          if (target_power !== undefined) {
+            if (mode !== 'homey') {
+              this.log(`[Device] ${this.getName()} - Ignoring target_power — not in homey mode`);
+              return;
+            }
+            const powerValues = mapHomeyToApiValues({ target_power: watts }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+            await this.applyApiValues(powerValues);
           }
         } catch (error) {
           const message = this.getErrorMessage(error, 'Failed to apply charger command');
@@ -244,12 +261,12 @@ class mainDevice extends Homey.Device {
           throw new Error(message);
         }
       },
-      500
+      1000
     );
   }
 
   async applyApiValues(apiValues = {}) {
-    const orderedKeys = ['frc', 'amp', 'psm', 'fsp'];
+    const orderedKeys = ['frc', 'amp', 'psm'];
 
     const orderedApiValues = {};
     for (const key of orderedKeys) {
