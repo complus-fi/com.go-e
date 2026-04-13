@@ -1,7 +1,6 @@
 'use strict';
 
 const Homey = require('homey');
-const { sleep } = require('../lib/helpers');
 const goeCharger = require('../lib/go-eCharger-API-v2');
 const { getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
 
@@ -36,6 +35,12 @@ class evChargerDevice extends Homey.Device {
     if (typeof error === 'string') return error;
     if (error.message) return error.message;
     return fallback;
+  }
+
+  async sleep(ms) {
+    return new Promise((resolve) => {
+      this.homey.setTimeout(resolve, ms);
+    });
   }
 
   async updateTargetPowerCapabilityMax(ama) {
@@ -88,9 +93,9 @@ class evChargerDevice extends Homey.Device {
         return Promise.reject(error);
       }
       this.log(`[Device] ${this.getName()}: ${this.getData().id} new settings OK.`);
-      this.setAvailable();
+      await this.setAvailable();
     } catch (error) {
-      this.setUnavailable(error).catch(() => {});
+      await this.setUnavailable(error);
       return Promise.reject(error);
     }
   }
@@ -139,15 +144,15 @@ class evChargerDevice extends Homey.Device {
     await this.onPoll();
   }
 
-  onDiscoveryAddressChanged(discoveryResult) {
+  async onDiscoveryAddressChanged(discoveryResult) {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.address}.`);
     this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.name}.`);
     // Update your connection details here, reconnect when the device is offline
     this.api.address = discoveryResult.address;
-    this.setSettings({
+    await this.setSettings({
       address: this.api.address
     });
-    this.setAvailable();
+    await this.setAvailable();
   }
 
   onDiscoveryLastSeenChanged(discoveryResult) {
@@ -194,19 +199,19 @@ class evChargerDevice extends Homey.Device {
       for (const c of oldC) {
         this.log(`[Device] ${this.getName()} - updateCapabilities => Remove `, c);
         await this.removeCapability(c);
-        await sleep(500);
+        await this.sleep(500);
       }
-      await sleep(2000);
+      await this.sleep(2000);
 
       // Add new capabilities with delay between each
       for (const c of newC) {
         this.log(`[Device] ${this.getName()} - updateCapabilities => Add `, c);
         await this.addCapability(c);
 
-        await sleep(500);
+        await this.sleep(500);
       }
 
-      await sleep(1000);
+      await this.sleep(1000);
     } catch (error) {
       this.log(error);
     }
