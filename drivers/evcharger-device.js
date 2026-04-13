@@ -339,7 +339,7 @@ class evChargerDevice extends Homey.Device {
         this.pollErrorMessage = message;
         this.log(`[Device] ${this.getName()} - onPoll error: ${message}`);
       }
-      this.setUnavailable(`Connection issue: ${message}`).catch(() => {});
+      await this.setUnavailable(`Connection issue: ${message}`).catch(() => {});
     }
   }
 }
