@@ -1,0 +1,23 @@
+{
+  "name": {
+    "en": "Local Network",
+    "nl": "Lokaal Netwerk",
+    "da": "Lokal Netværk",
+    "de": "Lokales Netzwerk",
+    "es": "Red Local",
+    "fr": "Réseau Local",
+    "it": "Rete Locale",
+    "no": "Lokal Nettverk",
+    "sv": "Lokalt Nätverk",
+    "pl": "Sieć Lokalna",
+    "ru": "Локальная сеть",
+    "ko": "로컬 네트워크",
+    "ar": "الشبكة المحلية"
+  },
+  "discovery": "mdns_http_go-echarger",
+  "$extends": [
+    "local",
+    "charger-capabilities",
+    "charger-settings"
+  ]
+}

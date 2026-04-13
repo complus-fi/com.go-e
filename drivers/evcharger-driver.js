@@ -1,6 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
+const { getDeviceIcon } = require('../lib/mappings');
 
 class evChargerDriver extends Homey.Driver {
   onInit() {
@@ -22,10 +23,12 @@ class evChargerDriver extends Homey.Driver {
           data: {
             id: discoveryResult.id
           },
+          icon: getDeviceIcon(discoveryResult.txt.devicetype, discoveryResult.txt.devicesubtype),
           settings: {
             address: discoveryResult.address,
             version: discoveryResult.txt.version,
             type: discoveryResult.txt.devicetype,
+            subtype: discoveryResult.txt.devicesubtype || '',
             driver: deviceDriver
           },
           store: {}
