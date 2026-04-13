@@ -109,7 +109,14 @@ class evChargerDevice extends Homey.Device {
    */
   async onDeleted() {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} has been deleted.`);
-    this.clearIntervals();
+    await this.clearIntervals();
+  }
+
+  async onUninit() {
+    await this.clearIntervals();
+    if (this.api && typeof this.api.destroy === 'function') {
+      this.api.destroy();
+    }
   }
 
   onDiscoveryResult(discoveryResult) {
@@ -127,8 +134,8 @@ class evChargerDevice extends Homey.Device {
       address: this.api.address
     });
     await this.setAvailable();
-    clearInterval(this.onPollInterval);
-    this.onPollInterval = setInterval(this.onPoll.bind(this), POLL_INTERVAL);
+    await this.clearIntervals();
+    this.onPollInterval = this.homey.setInterval(this.onPoll.bind(this), POLL_INTERVAL);
     await this.onPoll();
   }
 
@@ -151,7 +158,7 @@ class evChargerDevice extends Homey.Device {
   async clearIntervals() {
     try {
       this.log(`[Device] ${this.getName()}: ${this.getData().id} clearIntervals`);
-      clearInterval(this.onPollInterval);
+      this.homey.clearInterval(this.onPollInterval);
     } catch (error) {
       this.log(error);
     }
