@@ -1,8 +1,5 @@
 {
   "0.1.0": {
     "en": "New official Go-e App for the Gemini, CORE and PRO evChargers"
-  },
-  "0.2.0": {
-    "en": "Changed to a single driver for all local network connections. Supports Home+(V3), Gemini, CORE and PRO models."
   }
 }
