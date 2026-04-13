@@ -69,166 +69,20 @@
   "support": "https://github.com/complus-fi/com.go-e/issues",
   "drivers": [
     {
-      "0": {
-        "id": "address",
-        "type": "text",
-        "label": {
-          "en": "IP address",
-          "nl": "IP-adres",
-          "da": "IP-adresse",
-          "de": "IP-Adresse",
-          "es": "Dirección IP",
-          "fr": "Adresse IP",
-          "it": "Indirizzo IP",
-          "no": "IP-adresse",
-          "sv": "IP-adress",
-          "pl": "Adres IP",
-          "ru": "IP-адрес",
-          "ko": "IP 주소",
-          "ar": "عنوان IP"
-        },
-        "value": "0.0.0.0",
-        "hint": {
-          "en": "Discovered IP address of the device.",
-          "nl": "IP-adres van het apparaat ontdekt.",
-          "da": "Opdaget IP-adresse for enheden.",
-          "de": "IP-Adresse des Geräts entdeckt.",
-          "es": "Dirección IP del dispositivo descubierta.",
-          "fr": "Adresse IP de l'appareil découverte.",
-          "it": "Indirizzo IP del dispositivo rilevato.",
-          "no": "Oppdaget IP-adressen til enheten.",
-          "sv": "Upptäckt IP-adress för enheten.",
-          "pl": "Odkryto adres IP urządzenia.",
-          "ru": "Обнаружен IP-адрес устройства.",
-          "ko": "장치의 IP 주소를 발견했습니다.",
-          "ar": "تم اكتشاف عنوان IP للجهاز."
-        },
-        "highlight": true
-      },
-      "1": {
-        "type": "group",
-        "label": {
-          "en": "Discovered device information.",
-          "nl": "Ontdekte apparaatinformatie.",
-          "da": "Opdaget enhedsinformation.",
-          "de": "Entdeckte Geräteinformationen.",
-          "es": "Información del dispositivo descubierto.",
-          "fr": "Informations sur l'appareil découvert.",
-          "it": "Informazioni sul dispositivo rilevato.",
-          "no": "Oppdaget enhetsinformasjon.",
-          "sv": "Upptäckt enhetsinformation.",
-          "pl": "Odkryto informacje o urządzeniu.",
-          "ru": "Обнаружена информация об устройстве.",
-          "ko": "발견된 장치 정보.",
-          "ar": "تم اكتشاف معلومات الجهاز."
-        },
-        "children": [
-          {
-            "id": "version",
-            "type": "label",
-            "label": {
-              "en": "Firmware",
-              "nl": "Firmware",
-              "da": "Firmware",
-              "de": "Firmware",
-              "es": "Firmware",
-              "fr": "Micrologiciel",
-              "it": "Firmware",
-              "no": "Fastvare",
-              "sv": "Firmware",
-              "pl": "Oprogramowanie układowe",
-              "ru": "Прошивка",
-              "ko": "펌웨어",
-              "ar": "البرامج الثابتة"
-            },
-            "value": "",
-            "hint": {
-              "en": "Device firmware version.",
-              "nl": "Apparaat firmwareversie.",
-              "da": "Enhedens firmwareversion.",
-              "de": "Firmware-Version des Geräts.",
-              "es": "Versión del firmware del dispositivo.",
-              "fr": "Version du firmware de l'appareil.",
-              "it": "Versione firmware del dispositivo.",
-              "no": "Enhetsprogramvareversjon.",
-              "sv": "Enhetens firmwareversion.",
-              "pl": "Wersja oprogramowania urządzenia.",
-              "ru": "Версия прошивки устройства.",
-              "ko": "기기 펌웨어 버전.",
-              "ar": "إصدار البرنامج الثابت للجهاز."
-            }
-          },
-          {
-            "id": "type",
-            "type": "label",
-            "label": {
-              "en": "Type",
-              "nl": "Typ",
-              "da": "Type",
-              "de": "Typ",
-              "es": "Escribe",
-              "fr": "Tapez",
-              "it": "Tipo",
-              "no": "Type",
-              "sv": "Typ",
-              "pl": "Rodzaj",
-              "ru": "Тип",
-              "ko": "유형",
-              "ar": "نوع"
-            },
-            "value": "",
-            "hint": {
-              "en": "Device type.",
-              "nl": "Apparaattype.",
-              "da": "Enhedstype.",
-              "de": "Gerätetyp.",
-              "es": "Tipo de dispositivo.",
-              "fr": "Type d'appareil.",
-              "it": "Tipo di dispositivo.",
-              "no": "Enhetstype.",
-              "sv": "Enhetstyp.",
-              "pl": "Typ urządzenia.",
-              "ru": "Тип устройства.",
-              "ko": "장치 유형.",
-              "ar": "نوع الجهاز."
-            }
-          },
-          {
-            "id": "driver",
-            "type": "label",
-            "label": {
-              "en": "Driver",
-              "nl": "Stuurprogramma",
-              "da": "Driver",
-              "de": "Treiber",
-              "es": "Controlador",
-              "fr": "Pilote",
-              "it": "Driver",
-              "no": "Sjåfør",
-              "sv": "Drivrutin",
-              "pl": "Sterownik",
-              "ru": "Драйвер",
-              "ko": "드라이버",
-              "ar": "السائق"
-            },
-            "value": "",
-            "hint": {
-              "en": "Driver used during pairing.",
-              "nl": "Stuurprogramma gebruikt tijdens het koppelen.",
-              "da": "Driver brugt under parring.",
-              "de": "Treiber während der Kopplung verwendet.",
-              "es": "Controlador utilizado durante el emparejamiento.",
-              "fr": "Pilote utilisé lors de l'appairage.",
-              "it": "Driver utilizzato durante l'associazione.",
-              "no": "Driver brukt under sammenkobling.",
-              "sv": "Drivrutin använd under parkoppling.",
-              "pl": "Sterownik używany podczas parowania.",
-              "ru": "Драйвер используется во время сопряжения.",
-              "ko": "페어링 중 사용된 드라이버.",
-              "ar": "تم استخدام برنامج التشغيل أثناء الاقتران."
-            }
-          }
-        ]
+      "name": {
+        "en": "Local Network",
+        "nl": "Lokaal Netwerk",
+        "da": "Lokal Netværk",
+        "de": "Lokales Netzwerk",
+        "es": "Red Local",
+        "fr": "Réseau Local",
+        "it": "Rete Locale",
+        "no": "Lokal Nettverk",
+        "sv": "Lokalt Nätverk",
+        "pl": "Sieć Lokalna",
+        "ru": "Локальная сеть",
+        "ko": "로컬 네트워크",
+        "ar": "الشبكة المحلية"
       },
       "class": "evcharger",
       "platforms": [
@@ -242,6 +96,7 @@
         "large": "/drivers/go-eCharger-local/assets/images/large.png",
         "xlarge": "/drivers/go-eCharger-local/assets/images/xlarge.png"
       },
+      "discovery": "mdns_http_go-echarger",
       "pair": [
         {
           "id": "list_devices",
@@ -393,22 +248,134 @@
         "evCharger": true,
         "meterPowerImportedCapability": "meter_power"
       },
-      "name": {
-        "en": "Local Network",
-        "nl": "Lokaal Netwerk",
-        "da": "Lokal Netværk",
-        "de": "Lokales Netzwerk",
-        "es": "Red Local",
-        "fr": "Réseau Local",
-        "it": "Rete Locale",
-        "no": "Lokal Nettverk",
-        "sv": "Lokalt Nätverk",
-        "pl": "Sieć Lokalna",
-        "ru": "Локальная сеть",
-        "ko": "로컬 네트워크",
-        "ar": "الشبكة المحلية"
-      },
-      "discovery": "mdns_http_go-echarger",
+      "settings": [
+        {
+          "id": "address",
+          "type": "text",
+          "label": {
+            "en": "IP address",
+            "nl": "IP-adres",
+            "da": "IP-adresse",
+            "de": "IP-Adresse",
+            "es": "Dirección IP",
+            "fr": "Adresse IP",
+            "it": "Indirizzo IP",
+            "no": "IP-adresse",
+            "sv": "IP-adress",
+            "pl": "Adres IP",
+            "ru": "IP-адрес",
+            "ko": "IP 주소",
+            "ar": "عنوان IP"
+          },
+          "value": "0.0.0.0",
+          "hint": {
+            "en": "Discovered IP address of the device.",
+            "nl": "IP-adres van het apparaat ontdekt.",
+            "da": "Opdaget IP-adresse for enheden.",
+            "de": "IP-Adresse des Geräts entdeckt.",
+            "es": "Dirección IP del dispositivo descubierta.",
+            "fr": "Adresse IP de l'appareil découverte.",
+            "it": "Indirizzo IP del dispositivo rilevato.",
+            "no": "Oppdaget IP-adressen til enheten.",
+            "sv": "Upptäckt IP-adress för enheten.",
+            "pl": "Odkryto adres IP urządzenia.",
+            "ru": "Обнаружен IP-адрес устройства.",
+            "ko": "장치의 IP 주소를 발견했습니다.",
+            "ar": "تم اكتشاف عنوان IP للجهاز."
+          },
+          "highlight": true
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Discovered device information.",
+            "nl": "Ontdekte apparaatinformatie.",
+            "da": "Opdaget enhedsinformation.",
+            "de": "Entdeckte Geräteinformationen.",
+            "es": "Información del dispositivo descubierto.",
+            "fr": "Informations sur l'appareil découvert.",
+            "it": "Informazioni sul dispositivo rilevato.",
+            "no": "Oppdaget enhetsinformasjon.",
+            "sv": "Upptäckt enhetsinformation.",
+            "pl": "Odkryto informacje o urządzeniu.",
+            "ru": "Обнаружена информация об устройстве.",
+            "ko": "발견된 장치 정보.",
+            "ar": "تم اكتشاف معلومات الجهاز."
+          },
+          "children": [
+            {
+              "id": "version",
+              "type": "label",
+              "label": {
+                "en": "Firmware",
+                "nl": "Firmware",
+                "da": "Firmware",
+                "de": "Firmware",
+                "es": "Firmware",
+                "fr": "Micrologiciel",
+                "it": "Firmware",
+                "no": "Fastvare",
+                "sv": "Firmware",
+                "pl": "Oprogramowanie układowe",
+                "ru": "Прошивка",
+                "ko": "펌웨어",
+                "ar": "البرامج الثابتة"
+              },
+              "value": "",
+              "hint": {
+                "en": "Device firmware version.",
+                "nl": "Apparaat firmwareversie.",
+                "da": "Enhedens firmwareversion.",
+                "de": "Firmware-Version des Geräts.",
+                "es": "Versión del firmware del dispositivo.",
+                "fr": "Version du firmware de l'appareil.",
+                "it": "Versione firmware del dispositivo.",
+                "no": "Enhetsprogramvareversjon.",
+                "sv": "Enhetens firmwareversion.",
+                "pl": "Wersja oprogramowania urządzenia.",
+                "ru": "Версия прошивки устройства.",
+                "ko": "기기 펌웨어 버전.",
+                "ar": "إصدار البرنامج الثابت للجهاز."
+              }
+            },
+            {
+              "id": "type",
+              "type": "label",
+              "label": {
+                "en": "Type",
+                "nl": "Typ",
+                "da": "Type",
+                "de": "Typ",
+                "es": "Escribe",
+                "fr": "Tapez",
+                "it": "Tipo",
+                "no": "Type",
+                "sv": "Typ",
+                "pl": "Rodzaj",
+                "ru": "Тип",
+                "ko": "유형",
+                "ar": "نوع"
+              },
+              "value": "",
+              "hint": {
+                "en": "Device type.",
+                "nl": "Apparaattype.",
+                "da": "Enhedstype.",
+                "de": "Gerätetyp.",
+                "es": "Tipo de dispositivo.",
+                "fr": "Type d'appareil.",
+                "it": "Tipo di dispositivo.",
+                "no": "Enhetstype.",
+                "sv": "Enhetstyp.",
+                "pl": "Typ urządzenia.",
+                "ru": "Тип устройства.",
+                "ko": "장치 유형.",
+                "ar": "نوع الجهاز."
+              }
+            }
+          ]
+        }
+      ],
       "id": "go-eCharger-local"
     }
   ],

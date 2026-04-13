@@ -18,21 +18,24 @@ class evChargerDriver extends Homey.Driver {
 
         const discoveryStrategy = this.getDiscoveryStrategy();
         const discoveryResults = discoveryStrategy.getDiscoveryResults();
-        const results = Object.values(discoveryResults).map((discoveryResult) => ({
-          name: discoveryResult.name,
-          data: {
-            id: discoveryResult.id
-          },
-          icon: getDeviceIcon(discoveryResult.txt.devicetype, discoveryResult.txt.devicesubtype),
-          settings: {
-            address: discoveryResult.address,
-            version: discoveryResult.txt.version,
-            type: discoveryResult.txt.devicetype,
-            subtype: discoveryResult.txt.devicesubtype || '',
-            driver: deviceDriver
-          },
-          store: {}
-        }));
+        const results = Object.values(discoveryResults).map((discoveryResult) => {
+          const devicetype = discoveryResult.txt.devicetype || '';
+          const devicesubtype = discoveryResult.txt.devicesubtype || '';
+
+          return {
+            name: discoveryResult.name,
+            data: {
+              id: discoveryResult.id
+            },
+            icon: getDeviceIcon(devicetype, devicesubtype),
+            settings: {
+              address: discoveryResult.address,
+              version: discoveryResult.txt.version,
+              type: devicesubtype ? `${devicetype}/${devicesubtype}` : devicetype
+            },
+            store: {}
+          };
+        });
 
         if (results.length > 0) return results;
 

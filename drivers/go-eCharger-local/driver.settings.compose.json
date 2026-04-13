@@ -122,41 +122,6 @@
           "ko": "장치 유형.",
           "ar": "نوع الجهاز."
         }
-      },
-      {
-        "id": "driver",
-        "type": "label",
-        "label": {
-          "en": "Driver",
-          "nl": "Stuurprogramma",
-          "da": "Driver",
-          "de": "Treiber",
-          "es": "Controlador",
-          "fr": "Pilote",
-          "it": "Driver",
-          "no": "Sjåfør",
-          "sv": "Drivrutin",
-          "pl": "Sterownik",
-          "ru": "Драйвер",
-          "ko": "드라이버",
-          "ar": "السائق"
-        },
-        "value": "",
-        "hint": {
-          "en": "Driver used during pairing.",
-          "nl": "Stuurprogramma gebruikt tijdens het koppelen.",
-          "da": "Driver brugt under parring.",
-          "de": "Treiber während der Kopplung verwendet.",
-          "es": "Controlador utilizado durante el emparejamiento.",
-          "fr": "Pilote utilisé lors de l'appairage.",
-          "it": "Driver utilizzato durante l'associazione.",
-          "no": "Driver brukt under sammenkobling.",
-          "sv": "Drivrutin använd under parkoppling.",
-          "pl": "Sterownik używany podczas parowania.",
-          "ru": "Драйвер используется во время сопряжения.",
-          "ko": "페어링 중 사용된 드라이버.",
-          "ar": "تم استخدام برنامج التشغيل أثناء الاقتران."
-        }
       }
     ]
   }

@@ -14,10 +14,292 @@
     "ko": "로컬 네트워크",
     "ar": "الشبكة المحلية"
   },
+  "class": "evcharger",
+  "platforms": ["local"],
+  "connectivity": ["lan"],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+  },
   "discovery": "mdns_http_go-echarger",
-  "$extends": [
-    "local",
-    "charger-capabilities",
-    "charger-settings"
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices",
+      "navigation": {
+        "next": "done"
+      }
+    },
+    {
+      "id": "done",
+      "template": "done"
+    }
+  ],
+  "capabilities": [
+    "measure_temperature",
+    "meter_power",
+    "meter_power.session",
+    "alarm_problem",
+    "measure_power",
+    "measure_voltage",
+    "measure_voltage.output",
+    "measure_current",
+    "evcharger_charging",
+    "evcharger_charging_state",
+    "target_power",
+    "target_power_mode"
+  ],
+  "capabilitiesOptions": {
+    "meter_power.session": {
+      "type": "number",
+      "title": {
+        "en": "Energy Last Session",
+        "nl": "Energie Laatste Sessie",
+        "da": "Energi sidste session",
+        "de": "Energie letzte Sitzung",
+        "es": "Energía de la Última Sesión",
+        "fr": "Énergie de la dernière session",
+        "it": "Energia Ultima Sessione",
+        "no": "Energi siste økt",
+        "sv": "Energi senaste sessionen",
+        "pl": "Energia ostatniej sesji",
+        "ru": "Энергия за последнюю сессию",
+        "ko": "마지막 세션 에너지",
+        "ar": "الطاقة في الجلسة الأخيرة"
+      },
+      "hint:": {
+        "en": "Energy (kWh) delivered during last session. Reset automatically when a car is connected.",
+        "nl": "Energie (kWh) geleverd tijdens de laatste sessie. Wordt automatisch gereset wanneer een auto wordt aangesloten.",
+        "da": "Energi (kWh) leveret under sidste session. Nulstilles automatisk, når en bil tilsluttes.",
+        "de": "Energie (kWh), die während der letzten Sitzung geliefert wurde. Wird automatisch zurückgesetzt, wenn ein Auto angeschlossen wird.",
+        "es": "Energía (kWh) entregada durante la última sesión. Se restablece automáticamente cuando se conecta un coche.",
+        "fr": "Énergie (kWh) délivrée lors de la dernière session. Réinitialisation automatique lorsqu'une voiture est connectée.",
+        "it": "Energia (kWh) erogata durante l'ultima sessione. Si azzera automaticamente quando un'auto è collegata.",
+        "no": "Energi (kWh) levert under siste økt. Nullstilles automatisk når en bil kobles til.",
+        "sv": "Energi (kWh) levererad under senaste sessionen. Återställs automatiskt när en bil ansluts.",
+        "pl": "Energia (kWh) dostarczona podczas ostatniej sesji. Resetuje się automatycznie po podłączeniu samochodu.",
+        "ru": "Энергия (кВтч), переданная за последнюю сессию. Сбрасывается автоматически при подключении автомобиля.",
+        "ko": "마지막 세션 동안 전달된 에너지(kWh). 자동차가 연결되면 자동으로 초기화됩니다.",
+        "ar": "الطاقة (كيلوواط ساعة) التي تم تسليمها خلال الجلسة الأخيرة. يتم إعادة التعيين تلقائيًا عند توصيل سيارة."
+      },
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
+      },
+      "insights": true
+    },
+    "measure_voltage.output": {
+      "type": "number",
+      "title": {
+        "en": "Output Voltage",
+        "nl": "Uitgangsspanning",
+        "da": "Udgangsspænding",
+        "de": "Ausgangsspannung",
+        "es": "Voltaje de salida",
+        "fr": "Tension de sortie",
+        "it": "Tensione di uscita",
+        "no": "Utgangsspenning",
+        "sv": "Utspänning",
+        "pl": "Napięcie wyjściowe",
+        "ru": "Выходное напряжение",
+        "ko": "출력 전압",
+        "ar": "جهد الخرج"
+      },
+      "hint": {
+        "en": "Currently delivered voltage in volts.",
+        "nl": "Huidige geleverde spanning in volt.",
+        "da": "Aktuelt leveret spænding i volt.",
+        "de": "Derzeit gelieferte Spannung in Volt.",
+        "es": "Voltaje entregado actualmente en voltios.",
+        "fr": "Tension actuellement délivrée en volts.",
+        "it": "Tensione attualmente erogata in volt.",
+        "no": "For øyeblikket levert spenning i volt.",
+        "sv": "För närvarande levererad spänning i volt.",
+        "pl": "Aktualnie dostarczane napięcie w woltach.",
+        "ru": "Текущее напряжение в вольтах.",
+        "ko": "현재 공급되는 전압(볼트)입니다.",
+        "ar": "الجهد الحالي المُسلم بالفولت."
+      },
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "V",
+        "nl": "Je bent getraind op gegevens tot oktober 2023.",
+        "da": "Du er trænet på data frem til oktober 2023.",
+        "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+        "es": "V",
+        "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
+        "it": "Sei addestrato sui dati fino a ottobre 2023.",
+        "no": "Vennligst oppgi mer tekst for oversettelse.",
+        "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+        "pl": "V",
+        "ru": "Вы обучены данным до октября 2023 года.",
+        "ko": "V",
+        "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+      },
+      "min": 0,
+      "max": 500,
+      "insights": true
+    },
+    "target_power": {
+      "min": 0,
+      "max": 22080,
+      "step": 230,
+      "excludeMin": 0,
+      "excludeMax": 1380
+    }
+  },
+  "energy": {
+    "evCharger": true,
+    "meterPowerImportedCapability": "meter_power"
+  },
+  "settings": [
+    {
+      "id": "address",
+      "type": "text",
+      "label": {
+        "en": "IP address",
+        "nl": "IP-adres",
+        "da": "IP-adresse",
+        "de": "IP-Adresse",
+        "es": "Dirección IP",
+        "fr": "Adresse IP",
+        "it": "Indirizzo IP",
+        "no": "IP-adresse",
+        "sv": "IP-adress",
+        "pl": "Adres IP",
+        "ru": "IP-адрес",
+        "ko": "IP 주소",
+        "ar": "عنوان IP"
+      },
+      "value": "0.0.0.0",
+      "hint": {
+        "en": "Discovered IP address of the device.",
+        "nl": "IP-adres van het apparaat ontdekt.",
+        "da": "Opdaget IP-adresse for enheden.",
+        "de": "IP-Adresse des Geräts entdeckt.",
+        "es": "Dirección IP del dispositivo descubierta.",
+        "fr": "Adresse IP de l'appareil découverte.",
+        "it": "Indirizzo IP del dispositivo rilevato.",
+        "no": "Oppdaget IP-adressen til enheten.",
+        "sv": "Upptäckt IP-adress för enheten.",
+        "pl": "Odkryto adres IP urządzenia.",
+        "ru": "Обнаружен IP-адрес устройства.",
+        "ko": "장치의 IP 주소를 발견했습니다.",
+        "ar": "تم اكتشاف عنوان IP للجهاز."
+      },
+      "highlight": true
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Discovered device information.",
+        "nl": "Ontdekte apparaatinformatie.",
+        "da": "Opdaget enhedsinformation.",
+        "de": "Entdeckte Geräteinformationen.",
+        "es": "Información del dispositivo descubierto.",
+        "fr": "Informations sur l'appareil découvert.",
+        "it": "Informazioni sul dispositivo rilevato.",
+        "no": "Oppdaget enhetsinformasjon.",
+        "sv": "Upptäckt enhetsinformation.",
+        "pl": "Odkryto informacje o urządzeniu.",
+        "ru": "Обнаружена информация об устройстве.",
+        "ko": "발견된 장치 정보.",
+        "ar": "تم اكتشاف معلومات الجهاز."
+      },
+      "children": [
+        {
+          "id": "version",
+          "type": "label",
+          "label": {
+            "en": "Firmware",
+            "nl": "Firmware",
+            "da": "Firmware",
+            "de": "Firmware",
+            "es": "Firmware",
+            "fr": "Micrologiciel",
+            "it": "Firmware",
+            "no": "Fastvare",
+            "sv": "Firmware",
+            "pl": "Oprogramowanie układowe",
+            "ru": "Прошивка",
+            "ko": "펌웨어",
+            "ar": "البرامج الثابتة"
+          },
+          "value": "",
+          "hint": {
+            "en": "Device firmware version.",
+            "nl": "Apparaat firmwareversie.",
+            "da": "Enhedens firmwareversion.",
+            "de": "Firmware-Version des Geräts.",
+            "es": "Versión del firmware del dispositivo.",
+            "fr": "Version du firmware de l'appareil.",
+            "it": "Versione firmware del dispositivo.",
+            "no": "Enhetsprogramvareversjon.",
+            "sv": "Enhetens firmwareversion.",
+            "pl": "Wersja oprogramowania urządzenia.",
+            "ru": "Версия прошивки устройства.",
+            "ko": "기기 펌웨어 버전.",
+            "ar": "إصدار البرنامج الثابت للجهاز."
+          }
+        },
+        {
+          "id": "type",
+          "type": "label",
+          "label": {
+            "en": "Type",
+            "nl": "Typ",
+            "da": "Type",
+            "de": "Typ",
+            "es": "Escribe",
+            "fr": "Tapez",
+            "it": "Tipo",
+            "no": "Type",
+            "sv": "Typ",
+            "pl": "Rodzaj",
+            "ru": "Тип",
+            "ko": "유형",
+            "ar": "نوع"
+          },
+          "value": "",
+          "hint": {
+            "en": "Device type.",
+            "nl": "Apparaattype.",
+            "da": "Enhedstype.",
+            "de": "Gerätetyp.",
+            "es": "Tipo de dispositivo.",
+            "fr": "Type d'appareil.",
+            "it": "Tipo di dispositivo.",
+            "no": "Enhetstype.",
+            "sv": "Enhetstyp.",
+            "pl": "Typ urządzenia.",
+            "ru": "Тип устройства.",
+            "ko": "장치 유형.",
+            "ar": "نوع الجهاز."
+          }
+        }
+      ]
+    }
   ]
 }
