@@ -4,5 +4,8 @@
   },
   "0.2.1": {
     "en": "Changed to a single driver for all local network discovery. Supports Home+(V3), Gemini, CORE and PRO models."
+  },
+  "0.2.2": {
+    "en": "Cloud app compatibility checks and corrections."
   }
 }
