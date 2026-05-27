@@ -1,7 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
-const { getDeviceIcon } = require('../lib/mappings');
+const { getDeviceIcon, getModelFromDriverId, matchesDiscoveryModel } = require('../lib/mappings');
 
 class evChargerDriver extends Homey.Driver {
   onInit() {
@@ -18,24 +18,27 @@ class evChargerDriver extends Homey.Driver {
 
         const discoveryStrategy = this.getDiscoveryStrategy();
         const discoveryResults = discoveryStrategy.getDiscoveryResults();
-        const results = Object.values(discoveryResults).map((discoveryResult) => {
-          const devicetype = discoveryResult.txt.devicetype || '';
-          const devicesubtype = discoveryResult.txt.devicesubtype || '';
+        const model = getModelFromDriverId(deviceDriver);
+        const results = Object.values(discoveryResults)
+          .filter((discoveryResult) => matchesDiscoveryModel(discoveryResult, model))
+          .map((discoveryResult) => {
+            const devicetype = discoveryResult.txt.devicetype || '';
+            const devicesubtype = discoveryResult.txt.devicesubtype || '';
 
-          return {
-            name: discoveryResult.name,
-            data: {
-              id: discoveryResult.id
-            },
-            icon: getDeviceIcon(devicetype, devicesubtype),
-            settings: {
-              address: discoveryResult.address,
-              version: discoveryResult.txt.version,
-              type: devicesubtype ? `${devicetype}/${devicesubtype}` : devicetype
-            },
-            store: {}
-          };
-        });
+            return {
+              name: discoveryResult.name,
+              data: {
+                id: discoveryResult.id
+              },
+              icon: getDeviceIcon(devicetype, devicesubtype),
+              settings: {
+                address: discoveryResult.address,
+                version: discoveryResult.txt.version,
+                type: devicesubtype ? `${devicetype}/${devicesubtype}` : devicetype
+              },
+              store: {}
+            };
+          });
 
         if (results.length > 0) return results;
 

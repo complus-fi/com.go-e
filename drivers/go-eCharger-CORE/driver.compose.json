@@ -1,18 +1,18 @@
 {
   "name": {
-    "en": "Local Network",
-    "nl": "Lokaal Netwerk",
-    "da": "Lokal Netværk",
-    "de": "Lokales Netzwerk",
-    "es": "Red Local",
-    "fr": "Réseau Local",
-    "it": "Rete Locale",
-    "no": "Lokal Nettverk",
-    "sv": "Lokalt Nätverk",
-    "pl": "Sieć Lokalna",
-    "ru": "Локальная сеть",
-    "ko": "로컬 네트워크",
-    "ar": "الشبكة المحلية"
+    "en": "go-eCharger-CORE",
+    "nl": "go-eCharger-CORE",
+    "da": "go-eCharger-CORE",
+    "de": "go-eCharger-CORE",
+    "es": "go-eCharger-CORE",
+    "fr": "go-eCharger-CORE",
+    "it": "go-eCharger-CORE",
+    "no": "go-eCharger-CORE",
+    "sv": "go-eCharger-CORE",
+    "pl": "go-eCharger-CORE",
+    "ru": "go-eCharger-CORE",
+    "ko": "go-eCharger-CORE",
+    "ar": "go-eCharger-CORE"
   },
   "class": "evcharger",
   "platforms": ["local"],
@@ -22,7 +22,7 @@
     "large": "{{driverAssetsPath}}/images/large.png",
     "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
   },
-  "discovery": "mdns_http_go-echarger",
+  "discovery": "mdns_http_go-echarger-core",
   "pair": [
     {
       "id": "list_devices",
