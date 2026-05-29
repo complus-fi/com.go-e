@@ -1,18 +1,18 @@
 {
   "name": {
-    "en": "go-eCharger Gemini",
-    "nl": "go-eCharger Gemini",
-    "da": "go-eCharger Gemini",
-    "de": "go-eCharger Gemini",
-    "es": "go-eCharger Gemini",
-    "fr": "go-eCharger Gemini",
-    "it": "go-eCharger Gemini",
-    "no": "go-eCharger Gemini",
-    "sv": "go-eCharger Gemini",
-    "pl": "go-eCharger Gemini",
-    "ru": "go-eCharger Gemini",
-    "ko": "go-eCharger Gemini",
-    "ar": "go-eCharger Gemini"
+    "en": "go-eCharger Local",
+    "nl": "go-eCharger Local",
+    "da": "go-eCharger Local",
+    "de": "go-eCharger Local",
+    "es": "go-eCharger Local",
+    "fr": "go-eCharger Local",
+    "it": "go-eCharger Local",
+    "no": "go-eCharger Local",
+    "sv": "go-eCharger Local",
+    "pl": "go-eCharger Local",
+    "ru": "go-eCharger Local",
+    "ko": "go-eCharger Local",
+    "ar": "go-eCharger Local"
   },
   "class": "evcharger",
   "platforms": ["local"],
@@ -22,7 +22,7 @@
     "large": "{{driverAssetsPath}}/images/large.png",
     "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
   },
-  "discovery": "mdns_http_go-echarger-gemini",
+  "discovery": "mdns_http_go-echarger",
   "pair": [
     {
       "id": "list_devices",

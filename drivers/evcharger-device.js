@@ -114,10 +114,10 @@ class evChargerDevice extends Homey.Device {
    */
   async onDeleted() {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} has been deleted.`);
-    await this.clearIntervals();
   }
 
   async onUninit() {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} has been uninitialized.`);
     await this.clearIntervals();
     if (this.api && typeof this.api.destroy === 'function') {
       this.api.destroy();
