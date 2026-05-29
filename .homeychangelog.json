@@ -10,5 +10,8 @@
   },
   "0.2.3": {
     "en": "Updated branding"
+  },
+  "0.3.0": {
+    "en": "Deprecate single driver in favour of model drivers."
   }
 }
