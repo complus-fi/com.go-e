@@ -712,9 +712,9 @@
         "lan"
       ],
       "images": {
-        "small": "/drivers/go-eCharger-Home/assets/images/small.png",
-        "large": "/drivers/go-eCharger-Home/assets/images/large.png",
-        "xlarge": "/drivers/go-eCharger-Home/assets/images/xlarge.png"
+        "small": "/drivers/go-eCharger-Homeplus/assets/images/small.png",
+        "large": "/drivers/go-eCharger-Homeplus/assets/images/large.png",
+        "xlarge": "/drivers/go-eCharger-Homeplus/assets/images/xlarge.png"
       },
       "discovery": "mdns_http_go-echarger-home",
       "pair": [
@@ -996,7 +996,7 @@
           ]
         }
       ],
-      "id": "go-eCharger-Home"
+      "id": "go-eCharger-Homeplus"
     },
     {
       "name": {
