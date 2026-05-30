@@ -19,6 +19,7 @@
 - Avoid unrelated refactors.
 - Prefer reusable Homey Compose templates when multiple drivers share config.
 - Test and commit often so changes remain small.
+- Keep `MAPPINGS.md` synchronized with mapping behavior in `lib/mappings.js`, `lib/go-eCharger-API-v2.js`, and capability usage in `drivers/evcharger-device.js` whenever related code changes.
 
 ## Validation
 
