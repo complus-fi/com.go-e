@@ -1,0 +1,91 @@
+{
+  "id": "device_info",
+  "type": "group",
+  "label": {
+    "en": "Discovered device information.",
+    "nl": "Ontdekte apparaatinformatie.",
+    "da": "Opdaget enhedsinformation.",
+    "de": "Entdeckte Geräteinformationen.",
+    "es": "Información del dispositivo descubierto.",
+    "fr": "Informations sur l'appareil découvert.",
+    "it": "Informazioni sul dispositivo rilevato.",
+    "no": "Oppdaget enhetsinformasjon.",
+    "sv": "Upptäckt enhetsinformation.",
+    "pl": "Odkryto informacje o urządzeniu.",
+    "ru": "Обнаружена информация об устройстве.",
+    "ko": "발견된 장치 정보.",
+    "ar": "تم اكتشاف معلومات الجهاز."
+  },
+  "children": [
+    {
+      "id": "version",
+      "type": "label",
+      "label": {
+        "en": "Firmware",
+        "nl": "Firmware",
+        "da": "Firmware",
+        "de": "Firmware",
+        "es": "Firmware",
+        "fr": "Micrologiciel",
+        "it": "Firmware",
+        "no": "Fastvare",
+        "sv": "Firmware",
+        "pl": "Oprogramowanie układowe",
+        "ru": "Прошивка",
+        "ko": "펌웨어",
+        "ar": "البرامج الثابتة"
+      },
+      "value": "",
+      "hint": {
+        "en": "Device firmware version.",
+        "nl": "Apparaat firmwareversie.",
+        "da": "Enhedens firmwareversion.",
+        "de": "Firmware-Version des Geräts.",
+        "es": "Versión del firmware del dispositivo.",
+        "fr": "Version du firmware de l'appareil.",
+        "it": "Versione firmware del dispositivo.",
+        "no": "Enhetsprogramvareversjon.",
+        "sv": "Enhetens firmwareversion.",
+        "pl": "Wersja oprogramowania urządzenia.",
+        "ru": "Версия прошивки устройства.",
+        "ko": "기기 펌웨어 버전.",
+        "ar": "إصدار البرنامج الثابت للجهاز."
+      }
+    },
+    {
+      "id": "type",
+      "type": "label",
+      "label": {
+        "en": "Type",
+        "nl": "Typ",
+        "da": "Type",
+        "de": "Typ",
+        "es": "Escribe",
+        "fr": "Tapez",
+        "it": "Tipo",
+        "no": "Type",
+        "sv": "Typ",
+        "pl": "Rodzaj",
+        "ru": "Тип",
+        "ko": "유형",
+        "ar": "نوع"
+      },
+      "value": "",
+      "hint": {
+        "en": "Device type.",
+        "nl": "Apparaattype.",
+        "da": "Enhedstype.",
+        "de": "Gerätetyp.",
+        "es": "Tipo de dispositivo.",
+        "fr": "Type d'appareil.",
+        "it": "Tipo di dispositivo.",
+        "no": "Enhetstype.",
+        "sv": "Enhetstyp.",
+        "pl": "Typ urządzenia.",
+        "ru": "Тип устройства.",
+        "ko": "장치 유형.",
+        "ar": "نوع الجهاز."
+      }
+    }
+  ]
+}

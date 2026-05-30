@@ -1,0 +1,36 @@
+{
+  "id": "address",
+  "type": "text",
+  "label": {
+    "en": "IP address",
+    "nl": "IP-adres",
+    "da": "IP-adresse",
+    "de": "IP-Adresse",
+    "es": "Dirección IP",
+    "fr": "Adresse IP",
+    "it": "Indirizzo IP",
+    "no": "IP-adresse",
+    "sv": "IP-adress",
+    "pl": "Adres IP",
+    "ru": "IP-адрес",
+    "ko": "IP 주소",
+    "ar": "عنوان IP"
+  },
+  "value": "0.0.0.0",
+  "hint": {
+    "en": "Discovered IP address of the device.",
+    "nl": "IP-adres van het apparaat ontdekt.",
+    "da": "Opdaget IP-adresse for enheden.",
+    "de": "IP-Adresse des Geräts entdeckt.",
+    "es": "Dirección IP del dispositivo descubierta.",
+    "fr": "Adresse IP de l'appareil découverte.",
+    "it": "Indirizzo IP del dispositivo rilevato.",
+    "no": "Oppdaget IP-adressen til enheten.",
+    "sv": "Upptäckt IP-adress för enheten.",
+    "pl": "Odkryto adres IP urządzenia.",
+    "ru": "Обнаружен IP-адрес устройства.",
+    "ko": "장치의 IP 주소를 발견했습니다.",
+    "ar": "تم اكتشاف عنوان IP للجهاز."
+  },
+  "highlight": true
+}
