@@ -5,6 +5,7 @@ const goeCharger = require('../lib/go-eCharger-API-v2');
 const { getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
 
 const POLL_INTERVAL = 5000;
+const CHARGING_UI_DEBOUNCE_POLLS = 1;
 
 class evChargerDevice extends Homey.Device {
   /**
@@ -27,7 +28,15 @@ class evChargerDevice extends Homey.Device {
 
     this.api.apiKeys = getStatusAttributes(this.getCapabilities(), { firmwareVersion: this.getSettings().version });
     this.pollErrorMessage = null;
+    this.pendingChargingState = null;
     this.registerCapabilityListeners();
+  }
+
+  setPendingChargingState(value) {
+    this.pendingChargingState = {
+      expectedValue: value,
+      pollsToSkip: CHARGING_UI_DEBOUNCE_POLLS
+    };
   }
 
   getErrorMessage(error, fallback = 'Unknown error') {
@@ -224,7 +233,12 @@ class evChargerDevice extends Homey.Device {
         try {
           this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { target_power, target_power_mode, evcharger_charging });
 
-          const context = { api: this.api, maxAmps: this.maxAmps, firmwareVersion: this.getSettings().version };
+          const context = {
+            api: this.api,
+            maxAmps: this.maxAmps,
+            firmwareVersion: this.getSettings().version,
+            status: this.lastStatus
+          };
           // Switching to device mode: let the charger resume its own scheduling (frc=0 = neutral).
           if (target_power_mode === 'device') {
             await this.applyApiValues({ frc: 0 });
@@ -237,6 +251,7 @@ class evChargerDevice extends Homey.Device {
           if (evcharger_charging === false) {
             const apiValues = mapHomeyToApiValues({ evcharger_charging: false }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
             await this.applyApiValues(apiValues);
+            this.setPendingChargingState(false);
             return;
           }
 
@@ -253,6 +268,7 @@ class evChargerDevice extends Homey.Device {
             } else {
               await this.applyApiValues(forceOnValues);
             }
+            this.setPendingChargingState(true);
             return;
           }
 
@@ -278,7 +294,7 @@ class evChargerDevice extends Homey.Device {
   }
 
   async applyApiValues(apiValues = {}) {
-    const orderedKeys = ['frc', 'amp', 'psm'];
+    const orderedKeys = ['trx', 'frc', 'amp', 'psm'];
 
     const orderedApiValues = {};
     for (const key of orderedKeys) {
@@ -306,6 +322,7 @@ class evChargerDevice extends Homey.Device {
     try {
       const status = await this.api.getStatus();
       this.log(`[Device] ${this.getName()} - onPoll status:`, status);
+      this.lastStatus = status;
 
       if (this.pollErrorMessage) {
         this.pollErrorMessage = null;
@@ -331,6 +348,20 @@ class evChargerDevice extends Homey.Device {
       for (const [capability, value] of Object.entries(nextValues)) {
         if (!this.hasCapability(capability)) continue;
         if (value === undefined || value === null) continue;
+
+        if (capability === 'evcharger_charging' && this.pendingChargingState) {
+          const pending = this.pendingChargingState;
+          if (value === pending.expectedValue) {
+            this.pendingChargingState = null;
+          } else if (pending.pollsToSkip > 0) {
+            pending.pollsToSkip -= 1;
+            this.log(`[Device] ${this.getName()} - Skipping stale evcharger_charging poll value ${value} (waiting for ${pending.expectedValue})`);
+            continue;
+          } else {
+            this.pendingChargingState = null;
+          }
+        }
+
         await this.setCapabilityValue(capability, value).catch(this.error);
       }
     } catch (error) {
