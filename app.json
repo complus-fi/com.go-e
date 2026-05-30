@@ -67,6 +67,95 @@
   },
   "homeyCommunityTopicId": 74195,
   "support": "https://github.com/complus-fi/com.go-e/issues",
+  "flow": {
+    "actions": [
+      {
+        "title": {
+          "en": "Set PV surplus mode"
+        },
+        "titleFormatted": {
+          "en": "Set PV surplus mode [[enabled]]"
+        },
+        "hint": {
+          "en": "Enables or disables go-eCharger PV surplus control."
+        },
+        "args": [
+          {
+            "name": "enabled",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "true",
+                "title": {
+                  "en": "Enabled"
+                }
+              },
+              {
+                "id": "false",
+                "title": {
+                  "en": "Disabled"
+                }
+              }
+            ]
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "set_pv_surplus_enabled"
+      },
+      {
+        "title": {
+          "en": "Set PV surplus information"
+        },
+        "titleFormatted": {
+          "en": "Set PV surplus information [[pGrid]] [[pPv]] [[pAkku]]"
+        },
+        "hint": {
+          "en": "Updates go-eCharger available wattage for automatic PV surplus mode."
+        },
+        "args": [
+          {
+            "name": "pGrid",
+            "type": "number",
+            "title": {
+              "en": "Grid power (W)"
+            }
+          },
+          {
+            "name": "pPv",
+            "type": "number",
+            "optional": true,
+            "title": {
+              "en": "PV power (W, optional)"
+            }
+          },
+          {
+            "name": "pAkku",
+            "type": "number",
+            "optional": true,
+            "title": {
+              "en": "Battery power (W, optional)"
+            }
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "set_pv_surplus_info"
+      }
+    ]
+  },
   "drivers": [
     {
       "class": "evcharger",
@@ -112,10 +201,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -167,6 +265,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Average Battery Power",
+            "nl": "Gemiddeld Batterijvermogen",
+            "da": "Gennemsnitligt Batteri Effekt",
+            "de": "Durchschnittliche Batterieleistung",
+            "es": "Potencia Promedio de la Batería",
+            "fr": "Puissance Moyenne de la Batterie",
+            "it": "Potenza Media della Batteria",
+            "no": "Gjennomsnittlig Batterikraft",
+            "sv": "Genomsnittlig Batterikraft",
+            "pl": "Średnia Moc Baterii",
+            "ru": "Средняя мощность батареи",
+            "ko": "평균 배터리 전력",
+            "ar": "متوسط طاقة البطارية"
+          },
+          "hint": {
+            "en": "Average power delivered to the car's battery by PV optimization.",
+            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
+            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
+            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
+            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
+            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
+            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Average Grid Power",
+            "nl": "Gemiddeld Netstroom",
+            "da": "Gennemsnitligt Net Effekt",
+            "de": "Durchschnittliche Netzleistung",
+            "es": "Potencia Promedio de la Red",
+            "fr": "Puissance Moyenne du Réseau",
+            "it": "Potenza Media della Rete",
+            "no": "Gjennomsnittlig Nettkraft",
+            "sv": "Genomsnittlig Nätkraft",
+            "pl": "Średnia Moc Sieci",
+            "ru": "Средняя мощность сети",
+            "ko": "평균 그리드 전력",
+            "ar": "متوسط طاقة الشبكة"
+          },
+          "hint": {
+            "en": "Average power drawn from the grid by PV optimization.",
+            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
+            "es": "Potencia promedio tomada de la red por la optimización de PV.",
+            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
+            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
+            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
+            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
+            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Average PV Power",
+            "nl": "Gemiddeld PV-vermogen",
+            "da": "Gennemsnitlig PV-effekt",
+            "de": "Durchschnittliche PV-Leistung",
+            "es": "Potencia Promedio de PV",
+            "fr": "Puissance Moyenne de PV",
+            "it": "Potenza Media di PV",
+            "no": "Gjennomsnittlig PV-kraft",
+            "sv": "Genomsnittlig PV-kraft",
+            "pl": "Średnia Moc PV",
+            "ru": "Средняя мощность PV",
+            "ko": "평균 PV 전력",
+            "ar": "متوسط طاقة PV"
+          },
+          "hint": {
+            "en": "Average power produced by the solar panels used for PV optimization.",
+            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
+            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
+            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
+            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
+            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
+            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
+            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -203,24 +457,25 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
         },
         "target_power": {
+          "deprecated": true,
           "min": 0,
           "max": 22080,
           "step": 230,
@@ -423,10 +678,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -478,6 +742,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Average Battery Power",
+            "nl": "Gemiddeld Batterijvermogen",
+            "da": "Gennemsnitligt Batteri Effekt",
+            "de": "Durchschnittliche Batterieleistung",
+            "es": "Potencia Promedio de la Batería",
+            "fr": "Puissance Moyenne de la Batterie",
+            "it": "Potenza Media della Batteria",
+            "no": "Gjennomsnittlig Batterikraft",
+            "sv": "Genomsnittlig Batterikraft",
+            "pl": "Średnia Moc Baterii",
+            "ru": "Средняя мощность батареи",
+            "ko": "평균 배터리 전력",
+            "ar": "متوسط طاقة البطارية"
+          },
+          "hint": {
+            "en": "Average power delivered to the car's battery by PV optimization.",
+            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
+            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
+            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
+            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
+            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
+            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Average Grid Power",
+            "nl": "Gemiddeld Netstroom",
+            "da": "Gennemsnitligt Net Effekt",
+            "de": "Durchschnittliche Netzleistung",
+            "es": "Potencia Promedio de la Red",
+            "fr": "Puissance Moyenne du Réseau",
+            "it": "Potenza Media della Rete",
+            "no": "Gjennomsnittlig Nettkraft",
+            "sv": "Genomsnittlig Nätkraft",
+            "pl": "Średnia Moc Sieci",
+            "ru": "Средняя мощность сети",
+            "ko": "평균 그리드 전력",
+            "ar": "متوسط طاقة الشبكة"
+          },
+          "hint": {
+            "en": "Average power drawn from the grid by PV optimization.",
+            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
+            "es": "Potencia promedio tomada de la red por la optimización de PV.",
+            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
+            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
+            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
+            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
+            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Average PV Power",
+            "nl": "Gemiddeld PV-vermogen",
+            "da": "Gennemsnitlig PV-effekt",
+            "de": "Durchschnittliche PV-Leistung",
+            "es": "Potencia Promedio de PV",
+            "fr": "Puissance Moyenne de PV",
+            "it": "Potenza Media di PV",
+            "no": "Gjennomsnittlig PV-kraft",
+            "sv": "Genomsnittlig PV-kraft",
+            "pl": "Średnia Moc PV",
+            "ru": "Средняя мощность PV",
+            "ko": "평균 PV 전력",
+            "ar": "متوسط طاقة PV"
+          },
+          "hint": {
+            "en": "Average power produced by the solar panels used for PV optimization.",
+            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
+            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
+            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
+            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
+            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
+            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
+            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -514,24 +934,25 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
         },
         "target_power": {
+          "deprecated": true,
           "min": 0,
           "max": 22080,
           "step": 230,
@@ -734,10 +1155,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -789,6 +1219,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Average Battery Power",
+            "nl": "Gemiddeld Batterijvermogen",
+            "da": "Gennemsnitligt Batteri Effekt",
+            "de": "Durchschnittliche Batterieleistung",
+            "es": "Potencia Promedio de la Batería",
+            "fr": "Puissance Moyenne de la Batterie",
+            "it": "Potenza Media della Batteria",
+            "no": "Gjennomsnittlig Batterikraft",
+            "sv": "Genomsnittlig Batterikraft",
+            "pl": "Średnia Moc Baterii",
+            "ru": "Средняя мощность батареи",
+            "ko": "평균 배터리 전력",
+            "ar": "متوسط طاقة البطارية"
+          },
+          "hint": {
+            "en": "Average power delivered to the car's battery by PV optimization.",
+            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
+            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
+            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
+            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
+            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
+            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Average Grid Power",
+            "nl": "Gemiddeld Netstroom",
+            "da": "Gennemsnitligt Net Effekt",
+            "de": "Durchschnittliche Netzleistung",
+            "es": "Potencia Promedio de la Red",
+            "fr": "Puissance Moyenne du Réseau",
+            "it": "Potenza Media della Rete",
+            "no": "Gjennomsnittlig Nettkraft",
+            "sv": "Genomsnittlig Nätkraft",
+            "pl": "Średnia Moc Sieci",
+            "ru": "Средняя мощность сети",
+            "ko": "평균 그리드 전력",
+            "ar": "متوسط طاقة الشبكة"
+          },
+          "hint": {
+            "en": "Average power drawn from the grid by PV optimization.",
+            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
+            "es": "Potencia promedio tomada de la red por la optimización de PV.",
+            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
+            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
+            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
+            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
+            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Average PV Power",
+            "nl": "Gemiddeld PV-vermogen",
+            "da": "Gennemsnitlig PV-effekt",
+            "de": "Durchschnittliche PV-Leistung",
+            "es": "Potencia Promedio de PV",
+            "fr": "Puissance Moyenne de PV",
+            "it": "Potenza Media di PV",
+            "no": "Gjennomsnittlig PV-kraft",
+            "sv": "Genomsnittlig PV-kraft",
+            "pl": "Średnia Moc PV",
+            "ru": "Средняя мощность PV",
+            "ko": "평균 PV 전력",
+            "ar": "متوسط طاقة PV"
+          },
+          "hint": {
+            "en": "Average power produced by the solar panels used for PV optimization.",
+            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
+            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
+            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
+            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
+            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
+            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
+            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -825,24 +1411,25 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
         },
         "target_power": {
+          "deprecated": true,
           "min": 0,
           "max": 22080,
           "step": 230,
@@ -1045,10 +1632,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -1100,6 +1696,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Average Battery Power",
+            "nl": "Gemiddeld Batterijvermogen",
+            "da": "Gennemsnitligt Batteri Effekt",
+            "de": "Durchschnittliche Batterieleistung",
+            "es": "Potencia Promedio de la Batería",
+            "fr": "Puissance Moyenne de la Batterie",
+            "it": "Potenza Media della Batteria",
+            "no": "Gjennomsnittlig Batterikraft",
+            "sv": "Genomsnittlig Batterikraft",
+            "pl": "Średnia Moc Baterii",
+            "ru": "Средняя мощность батареи",
+            "ko": "평균 배터리 전력",
+            "ar": "متوسط طاقة البطارية"
+          },
+          "hint": {
+            "en": "Average power delivered to the car's battery by PV optimization.",
+            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
+            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
+            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
+            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
+            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
+            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Average Grid Power",
+            "nl": "Gemiddeld Netstroom",
+            "da": "Gennemsnitligt Net Effekt",
+            "de": "Durchschnittliche Netzleistung",
+            "es": "Potencia Promedio de la Red",
+            "fr": "Puissance Moyenne du Réseau",
+            "it": "Potenza Media della Rete",
+            "no": "Gjennomsnittlig Nettkraft",
+            "sv": "Genomsnittlig Nätkraft",
+            "pl": "Średnia Moc Sieci",
+            "ru": "Средняя мощность сети",
+            "ko": "평균 그리드 전력",
+            "ar": "متوسط طاقة الشبكة"
+          },
+          "hint": {
+            "en": "Average power drawn from the grid by PV optimization.",
+            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
+            "es": "Potencia promedio tomada de la red por la optimización de PV.",
+            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
+            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
+            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
+            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
+            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Average PV Power",
+            "nl": "Gemiddeld PV-vermogen",
+            "da": "Gennemsnitlig PV-effekt",
+            "de": "Durchschnittliche PV-Leistung",
+            "es": "Potencia Promedio de PV",
+            "fr": "Puissance Moyenne de PV",
+            "it": "Potenza Media di PV",
+            "no": "Gjennomsnittlig PV-kraft",
+            "sv": "Genomsnittlig PV-kraft",
+            "pl": "Średnia Moc PV",
+            "ru": "Средняя мощность PV",
+            "ko": "평균 PV 전력",
+            "ar": "متوسط طاقة PV"
+          },
+          "hint": {
+            "en": "Average power produced by the solar panels used for PV optimization.",
+            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
+            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
+            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
+            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
+            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
+            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
+            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -1136,24 +1888,25 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
         },
         "target_power": {
+          "deprecated": true,
           "min": 0,
           "max": 22080,
           "step": 230,
@@ -1356,10 +2109,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -1411,6 +2173,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Average Battery Power",
+            "nl": "Gemiddeld Batterijvermogen",
+            "da": "Gennemsnitligt Batteri Effekt",
+            "de": "Durchschnittliche Batterieleistung",
+            "es": "Potencia Promedio de la Batería",
+            "fr": "Puissance Moyenne de la Batterie",
+            "it": "Potenza Media della Batteria",
+            "no": "Gjennomsnittlig Batterikraft",
+            "sv": "Genomsnittlig Batterikraft",
+            "pl": "Średnia Moc Baterii",
+            "ru": "Средняя мощность батареи",
+            "ko": "평균 배터리 전력",
+            "ar": "متوسط طاقة البطارية"
+          },
+          "hint": {
+            "en": "Average power delivered to the car's battery by PV optimization.",
+            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
+            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
+            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
+            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
+            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
+            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Average Grid Power",
+            "nl": "Gemiddeld Netstroom",
+            "da": "Gennemsnitligt Net Effekt",
+            "de": "Durchschnittliche Netzleistung",
+            "es": "Potencia Promedio de la Red",
+            "fr": "Puissance Moyenne du Réseau",
+            "it": "Potenza Media della Rete",
+            "no": "Gjennomsnittlig Nettkraft",
+            "sv": "Genomsnittlig Nätkraft",
+            "pl": "Średnia Moc Sieci",
+            "ru": "Средняя мощность сети",
+            "ko": "평균 그리드 전력",
+            "ar": "متوسط طاقة الشبكة"
+          },
+          "hint": {
+            "en": "Average power drawn from the grid by PV optimization.",
+            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
+            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
+            "es": "Potencia promedio tomada de la red por la optimización de PV.",
+            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
+            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
+            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
+            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
+            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
+            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
+            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Average PV Power",
+            "nl": "Gemiddeld PV-vermogen",
+            "da": "Gennemsnitlig PV-effekt",
+            "de": "Durchschnittliche PV-Leistung",
+            "es": "Potencia Promedio de PV",
+            "fr": "Puissance Moyenne de PV",
+            "it": "Potenza Media di PV",
+            "no": "Gjennomsnittlig PV-kraft",
+            "sv": "Genomsnittlig PV-kraft",
+            "pl": "Średnia Moc PV",
+            "ru": "Средняя мощность PV",
+            "ko": "평균 PV 전력",
+            "ar": "متوسط طاقة PV"
+          },
+          "hint": {
+            "en": "Average power produced by the solar panels used for PV optimization.",
+            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
+            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
+            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
+            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
+            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
+            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
+            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
+            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
+            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
+            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -1447,24 +2365,25 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
         },
         "target_power": {
+          "deprecated": true,
           "min": 0,
           "max": 22080,
           "step": 230,
@@ -1624,6 +2543,312 @@
       ]
     }
   ],
+  "capabilities": {
+    "goe_measure_modelStatus": {
+      "type": "enum",
+      "title": {
+        "en": "Model status"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/goe_measure_modelStatus.svg",
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "ChargingBecauseNoChargeCtrlData"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "NotChargingBecauseOvertemperature"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "NotChargingBecauseAccessControl"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "ChargingBecauseForceStateOn"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "NotChargingBecauseForceStateOff"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "NotChargingBecauseScheduler"
+          }
+        },
+        {
+          "id": "6",
+          "title": {
+            "en": "NotChargingBecauseEnergyLimit"
+          }
+        },
+        {
+          "id": "7",
+          "title": {
+            "en": "ChargingBecauseAwattarPriceLow"
+          }
+        },
+        {
+          "id": "8",
+          "title": {
+            "en": "ChargingBecauseAutomaticStopTestLadung"
+          }
+        },
+        {
+          "id": "9",
+          "title": {
+            "en": "ChargingBecauseAutomaticStopNotEnoughTime"
+          }
+        },
+        {
+          "id": "10",
+          "title": {
+            "en": "ChargingBecauseAutomaticStop"
+          }
+        },
+        {
+          "id": "11",
+          "title": {
+            "en": "ChargingBecauseAutomaticStopNoClock"
+          }
+        },
+        {
+          "id": "12",
+          "title": {
+            "en": "ChargingBecausePvSurplus"
+          }
+        },
+        {
+          "id": "13",
+          "title": {
+            "en": "ChargingBecauseFallbackV2Default"
+          }
+        },
+        {
+          "id": "14",
+          "title": {
+            "en": "ChargingBecauseFallbackV2Scheduler"
+          }
+        },
+        {
+          "id": "15",
+          "title": {
+            "en": "ChargingBecauseFallbackDefault"
+          }
+        },
+        {
+          "id": "16",
+          "title": {
+            "en": "NotChargingBecauseFallbackV2Awattar"
+          }
+        },
+        {
+          "id": "17",
+          "title": {
+            "en": "NotChargingBecauseFallbackAwattar"
+          }
+        },
+        {
+          "id": "18",
+          "title": {
+            "en": "NotChargingBecauseFallbackAutomaticStop"
+          }
+        },
+        {
+          "id": "19",
+          "title": {
+            "en": "ChargingBecauseCarCompatibilityKeepAlive"
+          }
+        },
+        {
+          "id": "20",
+          "title": {
+            "en": "ChargingBecauseChargePauseNotAllowed"
+          }
+        },
+        {
+          "id": "21",
+          "title": {
+            "en": "Unknown(21)"
+          }
+        },
+        {
+          "id": "22",
+          "title": {
+            "en": "NotChargingBecauseSimulateUnplugging"
+          }
+        },
+        {
+          "id": "23",
+          "title": {
+            "en": "NotChargingBecausePhaseSwitch"
+          }
+        },
+        {
+          "id": "24",
+          "title": {
+            "en": "NotChargingBecauseMinPauseDuration"
+          }
+        },
+        {
+          "id": "25",
+          "title": {
+            "en": "Unknown(25)"
+          }
+        },
+        {
+          "id": "26",
+          "title": {
+            "en": "NotChargingBecauseError"
+          }
+        },
+        {
+          "id": "27",
+          "title": {
+            "en": "NotChargingBecauseLoadManagementDoesntWant"
+          }
+        },
+        {
+          "id": "28",
+          "title": {
+            "en": "NotChargingBecauseOcppDoesntWant"
+          }
+        },
+        {
+          "id": "29",
+          "title": {
+            "en": "NotChargingBecauseReconnectDelay"
+          }
+        },
+        {
+          "id": "30",
+          "title": {
+            "en": "NotChargingBecauseAdapterBlocking"
+          }
+        },
+        {
+          "id": "31",
+          "title": {
+            "en": "NotChargingBecauseUnderfrequencyControl"
+          }
+        },
+        {
+          "id": "32",
+          "title": {
+            "en": "NotChargingBecauseUnbalancedLoad"
+          }
+        },
+        {
+          "id": "33",
+          "title": {
+            "en": "ChargingBecauseDischargingPvBattery"
+          }
+        },
+        {
+          "id": "34",
+          "title": {
+            "en": "NotChargingBecauseGridMonitoring"
+          }
+        },
+        {
+          "id": "35",
+          "title": {
+            "en": "NotChargingBecauseOcppFallback"
+          }
+        },
+        {
+          "id": "36",
+          "title": {
+            "en": "NotChargingBecauseFloorDetected"
+          }
+        },
+        {
+          "id": "37",
+          "title": {
+            "en": "NotChargingBecauseOcppInoperable"
+          }
+        },
+        {
+          "id": "38",
+          "title": {
+            "en": "NotChargingBecauseUndervoltageControl"
+          }
+        },
+        {
+          "id": "39",
+          "title": {
+            "en": "NotChargingBecauseZeroSetpoint"
+          }
+        },
+        {
+          "id": "40",
+          "title": {
+            "en": "NotChargingBecauseInitializing"
+          }
+        },
+        {
+          "id": "41",
+          "title": {
+            "en": "NotChargingBecauseFailsafeLimit"
+          }
+        }
+      ]
+    },
+    "goe_measure_phase_switching": {
+      "type": "enum",
+      "title": {
+        "en": "Phase switching"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/goe_measure_phase_switching.svg",
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "Automatic"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "1-Phase"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "3-Phase"
+          }
+        }
+      ]
+    },
+    "goe_pv_surplus_enabled": {
+      "type": "boolean",
+      "title": {
+        "en": "PV Surplus Enabled"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "button",
+      "insights": true
+    }
+  },
   "discovery": {
     "mdns_http_go-echarger": {
       "type": "mdns-sd",

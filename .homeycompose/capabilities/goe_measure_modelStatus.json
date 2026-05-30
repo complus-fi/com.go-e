@@ -1,0 +1,264 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Model status"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/goe_measure_modelStatus.svg",
+  "values": [
+    {
+      "id": "0",
+      "title": {
+        "en": "ChargingBecauseNoChargeCtrlData"
+      }
+    },
+    {
+      "id": "1",
+      "title": {
+        "en": "NotChargingBecauseOvertemperature"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "NotChargingBecauseAccessControl"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "ChargingBecauseForceStateOn"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "NotChargingBecauseForceStateOff"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "NotChargingBecauseScheduler"
+      }
+    },
+    {
+      "id": "6",
+      "title": {
+        "en": "NotChargingBecauseEnergyLimit"
+      }
+    },
+    {
+      "id": "7",
+      "title": {
+        "en": "ChargingBecauseAwattarPriceLow"
+      }
+    },
+    {
+      "id": "8",
+      "title": {
+        "en": "ChargingBecauseAutomaticStopTestLadung"
+      }
+    },
+    {
+      "id": "9",
+      "title": {
+        "en": "ChargingBecauseAutomaticStopNotEnoughTime"
+      }
+    },
+    {
+      "id": "10",
+      "title": {
+        "en": "ChargingBecauseAutomaticStop"
+      }
+    },
+    {
+      "id": "11",
+      "title": {
+        "en": "ChargingBecauseAutomaticStopNoClock"
+      }
+    },
+    {
+      "id": "12",
+      "title": {
+        "en": "ChargingBecausePvSurplus"
+      }
+    },
+    {
+      "id": "13",
+      "title": {
+        "en": "ChargingBecauseFallbackV2Default"
+      }
+    },
+    {
+      "id": "14",
+      "title": {
+        "en": "ChargingBecauseFallbackV2Scheduler"
+      }
+    },
+    {
+      "id": "15",
+      "title": {
+        "en": "ChargingBecauseFallbackDefault"
+      }
+    },
+    {
+      "id": "16",
+      "title": {
+        "en": "NotChargingBecauseFallbackV2Awattar"
+      }
+    },
+    {
+      "id": "17",
+      "title": {
+        "en": "NotChargingBecauseFallbackAwattar"
+      }
+    },
+    {
+      "id": "18",
+      "title": {
+        "en": "NotChargingBecauseFallbackAutomaticStop"
+      }
+    },
+    {
+      "id": "19",
+      "title": {
+        "en": "ChargingBecauseCarCompatibilityKeepAlive"
+      }
+    },
+    {
+      "id": "20",
+      "title": {
+        "en": "ChargingBecauseChargePauseNotAllowed"
+      }
+    },
+    {
+      "id": "21",
+      "title": {
+        "en": "Unknown(21)"
+      }
+    },
+    {
+      "id": "22",
+      "title": {
+        "en": "NotChargingBecauseSimulateUnplugging"
+      }
+    },
+    {
+      "id": "23",
+      "title": {
+        "en": "NotChargingBecausePhaseSwitch"
+      }
+    },
+    {
+      "id": "24",
+      "title": {
+        "en": "NotChargingBecauseMinPauseDuration"
+      }
+    },
+    {
+      "id": "25",
+      "title": {
+        "en": "Unknown(25)"
+      }
+    },
+    {
+      "id": "26",
+      "title": {
+        "en": "NotChargingBecauseError"
+      }
+    },
+    {
+      "id": "27",
+      "title": {
+        "en": "NotChargingBecauseLoadManagementDoesntWant"
+      }
+    },
+    {
+      "id": "28",
+      "title": {
+        "en": "NotChargingBecauseOcppDoesntWant"
+      }
+    },
+    {
+      "id": "29",
+      "title": {
+        "en": "NotChargingBecauseReconnectDelay"
+      }
+    },
+    {
+      "id": "30",
+      "title": {
+        "en": "NotChargingBecauseAdapterBlocking"
+      }
+    },
+    {
+      "id": "31",
+      "title": {
+        "en": "NotChargingBecauseUnderfrequencyControl"
+      }
+    },
+    {
+      "id": "32",
+      "title": {
+        "en": "NotChargingBecauseUnbalancedLoad"
+      }
+    },
+    {
+      "id": "33",
+      "title": {
+        "en": "ChargingBecauseDischargingPvBattery"
+      }
+    },
+    {
+      "id": "34",
+      "title": {
+        "en": "NotChargingBecauseGridMonitoring"
+      }
+    },
+    {
+      "id": "35",
+      "title": {
+        "en": "NotChargingBecauseOcppFallback"
+      }
+    },
+    {
+      "id": "36",
+      "title": {
+        "en": "NotChargingBecauseFloorDetected"
+      }
+    },
+    {
+      "id": "37",
+      "title": {
+        "en": "NotChargingBecauseOcppInoperable"
+      }
+    },
+    {
+      "id": "38",
+      "title": {
+        "en": "NotChargingBecauseUndervoltageControl"
+      }
+    },
+    {
+      "id": "39",
+      "title": {
+        "en": "NotChargingBecauseZeroSetpoint"
+      }
+    },
+    {
+      "id": "40",
+      "title": {
+        "en": "NotChargingBecauseInitializing"
+      }
+    },
+    {
+      "id": "41",
+      "title": {
+        "en": "NotChargingBecauseFailsafeLimit"
+      }
+    }
+  ]
+}

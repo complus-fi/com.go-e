@@ -6,6 +6,7 @@ const { getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = re
 
 const POLL_INTERVAL = 5000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
+const AUTO_SPL3_THRESHOLD_W = 4140;
 
 class evChargerDevice extends Homey.Device {
   /**
@@ -58,7 +59,7 @@ class evChargerDevice extends Homey.Device {
     const maxAmps = Number(ama);
     if (!Number.isFinite(maxAmps) || maxAmps <= 0) return;
 
-    // target_power max should follow charger amp limit, expressed in watts.
+    // target_power max in manual mode follows charger amp limit, expressed in watts.
     const maxWatts = Math.round(maxAmps * 690);
     const options = this.getCapabilityOptions('target_power') || {};
     if (options.max === maxWatts) return;
@@ -206,16 +207,42 @@ class evChargerDevice extends Homey.Device {
 
       // Remove old capabilities with delay between each
       for (const c of oldC) {
+        if (!this.hasCapability(c)) {
+          this.log(`[Device] ${this.getName()} - updateCapabilities => Skip remove missing capability`, c);
+          continue;
+        }
+
         this.log(`[Device] ${this.getName()} - updateCapabilities => Remove `, c);
-        await this.removeCapability(c);
+        try {
+          await this.removeCapability(c);
+        } catch (error) {
+          const message = error?.message || '';
+          if (!message.includes('Invalid Capability')) {
+            throw error;
+          }
+          this.log(`[Device] ${this.getName()} - updateCapabilities => Remove skipped (already missing)`, c);
+        }
         await this.sleep(500);
       }
       await this.sleep(2000);
 
       // Add new capabilities with delay between each
       for (const c of newC) {
+        if (this.hasCapability(c)) {
+          this.log(`[Device] ${this.getName()} - updateCapabilities => Skip add existing capability`, c);
+          continue;
+        }
+
         this.log(`[Device] ${this.getName()} - updateCapabilities => Add `, c);
-        await this.addCapability(c);
+        try {
+          await this.addCapability(c);
+        } catch (error) {
+          const message = error?.message || '';
+          if (!message.includes('already exists')) {
+            throw error;
+          }
+          this.log(`[Device] ${this.getName()} - updateCapabilities => Add skipped (already exists)`, c);
+        }
 
         await this.sleep(500);
       }
@@ -228,20 +255,31 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['target_power', 'target_power_mode', 'evcharger_charging'],
-      async ({ target_power, target_power_mode, evcharger_charging }) => {
+      ['target_power_mode', 'evcharger_charging', 'goe_pv_surplus_enabled'],
+      async ({ target_power_mode, evcharger_charging, goe_pv_surplus_enabled }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { target_power, target_power_mode, evcharger_charging });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { target_power_mode, evcharger_charging, goe_pv_surplus_enabled });
 
           const context = {
             api: this.api,
             maxAmps: this.maxAmps,
             firmwareVersion: this.getSettings().version,
-            status: this.lastStatus
+            status: this.lastStatus,
+            spl3Threshold: AUTO_SPL3_THRESHOLD_W
           };
-          // Switching to device mode: let the charger resume its own scheduling (frc=0 = neutral).
+
+          if (goe_pv_surplus_enabled !== undefined) {
+            await this.onCapability_SET_PV_SURPLUS_ENABLED(Boolean(goe_pv_surplus_enabled));
+            return;
+          }
+
+          if (target_power_mode !== undefined) {
+            const modeValues = mapHomeyToApiValues({ target_power_mode }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+            await this.applyApiValues(modeValues);
+          }
+
+          // Device mode means automatic control by charger logic.
           if (target_power_mode === 'device') {
-            await this.applyApiValues({ frc: 0 });
             return;
           }
 
@@ -255,33 +293,12 @@ class evChargerDevice extends Homey.Device {
             return;
           }
 
-          const watts = target_power ?? this.getCapabilityValue('target_power') ?? 0;
-
           if (evcharger_charging === true) {
-            // Start/resume charging. When target_power arrives in the same batch (e.g. from
-            // the "Set target power" flow card), combine both into a single API call so the
-            // charger receives the amp setting and the force-on command together.
+            // Start/resume charging with force-on command.
             const forceOnValues = mapHomeyToApiValues({ evcharger_charging: true }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-            if (target_power !== undefined) {
-              const powerValues = mapHomeyToApiValues({ target_power: watts }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-              await this.applyApiValues({ ...powerValues, ...forceOnValues });
-            } else {
-              await this.applyApiValues(forceOnValues);
-            }
+            await this.applyApiValues(forceOnValues);
             this.setPendingChargingState(true);
             return;
-          }
-
-          // Only target_power changed — update the charger amp setting without
-          // altering the current charging state (frc is intentionally excluded).
-          // Ignore if the charger is in device mode — it manages its own power.
-          if (target_power !== undefined) {
-            if (mode !== 'homey') {
-              this.log(`[Device] ${this.getName()} - Ignoring target_power — not in homey mode`);
-              return;
-            }
-            const powerValues = mapHomeyToApiValues({ target_power: watts }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-            await this.applyApiValues(powerValues);
           }
         } catch (error) {
           const message = this.getErrorMessage(error, 'Failed to apply charger command');
@@ -294,7 +311,7 @@ class evChargerDevice extends Homey.Device {
   }
 
   async applyApiValues(apiValues = {}) {
-    const orderedKeys = ['trx', 'frc', 'amp', 'psm'];
+    const orderedKeys = ['ids', 'fup', 'psm', 'pgt', 'frm', 'spl3', 'fst', 'trx', 'frc', 'amp'];
 
     const orderedApiValues = {};
     for (const key of orderedKeys) {
@@ -345,6 +362,11 @@ class evChargerDevice extends Homey.Device {
       }
 
       const nextValues = mapStatusToCapabilities(status, this.getCapabilities(), this.api);
+
+      if (this.hasCapability('goe_pv_surplus_enabled') && status.fup !== undefined) {
+        nextValues.goe_pv_surplus_enabled = Boolean(status.fup);
+      }
+
       for (const [capability, value] of Object.entries(nextValues)) {
         if (!this.hasCapability(capability)) continue;
         if (value === undefined || value === null) continue;
@@ -372,6 +394,45 @@ class evChargerDevice extends Homey.Device {
       }
       await this.setUnavailable(`Connection issue: ${message}`).catch(() => {});
     }
+  }
+
+  async onCapability_SET_PV_SURPLUS_INFO({ pGrid, pPv, pAkku }) {
+    const payload = {
+      pGrid: Number(pGrid)
+    };
+
+    if (!Number.isFinite(payload.pGrid)) {
+      throw new Error('pGrid must be a number');
+    }
+
+    if (pPv !== undefined && pPv !== null && pPv !== '') {
+      const parsedPPv = Number(pPv);
+      if (!Number.isFinite(parsedPPv)) {
+        throw new Error('pPv must be a number when provided');
+      }
+      payload.pPv = parsedPPv;
+    }
+
+    if (pAkku !== undefined && pAkku !== null && pAkku !== '') {
+      const parsedPAkku = Number(pAkku);
+      if (!Number.isFinite(parsedPAkku)) {
+        throw new Error('pAkku must be a number when provided');
+      }
+      payload.pAkku = parsedPAkku;
+    }
+
+    await this.applyApiValues({ ids: payload });
+  }
+
+  async onCapability_SET_PV_SURPLUS_ENABLED(enabled) {
+    const context = {
+      status: this.lastStatus,
+      spl3Threshold: AUTO_SPL3_THRESHOLD_W
+    };
+
+    const apiValues = mapHomeyToApiValues({ goe_pv_surplus_enabled: Boolean(enabled) }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+
+    await this.applyApiValues(apiValues);
   }
 }
 

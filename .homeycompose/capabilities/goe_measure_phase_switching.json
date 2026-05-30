@@ -1,0 +1,30 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Phase switching"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "sensor",
+  "icon": "/assets/goe_measure_phase_switching.svg",
+  "values": [
+    {
+      "id": "0",
+      "title": {
+        "en": "Automatic"
+      }
+    },
+    {
+      "id": "1",
+      "title": {
+        "en": "1-Phase"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "3-Phase"
+      }
+    }
+  ]
+}

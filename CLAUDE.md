@@ -20,6 +20,8 @@
 - Prefer reusable Homey Compose templates when multiple drivers share config.
 - Test and commit often so changes remain small.
 - Keep `MAPPINGS.md` synchronized with mapping behavior in `lib/mappings.js`, `lib/go-eCharger-API-v2.js`, and capability usage in `drivers/evcharger-device.js` whenever related code changes.
+- Prefix all custom capabilities with `goe_`.
+- Treat charger polling as the source of truth for charger state; if the go-e mobile app or another controller changes settings, let the next poll update Homey capabilities instead of caching local state as authoritative.
 
 ## Validation
 
