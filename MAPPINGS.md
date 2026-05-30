@@ -15,7 +15,7 @@ Primary sources:
 2. Polling fetches charger status every 5 seconds.
 3. Status values are converted to capability values.
 4. Capability writes are converted back to API key/value commands.
-5. API command ordering prioritizes `ids`, `fup`, `fsp`, `spl3`, `fst`, then charging keys.
+5. API command ordering prioritizes `ids`, `fup`, `psm`, `pgt`, `frm`, `spl3`, `fst`, `trx`, `frc`, `amp`.
 
 ## Capability Matrix
 
@@ -31,6 +31,8 @@ Primary sources:
 | measure_current             | Read         | nrg                  | Average of non-zero phase currents (`nrg[4..6]`)                    | 0 when no active phases                                           |
 | measure_voltage             | Read         | nrg, pha             | Phase-aware input voltage calculation                               | 3-phase uses sqrt(3) scaling                                      |
 | measure_voltage.output      | Read         | nrg, pha             | Phase-aware output voltage calculation                              | 0 if no output phases active                                      |
+| goe_pv_surplus_enabled      | Read + write | fup                  | Read mirrors `fup`; write true sets automatic PV parameters         | Write false sets `fup=false`                                      |
+| target_power_mode           | Read + write | fup                  | Read from `fup`; write `device` sets automatic PV parameters        | `device` mode bypasses manual charging toggle actions             |
 | goe_measure_phase_switching | Read + write | psm                  | Enum capability for automatic / 1-phase / 3-phase selection         | Capability ids are stringified `0`, `1`, `2`                      |
 | goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code         | Capability id is the stringified status code                      |
 | measure_power.pakku         | Read         | pakku                | Reads charger PV optimization average battery power                 | Rounded to 2 decimals                                             |
@@ -48,6 +50,7 @@ Additional mode/power mappings:
 - Listener handles control capabilities in one debounced batch:
   - `target_power_mode`
   - `evcharger_charging`
+  - `goe_pv_surplus_enabled`
 - If `target_power_mode` is set to `device`, app enables charger automatic mode via `fup=true`, enforces `psm=0`, sets `pgt=-200`, `frm=2`, and sets `spl3` threshold.
 - If charging is turned off, command flow sends force-off behavior (`frc=1`).
 - If charging is turned on, command flow sends `frc=2`; if `trx` is null it also sets `trx=0` for anonymous charging.
