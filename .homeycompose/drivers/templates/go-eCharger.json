@@ -319,7 +319,8 @@
       "max": 22080,
       "step": 230,
       "excludeMin": 0,
-      "excludeMax": 1380
+      "excludeMax": 1380,
+      "deprecated": true
     },
     "target_power_mode": {
       "setable": false,
