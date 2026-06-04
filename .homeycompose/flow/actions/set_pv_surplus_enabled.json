@@ -12,6 +12,9 @@
     {
       "name": "enabled",
       "type": "dropdown",
+      "title": {
+        "en": "PV surplus mode"
+      },
       "values": [
         {
           "id": "true",
