@@ -11,253 +11,253 @@
     {
       "id": "0",
       "title": {
-        "en": "ChargingBecauseNoChargeCtrlData"
+        "en": "Charging (No Charge Control Data)"
       }
     },
     {
       "id": "1",
       "title": {
-        "en": "NotChargingBecauseOvertemperature"
+        "en": "Not Charging (Overtemperature)"
       }
     },
     {
       "id": "2",
       "title": {
-        "en": "NotChargingBecauseAccessControl"
+        "en": "Not Charging (Access Control)"
       }
     },
     {
       "id": "3",
       "title": {
-        "en": "ChargingBecauseForceStateOn"
+        "en": "Charging (Force State On)"
       }
     },
     {
       "id": "4",
       "title": {
-        "en": "NotChargingBecauseForceStateOff"
+        "en": "Not Charging (Force State Off)"
       }
     },
     {
       "id": "5",
       "title": {
-        "en": "NotChargingBecauseScheduler"
+        "en": "Not Charging (Scheduler)"
       }
     },
     {
       "id": "6",
       "title": {
-        "en": "NotChargingBecauseEnergyLimit"
+        "en": "Not Charging (Energy Limit)"
       }
     },
     {
       "id": "7",
       "title": {
-        "en": "ChargingBecauseAwattarPriceLow"
+        "en": "Charging (Dynamic Pricing Low)"
       }
     },
     {
       "id": "8",
       "title": {
-        "en": "ChargingBecauseAutomaticStopTestLadung"
+        "en": "Charging (Automatic Stop Test Charge)"
       }
     },
     {
       "id": "9",
       "title": {
-        "en": "ChargingBecauseAutomaticStopNotEnoughTime"
+        "en": "Charging (Automatic Stop, Not Enough Time)"
       }
     },
     {
       "id": "10",
       "title": {
-        "en": "ChargingBecauseAutomaticStop"
+        "en": "Charging (Automatic Stop)"
       }
     },
     {
       "id": "11",
       "title": {
-        "en": "ChargingBecauseAutomaticStopNoClock"
+        "en": "Charging (Automatic Stop, No Clock)"
       }
     },
     {
       "id": "12",
       "title": {
-        "en": "ChargingBecausePvSurplus"
+        "en": "Charging (PV Surplus)"
       }
     },
     {
       "id": "13",
       "title": {
-        "en": "ChargingBecauseFallbackV2Default"
+        "en": "Charging (Fallback v2 Default)"
       }
     },
     {
       "id": "14",
       "title": {
-        "en": "ChargingBecauseFallbackV2Scheduler"
+        "en": "Charging (Fallback v2 Scheduler)"
       }
     },
     {
       "id": "15",
       "title": {
-        "en": "ChargingBecauseFallbackDefault"
+        "en": "Charging (Fallback Default)"
       }
     },
     {
       "id": "16",
       "title": {
-        "en": "NotChargingBecauseFallbackV2Awattar"
+        "en": "Not Charging (Fallback v2 Dynamic Pricing)"
       }
     },
     {
       "id": "17",
       "title": {
-        "en": "NotChargingBecauseFallbackAwattar"
+        "en": "Not Charging (Fallback Dynamic Pricing)"
       }
     },
     {
       "id": "18",
       "title": {
-        "en": "NotChargingBecauseFallbackAutomaticStop"
+        "en": "Not Charging (Fallback Automatic Stop)"
       }
     },
     {
       "id": "19",
       "title": {
-        "en": "ChargingBecauseCarCompatibilityKeepAlive"
+        "en": "Charging (Car Compatibility Keep-Alive)"
       }
     },
     {
       "id": "20",
       "title": {
-        "en": "ChargingBecauseChargePauseNotAllowed"
+        "en": "Charging (Charge Pause Not Allowed)"
       }
     },
     {
       "id": "21",
       "title": {
-        "en": "Unknown(21)"
+        "en": "Unknown (21)"
       }
     },
     {
       "id": "22",
       "title": {
-        "en": "NotChargingBecauseSimulateUnplugging"
+        "en": "Not Charging (Simulate Unplugging)"
       }
     },
     {
       "id": "23",
       "title": {
-        "en": "NotChargingBecausePhaseSwitch"
+        "en": "Not Charging (Phase Switch)"
       }
     },
     {
       "id": "24",
       "title": {
-        "en": "NotChargingBecauseMinPauseDuration"
+        "en": "Not Charging (Minimum Pause Duration)"
       }
     },
     {
       "id": "25",
       "title": {
-        "en": "Unknown(25)"
+        "en": "Unknown (25)"
       }
     },
     {
       "id": "26",
       "title": {
-        "en": "NotChargingBecauseError"
+        "en": "Not Charging (Error)"
       }
     },
     {
       "id": "27",
       "title": {
-        "en": "NotChargingBecauseLoadManagementDoesntWant"
+        "en": "Not Charging (Load Management Does Not Allow)"
       }
     },
     {
       "id": "28",
       "title": {
-        "en": "NotChargingBecauseOcppDoesntWant"
+        "en": "Not Charging (OCPP Does Not Allow)"
       }
     },
     {
       "id": "29",
       "title": {
-        "en": "NotChargingBecauseReconnectDelay"
+        "en": "Not Charging (Reconnect Delay)"
       }
     },
     {
       "id": "30",
       "title": {
-        "en": "NotChargingBecauseAdapterBlocking"
+        "en": "Not Charging (Adapter Blocking)"
       }
     },
     {
       "id": "31",
       "title": {
-        "en": "NotChargingBecauseUnderfrequencyControl"
+        "en": "Not Charging (Underfrequency Control)"
       }
     },
     {
       "id": "32",
       "title": {
-        "en": "NotChargingBecauseUnbalancedLoad"
+        "en": "Not Charging (Unbalanced Load)"
       }
     },
     {
       "id": "33",
       "title": {
-        "en": "ChargingBecauseDischargingPvBattery"
+        "en": "Charging (Discharging PV Battery)"
       }
     },
     {
       "id": "34",
       "title": {
-        "en": "NotChargingBecauseGridMonitoring"
+        "en": "Not Charging (Grid Monitoring)"
       }
     },
     {
       "id": "35",
       "title": {
-        "en": "NotChargingBecauseOcppFallback"
+        "en": "Not Charging (OCPP Fallback)"
       }
     },
     {
       "id": "36",
       "title": {
-        "en": "NotChargingBecauseFloorDetected"
+        "en": "Not Charging (Floor Detected)"
       }
     },
     {
       "id": "37",
       "title": {
-        "en": "NotChargingBecauseOcppInoperable"
+        "en": "Not Charging (OCPP Inoperable)"
       }
     },
     {
       "id": "38",
       "title": {
-        "en": "NotChargingBecauseUndervoltageControl"
+        "en": "Not Charging (Undervoltage Control)"
       }
     },
     {
       "id": "39",
       "title": {
-        "en": "NotChargingBecauseZeroSetpoint"
+        "en": "Not Charging (Zero Setpoint)"
       }
     },
     {
       "id": "40",
       "title": {
-        "en": "NotChargingBecauseInitializing"
+        "en": "Not Charging (Initializing)"
       }
     },
     {
       "id": "41",
       "title": {
-        "en": "NotChargingBecauseFailsafeLimit"
+        "en": "Not Charging (Failsafe Limit)"
       }
     }
   ]
