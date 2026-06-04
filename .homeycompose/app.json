@@ -1,10 +1,12 @@
 {
   "id": "com.go-e",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
-  "platforms": ["local"],
+  "platforms": [
+    "local"
+  ],
   "name": {
     "en": "Go-e"
   },
@@ -23,7 +25,9 @@
     "ko": "스마트하고 간단하게 충전하세요. 저렴한 비용으로 전기차를 지능적으로 충전하세요.",
     "ar": "اشحن بذكاء وببساطة. اشحن سيارتك الكهربائية بتكلفة منخفضة وبذكاء."
   },
-  "category": ["energy"],
+  "category": [
+    "energy"
+  ],
   "permissions": [],
   "images": {
     "small": "/assets/images/small.png",
@@ -36,7 +40,14 @@
   },
   "brandColor": "#0a58a9",
   "tags": {
-    "en": ["ev", "electric vehicle", "charge", "charger", "charging", "car"]
+    "en": [
+      "ev",
+      "electric vehicle",
+      "charge",
+      "charger",
+      "charging",
+      "car"
+    ]
   },
   "contributing": {
     "donate": {

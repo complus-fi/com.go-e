@@ -22,5 +22,8 @@
   },
   "0.4.2": {
     "en": "Break: Deprecate the local driver."
+  },
+  "0.4.3": {
+    "en": "App manifest updates"
   }
 }
