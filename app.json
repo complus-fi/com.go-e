@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.go-e",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -83,6 +83,9 @@
           {
             "name": "enabled",
             "type": "dropdown",
+            "title": {
+              "en": "PV surplus mode"
+            },
             "values": [
               {
                 "id": "true",
@@ -490,19 +493,19 @@
             {
               "id": "device",
               "title": {
-                "en": "Automatic",
-                "nl": "Automatisch",
-                "de": "Automatisch",
-                "fr": "Automatique",
-                "it": "Automatico",
-                "sv": "Automatisk",
-                "no": "Automatisk",
-                "es": "Automático",
-                "da": "Automatisk",
-                "ru": "Автоматически",
-                "pl": "Automatyczny",
-                "ko": "자동",
-                "ar": "تلقائي"
+                "en": "Device",
+                "nl": "Apparaat",
+                "de": "Gerät",
+                "fr": "Appareil",
+                "it": "Dispositivo",
+                "sv": "Enhet",
+                "no": "Enhet",
+                "es": "Dispositivo",
+                "da": "Enhed",
+                "ru": "Устройство",
+                "pl": "Urządzenie",
+                "ko": "장치",
+                "ar": "جهاز"
               }
             },
             {
@@ -1010,19 +1013,19 @@
             {
               "id": "device",
               "title": {
-                "en": "Automatic",
-                "nl": "Automatisch",
-                "de": "Automatisch",
-                "fr": "Automatique",
-                "it": "Automatico",
-                "sv": "Automatisk",
-                "no": "Automatisk",
-                "es": "Automático",
-                "da": "Automatisk",
-                "ru": "Автоматически",
-                "pl": "Automatyczny",
-                "ko": "자동",
-                "ar": "تلقائي"
+                "en": "Device",
+                "nl": "Apparaat",
+                "de": "Gerät",
+                "fr": "Appareil",
+                "it": "Dispositivo",
+                "sv": "Enhet",
+                "no": "Enhet",
+                "es": "Dispositivo",
+                "da": "Enhed",
+                "ru": "Устройство",
+                "pl": "Urządzenie",
+                "ko": "장치",
+                "ar": "جهاز"
               }
             },
             {
@@ -1530,19 +1533,19 @@
             {
               "id": "device",
               "title": {
-                "en": "Automatic",
-                "nl": "Automatisch",
-                "de": "Automatisch",
-                "fr": "Automatique",
-                "it": "Automatico",
-                "sv": "Automatisk",
-                "no": "Automatisk",
-                "es": "Automático",
-                "da": "Automatisk",
-                "ru": "Автоматически",
-                "pl": "Automatyczny",
-                "ko": "자동",
-                "ar": "تلقائي"
+                "en": "Device",
+                "nl": "Apparaat",
+                "de": "Gerät",
+                "fr": "Appareil",
+                "it": "Dispositivo",
+                "sv": "Enhet",
+                "no": "Enhet",
+                "es": "Dispositivo",
+                "da": "Enhed",
+                "ru": "Устройство",
+                "pl": "Urządzenie",
+                "ko": "장치",
+                "ar": "جهاز"
               }
             },
             {
@@ -2050,19 +2053,19 @@
             {
               "id": "device",
               "title": {
-                "en": "Automatic",
-                "nl": "Automatisch",
-                "de": "Automatisch",
-                "fr": "Automatique",
-                "it": "Automatico",
-                "sv": "Automatisk",
-                "no": "Automatisk",
-                "es": "Automático",
-                "da": "Automatisk",
-                "ru": "Автоматически",
-                "pl": "Automatyczny",
-                "ko": "자동",
-                "ar": "تلقائي"
+                "en": "Device",
+                "nl": "Apparaat",
+                "de": "Gerät",
+                "fr": "Appareil",
+                "it": "Dispositivo",
+                "sv": "Enhet",
+                "no": "Enhet",
+                "es": "Dispositivo",
+                "da": "Enhed",
+                "ru": "Устройство",
+                "pl": "Urządzenie",
+                "ko": "장치",
+                "ar": "جهاز"
               }
             },
             {
@@ -2570,19 +2573,19 @@
             {
               "id": "device",
               "title": {
-                "en": "Automatic",
-                "nl": "Automatisch",
-                "de": "Automatisch",
-                "fr": "Automatique",
-                "it": "Automatico",
-                "sv": "Automatisk",
-                "no": "Automatisk",
-                "es": "Automático",
-                "da": "Automatisk",
-                "ru": "Автоматически",
-                "pl": "Automatyczny",
-                "ko": "자동",
-                "ar": "تلقائي"
+                "en": "Device",
+                "nl": "Apparaat",
+                "de": "Gerät",
+                "fr": "Appareil",
+                "it": "Dispositivo",
+                "sv": "Enhet",
+                "no": "Enhet",
+                "es": "Dispositivo",
+                "da": "Enhed",
+                "ru": "Устройство",
+                "pl": "Urządzenie",
+                "ko": "장치",
+                "ar": "جهاز"
               }
             },
             {

@@ -13,5 +13,8 @@
   },
   "0.3.0": {
     "en": "Deprecate single driver in favour of model drivers."
+  },
+  "0.4.0": {
+    "en": "Break: Refactored PV Surplus charging mode and added a flow card to set the values for go-eCharger."
   }
 }
