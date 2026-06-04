@@ -255,10 +255,10 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['target_power_mode', 'evcharger_charging', 'goe_pv_surplus_enabled'],
-      async ({ target_power_mode, evcharger_charging, goe_pv_surplus_enabled }) => {
+      ['evcharger_charging', 'goe_pv_surplus_enabled'],
+      async ({ evcharger_charging, goe_pv_surplus_enabled }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { target_power_mode, evcharger_charging, goe_pv_surplus_enabled });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_pv_surplus_enabled });
 
           const context = {
             api: this.api,
@@ -273,19 +273,6 @@ class evChargerDevice extends Homey.Device {
             return;
           }
 
-          if (target_power_mode !== undefined) {
-            const modeValues = mapHomeyToApiValues({ target_power_mode }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-            await this.applyApiValues(modeValues);
-          }
-
-          // Device mode means automatic control by charger logic.
-          if (target_power_mode === 'device') {
-            return;
-          }
-
-          // Resolve the effective mode (from this batch or the current capability value).
-          const mode = target_power_mode ?? this.getCapabilityValue('target_power_mode');
-
           if (evcharger_charging === false) {
             const apiValues = mapHomeyToApiValues({ evcharger_charging: false }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
             await this.applyApiValues(apiValues);
@@ -294,9 +281,13 @@ class evChargerDevice extends Homey.Device {
           }
 
           if (evcharger_charging === true) {
-            // Start/resume charging with force-on command.
-            const forceOnValues = mapHomeyToApiValues({ evcharger_charging: true }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-            await this.applyApiValues(forceOnValues);
+            const pvSurplusEnabled = goe_pv_surplus_enabled !== undefined ? Boolean(goe_pv_surplus_enabled) : Boolean(this.getCapabilityValue('goe_pv_surplus_enabled'));
+
+            // Start/resume charging with frc mode derived from PV surplus toggle.
+            // frc=0 => automatic (device), frc=2 => homey.
+            const startValues = mapHomeyToApiValues({ evcharger_charging: true }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+            startValues.frc = pvSurplusEnabled ? 0 : 2;
+            await this.applyApiValues(startValues);
             this.setPendingChargingState(true);
             return;
           }
@@ -397,6 +388,12 @@ class evChargerDevice extends Homey.Device {
   }
 
   async onCapability_SET_PV_SURPLUS_INFO({ pGrid, pPv, pAkku }) {
+    const pvSurplusEnabled = Boolean(this.getCapabilityValue('goe_pv_surplus_enabled'));
+    if (!pvSurplusEnabled) {
+      this.log(`[Device] ${this.getName()} - Skip ids update because goe_pv_surplus_enabled is false`);
+      return;
+    }
+
     const payload = {
       pGrid: Number(pGrid)
     };

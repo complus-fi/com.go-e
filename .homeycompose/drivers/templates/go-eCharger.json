@@ -320,6 +320,47 @@
       "step": 230,
       "excludeMin": 0,
       "excludeMax": 1380
+    },
+    "target_power_mode": {
+      "setable": false,
+      "values": [
+        {
+          "id": "device",
+          "title": {
+            "en": "Device",
+            "nl": "Apparaat",
+            "de": "Gerät",
+            "fr": "Appareil",
+            "it": "Dispositivo",
+            "sv": "Enhet",
+            "no": "Enhet",
+            "es": "Dispositivo",
+            "da": "Enhed",
+            "ru": "Устройство",
+            "pl": "Urządzenie",
+            "ko": "장치",
+            "ar": "جهاز"
+          }
+        },
+        {
+          "id": "homey",
+          "title": {
+            "en": "Homey",
+            "nl": "Homey",
+            "de": "Homey",
+            "fr": "Homey",
+            "it": "Homey",
+            "sv": "Homey",
+            "no": "Homey",
+            "es": "Homey",
+            "da": "Homey",
+            "ru": "Homey",
+            "pl": "Homey",
+            "ko": "Homey",
+            "ar": "Homey"
+          }
+        }
+      ]
     }
   },
   "energy": {

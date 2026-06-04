@@ -33,7 +33,7 @@ Primary sources:
 | measure_voltage             | Read         | nrg, pha             | Phase-aware input voltage calculation                               | 3-phase uses sqrt(3) scaling                                      |
 | measure_voltage.output      | Read         | nrg, pha             | Phase-aware output voltage calculation                              | 0 if no output phases active                                      |
 | goe_pv_surplus_enabled      | Read + write | fup                  | Read mirrors `fup`; write true sets automatic PV parameters         | Write true sets `lmo=4`; write false sets `lmo=3`, `fup=false`    |
-| target_power_mode           | Read + write | fup                  | Read from `fup`; write `device` sets automatic PV parameters        | `device` sets `lmo=4`; `homey` sets `lmo=3`, `fup=false`          |
+| target_power_mode           | Read         | frc                  | Read from `frc` (`0=device`, `2=homey`; `1` keeps current value)    | Read-only capability                                              |
 | goe_measure_phase_switching | Read         | psm                  | Enum capability for automatic / 1-phase / 3-phase status            | Capability ids are stringified `0`, `1`, `2`                      |
 | goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code         | Capability id is the stringified status code                      |
 | measure_power.pakku         | Read         | pakku                | Reads charger PV optimization average battery power                 | Rounded to 2 decimals                                             |
@@ -43,25 +43,20 @@ Primary sources:
 Additional mode/power mappings:
 
 - `goe_pv_surplus_enabled`: uses `fup` for read/write; enabling applies `lmo=4`, `fup=true`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`; disabling applies `lmo=3`, `fup=false`.
-- `target_power`: read-only status capability derived from `amp`, `pnp`, and `nrg` phase voltages.
-  1-phase: uses the single active phase voltage.
-  3-phase: uses combined phase voltage with `sqrt(3)` line-voltage conversion.
-- `target_power_mode`: reads from `fup` (`true` => device/automatic, `false` => homey/manual).
+- `target_power_mode`: read-only mapping from `frc` (`0` => `device`/automatic, `2` => `homey`, `1` => no mode update).
+- `target_power`: read-only status capability using charger `nrg[11]` P-total directly.
 
 ## Control Behavior
 
 - Listener handles control capabilities in one debounced batch:
-  - `target_power_mode`
   - `evcharger_charging`
   - `goe_pv_surplus_enabled`
 - If `goe_pv_surplus_enabled` is included in a batch, it is processed first and the listener returns immediately.
-- If `target_power_mode` is set to `device`, app enables charger automatic mode via `lmo=4`, `fup=true`, enforces `psm=0`, sets `pgt=-200`, `frm=2`, and sets `spl3` threshold.
-- If `target_power_mode` is set to `homey`, app returns charger basic mode via `lmo=3` and disables surplus control with `fup=false`.
-- If the changed batch explicitly sets `target_power_mode=device`, the listener returns after applying mode changes and does not process `evcharger_charging` in that same batch.
 - If charging is turned off, command flow sends force-off behavior (`frc=1`).
-- If charging is turned on, command flow sends `frc=2`; if `trx` is null it also sets `trx=0` for anonymous charging.
+- If charging is turned on and `goe_pv_surplus_enabled` is true, command flow sends `frc=0` (automatic).
+- If charging is turned on and `goe_pv_surplus_enabled` is false, command flow sends `frc=2` (homey).
 - `target_power` is read-only and does not generate charger commands.
-- Inverter/grid/battery telemetry can be sent via the `set_pv_surplus_info` flow action, which calls `onCapability_SET_PV_SURPLUS_INFO` and writes the `ids` payload.
+- Inverter/grid/battery telemetry can be sent via the `set_pv_surplus_info` flow action, which calls `onCapability_SET_PV_SURPLUS_INFO` and writes the `ids` payload only when `goe_pv_surplus_enabled` is true.
 - The `set_pv_surplus_enabled` flow action passes `enabled` through to `onCapability_SET_PV_SURPLUS_ENABLED`; device-side normalization accepts booleans and string booleans.
 - After a UI toggle of `evcharger_charging`, one mismatching poll value is ignored to prevent temporary switch bounce.
 
