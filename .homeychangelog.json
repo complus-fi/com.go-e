@@ -16,5 +16,8 @@
   },
   "0.4.0": {
     "en": "Break: Refactored PV Surplus charging mode and added a flow card to set the values for go-eCharger."
+  },
+  "0.4.1": {
+    "en": "Deprecate the combined Local driver"
   }
 }
