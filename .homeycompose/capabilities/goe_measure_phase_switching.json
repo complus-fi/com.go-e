@@ -4,7 +4,7 @@
     "en": "Phase switching"
   },
   "getable": true,
-  "setable": true,
+  "setable": false,
   "uiComponent": "sensor",
   "icon": "/assets/goe_measure_phase_switching.svg",
   "values": [
