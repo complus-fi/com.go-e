@@ -3,7 +3,7 @@
     "en": "Set PV surplus mode"
   },
   "titleFormatted": {
-    "en": "Set PV surplus mode [[enabled]]"
+    "en": "Set PV surplus mode to [[enabled]]"
   },
   "hint": {
     "en": "Enables or disables go-eCharger PV surplus control."

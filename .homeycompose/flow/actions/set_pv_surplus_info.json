@@ -3,7 +3,7 @@
     "en": "Set PV surplus information"
   },
   "titleFormatted": {
-    "en": "Set PV surplus information [[pGrid]] [[pPv]] [[pAkku]]"
+    "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W."
   },
   "hint": {
     "en": "Updates go-eCharger available wattage for automatic PV surplus mode."

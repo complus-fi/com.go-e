@@ -44,7 +44,6 @@
     "measure_power.pakku",
     "measure_power.pgrid",
     "measure_power.ppv",
-    "target_power",
     "target_power_mode"
   ],
   "capabilitiesOptions": {
@@ -311,16 +310,6 @@
       "min": 0,
       "max": 500,
       "insights": true
-    },
-    "target_power": {
-      "setable": false,
-      "uiComponent": "sensor",
-      "min": 0,
-      "max": 22080,
-      "step": 230,
-      "excludeMin": 0,
-      "excludeMax": 1380,
-      "deprecated": true
     },
     "target_power_mode": {
       "setable": false,
