@@ -269,7 +269,7 @@ class evChargerDevice extends Homey.Device {
           };
 
           if (goe_pv_surplus_enabled !== undefined) {
-            await this.onCapability_SET_PV_SURPLUS_ENABLED(Boolean(goe_pv_surplus_enabled));
+            await this.onCapability_SET_PV_SURPLUS_ENABLED(goe_pv_surplus_enabled);
             return;
           }
 
@@ -425,12 +425,14 @@ class evChargerDevice extends Homey.Device {
   }
 
   async onCapability_SET_PV_SURPLUS_ENABLED(enabled) {
+    const normalizedEnabled = typeof enabled === 'string' ? enabled.trim().toLowerCase() === 'true' : Boolean(enabled);
+
     const context = {
       status: this.lastStatus,
       spl3Threshold: AUTO_SPL3_THRESHOLD_W
     };
 
-    const apiValues = mapHomeyToApiValues({ goe_pv_surplus_enabled: Boolean(enabled) }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+    const apiValues = mapHomeyToApiValues({ goe_pv_surplus_enabled: normalizedEnabled }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
 
     await this.applyApiValues(apiValues);
   }
