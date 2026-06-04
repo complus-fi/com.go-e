@@ -19,5 +19,8 @@
   },
   "0.4.1": {
     "en": "Deprecate the combined Local driver"
+  },
+  "0.4.2": {
+    "en": "Break: Deprecate the local driver."
   }
 }

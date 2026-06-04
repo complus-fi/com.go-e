@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.go-e",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -74,7 +74,7 @@
           "en": "Set PV surplus mode"
         },
         "titleFormatted": {
-          "en": "Set PV surplus mode [[enabled]]"
+          "en": "Set PV surplus mode to [[enabled]]"
         },
         "hint": {
           "en": "Enables or disables go-eCharger PV surplus control."
@@ -117,7 +117,7 @@
           "en": "Set PV surplus information"
         },
         "titleFormatted": {
-          "en": "Set PV surplus information [[pGrid]] [[pPv]] [[pAkku]]"
+          "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W."
         },
         "hint": {
           "en": "Updates go-eCharger available wattage for automatic PV surplus mode."
@@ -210,7 +210,6 @@
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv",
-        "target_power",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
@@ -477,15 +476,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "setable": false,
-          "uiComponent": "sensor",
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         },
         "target_power_mode": {
           "setable": false,
@@ -730,7 +720,6 @@
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv",
-        "target_power",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
@@ -997,15 +986,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "setable": false,
-          "uiComponent": "sensor",
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         },
         "target_power_mode": {
           "setable": false,
@@ -1250,7 +1230,6 @@
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv",
-        "target_power",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
@@ -1517,15 +1496,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "setable": false,
-          "uiComponent": "sensor",
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         },
         "target_power_mode": {
           "setable": false,
@@ -1770,7 +1740,6 @@
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv",
-        "target_power",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
@@ -2037,15 +2006,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "setable": false,
-          "uiComponent": "sensor",
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         },
         "target_power_mode": {
           "setable": false,
@@ -2290,7 +2250,6 @@
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv",
-        "target_power",
         "target_power_mode"
       ],
       "capabilitiesOptions": {
@@ -2557,15 +2516,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "setable": false,
-          "uiComponent": "sensor",
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         },
         "target_power_mode": {
           "setable": false,
