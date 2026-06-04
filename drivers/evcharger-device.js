@@ -311,7 +311,7 @@ class evChargerDevice extends Homey.Device {
   }
 
   async applyApiValues(apiValues = {}) {
-    const orderedKeys = ['ids', 'fup', 'psm', 'pgt', 'frm', 'spl3', 'fst', 'trx', 'frc', 'amp'];
+    const orderedKeys = ['ids', 'lmo', 'fup', 'psm', 'pgt', 'frm', 'spl3', 'fst', 'trx', 'frc', 'amp'];
 
     const orderedApiValues = {};
     for (const key of orderedKeys) {
