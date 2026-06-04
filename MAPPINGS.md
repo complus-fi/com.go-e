@@ -7,6 +7,7 @@ Primary sources:
 - [drivers/evcharger-device.js](drivers/evcharger-device.js)
 - [lib/mappings.js](lib/mappings.js)
 - [lib/go-eCharger-API-v2.js](lib/go-eCharger-API-v2.js)
+- [lib/flows/actions.js](lib/flows/actions.js)
 - [.homeycompose/drivers/templates/go-eCharger.json](.homeycompose/drivers/templates/go-eCharger.json)
 
 ## Runtime Flow
@@ -51,12 +52,15 @@ Additional mode/power mappings:
   - `target_power_mode`
   - `evcharger_charging`
   - `goe_pv_surplus_enabled`
+- If `goe_pv_surplus_enabled` is included in a batch, it is processed first and the listener returns immediately.
 - If `target_power_mode` is set to `device`, app enables charger automatic mode via `lmo=4`, `fup=true`, enforces `psm=0`, sets `pgt=-200`, `frm=2`, and sets `spl3` threshold.
 - If `target_power_mode` is set to `homey`, app returns charger basic mode via `lmo=3` and disables surplus control with `fup=false`.
+- If the changed batch explicitly sets `target_power_mode=device`, the listener returns after applying mode changes and does not process `evcharger_charging` in that same batch.
 - If charging is turned off, command flow sends force-off behavior (`frc=1`).
 - If charging is turned on, command flow sends `frc=2`; if `trx` is null it also sets `trx=0` for anonymous charging.
 - `target_power` is deprecated and currently ignored for charger command generation.
-- Automatic mode supports sending inverter/grid/battery telemetry via `ids` flow action (every ~5s).
+- Inverter/grid/battery telemetry can be sent via the `set_pv_surplus_info` flow action, which calls `onCapability_SET_PV_SURPLUS_INFO` and writes the `ids` payload.
+- The `set_pv_surplus_enabled` flow action passes `enabled` through to `onCapability_SET_PV_SURPLUS_ENABLED`; device-side normalization accepts booleans and string booleans.
 - After a UI toggle of `evcharger_charging`, one mismatching poll value is ignored to prevent temporary switch bounce.
 
 ## Dynamic Limits
