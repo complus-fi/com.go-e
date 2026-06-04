@@ -43,7 +43,9 @@ Primary sources:
 Additional mode/power mappings:
 
 - `goe_pv_surplus_enabled`: uses `fup` for read/write; enabling applies `lmo=4`, `fup=true`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`; disabling applies `lmo=3`, `fup=false`.
-- `target_power`: deprecated for now; no active API mapping is applied.
+- `target_power`: read-only status capability derived from `amp`, `pnp`, and `nrg` phase voltages.
+  1-phase: uses the single active phase voltage.
+  3-phase: uses combined phase voltage with `sqrt(3)` line-voltage conversion.
 - `target_power_mode`: reads from `fup` (`true` => device/automatic, `false` => homey/manual).
 
 ## Control Behavior
@@ -58,14 +60,14 @@ Additional mode/power mappings:
 - If the changed batch explicitly sets `target_power_mode=device`, the listener returns after applying mode changes and does not process `evcharger_charging` in that same batch.
 - If charging is turned off, command flow sends force-off behavior (`frc=1`).
 - If charging is turned on, command flow sends `frc=2`; if `trx` is null it also sets `trx=0` for anonymous charging.
-- `target_power` is deprecated and currently ignored for charger command generation.
+- `target_power` is read-only and does not generate charger commands.
 - Inverter/grid/battery telemetry can be sent via the `set_pv_surplus_info` flow action, which calls `onCapability_SET_PV_SURPLUS_INFO` and writes the `ids` payload.
 - The `set_pv_surplus_enabled` flow action passes `enabled` through to `onCapability_SET_PV_SURPLUS_ENABLED`; device-side normalization accepts booleans and string booleans.
 - After a UI toggle of `evcharger_charging`, one mismatching poll value is ignored to prevent temporary switch bounce.
 
 ## Dynamic Limits
 
-- `target_power` remains present for compatibility but is marked deprecated.
+- `target_power` max is still adjusted from `ama` (charger amp limit) for UI consistency.
 
 ## Polling and Availability
 
