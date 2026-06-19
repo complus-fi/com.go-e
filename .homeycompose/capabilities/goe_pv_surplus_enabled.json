@@ -6,5 +6,6 @@
   "getable": true,
   "setable": true,
   "uiComponent": "button",
-  "insights": true
+  "insights": true,
+  "deprecated": true
 }

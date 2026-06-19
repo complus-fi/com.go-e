@@ -9,7 +9,19 @@
     "local"
   ],
   "name": {
-    "en": "Go-e"
+    "en": "Go-e",
+    "ar": "Go-e",
+    "da": "Go-e",
+    "de": "Go-e",
+    "es": "Go-e",
+    "fr": "Go-e",
+    "it": "Go-e",
+    "ko": "Go-e",
+    "nl": "Go-e",
+    "no": "Go-e",
+    "pl": "Go-e",
+    "ru": "Go-e",
+    "sv": "Go-e"
   },
   "description": {
     "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently.",
@@ -64,7 +76,203 @@
   "source": "https://github.com/complus-fi/com.go-e",
   "support": "https://github.com/complus-fi/com.go-e/issues",
   "flow": {
+    "triggers": [
+      {
+        "title": {
+          "en": "Charger mode changed"
+        },
+        "titleFormatted": {
+          "en": "Charger mode changed to [[goe_charger_mode]]"
+        },
+        "hint": {
+          "en": "Triggers when the charger mode changes."
+        },
+        "tokens": [
+          {
+            "name": "goe_charger_mode",
+            "type": "string",
+            "title": {
+              "en": "Current mode"
+            },
+            "example": {
+              "en": "Basic Charging"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "goe_charger_mode_changed"
+      }
+    ],
+    "conditions": [
+      {
+        "title": {
+          "en": "Charger mode !{{is|isn't}} [[mode]]"
+        },
+        "titleFormatted": {
+          "en": "Charger mode {{is|isn't}} [[mode]]"
+        },
+        "hint": {
+          "en": "Checks whether the charger is currently in the selected mode."
+        },
+        "args": [
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "basic_charging",
+                "title": {
+                  "en": "Basic Charging"
+                }
+              },
+              {
+                "id": "eco_pv_surplus",
+                "title": {
+                  "en": "Eco: Use PV Surplus"
+                }
+              },
+              {
+                "id": "eco_flexible_price",
+                "title": {
+                  "en": "Eco: Use Flexible price"
+                }
+              },
+              {
+                "id": "eco_pv_and_flexible_price",
+                "title": {
+                  "en": "Eco: Use PV and Flexible price"
+                }
+              },
+              {
+                "id": "trip_pv_surplus",
+                "title": {
+                  "en": "Trip: Use PV Surplus"
+                }
+              },
+              {
+                "id": "trip_flexible_price",
+                "title": {
+                  "en": "Trip: Use Flexible price"
+                }
+              },
+              {
+                "id": "trip_pv_and_flexible_price",
+                "title": {
+                  "en": "Trip: Use PV and Flexible price"
+                }
+              },
+              {
+                "id": "trip_no_pv_no_flexible_price",
+                "title": {
+                  "en": "Trip: No PV and No Flexible price"
+                }
+              }
+            ]
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "is_charger_mode"
+      }
+    ],
     "actions": [
+      {
+        "title": {
+          "en": "Set charger mode"
+        },
+        "titleFormatted": {
+          "en": "Set charger mode to [[mode]]"
+        },
+        "hint": {
+          "en": "Sets the charger logic mode and related PV/flexible-price flags."
+        },
+        "args": [
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "basic_charging",
+                "title": {
+                  "en": "Basic Charging"
+                }
+              },
+              {
+                "id": "eco_pv_surplus",
+                "title": {
+                  "en": "Eco: Use PV Surplus"
+                }
+              },
+              {
+                "id": "eco_flexible_price",
+                "title": {
+                  "en": "Eco: Use Flexible price"
+                }
+              },
+              {
+                "id": "eco_pv_and_flexible_price",
+                "title": {
+                  "en": "Eco: Use PV and Flexible price"
+                }
+              },
+              {
+                "id": "trip_pv_surplus",
+                "title": {
+                  "en": "Trip: Use PV Surplus"
+                }
+              },
+              {
+                "id": "trip_flexible_price",
+                "title": {
+                  "en": "Trip: Use Flexible price"
+                }
+              },
+              {
+                "id": "trip_pv_and_flexible_price",
+                "title": {
+                  "en": "Trip: Use PV and Flexible price"
+                }
+              },
+              {
+                "id": "trip_no_pv_no_flexible_price",
+                "title": {
+                  "en": "Trip: No PV and No Flexible price"
+                }
+              }
+            ]
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "set_charger_mode"
+      },
       {
         "title": {
           "en": "Set PV surplus mode"
@@ -200,13 +408,13 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
+        "goe_charger_mode",
         "goe_pv_surplus_enabled",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
         "measure_power.pakku",
         "measure_power.pgrid",
-        "measure_power.ppv",
-        "target_power_mode"
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
         "evcharger_charging": {
@@ -267,34 +475,34 @@
         "measure_power.pakku": {
           "type": "number",
           "title": {
-            "en": "Average Battery Power",
-            "nl": "Gemiddeld Batterijvermogen",
-            "da": "Gennemsnitligt Batteri Effekt",
-            "de": "Durchschnittliche Batterieleistung",
-            "es": "Potencia Promedio de la Batería",
-            "fr": "Puissance Moyenne de la Batterie",
-            "it": "Potenza Media della Batteria",
-            "no": "Gjennomsnittlig Batterikraft",
-            "sv": "Genomsnittlig Batterikraft",
-            "pl": "Średnia Moc Baterii",
-            "ru": "Средняя мощность батареи",
-            "ko": "평균 배터리 전력",
-            "ar": "متوسط طاقة البطارية"
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
           },
           "hint": {
-            "en": "Average power delivered to the car's battery by PV optimization.",
-            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
-            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
-            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
-            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
-            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
-            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
           },
           "getable": true,
           "setable": false,
@@ -319,34 +527,34 @@
         "measure_power.pgrid": {
           "type": "number",
           "title": {
-            "en": "Average Grid Power",
-            "nl": "Gemiddeld Netstroom",
-            "da": "Gennemsnitligt Net Effekt",
-            "de": "Durchschnittliche Netzleistung",
-            "es": "Potencia Promedio de la Red",
-            "fr": "Puissance Moyenne du Réseau",
-            "it": "Potenza Media della Rete",
-            "no": "Gjennomsnittlig Nettkraft",
-            "sv": "Genomsnittlig Nätkraft",
-            "pl": "Średnia Moc Sieci",
-            "ru": "Средняя мощность сети",
-            "ko": "평균 그리드 전력",
-            "ar": "متوسط طاقة الشبكة"
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
           },
           "hint": {
-            "en": "Average power drawn from the grid by PV optimization.",
-            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
-            "es": "Potencia promedio tomada de la red por la optimización de PV.",
-            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
-            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
-            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
-            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
-            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -371,34 +579,34 @@
         "measure_power.ppv": {
           "type": "number",
           "title": {
-            "en": "Average PV Power",
-            "nl": "Gemiddeld PV-vermogen",
-            "da": "Gennemsnitlig PV-effekt",
-            "de": "Durchschnittliche PV-Leistung",
-            "es": "Potencia Promedio de PV",
-            "fr": "Puissance Moyenne de PV",
-            "it": "Potenza Media di PV",
-            "no": "Gjennomsnittlig PV-kraft",
-            "sv": "Genomsnittlig PV-kraft",
-            "pl": "Średnia Moc PV",
-            "ru": "Средняя мощность PV",
-            "ko": "평균 PV 전력",
-            "ar": "متوسط طاقة PV"
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
           },
           "hint": {
-            "en": "Average power produced by the solar panels used for PV optimization.",
-            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
-            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
-            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
-            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
-            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
-            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
-            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
-            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
-            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -472,47 +680,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power_mode": {
-          "setable": false,
-          "values": [
-            {
-              "id": "device",
-              "title": {
-                "en": "Device",
-                "nl": "Apparaat",
-                "de": "Gerät",
-                "fr": "Appareil",
-                "it": "Dispositivo",
-                "sv": "Enhet",
-                "no": "Enhet",
-                "es": "Dispositivo",
-                "da": "Enhed",
-                "ru": "Устройство",
-                "pl": "Urządzenie",
-                "ko": "장치",
-                "ar": "جهاز"
-              }
-            },
-            {
-              "id": "homey",
-              "title": {
-                "en": "Homey",
-                "nl": "Homey",
-                "de": "Homey",
-                "fr": "Homey",
-                "it": "Homey",
-                "sv": "Homey",
-                "no": "Homey",
-                "es": "Homey",
-                "da": "Homey",
-                "ru": "Homey",
-                "pl": "Homey",
-                "ko": "Homey",
-                "ar": "Homey"
-              }
-            }
-          ]
         }
       },
       "energy": {
@@ -710,13 +877,13 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
+        "goe_charger_mode",
         "goe_pv_surplus_enabled",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
         "measure_power.pakku",
         "measure_power.pgrid",
-        "measure_power.ppv",
-        "target_power_mode"
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
         "evcharger_charging": {
@@ -777,34 +944,34 @@
         "measure_power.pakku": {
           "type": "number",
           "title": {
-            "en": "Average Battery Power",
-            "nl": "Gemiddeld Batterijvermogen",
-            "da": "Gennemsnitligt Batteri Effekt",
-            "de": "Durchschnittliche Batterieleistung",
-            "es": "Potencia Promedio de la Batería",
-            "fr": "Puissance Moyenne de la Batterie",
-            "it": "Potenza Media della Batteria",
-            "no": "Gjennomsnittlig Batterikraft",
-            "sv": "Genomsnittlig Batterikraft",
-            "pl": "Średnia Moc Baterii",
-            "ru": "Средняя мощность батареи",
-            "ko": "평균 배터리 전력",
-            "ar": "متوسط طاقة البطارية"
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
           },
           "hint": {
-            "en": "Average power delivered to the car's battery by PV optimization.",
-            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
-            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
-            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
-            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
-            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
-            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
           },
           "getable": true,
           "setable": false,
@@ -829,34 +996,34 @@
         "measure_power.pgrid": {
           "type": "number",
           "title": {
-            "en": "Average Grid Power",
-            "nl": "Gemiddeld Netstroom",
-            "da": "Gennemsnitligt Net Effekt",
-            "de": "Durchschnittliche Netzleistung",
-            "es": "Potencia Promedio de la Red",
-            "fr": "Puissance Moyenne du Réseau",
-            "it": "Potenza Media della Rete",
-            "no": "Gjennomsnittlig Nettkraft",
-            "sv": "Genomsnittlig Nätkraft",
-            "pl": "Średnia Moc Sieci",
-            "ru": "Средняя мощность сети",
-            "ko": "평균 그리드 전력",
-            "ar": "متوسط طاقة الشبكة"
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
           },
           "hint": {
-            "en": "Average power drawn from the grid by PV optimization.",
-            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
-            "es": "Potencia promedio tomada de la red por la optimización de PV.",
-            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
-            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
-            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
-            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
-            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -881,34 +1048,34 @@
         "measure_power.ppv": {
           "type": "number",
           "title": {
-            "en": "Average PV Power",
-            "nl": "Gemiddeld PV-vermogen",
-            "da": "Gennemsnitlig PV-effekt",
-            "de": "Durchschnittliche PV-Leistung",
-            "es": "Potencia Promedio de PV",
-            "fr": "Puissance Moyenne de PV",
-            "it": "Potenza Media di PV",
-            "no": "Gjennomsnittlig PV-kraft",
-            "sv": "Genomsnittlig PV-kraft",
-            "pl": "Średnia Moc PV",
-            "ru": "Средняя мощность PV",
-            "ko": "평균 PV 전력",
-            "ar": "متوسط طاقة PV"
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
           },
           "hint": {
-            "en": "Average power produced by the solar panels used for PV optimization.",
-            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
-            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
-            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
-            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
-            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
-            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
-            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
-            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
-            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -982,47 +1149,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power_mode": {
-          "setable": false,
-          "values": [
-            {
-              "id": "device",
-              "title": {
-                "en": "Device",
-                "nl": "Apparaat",
-                "de": "Gerät",
-                "fr": "Appareil",
-                "it": "Dispositivo",
-                "sv": "Enhet",
-                "no": "Enhet",
-                "es": "Dispositivo",
-                "da": "Enhed",
-                "ru": "Устройство",
-                "pl": "Urządzenie",
-                "ko": "장치",
-                "ar": "جهاز"
-              }
-            },
-            {
-              "id": "homey",
-              "title": {
-                "en": "Homey",
-                "nl": "Homey",
-                "de": "Homey",
-                "fr": "Homey",
-                "it": "Homey",
-                "sv": "Homey",
-                "no": "Homey",
-                "es": "Homey",
-                "da": "Homey",
-                "ru": "Homey",
-                "pl": "Homey",
-                "ko": "Homey",
-                "ar": "Homey"
-              }
-            }
-          ]
         }
       },
       "energy": {
@@ -1220,13 +1346,13 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
+        "goe_charger_mode",
         "goe_pv_surplus_enabled",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
         "measure_power.pakku",
         "measure_power.pgrid",
-        "measure_power.ppv",
-        "target_power_mode"
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
         "evcharger_charging": {
@@ -1287,34 +1413,34 @@
         "measure_power.pakku": {
           "type": "number",
           "title": {
-            "en": "Average Battery Power",
-            "nl": "Gemiddeld Batterijvermogen",
-            "da": "Gennemsnitligt Batteri Effekt",
-            "de": "Durchschnittliche Batterieleistung",
-            "es": "Potencia Promedio de la Batería",
-            "fr": "Puissance Moyenne de la Batterie",
-            "it": "Potenza Media della Batteria",
-            "no": "Gjennomsnittlig Batterikraft",
-            "sv": "Genomsnittlig Batterikraft",
-            "pl": "Średnia Moc Baterii",
-            "ru": "Средняя мощность батареи",
-            "ko": "평균 배터리 전력",
-            "ar": "متوسط طاقة البطارية"
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
           },
           "hint": {
-            "en": "Average power delivered to the car's battery by PV optimization.",
-            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
-            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
-            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
-            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
-            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
-            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
           },
           "getable": true,
           "setable": false,
@@ -1339,34 +1465,34 @@
         "measure_power.pgrid": {
           "type": "number",
           "title": {
-            "en": "Average Grid Power",
-            "nl": "Gemiddeld Netstroom",
-            "da": "Gennemsnitligt Net Effekt",
-            "de": "Durchschnittliche Netzleistung",
-            "es": "Potencia Promedio de la Red",
-            "fr": "Puissance Moyenne du Réseau",
-            "it": "Potenza Media della Rete",
-            "no": "Gjennomsnittlig Nettkraft",
-            "sv": "Genomsnittlig Nätkraft",
-            "pl": "Średnia Moc Sieci",
-            "ru": "Средняя мощность сети",
-            "ko": "평균 그리드 전력",
-            "ar": "متوسط طاقة الشبكة"
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
           },
           "hint": {
-            "en": "Average power drawn from the grid by PV optimization.",
-            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
-            "es": "Potencia promedio tomada de la red por la optimización de PV.",
-            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
-            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
-            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
-            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
-            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -1391,34 +1517,34 @@
         "measure_power.ppv": {
           "type": "number",
           "title": {
-            "en": "Average PV Power",
-            "nl": "Gemiddeld PV-vermogen",
-            "da": "Gennemsnitlig PV-effekt",
-            "de": "Durchschnittliche PV-Leistung",
-            "es": "Potencia Promedio de PV",
-            "fr": "Puissance Moyenne de PV",
-            "it": "Potenza Media di PV",
-            "no": "Gjennomsnittlig PV-kraft",
-            "sv": "Genomsnittlig PV-kraft",
-            "pl": "Średnia Moc PV",
-            "ru": "Средняя мощность PV",
-            "ko": "평균 PV 전력",
-            "ar": "متوسط طاقة PV"
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
           },
           "hint": {
-            "en": "Average power produced by the solar panels used for PV optimization.",
-            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
-            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
-            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
-            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
-            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
-            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
-            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
-            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
-            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -1492,47 +1618,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power_mode": {
-          "setable": false,
-          "values": [
-            {
-              "id": "device",
-              "title": {
-                "en": "Device",
-                "nl": "Apparaat",
-                "de": "Gerät",
-                "fr": "Appareil",
-                "it": "Dispositivo",
-                "sv": "Enhet",
-                "no": "Enhet",
-                "es": "Dispositivo",
-                "da": "Enhed",
-                "ru": "Устройство",
-                "pl": "Urządzenie",
-                "ko": "장치",
-                "ar": "جهاز"
-              }
-            },
-            {
-              "id": "homey",
-              "title": {
-                "en": "Homey",
-                "nl": "Homey",
-                "de": "Homey",
-                "fr": "Homey",
-                "it": "Homey",
-                "sv": "Homey",
-                "no": "Homey",
-                "es": "Homey",
-                "da": "Homey",
-                "ru": "Homey",
-                "pl": "Homey",
-                "ko": "Homey",
-                "ar": "Homey"
-              }
-            }
-          ]
         }
       },
       "energy": {
@@ -1730,13 +1815,13 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
+        "goe_charger_mode",
         "goe_pv_surplus_enabled",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
         "measure_power.pakku",
         "measure_power.pgrid",
-        "measure_power.ppv",
-        "target_power_mode"
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
         "evcharger_charging": {
@@ -1797,34 +1882,34 @@
         "measure_power.pakku": {
           "type": "number",
           "title": {
-            "en": "Average Battery Power",
-            "nl": "Gemiddeld Batterijvermogen",
-            "da": "Gennemsnitligt Batteri Effekt",
-            "de": "Durchschnittliche Batterieleistung",
-            "es": "Potencia Promedio de la Batería",
-            "fr": "Puissance Moyenne de la Batterie",
-            "it": "Potenza Media della Batteria",
-            "no": "Gjennomsnittlig Batterikraft",
-            "sv": "Genomsnittlig Batterikraft",
-            "pl": "Średnia Moc Baterii",
-            "ru": "Средняя мощность батареи",
-            "ko": "평균 배터리 전력",
-            "ar": "متوسط طاقة البطارية"
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
           },
           "hint": {
-            "en": "Average power delivered to the car's battery by PV optimization.",
-            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
-            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
-            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
-            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
-            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
-            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
           },
           "getable": true,
           "setable": false,
@@ -1849,34 +1934,34 @@
         "measure_power.pgrid": {
           "type": "number",
           "title": {
-            "en": "Average Grid Power",
-            "nl": "Gemiddeld Netstroom",
-            "da": "Gennemsnitligt Net Effekt",
-            "de": "Durchschnittliche Netzleistung",
-            "es": "Potencia Promedio de la Red",
-            "fr": "Puissance Moyenne du Réseau",
-            "it": "Potenza Media della Rete",
-            "no": "Gjennomsnittlig Nettkraft",
-            "sv": "Genomsnittlig Nätkraft",
-            "pl": "Średnia Moc Sieci",
-            "ru": "Средняя мощность сети",
-            "ko": "평균 그리드 전력",
-            "ar": "متوسط طاقة الشبكة"
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
           },
           "hint": {
-            "en": "Average power drawn from the grid by PV optimization.",
-            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
-            "es": "Potencia promedio tomada de la red por la optimización de PV.",
-            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
-            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
-            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
-            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
-            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -1901,34 +1986,34 @@
         "measure_power.ppv": {
           "type": "number",
           "title": {
-            "en": "Average PV Power",
-            "nl": "Gemiddeld PV-vermogen",
-            "da": "Gennemsnitlig PV-effekt",
-            "de": "Durchschnittliche PV-Leistung",
-            "es": "Potencia Promedio de PV",
-            "fr": "Puissance Moyenne de PV",
-            "it": "Potenza Media di PV",
-            "no": "Gjennomsnittlig PV-kraft",
-            "sv": "Genomsnittlig PV-kraft",
-            "pl": "Średnia Moc PV",
-            "ru": "Средняя мощность PV",
-            "ko": "평균 PV 전력",
-            "ar": "متوسط طاقة PV"
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
           },
           "hint": {
-            "en": "Average power produced by the solar panels used for PV optimization.",
-            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
-            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
-            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
-            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
-            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
-            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
-            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
-            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
-            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -2002,47 +2087,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power_mode": {
-          "setable": false,
-          "values": [
-            {
-              "id": "device",
-              "title": {
-                "en": "Device",
-                "nl": "Apparaat",
-                "de": "Gerät",
-                "fr": "Appareil",
-                "it": "Dispositivo",
-                "sv": "Enhet",
-                "no": "Enhet",
-                "es": "Dispositivo",
-                "da": "Enhed",
-                "ru": "Устройство",
-                "pl": "Urządzenie",
-                "ko": "장치",
-                "ar": "جهاز"
-              }
-            },
-            {
-              "id": "homey",
-              "title": {
-                "en": "Homey",
-                "nl": "Homey",
-                "de": "Homey",
-                "fr": "Homey",
-                "it": "Homey",
-                "sv": "Homey",
-                "no": "Homey",
-                "es": "Homey",
-                "da": "Homey",
-                "ru": "Homey",
-                "pl": "Homey",
-                "ko": "Homey",
-                "ar": "Homey"
-              }
-            }
-          ]
         }
       },
       "energy": {
@@ -2240,13 +2284,13 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
+        "goe_charger_mode",
         "goe_pv_surplus_enabled",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
         "measure_power.pakku",
         "measure_power.pgrid",
-        "measure_power.ppv",
-        "target_power_mode"
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
         "evcharger_charging": {
@@ -2307,34 +2351,34 @@
         "measure_power.pakku": {
           "type": "number",
           "title": {
-            "en": "Average Battery Power",
-            "nl": "Gemiddeld Batterijvermogen",
-            "da": "Gennemsnitligt Batteri Effekt",
-            "de": "Durchschnittliche Batterieleistung",
-            "es": "Potencia Promedio de la Batería",
-            "fr": "Puissance Moyenne de la Batterie",
-            "it": "Potenza Media della Batteria",
-            "no": "Gjennomsnittlig Batterikraft",
-            "sv": "Genomsnittlig Batterikraft",
-            "pl": "Średnia Moc Baterii",
-            "ru": "Средняя мощность батареи",
-            "ko": "평균 배터리 전력",
-            "ar": "متوسط طاقة البطارية"
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
           },
           "hint": {
-            "en": "Average power delivered to the car's battery by PV optimization.",
-            "nl": "Gemiddeld vermogen geleverd aan de batterij van de auto door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt leveret til bilens batteri af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung an die Autobatterie geliefert wird.",
-            "es": "Potencia promedio entregada a la batería del automóvil por la optimización de PV.",
-            "fr": "Puissance moyenne délivrée à la batterie de la voiture par l'optimisation PV.",
-            "it": "Potenza media erogata alla batteria dell'auto dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt levert til bilens batteri av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som levereras till bilens batteri av PV-optimering.",
-            "pl": "Średnia moc dostarczana do baterii samochodu przez optymalizację PV.",
-            "ru": "Средняя мощность, подаваемая на аккумулятор автомобиля с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 자동차 배터리에 공급되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي يتم تسليمها إلى بطارية السيارة من خلال تحسين PV."
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
           },
           "getable": true,
           "setable": false,
@@ -2359,34 +2403,34 @@
         "measure_power.pgrid": {
           "type": "number",
           "title": {
-            "en": "Average Grid Power",
-            "nl": "Gemiddeld Netstroom",
-            "da": "Gennemsnitligt Net Effekt",
-            "de": "Durchschnittliche Netzleistung",
-            "es": "Potencia Promedio de la Red",
-            "fr": "Puissance Moyenne du Réseau",
-            "it": "Potenza Media della Rete",
-            "no": "Gjennomsnittlig Nettkraft",
-            "sv": "Genomsnittlig Nätkraft",
-            "pl": "Średnia Moc Sieci",
-            "ru": "Средняя мощность сети",
-            "ko": "평균 그리드 전력",
-            "ar": "متوسط طاقة الشبكة"
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
           },
           "hint": {
-            "en": "Average power drawn from the grid by PV optimization.",
-            "nl": "Gemiddeld vermogen afgenomen van het net door PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt trukket fra nettet af PV-optimering.",
-            "de": "Durchschnittliche Leistung, die durch PV-Optimierung aus dem Netz bezogen wird.",
-            "es": "Potencia promedio tomada de la red por la optimización de PV.",
-            "fr": "Puissance moyenne tirée du réseau par l'optimisation PV.",
-            "it": "Potenza media prelevata dalla rete dall'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt trukket fra nettet av PV-optimalisering.",
-            "sv": "Genomsnittlig effekt som tas från nätet av PV-optimering.",
-            "pl": "Średnia moc pobierana z sieci przez optymalizację PV.",
-            "ru": "Средняя мощность, потребляемая из сети с помощью оптимизации PV.",
-            "ko": "PV 최적화를 통해 그리드에서 끌어오는 평균 전력입니다.",
-            "ar": "متوسط الطاقة المسحوبة من الشبكة من خلال تحسين PV."
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -2411,34 +2455,34 @@
         "measure_power.ppv": {
           "type": "number",
           "title": {
-            "en": "Average PV Power",
-            "nl": "Gemiddeld PV-vermogen",
-            "da": "Gennemsnitlig PV-effekt",
-            "de": "Durchschnittliche PV-Leistung",
-            "es": "Potencia Promedio de PV",
-            "fr": "Puissance Moyenne de PV",
-            "it": "Potenza Media di PV",
-            "no": "Gjennomsnittlig PV-kraft",
-            "sv": "Genomsnittlig PV-kraft",
-            "pl": "Średnia Moc PV",
-            "ru": "Средняя мощность PV",
-            "ko": "평균 PV 전력",
-            "ar": "متوسط طاقة PV"
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
           },
           "hint": {
-            "en": "Average power produced by the solar panels used for PV optimization.",
-            "nl": "Gemiddeld vermogen geproduceerd door de zonnepanelen die worden gebruikt voor PV-optimalisatie.",
-            "da": "Gennemsnitlig effekt produceret af solpanelerne, der bruges til PV-optimering.",
-            "de": "Durchschnittliche Leistung, die von den Solarmodulen erzeugt wird, die für die PV-Optimierung verwendet werden.",
-            "es": "Potencia promedio producida por los paneles solares utilizados para la optimización de PV.",
-            "fr": "Puissance moyenne produite par les panneaux solaires utilisés pour l'optimisation PV.",
-            "it": "Potenza media prodotta dai pannelli solari utilizzati per l'ottimizzazione PV.",
-            "no": "Gjennomsnittlig effekt produsert av solcellepanelene som brukes til PV-optimalisering.",
-            "sv": "Genomsnittlig effekt producerad av solpanelerna som används för PV-optimering.",
-            "pl": "Średnia moc produkowana przez panele słoneczne używane do optymalizacji PV.",
-            "ru": "Средняя мощность, производимая солнечными панелями, используемыми для оптимизации PV.",
-            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 평균 전력입니다.",
-            "ar": "متوسط الطاقة التي تنتجها الألواح الشمسية المستخدمة لتحسين PV."
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
           },
           "getable": true,
           "setable": false,
@@ -2512,47 +2556,6 @@
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power_mode": {
-          "setable": false,
-          "values": [
-            {
-              "id": "device",
-              "title": {
-                "en": "Device",
-                "nl": "Apparaat",
-                "de": "Gerät",
-                "fr": "Appareil",
-                "it": "Dispositivo",
-                "sv": "Enhet",
-                "no": "Enhet",
-                "es": "Dispositivo",
-                "da": "Enhed",
-                "ru": "Устройство",
-                "pl": "Urządzenie",
-                "ko": "장치",
-                "ar": "جهاز"
-              }
-            },
-            {
-              "id": "homey",
-              "title": {
-                "en": "Homey",
-                "nl": "Homey",
-                "de": "Homey",
-                "fr": "Homey",
-                "it": "Homey",
-                "sv": "Homey",
-                "no": "Homey",
-                "es": "Homey",
-                "da": "Homey",
-                "ru": "Homey",
-                "pl": "Homey",
-                "ko": "Homey",
-                "ar": "Homey"
-              }
-            }
-          ]
         }
       },
       "energy": {
@@ -2709,6 +2712,65 @@
     }
   ],
   "capabilities": {
+    "goe_charger_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Charger mode"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "values": [
+        {
+          "id": "basic_charging",
+          "title": {
+            "en": "Basic Charging"
+          }
+        },
+        {
+          "id": "eco_pv_surplus",
+          "title": {
+            "en": "Eco: Use PV Surplus"
+          }
+        },
+        {
+          "id": "eco_flexible_price",
+          "title": {
+            "en": "Eco: Use Flexible price"
+          }
+        },
+        {
+          "id": "eco_pv_and_flexible_price",
+          "title": {
+            "en": "Eco: Use PV and Flexible price"
+          }
+        },
+        {
+          "id": "trip_pv_surplus",
+          "title": {
+            "en": "Trip: Use PV Surplus"
+          }
+        },
+        {
+          "id": "trip_flexible_price",
+          "title": {
+            "en": "Trip: Use Flexible price"
+          }
+        },
+        {
+          "id": "trip_pv_and_flexible_price",
+          "title": {
+            "en": "Trip: Use PV and Flexible price"
+          }
+        },
+        {
+          "id": "trip_no_pv_no_flexible_price",
+          "title": {
+            "en": "Trip: No PV and No Flexible price"
+          }
+        }
+      ]
+    },
     "goe_measure_modelStatus": {
       "type": "enum",
       "title": {

@@ -38,6 +38,7 @@
     "measure_current",
     "evcharger_charging",
     "evcharger_charging_state",
+    "goe_charger_mode",
     "goe_pv_surplus_enabled",
     "goe_measure_phase_switching",
     "goe_measure_modelStatus",

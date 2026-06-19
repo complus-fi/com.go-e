@@ -1,0 +1,78 @@
+{
+  "title": {
+    "en": "Set charger mode"
+  },
+  "titleFormatted": {
+    "en": "Set charger mode to [[mode]]"
+  },
+  "hint": {
+    "en": "Sets the charger logic mode and related PV/flexible-price flags."
+  },
+  "args": [
+    {
+      "name": "mode",
+      "type": "dropdown",
+      "title": {
+        "en": "Mode"
+      },
+      "values": [
+        {
+          "id": "basic_charging",
+          "title": {
+            "en": "Basic Charging"
+          }
+        },
+        {
+          "id": "eco_pv_surplus",
+          "title": {
+            "en": "Eco: Use PV Surplus"
+          }
+        },
+        {
+          "id": "eco_flexible_price",
+          "title": {
+            "en": "Eco: Use Flexible price"
+          }
+        },
+        {
+          "id": "eco_pv_and_flexible_price",
+          "title": {
+            "en": "Eco: Use PV and Flexible price"
+          }
+        },
+        {
+          "id": "trip_pv_surplus",
+          "title": {
+            "en": "Trip: Use PV Surplus"
+          }
+        },
+        {
+          "id": "trip_flexible_price",
+          "title": {
+            "en": "Trip: Use Flexible price"
+          }
+        },
+        {
+          "id": "trip_pv_and_flexible_price",
+          "title": {
+            "en": "Trip: Use PV and Flexible price"
+          }
+        },
+        {
+          "id": "trip_no_pv_no_flexible_price",
+          "title": {
+            "en": "Trip: No PV and No Flexible price"
+          }
+        }
+      ]
+    },
+    {
+      "type": "device",
+      "name": "device",
+      "title": {
+        "en": "Device"
+      },
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+    }
+  ]
+}

@@ -32,6 +32,7 @@ Primary sources:
 | measure_current             | Read         | nrg                  | Average of non-zero phase currents (`nrg[4..6]`)                    | 0 when no active phases                                           |
 | measure_voltage             | Read         | nrg, pha             | Phase-aware input voltage calculation                               | 3-phase uses sqrt(3) scaling                                      |
 | measure_voltage.output      | Read         | nrg, pha             | Phase-aware output voltage calculation                              | 0 if no output phases active                                      |
+| goe_charger_mode            | Read + write | lmo, fup, awe        | Maps go-e charger mode combinations to enum values                  | Primary charger mode capability                                   |
 | goe_pv_surplus_enabled      | Read + write | fup                  | Read mirrors `fup`; write true sets automatic PV parameters         | Write true sets `lmo=4`; write false sets `lmo=3`, `fup=false`    |
 | goe_measure_phase_switching | Read         | psm                  | Enum capability for automatic / 1-phase / 3-phase status            | Capability ids are stringified `0`, `1`, `2`                      |
 | goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code         | Capability id is the stringified status code                      |
@@ -41,26 +42,33 @@ Primary sources:
 
 Additional mode/power mappings:
 
+- `goe_charger_mode`: read/write enum with these combinations:
+  - `basic_charging` => `lmo=3`, `fup=false`, `awe=false`
+  - `eco_pv_surplus` => `lmo=4`, `fup=true`, `awe=false`
+  - `eco_flexible_price` => `lmo=4`, `fup=false`, `awe=true`
+  - `eco_pv_and_flexible_price` => `lmo=4`, `fup=true`, `awe=true`
+  - `trip_pv_surplus` => `lmo=5`, `fup=true`, `awe=false`
+  - `trip_flexible_price` => `lmo=5`, `fup=false`, `awe=true`
+  - `trip_pv_and_flexible_price` => `lmo=5`, `fup=true`, `awe=true`
+  - `trip_no_pv_no_flexible_price` => `lmo=5`, `fup=false`, `awe=false`
 - `goe_pv_surplus_enabled`: uses `fup` for read/write; enabling applies `lmo=4`, `fup=true`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`; disabling applies `lmo=3`, `fup=false`.
-- `target_power`: read-only status capability using charger `nrg[11]` P-total directly.
 
 ## Control Behavior
 
 - Listener handles control capabilities in one debounced batch:
   - `evcharger_charging`
+  - `goe_charger_mode`
   - `goe_pv_surplus_enabled`
-- If `goe_pv_surplus_enabled` is included in a batch, it is processed first and the listener returns immediately.
+- If `goe_charger_mode` is included in a batch, it is processed first and the listener returns immediately.
+- If `goe_pv_surplus_enabled` is included in a batch, it is processed next and the listener returns immediately.
 - If charging is turned off, command flow sends force-off behavior (`frc=1`).
-- If charging is turned on and `goe_pv_surplus_enabled` is true, command flow sends `frc=0` (automatic).
-- If charging is turned on and `goe_pv_surplus_enabled` is false, command flow sends `frc=2` (homey).
-- `target_power` is read-only and does not generate charger commands.
+- If charging is turned on and `goe_charger_mode` is any Eco/Trip mode, command flow sends `frc=0` (automatic).
+- If charging is turned on and `goe_charger_mode` is `basic_charging`, command flow sends `frc=2` (homey).
 - Inverter/grid/battery telemetry can be sent via the `set_pv_surplus_info` flow action, which calls `onCapability_SET_PV_SURPLUS_INFO` and writes the `ids` payload only when `goe_pv_surplus_enabled` is true.
 - The `set_pv_surplus_enabled` flow action passes `enabled` through to `onCapability_SET_PV_SURPLUS_ENABLED`; device-side normalization accepts booleans and string booleans.
+- The `set_charger_mode` flow action writes `goe_charger_mode`; `is_charger_mode` checks the current enum value.
+- The `goe_charger_mode_changed` trigger uses Homey's custom capability changed trigger for enum capabilities and exposes the current mode token.
 - After a UI toggle of `evcharger_charging`, one mismatching poll value is ignored to prevent temporary switch bounce.
-
-## Dynamic Limits
-
-- `target_power` max is still adjusted from `ama` (charger amp limit) for UI consistency.
 
 ## Polling and Availability
 

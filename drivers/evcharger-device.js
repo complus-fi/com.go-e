@@ -2,11 +2,12 @@
 
 const Homey = require('homey');
 const goeCharger = require('../lib/go-eCharger-API-v2');
-const { getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
+const { GOE_CHARGER_MODE, getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
 
 const POLL_INTERVAL = 5000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const AUTO_SPL3_THRESHOLD_W = 4140;
+const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
 class evChargerDevice extends Homey.Device {
   /**
@@ -50,23 +51,6 @@ class evChargerDevice extends Homey.Device {
   async sleep(ms) {
     return new Promise((resolve) => {
       this.homey.setTimeout(resolve, ms);
-    });
-  }
-
-  async updateTargetPowerCapabilityMax(ama) {
-    if (!this.hasCapability('target_power')) return;
-
-    const maxAmps = Number(ama);
-    if (!Number.isFinite(maxAmps) || maxAmps <= 0) return;
-
-    // target_power max in manual mode follows charger amp limit, expressed in watts.
-    const maxWatts = Math.round(maxAmps * 690);
-    const options = this.getCapabilityOptions('target_power') || {};
-    if (options.max === maxWatts) return;
-
-    await this.setCapabilityOptions('target_power', {
-      ...options,
-      max: maxWatts
     });
   }
 
@@ -255,10 +239,10 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['evcharger_charging', 'goe_pv_surplus_enabled'],
-      async ({ evcharger_charging, goe_pv_surplus_enabled }) => {
+      ['evcharger_charging', 'goe_pv_surplus_enabled', 'goe_charger_mode'],
+      async ({ evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_pv_surplus_enabled });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode });
 
           const context = {
             api: this.api,
@@ -267,6 +251,11 @@ class evChargerDevice extends Homey.Device {
             status: this.lastStatus,
             spl3Threshold: AUTO_SPL3_THRESHOLD_W
           };
+
+          if (goe_charger_mode !== undefined) {
+            await this.onCapability_SET_CHARGER_MODE(goe_charger_mode);
+            return;
+          }
 
           if (goe_pv_surplus_enabled !== undefined) {
             await this.onCapability_SET_PV_SURPLUS_ENABLED(goe_pv_surplus_enabled);
@@ -281,12 +270,12 @@ class evChargerDevice extends Homey.Device {
           }
 
           if (evcharger_charging === true) {
-            const pvSurplusEnabled = goe_pv_surplus_enabled !== undefined ? Boolean(goe_pv_surplus_enabled) : Boolean(this.getCapabilityValue('goe_pv_surplus_enabled'));
+            const chargerMode = this.getCapabilityValue('goe_charger_mode');
+            const automaticMode = chargerMode && chargerMode !== GOE_CHARGER_MODE.BASIC_CHARGING;
 
-            // Start/resume charging with frc mode derived from PV surplus toggle.
-            // frc=0 => automatic (device), frc=2 => homey.
+            // Start/resume charging in automatic mode for Eco/Trip charger logic, otherwise use Homey/manual mode.
             const startValues = mapHomeyToApiValues({ evcharger_charging: true }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-            startValues.frc = pvSurplusEnabled ? 0 : 2;
+            startValues.frc = automaticMode ? 0 : 2;
             await this.applyApiValues(startValues);
             this.setPendingChargingState(true);
             return;
@@ -349,7 +338,6 @@ class evChargerDevice extends Homey.Device {
 
       if (status.ama !== undefined) {
         this.maxAmps = Number(status.ama);
-        await this.updateTargetPowerCapabilityMax(this.maxAmps);
       }
 
       const nextValues = mapStatusToCapabilities(status, this.getCapabilities(), this.api);
@@ -431,6 +419,21 @@ class evChargerDevice extends Homey.Device {
 
     const apiValues = mapHomeyToApiValues({ goe_pv_surplus_enabled: normalizedEnabled }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
 
+    await this.applyApiValues(apiValues);
+  }
+
+  async onCapability_SET_CHARGER_MODE(mode) {
+    const normalizedMode = typeof mode === 'string' ? mode.trim() : '';
+    if (!GOE_CHARGER_MODE_IDS.has(normalizedMode)) {
+      throw new Error(`Unsupported charger mode: ${mode}`);
+    }
+
+    const context = {
+      status: this.lastStatus,
+      spl3Threshold: AUTO_SPL3_THRESHOLD_W
+    };
+
+    const apiValues = mapHomeyToApiValues({ goe_charger_mode: normalizedMode }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
     await this.applyApiValues(apiValues);
   }
 }
