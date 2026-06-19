@@ -15,5 +15,6 @@
     "ar": "go-eCharger Local"
   },
   "discovery": "mdns_http_go-echarger",
-  "$extends": ["go-eCharger"]
+  "$extends": ["go-eCharger"],
+  "deprecated": true
 }

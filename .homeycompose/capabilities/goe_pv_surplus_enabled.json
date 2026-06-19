@@ -1,0 +1,11 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "PV Surplus Enabled"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "button",
+  "insights": true,
+  "deprecated": true
+}

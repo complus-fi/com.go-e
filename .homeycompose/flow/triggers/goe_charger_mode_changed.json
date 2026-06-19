@@ -1,0 +1,33 @@
+{
+  "title": {
+    "en": "Charger mode changed"
+  },
+  "titleFormatted": {
+    "en": "Charger mode changed to [[goe_charger_mode]]"
+  },
+  "hint": {
+    "en": "Triggers when the charger mode changes."
+  },
+  "tokens": [
+    {
+      "name": "goe_charger_mode",
+      "type": "string",
+      "title": {
+        "en": "Current mode"
+      },
+      "example": {
+        "en": "Basic Charging"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "title": {
+        "en": "Device"
+      },
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+    }
+  ]
+}

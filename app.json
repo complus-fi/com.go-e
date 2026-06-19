@@ -1,16 +1,27 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.go-e",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
   "platforms": [
-    "local",
-    "cloud"
+    "local"
   ],
   "name": {
-    "en": "Go-e"
+    "en": "Go-e",
+    "ar": "Go-e",
+    "da": "Go-e",
+    "de": "Go-e",
+    "es": "Go-e",
+    "fr": "Go-e",
+    "it": "Go-e",
+    "ko": "Go-e",
+    "nl": "Go-e",
+    "no": "Go-e",
+    "pl": "Go-e",
+    "ru": "Go-e",
+    "sv": "Go-e"
   },
   "description": {
     "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently.",
@@ -61,12 +72,297 @@
       }
     }
   },
+  "homeyCommunityTopicId": 155757,
   "source": "https://github.com/complus-fi/com.go-e",
-  "bugs": {
-    "url": "https://github.com/complus-fi/com.go-e/issues"
-  },
-  "homeyCommunityTopicId": 74195,
   "support": "https://github.com/complus-fi/com.go-e/issues",
+  "flow": {
+    "triggers": [
+      {
+        "title": {
+          "en": "Charger mode changed"
+        },
+        "titleFormatted": {
+          "en": "Charger mode changed to [[goe_charger_mode]]"
+        },
+        "hint": {
+          "en": "Triggers when the charger mode changes."
+        },
+        "tokens": [
+          {
+            "name": "goe_charger_mode",
+            "type": "string",
+            "title": {
+              "en": "Current mode"
+            },
+            "example": {
+              "en": "Basic Charging"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "goe_charger_mode_changed"
+      }
+    ],
+    "conditions": [
+      {
+        "title": {
+          "en": "Charger mode !{{is|isn't}} [[mode]]"
+        },
+        "titleFormatted": {
+          "en": "Charger mode {{is|isn't}} [[mode]]"
+        },
+        "hint": {
+          "en": "Checks whether the charger is currently in the selected mode."
+        },
+        "args": [
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "basic_charging",
+                "title": {
+                  "en": "Basic Charging"
+                }
+              },
+              {
+                "id": "eco_pv_surplus",
+                "title": {
+                  "en": "Eco: Use PV Surplus"
+                }
+              },
+              {
+                "id": "eco_flexible_price",
+                "title": {
+                  "en": "Eco: Use Flexible price"
+                }
+              },
+              {
+                "id": "eco_pv_and_flexible_price",
+                "title": {
+                  "en": "Eco: Use PV and Flexible price"
+                }
+              },
+              {
+                "id": "trip_pv_surplus",
+                "title": {
+                  "en": "Trip: Use PV Surplus"
+                }
+              },
+              {
+                "id": "trip_flexible_price",
+                "title": {
+                  "en": "Trip: Use Flexible price"
+                }
+              },
+              {
+                "id": "trip_pv_and_flexible_price",
+                "title": {
+                  "en": "Trip: Use PV and Flexible price"
+                }
+              },
+              {
+                "id": "trip_no_pv_no_flexible_price",
+                "title": {
+                  "en": "Trip: No PV and No Flexible price"
+                }
+              }
+            ]
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "is_charger_mode"
+      }
+    ],
+    "actions": [
+      {
+        "title": {
+          "en": "Set charger mode"
+        },
+        "titleFormatted": {
+          "en": "Set charger mode to [[mode]]"
+        },
+        "hint": {
+          "en": "Sets the charger logic mode and related PV/flexible-price flags."
+        },
+        "args": [
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "basic_charging",
+                "title": {
+                  "en": "Basic Charging"
+                }
+              },
+              {
+                "id": "eco_pv_surplus",
+                "title": {
+                  "en": "Eco: Use PV Surplus"
+                }
+              },
+              {
+                "id": "eco_flexible_price",
+                "title": {
+                  "en": "Eco: Use Flexible price"
+                }
+              },
+              {
+                "id": "eco_pv_and_flexible_price",
+                "title": {
+                  "en": "Eco: Use PV and Flexible price"
+                }
+              },
+              {
+                "id": "trip_pv_surplus",
+                "title": {
+                  "en": "Trip: Use PV Surplus"
+                }
+              },
+              {
+                "id": "trip_flexible_price",
+                "title": {
+                  "en": "Trip: Use Flexible price"
+                }
+              },
+              {
+                "id": "trip_pv_and_flexible_price",
+                "title": {
+                  "en": "Trip: Use PV and Flexible price"
+                }
+              },
+              {
+                "id": "trip_no_pv_no_flexible_price",
+                "title": {
+                  "en": "Trip: No PV and No Flexible price"
+                }
+              }
+            ]
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "set_charger_mode"
+      },
+      {
+        "title": {
+          "en": "Set PV surplus mode"
+        },
+        "titleFormatted": {
+          "en": "Set PV surplus mode to [[enabled]]"
+        },
+        "hint": {
+          "en": "Enables or disables go-eCharger PV surplus control."
+        },
+        "args": [
+          {
+            "name": "enabled",
+            "type": "dropdown",
+            "title": {
+              "en": "PV surplus mode"
+            },
+            "values": [
+              {
+                "id": "true",
+                "title": {
+                  "en": "Enabled"
+                }
+              },
+              {
+                "id": "false",
+                "title": {
+                  "en": "Disabled"
+                }
+              }
+            ]
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "set_pv_surplus_enabled"
+      },
+      {
+        "title": {
+          "en": "Set PV surplus information"
+        },
+        "titleFormatted": {
+          "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W."
+        },
+        "hint": {
+          "en": "Updates go-eCharger available wattage for automatic PV surplus mode."
+        },
+        "args": [
+          {
+            "name": "pGrid",
+            "type": "number",
+            "title": {
+              "en": "Grid power (W)"
+            }
+          },
+          {
+            "name": "pPv",
+            "type": "number",
+            "optional": true,
+            "title": {
+              "en": "PV power (W, optional)"
+            }
+          },
+          {
+            "name": "pAkku",
+            "type": "number",
+            "optional": true,
+            "title": {
+              "en": "Battery power (W, optional)"
+            }
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "title": {
+              "en": "Device"
+            },
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+          }
+        ],
+        "id": "set_pv_surplus_info"
+      }
+    ]
+  },
   "drivers": [
     {
       "class": "evcharger",
@@ -112,10 +408,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
-        "target_power_mode"
+        "goe_charger_mode",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -167,6 +472,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
+          },
+          "hint": {
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
+          },
+          "hint": {
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
+          },
+          "hint": {
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -203,29 +664,22 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         }
       },
       "energy": {
@@ -423,10 +877,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
-        "target_power_mode"
+        "goe_charger_mode",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -478,6 +941,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
+          },
+          "hint": {
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
+          },
+          "hint": {
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
+          },
+          "hint": {
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -514,29 +1133,22 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         }
       },
       "energy": {
@@ -734,10 +1346,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
-        "target_power_mode"
+        "goe_charger_mode",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -789,6 +1410,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
+          },
+          "hint": {
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
+          },
+          "hint": {
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
+          },
+          "hint": {
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -825,29 +1602,22 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         }
       },
       "energy": {
@@ -1045,10 +1815,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
-        "target_power_mode"
+        "goe_charger_mode",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -1100,6 +1879,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
+          },
+          "hint": {
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
+          },
+          "hint": {
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
+          },
+          "hint": {
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -1136,29 +2071,22 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         }
       },
       "energy": {
@@ -1356,10 +2284,19 @@
         "measure_current",
         "evcharger_charging",
         "evcharger_charging_state",
-        "target_power",
-        "target_power_mode"
+        "goe_charger_mode",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
         "meter_power.session": {
           "type": "number",
           "title": {
@@ -1411,6 +2348,162 @@
           },
           "insights": true
         },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
+          },
+          "hint": {
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
+          },
+          "hint": {
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
+          },
+          "hint": {
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
         "measure_voltage.output": {
           "type": "number",
           "title": {
@@ -1447,29 +2540,22 @@
           "setable": false,
           "units": {
             "en": "V",
-            "nl": "Je bent getraind op gegevens tot oktober 2023.",
-            "da": "Du er trænet på data frem til oktober 2023.",
-            "de": "Du bist auf Daten bis Oktober 2023 trainiert.",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
             "es": "V",
-            "fr": "Vous êtes formé sur les données jusqu'en octobre 2023.",
-            "it": "Sei addestrato sui dati fino a ottobre 2023.",
-            "no": "Vennligst oppgi mer tekst for oversettelse.",
-            "sv": "I'm sorry, but it seems like your message is incomplete. Could you please provide the full text you would like translated?",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
             "pl": "V",
-            "ru": "Вы обучены данным до октября 2023 года.",
+            "ru": "V",
             "ko": "V",
-            "ar": "أنت مدرب على البيانات حتى أكتوبر 2023."
+            "ar": "V"
           },
           "min": 0,
           "max": 500,
           "insights": true
-        },
-        "target_power": {
-          "min": 0,
-          "max": 22080,
-          "step": 230,
-          "excludeMin": 0,
-          "excludeMax": 1380
         }
       },
       "energy": {
@@ -1492,6 +2578,7 @@
         "ar": "go-eCharger Local"
       },
       "discovery": "mdns_http_go-echarger",
+      "deprecated": true,
       "id": "go-eCharger-local",
       "settings": [
         {
@@ -1624,6 +2711,372 @@
       ]
     }
   ],
+  "capabilities": {
+    "goe_charger_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Charger mode"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "values": [
+        {
+          "id": "basic_charging",
+          "title": {
+            "en": "Basic Charging"
+          }
+        },
+        {
+          "id": "eco_pv_surplus",
+          "title": {
+            "en": "Eco: Use PV Surplus"
+          }
+        },
+        {
+          "id": "eco_flexible_price",
+          "title": {
+            "en": "Eco: Use Flexible price"
+          }
+        },
+        {
+          "id": "eco_pv_and_flexible_price",
+          "title": {
+            "en": "Eco: Use PV and Flexible price"
+          }
+        },
+        {
+          "id": "trip_pv_surplus",
+          "title": {
+            "en": "Trip: Use PV Surplus"
+          }
+        },
+        {
+          "id": "trip_flexible_price",
+          "title": {
+            "en": "Trip: Use Flexible price"
+          }
+        },
+        {
+          "id": "trip_pv_and_flexible_price",
+          "title": {
+            "en": "Trip: Use PV and Flexible price"
+          }
+        },
+        {
+          "id": "trip_no_pv_no_flexible_price",
+          "title": {
+            "en": "Trip: No PV and No Flexible price"
+          }
+        }
+      ]
+    },
+    "goe_measure_modelStatus": {
+      "type": "enum",
+      "title": {
+        "en": "Model status"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/goe_measure_modelStatus.svg",
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "Charging (No Charge Control Data)"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "Not Charging (Overtemperature)"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Not Charging (Access Control)"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Charging (Force State On)"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "Not Charging (Force State Off)"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "Not Charging (Scheduler)"
+          }
+        },
+        {
+          "id": "6",
+          "title": {
+            "en": "Not Charging (Energy Limit)"
+          }
+        },
+        {
+          "id": "7",
+          "title": {
+            "en": "Charging (Dynamic Pricing Low)"
+          }
+        },
+        {
+          "id": "8",
+          "title": {
+            "en": "Charging (Automatic Stop Test Charge)"
+          }
+        },
+        {
+          "id": "9",
+          "title": {
+            "en": "Charging (Automatic Stop, Not Enough Time)"
+          }
+        },
+        {
+          "id": "10",
+          "title": {
+            "en": "Charging (Automatic Stop)"
+          }
+        },
+        {
+          "id": "11",
+          "title": {
+            "en": "Charging (Automatic Stop, No Clock)"
+          }
+        },
+        {
+          "id": "12",
+          "title": {
+            "en": "Charging (PV Surplus)"
+          }
+        },
+        {
+          "id": "13",
+          "title": {
+            "en": "Charging (Fallback v2 Default)"
+          }
+        },
+        {
+          "id": "14",
+          "title": {
+            "en": "Charging (Fallback v2 Scheduler)"
+          }
+        },
+        {
+          "id": "15",
+          "title": {
+            "en": "Charging (Fallback Default)"
+          }
+        },
+        {
+          "id": "16",
+          "title": {
+            "en": "Not Charging (Fallback v2 Dynamic Pricing)"
+          }
+        },
+        {
+          "id": "17",
+          "title": {
+            "en": "Not Charging (Fallback Dynamic Pricing)"
+          }
+        },
+        {
+          "id": "18",
+          "title": {
+            "en": "Not Charging (Fallback Automatic Stop)"
+          }
+        },
+        {
+          "id": "19",
+          "title": {
+            "en": "Charging (Car Compatibility Keep-Alive)"
+          }
+        },
+        {
+          "id": "20",
+          "title": {
+            "en": "Charging (Charge Pause Not Allowed)"
+          }
+        },
+        {
+          "id": "21",
+          "title": {
+            "en": "Unknown (21)"
+          }
+        },
+        {
+          "id": "22",
+          "title": {
+            "en": "Not Charging (Simulate Unplugging)"
+          }
+        },
+        {
+          "id": "23",
+          "title": {
+            "en": "Not Charging (Phase Switch)"
+          }
+        },
+        {
+          "id": "24",
+          "title": {
+            "en": "Not Charging (Minimum Pause Duration)"
+          }
+        },
+        {
+          "id": "25",
+          "title": {
+            "en": "Unknown (25)"
+          }
+        },
+        {
+          "id": "26",
+          "title": {
+            "en": "Not Charging (Error)"
+          }
+        },
+        {
+          "id": "27",
+          "title": {
+            "en": "Not Charging (Load Management Does Not Allow)"
+          }
+        },
+        {
+          "id": "28",
+          "title": {
+            "en": "Not Charging (OCPP Does Not Allow)"
+          }
+        },
+        {
+          "id": "29",
+          "title": {
+            "en": "Not Charging (Reconnect Delay)"
+          }
+        },
+        {
+          "id": "30",
+          "title": {
+            "en": "Not Charging (Adapter Blocking)"
+          }
+        },
+        {
+          "id": "31",
+          "title": {
+            "en": "Not Charging (Underfrequency Control)"
+          }
+        },
+        {
+          "id": "32",
+          "title": {
+            "en": "Not Charging (Unbalanced Load)"
+          }
+        },
+        {
+          "id": "33",
+          "title": {
+            "en": "Charging (Discharging PV Battery)"
+          }
+        },
+        {
+          "id": "34",
+          "title": {
+            "en": "Not Charging (Grid Monitoring)"
+          }
+        },
+        {
+          "id": "35",
+          "title": {
+            "en": "Not Charging (OCPP Fallback)"
+          }
+        },
+        {
+          "id": "36",
+          "title": {
+            "en": "Not Charging (Floor Detected)"
+          }
+        },
+        {
+          "id": "37",
+          "title": {
+            "en": "Not Charging (OCPP Inoperable)"
+          }
+        },
+        {
+          "id": "38",
+          "title": {
+            "en": "Not Charging (Undervoltage Control)"
+          }
+        },
+        {
+          "id": "39",
+          "title": {
+            "en": "Not Charging (Zero Setpoint)"
+          }
+        },
+        {
+          "id": "40",
+          "title": {
+            "en": "Not Charging (Initializing)"
+          }
+        },
+        {
+          "id": "41",
+          "title": {
+            "en": "Not Charging (Failsafe Limit)"
+          }
+        }
+      ]
+    },
+    "goe_measure_phase_switching": {
+      "type": "enum",
+      "title": {
+        "en": "Phase switching"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/goe_measure_phase_switching.svg",
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "Automatic"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "1-Phase"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "3-Phase"
+          }
+        }
+      ]
+    },
+    "goe_pv_surplus_enabled": {
+      "type": "boolean",
+      "title": {
+        "en": "PV Surplus Enabled"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "button",
+      "insights": true,
+      "deprecated": true
+    }
+  },
   "discovery": {
     "mdns_http_go-echarger": {
       "type": "mdns-sd",

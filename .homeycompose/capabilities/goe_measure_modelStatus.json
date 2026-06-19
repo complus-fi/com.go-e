@@ -1,0 +1,264 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Model status"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/goe_measure_modelStatus.svg",
+  "values": [
+    {
+      "id": "0",
+      "title": {
+        "en": "Charging (No Charge Control Data)"
+      }
+    },
+    {
+      "id": "1",
+      "title": {
+        "en": "Not Charging (Overtemperature)"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Not Charging (Access Control)"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Charging (Force State On)"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Not Charging (Force State Off)"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Not Charging (Scheduler)"
+      }
+    },
+    {
+      "id": "6",
+      "title": {
+        "en": "Not Charging (Energy Limit)"
+      }
+    },
+    {
+      "id": "7",
+      "title": {
+        "en": "Charging (Dynamic Pricing Low)"
+      }
+    },
+    {
+      "id": "8",
+      "title": {
+        "en": "Charging (Automatic Stop Test Charge)"
+      }
+    },
+    {
+      "id": "9",
+      "title": {
+        "en": "Charging (Automatic Stop, Not Enough Time)"
+      }
+    },
+    {
+      "id": "10",
+      "title": {
+        "en": "Charging (Automatic Stop)"
+      }
+    },
+    {
+      "id": "11",
+      "title": {
+        "en": "Charging (Automatic Stop, No Clock)"
+      }
+    },
+    {
+      "id": "12",
+      "title": {
+        "en": "Charging (PV Surplus)"
+      }
+    },
+    {
+      "id": "13",
+      "title": {
+        "en": "Charging (Fallback v2 Default)"
+      }
+    },
+    {
+      "id": "14",
+      "title": {
+        "en": "Charging (Fallback v2 Scheduler)"
+      }
+    },
+    {
+      "id": "15",
+      "title": {
+        "en": "Charging (Fallback Default)"
+      }
+    },
+    {
+      "id": "16",
+      "title": {
+        "en": "Not Charging (Fallback v2 Dynamic Pricing)"
+      }
+    },
+    {
+      "id": "17",
+      "title": {
+        "en": "Not Charging (Fallback Dynamic Pricing)"
+      }
+    },
+    {
+      "id": "18",
+      "title": {
+        "en": "Not Charging (Fallback Automatic Stop)"
+      }
+    },
+    {
+      "id": "19",
+      "title": {
+        "en": "Charging (Car Compatibility Keep-Alive)"
+      }
+    },
+    {
+      "id": "20",
+      "title": {
+        "en": "Charging (Charge Pause Not Allowed)"
+      }
+    },
+    {
+      "id": "21",
+      "title": {
+        "en": "Unknown (21)"
+      }
+    },
+    {
+      "id": "22",
+      "title": {
+        "en": "Not Charging (Simulate Unplugging)"
+      }
+    },
+    {
+      "id": "23",
+      "title": {
+        "en": "Not Charging (Phase Switch)"
+      }
+    },
+    {
+      "id": "24",
+      "title": {
+        "en": "Not Charging (Minimum Pause Duration)"
+      }
+    },
+    {
+      "id": "25",
+      "title": {
+        "en": "Unknown (25)"
+      }
+    },
+    {
+      "id": "26",
+      "title": {
+        "en": "Not Charging (Error)"
+      }
+    },
+    {
+      "id": "27",
+      "title": {
+        "en": "Not Charging (Load Management Does Not Allow)"
+      }
+    },
+    {
+      "id": "28",
+      "title": {
+        "en": "Not Charging (OCPP Does Not Allow)"
+      }
+    },
+    {
+      "id": "29",
+      "title": {
+        "en": "Not Charging (Reconnect Delay)"
+      }
+    },
+    {
+      "id": "30",
+      "title": {
+        "en": "Not Charging (Adapter Blocking)"
+      }
+    },
+    {
+      "id": "31",
+      "title": {
+        "en": "Not Charging (Underfrequency Control)"
+      }
+    },
+    {
+      "id": "32",
+      "title": {
+        "en": "Not Charging (Unbalanced Load)"
+      }
+    },
+    {
+      "id": "33",
+      "title": {
+        "en": "Charging (Discharging PV Battery)"
+      }
+    },
+    {
+      "id": "34",
+      "title": {
+        "en": "Not Charging (Grid Monitoring)"
+      }
+    },
+    {
+      "id": "35",
+      "title": {
+        "en": "Not Charging (OCPP Fallback)"
+      }
+    },
+    {
+      "id": "36",
+      "title": {
+        "en": "Not Charging (Floor Detected)"
+      }
+    },
+    {
+      "id": "37",
+      "title": {
+        "en": "Not Charging (OCPP Inoperable)"
+      }
+    },
+    {
+      "id": "38",
+      "title": {
+        "en": "Not Charging (Undervoltage Control)"
+      }
+    },
+    {
+      "id": "39",
+      "title": {
+        "en": "Not Charging (Zero Setpoint)"
+      }
+    },
+    {
+      "id": "40",
+      "title": {
+        "en": "Not Charging (Initializing)"
+      }
+    },
+    {
+      "id": "41",
+      "title": {
+        "en": "Not Charging (Failsafe Limit)"
+      }
+    }
+  ]
+}

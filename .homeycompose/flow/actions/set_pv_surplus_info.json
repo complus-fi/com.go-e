@@ -1,0 +1,42 @@
+{
+  "title": {
+    "en": "Set PV surplus information"
+  },
+  "titleFormatted": {
+    "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W."
+  },
+  "hint": {
+    "en": "Updates go-eCharger available wattage for automatic PV surplus mode."
+  },
+  "args": [
+    {
+      "name": "pGrid",
+      "type": "number",
+      "title": {
+        "en": "Grid power (W)"
+      }
+    },
+    {
+      "name": "pPv",
+      "type": "number",
+      "optional": true,
+      "title": {
+        "en": "PV power (W, optional)"
+      }
+    },
+    {
+      "name": "pAkku",
+      "type": "number",
+      "optional": true,
+      "title": {
+        "en": "Battery power (W, optional)"
+      }
+    },
+    {
+      "type": "device",
+      "name": "device",
+      "title": { "en": "Device" },
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+    }
+  ]
+}

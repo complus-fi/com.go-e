@@ -1,15 +1,26 @@
 {
   "id": "com.go-e",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
   "platforms": [
-    "local",
-    "cloud"
+    "local"
   ],
   "name": {
-    "en": "Go-e"
+    "en": "Go-e",
+    "ar": "Go-e",
+    "da": "Go-e",
+    "de": "Go-e",
+    "es": "Go-e",
+    "fr": "Go-e",
+    "it": "Go-e",
+    "ko": "Go-e",
+    "nl": "Go-e",
+    "no": "Go-e",
+    "pl": "Go-e",
+    "ru": "Go-e",
+    "sv": "Go-e"
   },
   "description": {
     "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently.",
@@ -60,10 +71,7 @@
       }
     }
   },
+  "homeyCommunityTopicId": 155757,
   "source": "https://github.com/complus-fi/com.go-e",
-  "bugs": {
-    "url": "https://github.com/complus-fi/com.go-e/issues"
-  },
-  "homeyCommunityTopicId": 74195,
   "support": "https://github.com/complus-fi/com.go-e/issues"
 }

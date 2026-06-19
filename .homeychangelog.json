@@ -1,9 +1,6 @@
 {
   "0.1.0": {
-    "en": "New official Go-e App for the Gemini, CORE and PRO evChargers"
-  },
-  "0.2.1": {
-    "en": "Changed to a single driver for all local network discovery. Supports Home+(V3), Gemini, CORE and PRO models."
+    "en": "New official Go-e App for the Home+, Gemini, CORE and PRO evChargers"
   },
   "0.2.2": {
     "en": "Cloud app compatibility checks and corrections."
@@ -11,7 +8,13 @@
   "0.2.3": {
     "en": "Updated branding"
   },
-  "0.3.0": {
-    "en": "Deprecate single driver in favour of model drivers."
+  "0.4.0": {
+    "en": "Break: Refactored PV Surplus charging mode and added a flow card to set the values for go-eCharger."
+  },
+  "0.4.3": {
+    "en": "App manifest updates"
+  },
+  "0.5.0": {
+    "en": "Add capability to switch between Go-E Charger modes: Basic, Eco, Daily Trip"
   }
 }

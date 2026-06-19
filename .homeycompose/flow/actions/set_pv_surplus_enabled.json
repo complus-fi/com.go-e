@@ -1,0 +1,40 @@
+{
+  "title": {
+    "en": "Set PV surplus mode"
+  },
+  "titleFormatted": {
+    "en": "Set PV surplus mode to [[enabled]]"
+  },
+  "hint": {
+    "en": "Enables or disables go-eCharger PV surplus control."
+  },
+  "args": [
+    {
+      "name": "enabled",
+      "type": "dropdown",
+      "title": {
+        "en": "PV surplus mode"
+      },
+      "values": [
+        {
+          "id": "true",
+          "title": {
+            "en": "Enabled"
+          }
+        },
+        {
+          "id": "false",
+          "title": {
+            "en": "Disabled"
+          }
+        }
+      ]
+    },
+    {
+      "type": "device",
+      "name": "device",
+      "title": { "en": "Device" },
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+    }
+  ]
+}
