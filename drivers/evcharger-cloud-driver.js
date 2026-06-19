@@ -1,27 +1,33 @@
 'use strict';
 
-const evChargerDriver = require('evcharger-driver');
+const Homey = require('homey');
+const { getModelFromDriverId, matchesDiscoveryModel } = require('../lib/mappings');
 const goeChargerAPI = require('../lib/go-eCharger-API-v2');
-const { getModelFromDriverId } = require('../lib/mappings');
 
-class evChargerCloudDriver extends evChargerDriver.Driver {
+class evChargerCloudDriver extends Homey.Driver {
   onInit() {
     this.log('[Driver] - init', this.id);
     this.log('[Driver] - version', this.homey.app.manifest.version);
   }
 
   async onPair(session) {
-    let username = "";
-    let password = "";
+    let serialnumber = '';
+    let token = '';
 
-    session.setHandler("login", async (data) => {
-      username = data.username;
-      password = data.password;
+    session.setHandler('login', async (data) => {
+      serialnumber = data.username;
+      token = data.password;
+      this.log(`[Driver] ${this.id} - cloud login requested for serial ${serialnumber}`);
 
-      const credentialsAreValid = await goeChargerAPI.testCredentials({
-        username,
-        password,
-      });
+      const api = new goeChargerAPI(`https://${serialnumber}.api.v3.go-e.io/api`, this, ['sse', 'fna', 'dfam', 'typ', 'styp', 'fwv'], token);
+      let credentialsAreValid = false;
+      try {
+        const cloudStatus = await api.getStatus();
+        credentialsAreValid = Boolean(cloudStatus && cloudStatus.sse === serialnumber);
+        this.log(`[Driver] ${this.id} - cloud login validation result: ${credentialsAreValid ? 'ok' : 'failed'}`);
+      } catch (error) {
+        this.log('[Driver] cloud login validation failed:', error?.message || error);
+      }
 
       // return true to continue adding the device if the login succeeded
       // return false to indicate to the user the login attempt failed
@@ -29,26 +35,45 @@ class evChargerCloudDriver extends evChargerDriver.Driver {
       return credentialsAreValid;
     });
 
-    session.setHandler("list_devices", async () => {
-      const api = await goeChargerAPI.login({ username, password });
-      const myDevices = await api.getDevices();
+    session.setHandler('list_devices', async () => {
+      this.log(`[Driver] ${this.id} - list_devices requested for serial ${serialnumber}`);
+      const api = new goeChargerAPI(`https://${serialnumber}.api.v3.go-e.io/api`, this, ['sse', 'fna', 'dfam', 'typ', 'styp', 'fwv'], token);
+      const cloudStatus = await api.getStatus();
+      const model = getModelFromDriverId(this.id);
+      this.log(`[Driver] ${this.id} - cloud device reported type: ${cloudStatus.typ || 'unknown'}${cloudStatus.styp ? `/${cloudStatus.styp}` : ''}, expected model: ${model || 'any'}`);
+      const matchesModel = matchesDiscoveryModel(
+        {
+          txt: {
+            devicetype: cloudStatus.typ || '',
+            devicesubtype: cloudStatus.styp || ''
+          }
+        },
+        model
+      );
 
-      const devices = myDevices.map((myDevice) => {
-        return {
-          name: myDevice.name,
+      if (!matchesModel) {
+        this.log(`[Driver] ${this.id} - list_devices filtered out serial ${serialnumber} because model does not match`);
+        return [];
+      }
+
+      this.log(`[Driver] ${this.id} - list_devices returning serial ${serialnumber}`);
+
+      return [
+        {
+          name: cloudStatus.fna || serialnumber,
           data: {
-            id: myDevice.id,
+            id: serialnumber
           },
           settings: {
-            // Store username & password in settings
+            // Store serialnumber & token in settings
             // so the user can change them later
-            username,
-            password,
-          },
-        };
-      });
-
-      return devices;
+            serialnumber,
+            token,
+            version: cloudStatus.fwv,
+            type: cloudStatus.styp ? `${cloudStatus.typ}/${cloudStatus.styp}` : cloudStatus.typ
+          }
+        }
+      ];
     });
   }
 }
