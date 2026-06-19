@@ -33,7 +33,6 @@ Primary sources:
 | measure_voltage             | Read         | nrg, pha             | Phase-aware input voltage calculation                               | 3-phase uses sqrt(3) scaling                                      |
 | measure_voltage.output      | Read         | nrg, pha             | Phase-aware output voltage calculation                              | 0 if no output phases active                                      |
 | goe_pv_surplus_enabled      | Read + write | fup                  | Read mirrors `fup`; write true sets automatic PV parameters         | Write true sets `lmo=4`; write false sets `lmo=3`, `fup=false`    |
-| target_power_mode           | Read         | frc                  | Read from `frc` (`0=device`, `2=homey`; `1` keeps current value)    | Read-only capability                                              |
 | goe_measure_phase_switching | Read         | psm                  | Enum capability for automatic / 1-phase / 3-phase status            | Capability ids are stringified `0`, `1`, `2`                      |
 | goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code         | Capability id is the stringified status code                      |
 | measure_power.pakku         | Read         | pakku                | Reads charger PV optimization average battery power                 | Rounded to 2 decimals                                             |
@@ -43,7 +42,6 @@ Primary sources:
 Additional mode/power mappings:
 
 - `goe_pv_surplus_enabled`: uses `fup` for read/write; enabling applies `lmo=4`, `fup=true`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`; disabling applies `lmo=3`, `fup=false`.
-- `target_power_mode`: read-only mapping from `frc` (`0` => `device`/automatic, `2` => `homey`, `1` => no mode update).
 - `target_power`: read-only status capability using charger `nrg[11]` P-total directly.
 
 ## Control Behavior

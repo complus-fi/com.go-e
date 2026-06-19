@@ -8,7 +8,19 @@
     "local"
   ],
   "name": {
-    "en": "Go-e"
+    "en": "Go-e",
+    "ar": "Go-e",
+    "da": "Go-e",
+    "de": "Go-e",
+    "es": "Go-e",
+    "fr": "Go-e",
+    "it": "Go-e",
+    "ko": "Go-e",
+    "nl": "Go-e",
+    "no": "Go-e",
+    "pl": "Go-e",
+    "ru": "Go-e",
+    "sv": "Go-e"
   },
   "description": {
     "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently.",
