@@ -5,7 +5,7 @@
   "sdk": 3,
   "runtime": "nodejs",
   "platforms": [
-    "local"
+    "local", "cloud"
   ],
   "name": {
     "en": "Go-e",

@@ -1,19 +1,19 @@
 {
   "name": {
-    "en": "go-eCharger PRO",
-    "nl": "go-eCharger PRO",
-    "da": "go-eCharger PRO",
-    "de": "go-eCharger PRO",
-    "es": "go-eCharger PRO",
-    "fr": "go-eCharger PRO",
-    "it": "go-eCharger PRO",
-    "no": "go-eCharger PRO",
-    "sv": "go-eCharger PRO",
-    "pl": "go-eCharger PRO",
-    "ru": "go-eCharger PRO",
-    "ko": "go-eCharger PRO",
-    "ar": "go-eCharger PRO"
+    "en": "go-eCharger PRO (local)",
+    "nl": "go-eCharger PRO (local)",
+    "da": "go-eCharger PRO (local)",
+    "de": "go-eCharger PRO (local)",
+    "es": "go-eCharger PRO (local)",
+    "fr": "go-eCharger PRO (local)",
+    "it": "go-eCharger PRO (local)",
+    "no": "go-eCharger PRO (local)",
+    "sv": "go-eCharger PRO (local)",
+    "pl": "go-eCharger PRO (local)",
+    "ru": "go-eCharger PRO (local)",
+    "ko": "go-eCharger PRO (local)",
+    "ar": "go-eCharger PRO (local)"
   },
   "discovery": "mdns_http_go-echarger-pro",
-  "$extends": ["go-eCharger"]
+  "$extends": ["go-eCharger", "go-eCharger-local"]
 }

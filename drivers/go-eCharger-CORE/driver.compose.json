@@ -1,19 +1,19 @@
 {
   "name": {
-    "en": "go-eCharger CORE",
-    "nl": "go-eCharger CORE",
-    "da": "go-eCharger CORE",
-    "de": "go-eCharger CORE",
-    "es": "go-eCharger CORE",
-    "fr": "go-eCharger CORE",
-    "it": "go-eCharger CORE",
-    "no": "go-eCharger CORE",
-    "sv": "go-eCharger CORE",
-    "pl": "go-eCharger CORE",
-    "ru": "go-eCharger CORE",
-    "ko": "go-eCharger CORE",
-    "ar": "go-eCharger CORE"
+    "en": "go-eCharger CORE (local)",
+    "nl": "go-eCharger CORE (local)",
+    "da": "go-eCharger CORE (local)",
+    "de": "go-eCharger CORE (local)",
+    "es": "go-eCharger CORE (local)",
+    "fr": "go-eCharger CORE (local)",
+    "it": "go-eCharger CORE (local)",
+    "no": "go-eCharger CORE (local)",
+    "sv": "go-eCharger CORE (local)",
+    "pl": "go-eCharger CORE (local)",
+    "ru": "go-eCharger CORE (local)",
+    "ko": "go-eCharger CORE (local)",
+    "ar": "go-eCharger CORE (local)"
   },
   "discovery": "mdns_http_go-echarger-core",
-  "$extends": ["go-eCharger"]
+  "$extends": ["go-eCharger", "go-eCharger-local"]
 }

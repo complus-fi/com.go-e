@@ -1,67 +1,211 @@
 {
   "title": {
-    "en": "Set charger mode"
+    "en": "Set charger mode",
+    "nl": "Stel laadmodus in",
+    "da": "Indstil opladertilstand",
+    "de": "Lademodus einstellen",
+    "es": "Establecer modo de cargador",
+    "fr": "Définir le mode de chargeur",
+    "it": "Imposta modalità caricatore",
+    "no": "Sett lademodus",
+    "sv": "Ställ in laddarläge",
+    "pl": "Ustaw tryb ładowarki",
+    "ru": "Установить режим зарядного устройства",
+    "ko": "충전기 모드 설정",
+    "ar": "تعيين وضع الشاحن"
   },
   "titleFormatted": {
-    "en": "Set charger mode to [[mode]]"
+    "en": "Set charger mode to [[mode]]",
+    "nl": "Stel de laadmodus in op [[mode]]",
+    "da": "Indstil opladertilstand til [[mode]]",
+    "de": "Ladegerät auf [[mode]] einstellen",
+    "es": "Establecer el modo del cargador a [[mode]]",
+    "fr": "Définir le mode du chargeur sur [[mode]]",
+    "it": "Imposta la modalità del caricatore su [[mode]]",
+    "no": "Sett ladermodus til [[mode]]",
+    "sv": "Ställ in laddarens läge till [[mode]]",
+    "pl": "Ustaw tryb ładowarki na [[mode]]",
+    "ru": "Установите режим зарядного устройства на [[mode]]",
+    "ko": "충전기 모드를 [[mode]](으)로 설정하세요.",
+    "ar": "اضبط وضع الشاحن على [[mode]]"
   },
   "hint": {
-    "en": "Sets the charger logic mode and related PV/flexible-price flags."
+    "en": "Sets the charger logic mode and related PV/flexible-price flags.",
+    "nl": "Stelt de logica-modus van de lader in en de bijbehorende PV/flexibele-prijs vlaggen.",
+    "da": "Indstiller opladerens logiktilstand og relaterede PV/fleksible prisflag.",
+    "de": "Legt den Logikmodus des Ladegeräts und die zugehörigen PV-/flexiblen Preis-Flags fest.",
+    "es": "Establece el modo de lógica del cargador y las banderas relacionadas con PV/precio flexible.",
+    "fr": "Définit le mode logique du chargeur et les indicateurs liés au PV/prix flexible.",
+    "it": "Imposta la modalità logica del caricatore e i relativi flag per PV/prezzo flessibile.",
+    "no": "Setter lademodus og relaterte PV-/fleksibel-pris-flagg.",
+    "sv": "Ställer in laddarens logikläge och relaterade PV-/flexibla prisflaggor.",
+    "pl": "Ustawia tryb logiki ładowarki oraz powiązane flagi PV/elastycznej ceny.",
+    "ru": "Устанавливает режим логики зарядного устройства и связанные флаги для солнечной энергии/гибкой цены.",
+    "ko": "충전기 로직 모드 및 관련 PV/유연한 가격 플래그를 설정합니다.",
+    "ar": "يضبط وضع منطق الشاحن والأعلام المتعلقة بالطاقة الشمسية/السعر المرن."
   },
   "args": [
     {
       "name": "mode",
       "type": "dropdown",
       "title": {
-        "en": "Mode"
+        "en": "Mode",
+        "nl": "Modus",
+        "da": "Tilstand",
+        "de": "Modus",
+        "es": "Modo",
+        "fr": "Mode",
+        "it": "Modalità",
+        "no": "Modus",
+        "sv": "Läge",
+        "pl": "Tryb",
+        "ru": "Режим",
+        "ko": "모드",
+        "ar": "الوضع"
       },
       "values": [
         {
           "id": "basic_charging",
           "title": {
-            "en": "Basic Charging"
+            "en": "Basic Charging",
+            "nl": "Basisopladen",
+            "da": "Grundlæggende opladning",
+            "de": "Grundlegendes Laden",
+            "es": "Carga básica",
+            "fr": "Charge de base",
+            "it": "Ricarica di base",
+            "no": "Grunnleggende lading",
+            "sv": "Grundläggande laddning",
+            "pl": "Podstawowe ładowanie",
+            "ru": "Базовая зарядка",
+            "ko": "기본 충전",
+            "ar": "الشحن الأساسي"
           }
         },
         {
           "id": "eco_pv_surplus",
           "title": {
-            "en": "Eco: Use PV Surplus"
+            "en": "Eco: Use PV Surplus",
+            "nl": "Eco: Gebruik PV-overschot",
+            "da": "Eco: Brug PV-overskud",
+            "de": "Eco: PV-Überschuss nutzen",
+            "es": "Eco: Usar excedente fotovoltaico",
+            "fr": "Éco : Utiliser le surplus photovoltaïque",
+            "it": "Eco: Usa il surplus fotovoltaico",
+            "no": "Eco: Bruk PV-overskudd",
+            "sv": "Eco: Använd överskott från solceller",
+            "pl": "Eco: Użyj nadwyżki PV",
+            "ru": "Эко: Использовать излишки солнечной энергии",
+            "ko": "에코: PV 잉여 전력 사용",
+            "ar": "إيكو: استخدم فائض الطاقة الشمسية"
           }
         },
         {
           "id": "eco_flexible_price",
           "title": {
-            "en": "Eco: Use Flexible price"
+            "en": "Eco: Use Flexible price",
+            "nl": "Eco: Gebruik Flexibele prijs",
+            "da": "Eco: Brug fleksibel pris",
+            "de": "Eco: Flexible Preise verwenden",
+            "es": "Eco: Usar precio flexible",
+            "fr": "Éco : Utiliser le prix flexible",
+            "it": "Eco: Usa prezzo flessibile",
+            "no": "Eco: Bruk fleksibel pris",
+            "sv": "Eco: Använd Flexibelt pris",
+            "pl": "Eco: Użyj elastycznej ceny",
+            "ru": "Эко: Используйте гибкие цены",
+            "ko": "에코: 유연한 가격 사용",
+            "ar": "إيكو: استخدم السعر المرن"
           }
         },
         {
           "id": "eco_pv_and_flexible_price",
           "title": {
-            "en": "Eco: Use PV and Flexible price"
+            "en": "Eco: Use PV and Flexible price",
+            "nl": "Eco: Gebruik PV en Flexibele prijs",
+            "da": "Eco: Brug solenergi og fleksibel pris",
+            "de": "Eco: PV und flexiblen Preis nutzen",
+            "es": "Eco: Usa PV y precio flexible",
+            "fr": "Éco : Utiliser PV et prix flexible",
+            "it": "Eco: Usa PV e Prezzo flessibile",
+            "no": "Eco: Bruk PV og Fleksibel pris",
+            "sv": "Eco: Använd solenergi och flexibelt pris",
+            "pl": "Eco: Użyj PV i elastycznej ceny",
+            "ru": "Эко: Используйте солнечную энергию и гибкие тарифы",
+            "ko": "에코: PV 및 유연한 가격 사용",
+            "ar": "إيكو: استخدم الطاقة الشمسية والسعر المرن"
           }
         },
         {
           "id": "trip_pv_surplus",
           "title": {
-            "en": "Trip: Use PV Surplus"
+            "en": "Trip: Use PV Surplus",
+            "nl": "Trip: Gebruik PV-overschot",
+            "da": "Tur: Brug PV-overskud",
+            "de": "Reise: PV-Überschuss nutzen",
+            "es": "Viaje: Usar excedente de PV",
+            "fr": "Voyage : Utiliser le surplus PV",
+            "it": "Viaggio: Usa Eccedenza Fotovoltaica",
+            "no": "Tur: Bruk PV-overskudd",
+            "sv": "Resa: Använd PV-överskott",
+            "pl": "Podróż: Użyj nadwyżki PV",
+            "ru": "Поездка: Использовать излишки солнечной энергии",
+            "ko": "여행: PV 잉여 전력 사용",
+            "ar": "الرحلة: استخدام فائض الطاقة الشمسية"
           }
         },
         {
           "id": "trip_flexible_price",
           "title": {
-            "en": "Trip: Use Flexible price"
+            "en": "Trip: Use Flexible price",
+            "nl": "Reis: Gebruik Flexibele prijs",
+            "da": "Trip: Brug fleksibel pris",
+            "de": "Reise: Flexiblen Preis verwenden",
+            "es": "Viaje: Usa precio flexible",
+            "fr": "Voyage : Utiliser le prix flexible",
+            "it": "Viaggio: Usa prezzo flessibile",
+            "no": "Tur: Bruk Fleksibel pris",
+            "sv": "Resa: Använd Flexibelt pris",
+            "pl": "Podróż: Użyj elastycznej ceny",
+            "ru": "Поездка: Используйте гибкую цену",
+            "ko": "여행: 유연한 가격 사용",
+            "ar": "رحلة: استخدم السعر المرن"
           }
         },
         {
           "id": "trip_pv_and_flexible_price",
           "title": {
-            "en": "Trip: Use PV and Flexible price"
+            "en": "Trip: Use PV and Flexible price",
+            "nl": "Reis: Gebruik PV en Flexibele prijs",
+            "da": "Tur: Brug PV og fleksibel pris",
+            "de": "Reise: PV und flexiblen Preis verwenden",
+            "es": "Viaje: Usar PV y precio flexible",
+            "fr": "Voyage : Utiliser PV et prix flexible",
+            "it": "Viaggio: Usa PV e prezzo flessibile",
+            "no": "Tur: Bruk PV og Fleksibel pris",
+            "sv": "Resa: Använd PV och Flexibelt pris",
+            "pl": "Podróż: Użyj PV i elastycznej ceny",
+            "ru": "Поездка: Используйте PV и гибкую цену",
+            "ko": "여행: PV 및 유연한 가격 사용",
+            "ar": "الرحلة: استخدم PV والسعر المرن"
           }
         },
         {
           "id": "trip_no_pv_no_flexible_price",
           "title": {
-            "en": "Trip: No PV and No Flexible price"
+            "en": "Trip: No PV and No Flexible price",
+            "nl": "Reis: Geen PV en Geen Flexibele prijs",
+            "da": "Tur: Ingen PV og Ingen fleksibel pris",
+            "de": "Reise: Kein PV und Kein flexibler Preis",
+            "es": "Viaje: Sin PV y Sin precio flexible",
+            "fr": "Voyage : Pas de PV et Pas de prix flexible",
+            "it": "Viaggio: Nessun PV e Nessun prezzo flessibile",
+            "no": "Tur: Ingen PV og Ingen Fleksibel pris",
+            "sv": "Resa: Ingen PV och inget flexibelt pris",
+            "pl": "Podróż: Brak PV i Brak Elastycznej ceny",
+            "ru": "Поездка: Без фотоэлектрических панелей и без гибкой цены",
+            "ko": "여행: PV 없음 및 유연한 가격 없음",
+            "ar": "رحلة: بدون PV وبدون سعر مرن"
           }
         }
       ]
@@ -70,9 +214,21 @@
       "type": "device",
       "name": "device",
       "title": {
-        "en": "Device"
+        "en": "Device",
+        "nl": "Apparaat",
+        "da": "Enhed",
+        "de": "Gerät",
+        "es": "Dispositivo",
+        "fr": "Appareil",
+        "it": "Dispositivo",
+        "no": "Enhet",
+        "sv": "Enhet",
+        "pl": "Urządzenie",
+        "ru": "Устройство",
+        "ko": "장치",
+        "ar": "الجهاز"
       },
-      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
     }
   ]
 }

@@ -1,0 +1,31 @@
+{
+  "platforms": ["local", "cloud"],
+  "connectivity": ["cloud"],
+  "pair": [
+    {
+      "id": "cloud_api_key",
+      "template": "custom",
+      "navigation": {
+        "next": "list_devices"
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices",
+      "navigation": {
+        "next": "done"
+      }
+    },
+    {
+      "id": "done",
+      "template": "done"
+    }
+  ]
+}

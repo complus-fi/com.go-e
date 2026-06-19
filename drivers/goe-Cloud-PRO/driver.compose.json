@@ -1,0 +1,18 @@
+{
+  "name": {
+    "en": "go-eCharger PRO (cloud)",
+    "nl": "go-eCharger PRO (cloud)",
+    "da": "go-eCharger PRO (cloud)",
+    "de": "go-eCharger PRO (cloud)",
+    "es": "go-eCharger PRO (cloud)",
+    "fr": "go-eCharger PRO (cloud)",
+    "it": "go-eCharger PRO (cloud)",
+    "no": "go-eCharger PRO (cloud)",
+    "sv": "go-eCharger PRO (cloud)",
+    "pl": "go-eCharger PRO (cloud)",
+    "ru": "go-eCharger PRO (cloud)",
+    "ko": "go-eCharger PRO (cloud)",
+    "ar": "go-eCharger PRO (cloud)"
+  },
+  "$extends": ["go-eCharger", "go-eCharger-cloud"]
+}

@@ -1,7 +1,19 @@
 {
   "type": "boolean",
   "title": {
-    "en": "PV Surplus Enabled"
+    "en": "PV Surplus Enabled",
+    "nl": "PV-overschot ingeschakeld",
+    "da": "PV-overskud aktiveret",
+    "de": "PV-Überschuss aktiviert",
+    "es": "Excedente de PV Activado",
+    "fr": "Surplus PV Activé",
+    "it": "Surplus PV Abilitato",
+    "no": "PV-overskudd aktivert",
+    "sv": "PV-överskott aktiverat",
+    "pl": "Nadwyżka PV włączona",
+    "ru": "Избыток PV включен",
+    "ko": "PV 잉여 활성화됨",
+    "ar": "تمكين الفائض الكهروضوئي"
   },
   "getable": true,
   "setable": true,

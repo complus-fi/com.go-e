@@ -1,0 +1,36 @@
+{
+  "id": "api_key",
+  "type": "password",
+  "label": {
+    "en": "Cloud API key",
+    "nl": "Cloud API-sleutel",
+    "da": "Cloud API-nogle",
+    "de": "Cloud API-Schlussel",
+    "es": "Clave API de Cloud",
+    "fr": "Cle API Cloud",
+    "it": "Chiave API Cloud",
+    "no": "Cloud API-nokkel",
+    "sv": "Cloud API-nyckel",
+    "pl": "Klucz API Cloud",
+    "ru": "Cloud API ключ",
+    "ko": "Cloud API 키",
+    "ar": "مفتاح Cloud API"
+  },
+  "value": "",
+  "hint": {
+    "en": "Used to connect this charger through the go-e Cloud API.",
+    "nl": "Wordt gebruikt om deze lader via de go-e Cloud API te verbinden.",
+    "da": "Bruges til at forbinde denne oplader via go-e Cloud API.",
+    "de": "Wird verwendet, um dieses Ladegerat uber die go-e Cloud API zu verbinden.",
+    "es": "Se usa para conectar este cargador a traves de la API de go-e Cloud.",
+    "fr": "Utilise pour connecter ce chargeur via l'API go-e Cloud.",
+    "it": "Usata per collegare questo caricatore tramite la API Cloud di go-e.",
+    "no": "Brukes til a koble denne laderen til via go-e Cloud API.",
+    "sv": "Anvands for att ansluta denna laddare via go-e Cloud API.",
+    "pl": "Uzywany do polaczenia tej ladowarki przez API go-e Cloud.",
+    "ru": "Используется для подключения этого зарядного устройства через go-e Cloud API.",
+    "ko": "go-e Cloud API를 통해 이 충전기를 연결하는 데 사용됩니다.",
+    "ar": "يستخدم للاتصال بهذا الشاحن عبر واجهة go-e Cloud API."
+  },
+  "highlight": true
+}

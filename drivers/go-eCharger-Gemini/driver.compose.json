@@ -1,19 +1,19 @@
 {
   "name": {
-    "en": "go-eCharger Gemini",
-    "nl": "go-eCharger Gemini",
-    "da": "go-eCharger Gemini",
-    "de": "go-eCharger Gemini",
-    "es": "go-eCharger Gemini",
-    "fr": "go-eCharger Gemini",
-    "it": "go-eCharger Gemini",
-    "no": "go-eCharger Gemini",
-    "sv": "go-eCharger Gemini",
-    "pl": "go-eCharger Gemini",
-    "ru": "go-eCharger Gemini",
-    "ko": "go-eCharger Gemini",
-    "ar": "go-eCharger Gemini"
+    "en": "go-eCharger Gemini (local)",
+    "nl": "go-eCharger Gemini (local)",
+    "da": "go-eCharger Gemini (local)",
+    "de": "go-eCharger Gemini (local)",
+    "es": "go-eCharger Gemini (local)",
+    "fr": "go-eCharger Gemini (local)",
+    "it": "go-eCharger Gemini (local)",
+    "no": "go-eCharger Gemini (local)",
+    "sv": "go-eCharger Gemini (local)",
+    "pl": "go-eCharger Gemini (local)",
+    "ru": "go-eCharger Gemini (local)",
+    "ko": "go-eCharger Gemini (local)",
+    "ar": "go-eCharger Gemini (local)"
   },
   "discovery": "mdns_http_go-echarger-gemini",
-  "$extends": ["go-eCharger"]
+  "$extends": ["go-eCharger", "go-eCharger-local"]
 }

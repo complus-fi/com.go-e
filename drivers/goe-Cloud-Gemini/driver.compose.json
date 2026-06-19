@@ -1,0 +1,18 @@
+{
+  "name": {
+    "en": "go-eCharger Gemini (cloud)",
+    "nl": "go-eCharger Gemini (cloud)",
+    "da": "go-eCharger Gemini (cloud)",
+    "de": "go-eCharger Gemini (cloud)",
+    "es": "go-eCharger Gemini (cloud)",
+    "fr": "go-eCharger Gemini (cloud)",
+    "it": "go-eCharger Gemini (cloud)",
+    "no": "go-eCharger Gemini (cloud)",
+    "sv": "go-eCharger Gemini (cloud)",
+    "pl": "go-eCharger Gemini (cloud)",
+    "ru": "go-eCharger Gemini (cloud)",
+    "ko": "go-eCharger Gemini (cloud)",
+    "ar": "go-eCharger Gemini (cloud)"
+  },
+  "$extends": ["go-eCharger", "go-eCharger-cloud"]
+}

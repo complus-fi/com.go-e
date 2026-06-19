@@ -1,7 +1,19 @@
 {
   "type": "enum",
   "title": {
-    "en": "Model status"
+    "en": "Model status",
+    "nl": "Modelstatus",
+    "da": "Modelstatus",
+    "de": "Modellstatus",
+    "es": "Estado del modelo",
+    "fr": "Statut du modèle",
+    "it": "Stato del modello",
+    "no": "Modellstatus",
+    "sv": "Modellstatus",
+    "pl": "Status modelu",
+    "ru": "Статус модели",
+    "ko": "모델 상태",
+    "ar": "حالة النموذج"
   },
   "getable": true,
   "setable": false,
@@ -11,253 +23,757 @@
     {
       "id": "0",
       "title": {
-        "en": "Charging (No Charge Control Data)"
+        "en": "Charging (No Charge Control Data)",
+        "nl": "Opladen (Geen laadcontrolegegevens)",
+        "da": "Oplader (Ingen opladningskontroldata)",
+        "de": "Laden (Keine Ladesteuerungsdaten)",
+        "es": "Cargando (Sin datos de control de carga)",
+        "fr": "Chargement (Pas de données de contrôle de charge)",
+        "it": "Caricamento (Nessun dato di controllo di carica)",
+        "no": "Lader (Ingen lade-kontroll-data)",
+        "sv": "Laddar (Ingen laddningskontrolldata)",
+        "pl": "Ładowanie (Brak danych o kontroli ładowania)",
+        "ru": "Зарядка (Нет данных управления зарядкой)",
+        "ko": "충전 중 (충전 제어 데이터 없음)",
+        "ar": "الشحن (لا توجد بيانات تحكم في الشحن)"
       }
     },
     {
       "id": "1",
       "title": {
-        "en": "Not Charging (Overtemperature)"
+        "en": "Not Charging (Overtemperature)",
+        "nl": "Niet aan het opladen (Overtemperatuur)",
+        "da": "Lader ikke (Overtemperatur)",
+        "de": "Nicht laden (Übertemperatur)",
+        "es": "No está cargando (sobretemperatura)",
+        "fr": "Pas de charge (surchauffe)",
+        "it": "Non in carica (Surriscaldamento)",
+        "no": "Lader ikke (Overtemperatur)",
+        "sv": "Laddar inte (Övertemperatur)",
+        "pl": "Nie ładuje (przegrzanie)",
+        "ru": "Не заряжается (перегрев)",
+        "ko": "충전 안 됨 (온도 과열)",
+        "ar": "لا يتم الشحن (درجة حرارة زائدة)"
       }
     },
     {
       "id": "2",
       "title": {
-        "en": "Not Charging (Access Control)"
+        "en": "Not Charging (Access Control)",
+        "nl": "Niet opladen (Toegangscontrole)",
+        "da": "Lader ikke (Adgangskontrol)",
+        "de": "Nicht laden (Zugangskontrolle)",
+        "es": "No está cargando (Control de acceso)",
+        "fr": "Pas de charge (Contrôle d'accès)",
+        "it": "Non in carica (Controllo accessi)",
+        "no": "Lader ikke (Tilgangskontroll)",
+        "sv": "Laddar inte (Åtkomstkontroll)",
+        "pl": "Nie ładuje (Kontrola dostępu)",
+        "ru": "Не заряжается (Контроль доступа)",
+        "ko": "충전 안 됨 (접근 제어)",
+        "ar": "لا يتم الشحن (التحكم في الوصول)"
       }
     },
     {
       "id": "3",
       "title": {
-        "en": "Charging (Force State On)"
+        "en": "Charging (Force State On)",
+        "nl": "Opladen (Force State Aan)",
+        "da": "Oplader (Tving tilstand til at være tændt)",
+        "de": "Laden (Zustand erzwingen: Ein)",
+        "es": "Cargando (Forzar estado activado)",
+        "fr": "Chargement (Forcer l'état activé)",
+        "it": "Caricamento (Forza Stato Attivo)",
+        "no": "Lader (Tving tilstand på)",
+        "sv": "Laddar (Tvinga tillstånd på)",
+        "pl": "Ładowanie (Wymuś stan włączony)",
+        "ru": "Зарядка (Принудительное включение)",
+        "ko": "충전 중 (상태 강제 켜기)",
+        "ar": "الشحن (فرض الحالة تشغيل)"
       }
     },
     {
       "id": "4",
       "title": {
-        "en": "Not Charging (Force State Off)"
+        "en": "Not Charging (Force State Off)",
+        "nl": "Niet opladen (Forceer status uit)",
+        "da": "Lader ikke (Tving tilstand fra)",
+        "de": "Nicht laden (Zustand erzwingen: Aus)",
+        "es": "No está cargando (Forzar estado apagado)",
+        "fr": "Pas de charge (État forcé désactivé)",
+        "it": "Non in carica (Forza stato spento)",
+        "no": "Lader ikke (Tving tilstand av)",
+        "sv": "Laddar inte (Tvinga tillstånd av)",
+        "pl": "Nie ładuje (wymuszone wyłączenie)",
+        "ru": "Не заряжается (принудительное отключение)",
+        "ko": "충전 안 함 (상태 강제 종료)",
+        "ar": "غير مشحون (إيقاف الحالة بالقوة)"
       }
     },
     {
       "id": "5",
       "title": {
-        "en": "Not Charging (Scheduler)"
+        "en": "Not Charging (Scheduler)",
+        "nl": "Niet opladen (Planner)",
+        "da": "Lader ikke (Tidsplanlægger)",
+        "de": "Nicht laden (Zeitplaner)",
+        "es": "No cargando (Programador)",
+        "fr": "Pas de charge (Planificateur)",
+        "it": "Non in carica (Programmatore)",
+        "no": "Lader ikke (Tidsplanlegger)",
+        "sv": "Laddar inte (Schemaläggare)",
+        "pl": "Nie ładuje (Harmonogram)",
+        "ru": "Не заряжается (планировщик)",
+        "ko": "충전 안 함 (스케줄러)",
+        "ar": "غير مشحون (الجدول الزمني)"
       }
     },
     {
       "id": "6",
       "title": {
-        "en": "Not Charging (Energy Limit)"
+        "en": "Not Charging (Energy Limit)",
+        "nl": "Niet aan het opladen (Energielimiet)",
+        "da": "Lader ikke (Energigrænse)",
+        "de": "Nicht laden (Energiegrenze)",
+        "es": "No está cargando (Límite de energía)",
+        "fr": "Pas de charge (Limite d'énergie)",
+        "it": "Non in carica (Limite di energia)",
+        "no": "Lader ikke (Energigrense)",
+        "sv": "Laddar inte (Energigräns)",
+        "pl": "Nie ładuje (Limit energii)",
+        "ru": "Не заряжается (лимит энергии)",
+        "ko": "충전 안 됨 (에너지 제한)",
+        "ar": "لا يتم الشحن (حد الطاقة)"
       }
     },
     {
       "id": "7",
       "title": {
-        "en": "Charging (Dynamic Pricing Low)"
+        "en": "Charging (Dynamic Pricing Low)",
+        "nl": "Opladen (Dynamische Prijs Laag)",
+        "da": "Opladning (Dynamisk Prissætning Lav)",
+        "de": "Laden (Dynamische Preisgestaltung Niedrig)",
+        "es": "Cargando (Precio Dinámico Bajo)",
+        "fr": "Chargement (Tarification dynamique basse)",
+        "it": "Caricamento (Prezzo Dinamico Basso)",
+        "no": "Lading (Dynamisk prising lav)",
+        "sv": "Laddar (Dynamisk prissättning låg)",
+        "pl": "Ładowanie (Dynamiczne Ceny Niskie)",
+        "ru": "Зарядка (Динамическое ценообразование - низкая цена)",
+        "ko": "충전 중 (동적 가격 낮음)",
+        "ar": "الشحن (تسعير ديناميكي منخفض)"
       }
     },
     {
       "id": "8",
       "title": {
-        "en": "Charging (Automatic Stop Test Charge)"
+        "en": "Charging (Automatic Stop Test Charge)",
+        "nl": "Opladen (Automatische Stop Testlading)",
+        "da": "Opladning (Automatisk Stop Testopladning)",
+        "de": "Laden (Automatischer Stopp Testladung)",
+        "es": "Cargando (Prueba de Carga con Parada Automática)",
+        "fr": "Charge (Arrêt automatique du test de charge)",
+        "it": "Ricarica (Test di Arresto Automatico)",
+        "no": "Lading (Automatisk stopp testlading)",
+        "sv": "Laddar (Automatisk stopp testladdning)",
+        "pl": "Ładowanie (Automatyczne Zatrzymanie Testu Ładowania)",
+        "ru": "Зарядка (Автоматическая остановка тестовой зарядки)",
+        "ko": "충전 (자동 정지 테스트 충전)",
+        "ar": "الشحن (اختبار التوقف التلقائي للشحن)"
       }
     },
     {
       "id": "9",
       "title": {
-        "en": "Charging (Automatic Stop, Not Enough Time)"
+        "en": "Charging (Automatic Stop, Not Enough Time)",
+        "nl": "Opladen (Automatisch Stoppen, Niet Genoeg Tijd)",
+        "da": "Opladning (Automatisk Stop, Ikke Nok Tid)",
+        "de": "Laden (Automatischer Stopp, Nicht genug Zeit)",
+        "es": "Carga (Parada Automática, No Hay Suficiente Tiempo)",
+        "fr": "Chargement (Arrêt automatique, Pas assez de temps)",
+        "it": "Carica (Arresto Automatico, Tempo Insufficiente)",
+        "no": "Lading (Automatisk Stopp, Ikke Nok Tid)",
+        "sv": "Laddar (Automatisk stopp, Inte tillräckligt med tid)",
+        "pl": "Ładowanie (Automatyczne Zatrzymanie, Za Mało Czasu)",
+        "ru": "Зарядка (Автоматическая остановка, Недостаточно времени)",
+        "ko": "충전 (자동 중지, 시간 부족)",
+        "ar": "الشحن (إيقاف تلقائي، ليس هناك وقت كافٍ)"
       }
     },
     {
       "id": "10",
       "title": {
-        "en": "Charging (Automatic Stop)"
+        "en": "Charging (Automatic Stop)",
+        "nl": "Opladen (Automatisch Stoppen)",
+        "da": "Opladning (Automatisk Stop)",
+        "de": "Laden (Automatischer Stopp)",
+        "es": "Carga (Parada Automática)",
+        "fr": "Chargement (Arrêt automatique)",
+        "it": "Ricarica (Arresto Automatico)",
+        "no": "Lading (Automatisk stopp)",
+        "sv": "Laddning (Automatisk stopp)",
+        "pl": "Ładowanie (Automatyczne Zatrzymanie)",
+        "ru": "Зарядка (Автоматическая остановка)",
+        "ko": "충전 (자동 정지)",
+        "ar": "الشحن (إيقاف تلقائي)"
       }
     },
     {
       "id": "11",
       "title": {
-        "en": "Charging (Automatic Stop, No Clock)"
+        "en": "Charging (Automatic Stop, No Clock)",
+        "nl": "Opladen (Automatisch Stoppen, Geen Klok)",
+        "da": "Opladning (Automatisk stop, Ingen ur)",
+        "de": "Laden (Automatischer Stopp, Keine Uhr)",
+        "es": "Cargando (Parada Automática, Sin Reloj)",
+        "fr": "Chargement (Arrêt automatique, Pas d'horloge)",
+        "it": "Ricarica (Arresto Automatico, Senza Orologio)",
+        "no": "Lading (Automatisk stopp, Ingen klokke)",
+        "sv": "Laddar (Automatisk stopp, Ingen klocka)",
+        "pl": "Ładowanie (Automatyczne zatrzymanie, Bez zegara)",
+        "ru": "Зарядка (Автоматическая остановка, Без таймера)",
+        "ko": "충전 (자동 정지, 시계 없음)",
+        "ar": "الشحن (إيقاف تلقائي، بدون ساعة)"
       }
     },
     {
       "id": "12",
       "title": {
-        "en": "Charging (PV Surplus)"
+        "en": "Charging (PV Surplus)",
+        "nl": "Opladen (PV Overschot)",
+        "da": "Opladning (PV Overskud)",
+        "de": "Laden (PV-Überschuss)",
+        "es": "Carga (Excedente FV)",
+        "fr": "Chargement (Surplus PV)",
+        "it": "Carica (Eccedenza FV)",
+        "no": "Lading (PV-overskudd)",
+        "sv": "Laddar (PV-överskott)",
+        "pl": "Ładowanie (nadwyżka PV)",
+        "ru": "Зарядка (избыток солнечной энергии)",
+        "ko": "충전 (PV 잉여)",
+        "ar": "الشحن (الفائض الشمسي)"
       }
     },
     {
       "id": "13",
       "title": {
-        "en": "Charging (Fallback v2 Default)"
+        "en": "Charging (Fallback v2 Default)",
+        "nl": "Opladen (Fallback v2 Standaard)",
+        "da": "Opladning (Fallback v2 Standard)",
+        "de": "Laden (Fallback v2 Standard)",
+        "es": "Cargando (Fallback v2 Default)",
+        "fr": "Chargement (Fallback v2 Default)",
+        "it": "Caricamento (Fallback v2 Default)",
+        "no": "Lading (Fallback v2 Standard)",
+        "sv": "Laddar (Standardalternativ v2)",
+        "pl": "Ładowanie (Domyślne Fallback v2)",
+        "ru": "Зарядка (Резервный v2 по умолчанию)",
+        "ko": "충전 (기본 v2 대체)",
+        "ar": "الشحن (الافتراضي النسخة الثانية)"
       }
     },
     {
       "id": "14",
       "title": {
-        "en": "Charging (Fallback v2 Scheduler)"
+        "en": "Charging (Fallback v2 Scheduler)",
+        "nl": "Opladen (Fallback v2 Planner)",
+        "da": "Opladning (Fallback v2 Scheduler)",
+        "de": "Laden (Fallback v2 Zeitplaner)",
+        "es": "Cargando (Programador de respaldo v2)",
+        "fr": "Chargement (Planificateur de secours v2)",
+        "it": "Ricarica (Pianificatore di riserva v2)",
+        "no": "Lading (Fallback v2 Planlegger)",
+        "sv": "Laddar (Reservplan v2 Schemaläggare)",
+        "pl": "Ładowanie (Harmonogram awaryjny v2)",
+        "ru": "Зарядка (Резервный планировщик v2)",
+        "ko": "충전 (대체 v2 스케줄러)",
+        "ar": "الشحن (جدولة النسخة الاحتياطية v2)"
       }
     },
     {
       "id": "15",
       "title": {
-        "en": "Charging (Fallback Default)"
+        "en": "Charging (Fallback Default)",
+        "nl": "Opladen (Standaardinstelling)",
+        "da": "Opladning (Standardtilstand)",
+        "de": "Laden (Standard-Einstellung)",
+        "es": "Cargando (Predeterminado de Respaldo)",
+        "fr": "Chargement (Valeur par défaut de secours)",
+        "it": "Ricarica (Predefinito di Riserva)",
+        "no": "Lader (Standard fallback)",
+        "sv": "Laddar (Standardalternativ)",
+        "pl": "Ładowanie (domyślne awaryjne)",
+        "ru": "Зарядка (резервное значение по умолчанию)",
+        "ko": "충전 (기본값)",
+        "ar": "الشحن (الإعداد الافتراضي)"
       }
     },
     {
       "id": "16",
       "title": {
-        "en": "Not Charging (Fallback v2 Dynamic Pricing)"
+        "en": "Not Charging (Fallback v2 Dynamic Pricing)",
+        "nl": "Niet aan het opladen (Fallback v2 Dynamische Prijzen)",
+        "da": "Ikke oplader (Fallback v2 Dynamisk Prissætning)",
+        "de": "Nicht laden (Fallback v2 Dynamische Preisgestaltung)",
+        "es": "No está cargando (Precios dinámicos de respaldo v2)",
+        "fr": "Pas de charge (Tarification dynamique de secours v2)",
+        "it": "Non in carica (Prezzi dinamici Fallback v2)",
+        "no": "Lader ikke (Fallback v2 Dynamisk Prising)",
+        "sv": "Laddar inte (Fallback v2 Dynamisk Prissättning)",
+        "pl": "Nie ładuje (Dynamiczne ceny awaryjne v2)",
+        "ru": "Не заряжается (Резервный вариант v2 Динамическое ценообразование)",
+        "ko": "충전되지 않음 (대체 v2 동적 가격 책정)",
+        "ar": "لا يتم الشحن (التسعير الديناميكي البديل v2)"
       }
     },
     {
       "id": "17",
       "title": {
-        "en": "Not Charging (Fallback Dynamic Pricing)"
+        "en": "Not Charging (Fallback Dynamic Pricing)",
+        "nl": "Niet aan het opladen (Fallback Dynamische Prijsstelling)",
+        "da": "Ikke oplader (Fallback dynamisk prissætning)",
+        "de": "Nicht laden (Fallback-Dynamische Preisgestaltung)",
+        "es": "No está cargando (Precios dinámicos de respaldo)",
+        "fr": "Pas de charge (Tarification dynamique de secours)",
+        "it": "Non in carica (Prezzi dinamici di riserva)",
+        "no": "Lader ikke (Fallback dynamisk prising)",
+        "sv": "Laddar inte (Fallback Dynamisk Prissättning)",
+        "pl": "Nie ładuje (awaryjne dynamiczne ustalanie cen)",
+        "ru": "Не заряжается (резервное динамическое ценообразование)",
+        "ko": "충전되지 않음 (대체 동적 가격)",
+        "ar": "لا يتم الشحن (تسعير ديناميكي احتياطي)"
       }
     },
     {
       "id": "18",
       "title": {
-        "en": "Not Charging (Fallback Automatic Stop)"
+        "en": "Not Charging (Fallback Automatic Stop)",
+        "nl": "Niet aan het opladen (Automatische stop als back-up)",
+        "da": "Ikke oplader (Automatisk stop som fallback)",
+        "de": "Nicht laden (Automatischer Stopp als Fallback)",
+        "es": "No está cargando (Parada automática de respaldo)",
+        "fr": "Pas de charge (Arrêt automatique de secours)",
+        "it": "Non in carica (Arresto automatico di emergenza)",
+        "no": "Lader ikke (Automatisk stopp som reserve)",
+        "sv": "Laddar inte (Automatisk stopp som reserv)",
+        "pl": "Nie ładuje (Automatyczne zatrzymanie awaryjne)",
+        "ru": "Не заряжается (автоматическая остановка)",
+        "ko": "충전 안 됨 (자동 중지)",
+        "ar": "لا يتم الشحن (توقف تلقائي احتياطي)"
       }
     },
     {
       "id": "19",
       "title": {
-        "en": "Charging (Car Compatibility Keep-Alive)"
+        "en": "Charging (Car Compatibility Keep-Alive)",
+        "nl": "Opladen (Auto-compatibiliteit Keep-Alive)",
+        "da": "Opladning (Bilkompatibilitet Keep-Alive)",
+        "de": "Laden (Auto-Kompatibilität Keep-Alive)",
+        "es": "Carga (Compatibilidad del Coche Mantener Activo)",
+        "fr": "Chargement (Compatibilité Voiture Keep-Alive)",
+        "it": "Ricarica (Compatibilità Auto Keep-Alive)",
+        "no": "Lading (Bilkompatibilitet Keep-Alive)",
+        "sv": "Laddning (Bilkompatibilitet Håll-igång)",
+        "pl": "Ładowanie (Kompatybilność Samochodu - Utrzymanie Połączenia)",
+        "ru": "Зарядка (Совместимость с автомобилем, поддержание активности)",
+        "ko": "충전 (자동차 호환성 유지)",
+        "ar": "الشحن (التوافق مع السيارة - الحفاظ على الاتصال)"
       }
     },
     {
       "id": "20",
       "title": {
-        "en": "Charging (Charge Pause Not Allowed)"
+        "en": "Charging (Charge Pause Not Allowed)",
+        "nl": "Opladen (Oplaadpauze Niet Toegestaan)",
+        "da": "Oplader (Pause i opladning ikke tilladt)",
+        "de": "Laden (Ladepause nicht erlaubt)",
+        "es": "Cargando (Pausa de carga no permitida)",
+        "fr": "Chargement (Pause de charge non autorisée)",
+        "it": "Caricamento (Pausa di Carica Non Consentita)",
+        "no": "Lader (Ladepause Ikke Tillatt)",
+        "sv": "Laddar (Laddningspaus Ej Tillåten)",
+        "pl": "Ładowanie (Wstrzymanie ładowania niedozwolone)",
+        "ru": "Зарядка (Пауза Зарядки Не Разрешена)",
+        "ko": "충전 중 (충전 일시 중지 불가)",
+        "ar": "الشحن (إيقاف الشحن غير مسموح)"
       }
     },
     {
       "id": "21",
       "title": {
-        "en": "Unknown (21)"
+        "en": "Unknown (21)",
+        "nl": "Onbekend (21)",
+        "da": "Ukendt (21)",
+        "de": "Unbekannt (21)",
+        "es": "Desconocido (21)",
+        "fr": "Inconnu (21)",
+        "it": "Sconosciuto (21)",
+        "no": "Ukjent (21)",
+        "sv": "Okänd (21)",
+        "pl": "Nieznany (21)",
+        "ru": "Неизвестно (21)",
+        "ko": "알 수 없음 (21)",
+        "ar": "غير معروف (21)"
       }
     },
     {
       "id": "22",
       "title": {
-        "en": "Not Charging (Simulate Unplugging)"
+        "en": "Not Charging (Simulate Unplugging)",
+        "nl": "Niet aan het opladen (Simuleer loskoppelen)",
+        "da": "Ikke oplader (simuler frakobling)",
+        "de": "Nicht laden (Steckerziehen simulieren)",
+        "es": "No está cargando (Simular desconexión)",
+        "fr": "Pas de charge (Simuler le débranchement)",
+        "it": "Non in carica (Simula scollegamento)",
+        "no": "Lader ikke (Simuler frakobling)",
+        "sv": "Laddar inte (Simulera urkoppling)",
+        "pl": "Nie ładuje (symuluj odłączenie)",
+        "ru": "Не заряжается (симуляция отключения)",
+        "ko": "충전 안 함 (플러그 뽑기 시뮬레이션)",
+        "ar": "غير مشحون (محاكاة فصل الشحن)"
       }
     },
     {
       "id": "23",
       "title": {
-        "en": "Not Charging (Phase Switch)"
+        "en": "Not Charging (Phase Switch)",
+        "nl": "Niet aan het opladen (Fase Schakelaar)",
+        "da": "Lader ikke (Faseskift)",
+        "de": "Nicht laden (Phasenwechsel)",
+        "es": "No está cargando (Cambio de fase)",
+        "fr": "Pas de charge (Changement de phase)",
+        "it": "Non in carica (Cambio fase)",
+        "no": "Lader ikke (Faseskifte)",
+        "sv": "Laddar inte (Fasbyte)",
+        "pl": "Nie ładuje (Przełącznik faz)",
+        "ru": "Не заряжается (переключение фаз)",
+        "ko": "충전 안 됨 (위상 전환)",
+        "ar": "لا يتم الشحن (تبديل الطور)"
       }
     },
     {
       "id": "24",
       "title": {
-        "en": "Not Charging (Minimum Pause Duration)"
+        "en": "Not Charging (Minimum Pause Duration)",
+        "nl": "Niet aan het opladen (Minimale pauzeduur)",
+        "da": "Lader ikke (Minimum pausevarighed)",
+        "de": "Nicht laden (Mindestpausendauer)",
+        "es": "No está cargando (Duración mínima de pausa)",
+        "fr": "Pas de charge (Durée minimale de pause)",
+        "it": "Non in carica (Durata minima di pausa)",
+        "no": "Lader ikke (Minimum pausevarighet)",
+        "sv": "Laddar inte (Minsta pauslängd)",
+        "pl": "Nie ładuje (Minimalny czas przerwy)",
+        "ru": "Не заряжается (минимальная продолжительность паузы)",
+        "ko": "충전 중지 (최소 일시 중지 시간)",
+        "ar": "غير مشحون (مدة التوقف الأدنى)"
       }
     },
     {
       "id": "25",
       "title": {
-        "en": "Unknown (25)"
+        "en": "Unknown (25)",
+        "nl": "Onbekend (25)",
+        "da": "Ukendt (25)",
+        "de": "Unbekannt (25)",
+        "es": "Desconocido (25)",
+        "fr": "Inconnu (25)",
+        "it": "Sconosciuto (25)",
+        "no": "Ukjent (25)",
+        "sv": "Okänd (25)",
+        "pl": "Nieznany (25)",
+        "ru": "Неизвестно (25)",
+        "ko": "알 수 없음 (25)",
+        "ar": "غير معروف (25)"
       }
     },
     {
       "id": "26",
       "title": {
-        "en": "Not Charging (Error)"
+        "en": "Not Charging (Error)",
+        "nl": "Niet aan het opladen (Fout)",
+        "da": "Lader ikke (Fejl)",
+        "de": "Nicht Laden (Fehler)",
+        "es": "No está cargando (Error)",
+        "fr": "Pas de charge (Erreur)",
+        "it": "Non in carica (Errore)",
+        "no": "Lader ikke (Feil)",
+        "sv": "Laddar inte (Fel)",
+        "pl": "Nie ładuje (Błąd)",
+        "ru": "Не заряжается (Ошибка)",
+        "ko": "충전되지 않음 (오류)",
+        "ar": "لا يشحن (خطأ)"
       }
     },
     {
       "id": "27",
       "title": {
-        "en": "Not Charging (Load Management Does Not Allow)"
+        "en": "Not Charging (Load Management Does Not Allow)",
+        "nl": "Niet aan het laden (Laadbeheer staat het niet toe)",
+        "da": "Lader ikke (Belastningsstyring tillader det ikke)",
+        "de": "Nicht laden (Lastmanagement erlaubt es nicht)",
+        "es": "No está cargando (la gestión de carga no lo permite)",
+        "fr": "Pas de charge (Gestion de charge non autorisée)",
+        "it": "Non in carica (Gestione del carico non consente)",
+        "no": "Lader ikke (Laststyring tillater ikke)",
+        "sv": "Laddar inte (Laststyrning tillåter inte)",
+        "pl": "Nie ładuje (Zarządzanie obciążeniem nie pozwala)",
+        "ru": "Не заряжается (управление нагрузкой не позволяет)",
+        "ko": "충전되지 않음 (부하 관리가 허용하지 않음)",
+        "ar": "لا يتم الشحن (إدارة الحمل لا تسمح بذلك)"
       }
     },
     {
       "id": "28",
       "title": {
-        "en": "Not Charging (OCPP Does Not Allow)"
+        "en": "Not Charging (OCPP Does Not Allow)",
+        "nl": "Niet aan het opladen (OCPP staat het niet toe)",
+        "da": "Lader ikke (OCPP tillader det ikke)",
+        "de": "Nicht laden (OCPP erlaubt es nicht)",
+        "es": "No está cargando (OCPP no lo permite)",
+        "fr": "Pas de charge (OCPP ne permet pas)",
+        "it": "Non in carica (OCPP non consente)",
+        "no": "Lader ikke (OCPP tillater ikke)",
+        "sv": "Laddar inte (OCPP tillåter inte)",
+        "pl": "Nie ładuje (OCPP nie pozwala)",
+        "ru": "Не заряжается (OCPP не разрешает)",
+        "ko": "충전되지 않음 (OCPP에서 허용하지 않음)",
+        "ar": "لا يتم الشحن (OCPP لا يسمح بذلك)"
       }
     },
     {
       "id": "29",
       "title": {
-        "en": "Not Charging (Reconnect Delay)"
+        "en": "Not Charging (Reconnect Delay)",
+        "nl": "Niet aan het opladen (Vertraging bij opnieuw verbinden)",
+        "da": "Lader ikke (Genforbindelsesforsinkelse)",
+        "de": "Nicht laden (Verzögerung beim Wiederverbinden)",
+        "es": "No está cargando (Retraso de reconexión)",
+        "fr": "Pas de charge (Délai de reconnexion)",
+        "it": "Non in carica (Ritardo di riconnessione)",
+        "no": "Lader ikke (forsinkelse ved tilkobling)",
+        "sv": "Laddar inte (Återanslutningsfördröjning)",
+        "pl": "Nie ładuje (Opóźnienie ponownego połączenia)",
+        "ru": "Не заряжается (задержка переподключения)",
+        "ko": "충전 안 됨 (재연결 지연)",
+        "ar": "غير مشحون (تأخير إعادة الاتصال)"
       }
     },
     {
       "id": "30",
       "title": {
-        "en": "Not Charging (Adapter Blocking)"
+        "en": "Not Charging (Adapter Blocking)",
+        "nl": "Niet opladen (adapter blokkering)",
+        "da": "Lader ikke (Adapter blokerer)",
+        "de": "Nicht laden (Adapter blockiert)",
+        "es": "No está cargando (bloqueo del adaptador)",
+        "fr": "Pas de charge (adaptateur bloqué)",
+        "it": "Non in carica (Blocco adattatore)",
+        "no": "Lader ikke (Adapter blokkering)",
+        "sv": "Laddar inte (Adapter blockerar)",
+        "pl": "Nie ładuje (blokada adaptera)",
+        "ru": "Не заряжается (блокировка адаптера)",
+        "ko": "충전 안 됨 (어댑터 차단)",
+        "ar": "لا يتم الشحن (حظر المحول)"
       }
     },
     {
       "id": "31",
       "title": {
-        "en": "Not Charging (Underfrequency Control)"
+        "en": "Not Charging (Underfrequency Control)",
+        "nl": "Niet aan het opladen (onderfrequentieregeling)",
+        "da": "Ikke oplader (underfrekvenskontrol)",
+        "de": "Nicht laden (Unterfrequenzregelung)",
+        "es": "No está cargando (Control de subfrecuencia)",
+        "fr": "Pas de charge (contrôle de sous-fréquence)",
+        "it": "Non in carica (Controllo di sottofrequenza)",
+        "no": "Lader ikke (Underfrekvenskontroll)",
+        "sv": "Laddar inte (Underfrekvenskontroll)",
+        "pl": "Nie ładuje (kontrola podczęstotliwości)",
+        "ru": "Не заряжается (контроль пониженной частоты)",
+        "ko": "충전 안 됨 (저주파 제어)",
+        "ar": "لا يتم الشحن (التحكم في التردد المنخفض)"
       }
     },
     {
       "id": "32",
       "title": {
-        "en": "Not Charging (Unbalanced Load)"
+        "en": "Not Charging (Unbalanced Load)",
+        "nl": "Niet aan het opladen (ongebalanceerde belasting)",
+        "da": "Lader ikke (Ubalance i belastning)",
+        "de": "Nicht laden (Unausgeglichene Last)",
+        "es": "No está cargando (Carga desequilibrada)",
+        "fr": "Pas de charge (Charge déséquilibrée)",
+        "it": "Non in carica (Carico sbilanciato)",
+        "no": "Lader ikke (Ubalansert belastning)",
+        "sv": "Laddar inte (Obalanserad belastning)",
+        "pl": "Nie ładuje (Niezrównoważone obciążenie)",
+        "ru": "Не заряжается (несбалансированная нагрузка)",
+        "ko": "충전되지 않음 (부하 불균형)",
+        "ar": "لا يتم الشحن (تحميل غير متوازن)"
       }
     },
     {
       "id": "33",
       "title": {
-        "en": "Charging (Discharging PV Battery)"
+        "en": "Charging (Discharging PV Battery)",
+        "nl": "Opladen (Ontladen PV-batterij)",
+        "da": "Opladning (Afladning af solcellebatteri)",
+        "de": "Laden (Entladen der PV-Batterie)",
+        "es": "Cargando (Descargando batería fotovoltaica)",
+        "fr": "Chargement (Décharge de la batterie PV)",
+        "it": "Caricamento (Scaricamento batteria fotovoltaica)",
+        "no": "Lading (Utlading PV-batteri)",
+        "sv": "Laddar (Utladdning av solcellsbatteri)",
+        "pl": "Ładowanie (Rozładowywanie baterii PV)",
+        "ru": "Зарядка (Разрядка солнечной батареи)",
+        "ko": "충전 중 (태양광 배터리 방전 중)",
+        "ar": "الشحن (تفريغ بطارية الطاقة الشمسية)"
       }
     },
     {
       "id": "34",
       "title": {
-        "en": "Not Charging (Grid Monitoring)"
+        "en": "Not Charging (Grid Monitoring)",
+        "nl": "Niet aan het opladen (Netbewaking)",
+        "da": "Ikke oplader (Netovervågning)",
+        "de": "Nicht laden (Netzüberwachung)",
+        "es": "No está cargando (Monitoreo de red)",
+        "fr": "Pas de charge (Surveillance du réseau)",
+        "it": "Non in carica (Monitoraggio della rete)",
+        "no": "Lader ikke (Nettverksovervåking)",
+        "sv": "Laddar inte (Nätövervakning)",
+        "pl": "Nie ładuje (Monitorowanie sieci)",
+        "ru": "Не заряжается (Мониторинг сети)",
+        "ko": "충전 안 됨 (전력망 모니터링)",
+        "ar": "لا يتم الشحن (مراقبة الشبكة)"
       }
     },
     {
       "id": "35",
       "title": {
-        "en": "Not Charging (OCPP Fallback)"
+        "en": "Not Charging (OCPP Fallback)",
+        "nl": "Niet aan het opladen (OCPP Terugval)",
+        "da": "Lader ikke (OCPP Fallback)",
+        "de": "Nicht laden (OCPP Fallback)",
+        "es": "No está cargando (Reversión OCPP)",
+        "fr": "Pas de charge (Repli OCPP)",
+        "it": "Non in carica (Ripiego OCPP)",
+        "no": "Lader ikke (OCPP reserve)",
+        "sv": "Laddar inte (OCPP Fallback)",
+        "pl": "Nie ładuje (tryb awaryjny OCPP)",
+        "ru": "Не заряжается (резервный режим OCPP)",
+        "ko": "충전되지 않음 (OCPP 폴백)",
+        "ar": "لا يتم الشحن (الرجوع إلى OCPP)"
       }
     },
     {
       "id": "36",
       "title": {
-        "en": "Not Charging (Floor Detected)"
+        "en": "Not Charging (Floor Detected)",
+        "nl": "Niet aan het opladen (vloer gedetecteerd)",
+        "da": "Lader ikke (Gulv registreret)",
+        "de": "Nicht laden (Boden erkannt)",
+        "es": "No está cargando (se detectó suelo)",
+        "fr": "Pas de charge (sol détecté)",
+        "it": "Non in carica (Pavimento rilevato)",
+        "no": "Lader ikke (Gulv oppdaget)",
+        "sv": "Laddar inte (Golvet upptäckt)",
+        "pl": "Nie ładuje (Wykryto podłogę)",
+        "ru": "Не заряжается (обнаружен пол)",
+        "ko": "충전되지 않음 (바닥 감지됨)",
+        "ar": "لا يتم الشحن (تم اكتشاف الأرضية)"
       }
     },
     {
       "id": "37",
       "title": {
-        "en": "Not Charging (OCPP Inoperable)"
+        "en": "Not Charging (OCPP Inoperable)",
+        "nl": "Niet aan het opladen (OCPP niet operationeel)",
+        "da": "Lader ikke (OCPP ude af drift)",
+        "de": "Nicht laden (OCPP nicht funktionsfähig)",
+        "es": "No está cargando (OCPP inoperable)",
+        "fr": "Pas de charge (OCPP inopérant)",
+        "it": "Non in carica (OCPP non operativo)",
+        "no": "Lader ikke (OCPP fungerer ikke)",
+        "sv": "Laddar inte (OCPP fungerar inte)",
+        "pl": "Nie ładuje (OCPP nie działa)",
+        "ru": "Не заряжается (OCPP не работает)",
+        "ko": "충전되지 않음 (OCPP 작동 불가)",
+        "ar": "لا يتم الشحن (OCPP غير قابل للتشغيل)"
       }
     },
     {
       "id": "38",
       "title": {
-        "en": "Not Charging (Undervoltage Control)"
+        "en": "Not Charging (Undervoltage Control)",
+        "nl": "Niet opladen (onderspanningscontrole)",
+        "da": "Lader ikke (Underspændingskontrol)",
+        "de": "Nicht laden (Unterspannungskontrolle)",
+        "es": "No está cargando (Control de subtensión)",
+        "fr": "Pas de charge (contrôle de sous-tension)",
+        "it": "Non in carica (Controllo sottotensione)",
+        "no": "Lader ikke (Underspenning kontroll)",
+        "sv": "Laddar inte (Underspänningskontroll)",
+        "pl": "Nie ładuje (Kontrola niskiego napięcia)",
+        "ru": "Не заряжается (Контроль пониженного напряжения)",
+        "ko": "충전되지 않음 (저전압 제어)",
+        "ar": "لا يتم الشحن (التحكم في انخفاض الجهد)"
       }
     },
     {
       "id": "39",
       "title": {
-        "en": "Not Charging (Zero Setpoint)"
+        "en": "Not Charging (Zero Setpoint)",
+        "nl": "Niet aan het opladen (Nul Instelpunt)",
+        "da": "Ikke oplader (Nulpunkt)",
+        "de": "Nicht laden (Nullpunkt)",
+        "es": "No está cargando (Punto de ajuste cero)",
+        "fr": "Pas de charge (Point de consigne zéro)",
+        "it": "Non in carica (Punto di regolazione zero)",
+        "no": "Lader ikke (Nullpunkt)",
+        "sv": "Laddar inte (Noll inställning)",
+        "pl": "Nie ładuje (ustawienie zerowe)",
+        "ru": "Не заряжается (нулевая уставка)",
+        "ko": "충전 안 함 (제로 설정점)",
+        "ar": "غير مشحون (نقطة ضبط صفر)"
       }
     },
     {
       "id": "40",
       "title": {
-        "en": "Not Charging (Initializing)"
+        "en": "Not Charging (Initializing)",
+        "nl": "Niet aan het opladen (Initialiseren)",
+        "da": "Lader ikke (Initialiserer)",
+        "de": "Nicht laden (Initialisierung)",
+        "es": "No está cargando (Inicializando)",
+        "fr": "Pas de charge (Initialisation)",
+        "it": "Non in carica (Inizializzazione)",
+        "no": "Lader ikke (Initialiserer)",
+        "sv": "Laddar inte (Initierar)",
+        "pl": "Nie ładuje (Inicjalizacja)",
+        "ru": "Не заряжается (Инициализация)",
+        "ko": "충전 안 됨 (초기화 중)",
+        "ar": "لا يشحن (جارٍ التهيئة)"
       }
     },
     {
       "id": "41",
       "title": {
-        "en": "Not Charging (Failsafe Limit)"
+        "en": "Not Charging (Failsafe Limit)",
+        "nl": "Niet opladen (Failsafe-limiet)",
+        "da": "Ikke oplader (Failsafe-grænse)",
+        "de": "Nicht laden (Failsafe-Grenze)",
+        "es": "No se está cargando (Límite de seguridad)",
+        "fr": "Pas de charge (Limite de sécurité)",
+        "it": "Non in carica (Limite di sicurezza)",
+        "no": "Lader ikke (Sikkerhetsgrense)",
+        "sv": "Laddar inte (Failsafe-gräns)",
+        "pl": "Nie ładuje (limit awaryjny)",
+        "ru": "Не заряжается (предел аварийного режима)",
+        "ko": "충전 안 됨 (안전장치 한계)",
+        "ar": "لا يتم الشحن (حد الأمان)"
       }
     }
   ]

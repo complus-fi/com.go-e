@@ -1,22 +1,82 @@
 {
   "title": {
-    "en": "Charger mode changed"
+    "en": "Charger mode changed",
+    "nl": "Laadmodus gewijzigd",
+    "da": "Opladertilstand ændret",
+    "de": "Lademodus geändert",
+    "es": "Modo de carga cambiado",
+    "fr": "Mode de chargeur modifié",
+    "it": "Modalità di ricarica cambiata",
+    "no": "Lademodus endret",
+    "sv": "Laddarläge ändrat",
+    "pl": "Tryb ładowarki zmieniony",
+    "ru": "Режим зарядного устройства изменен",
+    "ko": "충전기 모드가 변경되었습니다.",
+    "ar": "تم تغيير وضع الشاحن"
   },
   "titleFormatted": {
-    "en": "Charger mode changed to [[goe_charger_mode]]"
+    "en": "Charger mode changed to [[goe_charger_mode]]",
+    "nl": "Lader modus gewijzigd naar [[goe_charger_mode]]",
+    "da": "Opladningstilstand ændret til [[goe_charger_mode]]",
+    "de": "Lademodus geändert zu [[goe_charger_mode]]",
+    "es": "El modo del cargador se cambió a [[goe_charger_mode]]",
+    "fr": "Le mode de charge a été changé en [[goe_charger_mode]]",
+    "it": "Modalità caricatore cambiata in [[goe_charger_mode]]",
+    "no": "Lademodus endret til [[goe_charger_mode]]",
+    "sv": "Laddarläge ändrat till [[goe_charger_mode]]",
+    "pl": "Tryb ładowania zmieniony na [[goe_charger_mode]]",
+    "ru": "Режим зарядного устройства изменен на [[goe_charger_mode]]",
+    "ko": "충전기 모드가 [[goe_charger_mode]]로 변경되었습니다.",
+    "ar": "تم تغيير وضع الشاحن إلى [[goe_charger_mode]]"
   },
   "hint": {
-    "en": "Triggers when the charger mode changes."
+    "en": "Triggers when the charger mode changes.",
+    "nl": "Wordt geactiveerd wanneer de laadmodus verandert.",
+    "da": "Udløser, når opladertilstanden ændres.",
+    "de": "Wird ausgelöst, wenn sich der Lademodus ändert.",
+    "es": "Se activa cuando cambia el modo del cargador.",
+    "fr": "Déclencheurs lorsque le mode de chargeur change.",
+    "it": "Attiva quando cambia la modalità del caricatore.",
+    "no": "Utøser når lademodusen endres.",
+    "sv": "Utlöser när laddarens läge ändras.",
+    "pl": "Wyzwala się, gdy zmienia się tryb ładowarki.",
+    "ru": "Срабатывает при изменении режима зарядного устройства.",
+    "ko": "충전기 모드가 변경될 때 트리거됩니다.",
+    "ar": "يتفاعل عند تغيير وضع الشاحن."
   },
   "tokens": [
     {
       "name": "goe_charger_mode",
       "type": "string",
       "title": {
-        "en": "Current mode"
+        "en": "Current mode",
+        "nl": "Huidige modus",
+        "da": "Nuværende tilstand",
+        "de": "Aktueller Modus",
+        "es": "Modo actual",
+        "fr": "Mode actuel",
+        "it": "Modalità attuale",
+        "no": "Gjeldende modus",
+        "sv": "Nuvarande läge",
+        "pl": "Bieżący tryb",
+        "ru": "Текущий режим",
+        "ko": "현재 모드",
+        "ar": "الوضع الحالي"
       },
       "example": {
-        "en": "Basic Charging"
+        "en": "Basic Charging",
+        "nl": "Basisopladen",
+        "da": "Grundlæggende opladning",
+        "de": "Grundlegendes Laden",
+        "es": "Carga básica",
+        "fr": "Charge de base",
+        "it": "Ricarica di base",
+        "no": "Grunnleggende lading",
+        "sv": "Grundläggande laddning",
+        "pl": "Podstawowe ładowanie",
+        "ru": "Базовая зарядка",
+        "ko": "기본 충전",
+        "ar": "الشحن الأساسي"
       }
     }
   ],
@@ -25,9 +85,21 @@
       "type": "device",
       "name": "device",
       "title": {
-        "en": "Device"
+        "en": "Device",
+        "nl": "Apparaat",
+        "da": "Enhed",
+        "de": "Gerät",
+        "es": "Dispositivo",
+        "fr": "Appareil",
+        "it": "Dispositivo",
+        "no": "Enhet",
+        "sv": "Enhet",
+        "pl": "Urządzenie",
+        "ru": "Устройство",
+        "ko": "장치",
+        "ar": "الجهاز"
       },
-      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
     }
   ]
 }

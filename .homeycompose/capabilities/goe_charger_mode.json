@@ -1,7 +1,19 @@
 {
   "type": "enum",
   "title": {
-    "en": "Charger mode"
+    "en": "Charger mode",
+    "nl": "Laadmodus",
+    "da": "Ladertilstand",
+    "de": "Lademodus",
+    "es": "Modo de carga",
+    "fr": "Mode de chargeur",
+    "it": "Modalità caricatore",
+    "no": "Lademodus",
+    "sv": "Laddarläge",
+    "pl": "Tryb ładowarki",
+    "ru": "Режим зарядки",
+    "ko": "충전기 모드",
+    "ar": "وضع الشاحن"
   },
   "getable": true,
   "setable": true,
@@ -10,49 +22,145 @@
     {
       "id": "basic_charging",
       "title": {
-        "en": "Basic Charging"
+        "en": "Basic Charging",
+        "nl": "Basisopladen",
+        "da": "Grundlæggende opladning",
+        "de": "Grundlegendes Laden",
+        "es": "Carga básica",
+        "fr": "Charge de base",
+        "it": "Ricarica di base",
+        "no": "Grunnleggende lading",
+        "sv": "Grundläggande laddning",
+        "pl": "Podstawowe ładowanie",
+        "ru": "Базовая зарядка",
+        "ko": "기본 충전",
+        "ar": "الشحن الأساسي"
       }
     },
     {
       "id": "eco_pv_surplus",
       "title": {
-        "en": "Eco: Use PV Surplus"
+        "en": "Eco: Use PV Surplus",
+        "nl": "Eco: Gebruik PV-overschot",
+        "da": "Eco: Brug PV-overskud",
+        "de": "Eco: PV-Überschuss nutzen",
+        "es": "Eco: Usar excedente fotovoltaico",
+        "fr": "Éco : Utiliser le surplus photovoltaïque",
+        "it": "Eco: Usa il surplus fotovoltaico",
+        "no": "Eco: Bruk PV-overskudd",
+        "sv": "Eco: Använd överskott från solceller",
+        "pl": "Eco: Użyj nadwyżki PV",
+        "ru": "Эко: Использовать излишки солнечной энергии",
+        "ko": "에코: PV 잉여 전력 사용",
+        "ar": "إيكو: استخدام فائض الطاقة الشمسية"
       }
     },
     {
       "id": "eco_flexible_price",
       "title": {
-        "en": "Eco: Use Flexible price"
+        "en": "Eco: Use Flexible price",
+        "nl": "Eco: Gebruik Flexibele prijs",
+        "da": "Eco: Brug fleksibel pris",
+        "de": "Eco: Flexible Preise verwenden",
+        "es": "Eco: Usar precio flexible",
+        "fr": "Éco : Utiliser le prix flexible",
+        "it": "Eco: Usa prezzo flessibile",
+        "no": "Eco: Bruk fleksibel pris",
+        "sv": "Eco: Använd Flexibelt pris",
+        "pl": "Eco: Użyj elastycznej ceny",
+        "ru": "Эко: Используйте гибкую цену",
+        "ko": "에코: 유연한 가격 사용",
+        "ar": "إيكو: استخدم السعر المرن"
       }
     },
     {
       "id": "eco_pv_and_flexible_price",
       "title": {
-        "en": "Eco: Use PV and Flexible price"
+        "en": "Eco: Use PV and Flexible price",
+        "nl": "Eco: Gebruik PV en Flexibele prijs",
+        "da": "Eco: Brug solceller og fleksibel pris",
+        "de": "Eco: PV und flexiblen Preis nutzen",
+        "es": "Eco: Usa PV y precio flexible",
+        "fr": "Éco : Utiliser PV et prix flexible",
+        "it": "Eco: Usa PV e Prezzo flessibile",
+        "no": "Eco: Bruk PV og Fleksibel pris",
+        "sv": "Eco: Använd PV och Flexibelt pris",
+        "pl": "Eco: Użyj PV i elastycznej ceny",
+        "ru": "Эко: Используйте солнечную энергию и гибкие тарифы",
+        "ko": "에코: PV 및 유연한 가격 사용",
+        "ar": "إيكو: استخدم الطاقة الشمسية والسعر المرن"
       }
     },
     {
       "id": "trip_pv_surplus",
       "title": {
-        "en": "Trip: Use PV Surplus"
+        "en": "Trip: Use PV Surplus",
+        "nl": "Trip: Gebruik PV-overschot",
+        "da": "Trip: Brug PV-overskud",
+        "de": "Trip: PV-Überschuss nutzen",
+        "es": "Viaje: Usar excedente de PV",
+        "fr": "Voyage : Utiliser le surplus PV",
+        "it": "Viaggio: Usa Eccedenza Fotovoltaica",
+        "no": "Tur: Bruk PV-overskudd",
+        "sv": "Resa: Använd PV-överskott",
+        "pl": "Podróż: Użyj nadwyżki PV",
+        "ru": "Поездка: Использовать избыток солнечной энергии",
+        "ko": "여행: PV 잉여 사용",
+        "ar": "الرحلة: استخدام فائض الطاقة الشمسية"
       }
     },
     {
       "id": "trip_flexible_price",
       "title": {
-        "en": "Trip: Use Flexible price"
+        "en": "Trip: Use Flexible price",
+        "nl": "Reis: Gebruik Flexibele prijs",
+        "da": "Trip: Brug fleksibel pris",
+        "de": "Reise: Flexiblen Preis verwenden",
+        "es": "Viaje: Usar precio flexible",
+        "fr": "Voyage : Utiliser le prix flexible",
+        "it": "Viaggio: Usa prezzo flessibile",
+        "no": "Tur: Bruk fleksibel pris",
+        "sv": "Resa: Använd Flexibelt pris",
+        "pl": "Podróż: Użyj elastycznej ceny",
+        "ru": "Поездка: Используйте гибкую цену",
+        "ko": "여행: 유연한 가격 사용",
+        "ar": "رحلة: استخدم السعر المرن"
       }
     },
     {
       "id": "trip_pv_and_flexible_price",
       "title": {
-        "en": "Trip: Use PV and Flexible price"
+        "en": "Trip: Use PV and Flexible price",
+        "nl": "Reis: Gebruik PV en Flexibele prijs",
+        "da": "Tur: Brug PV og fleksibel pris",
+        "de": "Trip: PV und flexibler Preis verwenden",
+        "es": "Viaje: Usar PV y precio flexible",
+        "fr": "Voyage : Utiliser PV et prix flexible",
+        "it": "Viaggio: Usa PV e Prezzo flessibile",
+        "no": "Tur: Bruk PV og Fleksibel pris",
+        "sv": "Resa: Använd PV och Flexibelt pris",
+        "pl": "Podróż: Użyj PV i elastycznej ceny",
+        "ru": "Поездка: Используйте PV и гибкую цену",
+        "ko": "여행: PV 및 유연한 가격 사용",
+        "ar": "رحلة: استخدم PV وسعر مرن"
       }
     },
     {
       "id": "trip_no_pv_no_flexible_price",
       "title": {
-        "en": "Trip: No PV and No Flexible price"
+        "en": "Trip: No PV and No Flexible price",
+        "nl": "Trip: Geen PV en Geen Flexibele prijs",
+        "da": "Tur: Ingen PV og ingen fleksibel pris",
+        "de": "Reise: Kein PV und Kein flexibler Preis",
+        "es": "Viaje: Sin PV y Sin precio flexible",
+        "fr": "Voyage : Pas de PV et Pas de prix flexible",
+        "it": "Viaggio: Nessun PV e Nessun prezzo flessibile",
+        "no": "Tur: Ingen PV og Ingen Fleksibel pris",
+        "sv": "Resa: Ingen PV och inget flexibelt pris",
+        "pl": "Podróż: Brak PV i Brak Elastycznej ceny",
+        "ru": "Поездка: Без фотоэлектрических панелей и без гибкой цены",
+        "ko": "여행: PV 없음 및 유연한 가격 없음",
+        "ar": "رحلة: بدون PV وبدون سعر مرن"
       }
     }
   ]
