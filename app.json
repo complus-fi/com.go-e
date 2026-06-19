@@ -3098,8 +3098,25 @@
       ],
       "pair": [
         {
-          "id": "cloud_api_key",
-          "template": "custom",
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "go-eCharger Cloud Account"
+            },
+            "usernameLabel": {
+              "en": "go-eCharger Serial Number (get from go-eCharger mobile app)"
+            },
+            "usernamePlaceholder": {
+              "en": "123456"
+            },
+            "passwordLabel": {
+              "en": "Cloud API Key (set in go-eCharger mobile app)"
+            },
+            "passwordPlaceholder": {
+              "en": "Your Cloud API Key"
+            }
+          },
           "navigation": {
             "next": "list_devices"
           }
@@ -3574,8 +3591,25 @@
       ],
       "pair": [
         {
-          "id": "cloud_api_key",
-          "template": "custom",
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "go-eCharger Cloud Account"
+            },
+            "usernameLabel": {
+              "en": "go-eCharger Serial Number (get from go-eCharger mobile app)"
+            },
+            "usernamePlaceholder": {
+              "en": "123456"
+            },
+            "passwordLabel": {
+              "en": "Cloud API Key (set in go-eCharger mobile app)"
+            },
+            "passwordPlaceholder": {
+              "en": "Your Cloud API Key"
+            }
+          },
           "navigation": {
             "next": "list_devices"
           }
@@ -4050,8 +4084,25 @@
       ],
       "pair": [
         {
-          "id": "cloud_api_key",
-          "template": "custom",
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "go-eCharger Cloud Account"
+            },
+            "usernameLabel": {
+              "en": "go-eCharger Serial Number (get from go-eCharger mobile app)"
+            },
+            "usernamePlaceholder": {
+              "en": "123456"
+            },
+            "passwordLabel": {
+              "en": "Cloud API Key (set in go-eCharger mobile app)"
+            },
+            "passwordPlaceholder": {
+              "en": "Your Cloud API Key"
+            }
+          },
           "navigation": {
             "next": "list_devices"
           }
@@ -4526,8 +4577,25 @@
       ],
       "pair": [
         {
-          "id": "cloud_api_key",
-          "template": "custom",
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "go-eCharger Cloud Account"
+            },
+            "usernameLabel": {
+              "en": "go-eCharger Serial Number (get from go-eCharger mobile app)"
+            },
+            "usernamePlaceholder": {
+              "en": "123456"
+            },
+            "passwordLabel": {
+              "en": "Cloud API Key (set in go-eCharger mobile app)"
+            },
+            "passwordPlaceholder": {
+              "en": "Your Cloud API Key"
+            }
+          },
           "navigation": {
             "next": "list_devices"
           }
