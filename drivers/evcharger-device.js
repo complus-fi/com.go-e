@@ -24,7 +24,7 @@ class evChargerDevice extends Homey.Device {
 
     const settings = this.getSettings();
     this.api = new goeChargerAPI();
-    this.api.api_base_url = this.getApiBaseUrl(settings.address);
+    this.api.base_url = this.getApiBaseUrl(settings.address);
     this.api.driver = this.driver.id;
 
     await this.checkCapabilities();
@@ -83,7 +83,7 @@ class evChargerDevice extends Homey.Device {
       return;
     }
 
-    this.api.api_base_url = this.getApiBaseUrl(newAddress);
+    this.api.base_url = this.getApiBaseUrl(newAddress);
     try {
       const isConnected = await this.api.testConnection();
       if (!isConnected) {
@@ -133,7 +133,7 @@ class evChargerDevice extends Homey.Device {
   async onDiscoveryAvailable(discoveryResult) {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} available - result: ${discoveryResult.address}.`);
     this.log(`[Device] ${this.getName()}: ${this.getData().id} type: ${discoveryResult.txt.devicetype}.`);
-    this.api.api_base_url = this.getApiBaseUrl(discoveryResult.address);
+    this.api.base_url = this.getApiBaseUrl(discoveryResult.address);
     await this.setSettings({
       address: discoveryResult.address
     });
@@ -147,7 +147,7 @@ class evChargerDevice extends Homey.Device {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.address}.`);
     this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.name}.`);
     // Update your connection details here, reconnect when the device is offline
-    this.api.api_base_url = this.getApiBaseUrl(discoveryResult.address);
+    this.api.base_url = this.getApiBaseUrl(discoveryResult.address);
     await this.setSettings({
       address: discoveryResult.address
     });
