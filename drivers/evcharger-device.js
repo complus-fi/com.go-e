@@ -1,7 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
-const goeCharger = require('../lib/go-eCharger-API-v2');
+const goeChargerAPI = require('../lib/go-eCharger-API-v2');
 const { GOE_CHARGER_MODE, getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
 
 const POLL_INTERVAL = 5000;
@@ -18,7 +18,7 @@ class evChargerDevice extends Homey.Device {
     this.setUnavailable(`Initializing ${this.getName()}`).catch(() => {});
 
     const settings = this.getSettings();
-    this.api = new goeCharger();
+    this.api = new goeChargerAPI();
     this.api.address = settings.address;
     this.api.driver = this.driver.id;
 

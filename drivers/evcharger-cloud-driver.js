@@ -1,53 +1,54 @@
 'use strict';
 
-const Homey = require('homey');
-const crypto = require('crypto');
+const evChargerDriver = require('evcharger-driver');
+const goeChargerAPI = require('../lib/go-eCharger-API-v2');
 const { getModelFromDriverId } = require('../lib/mappings');
 
-class evChargerCloudDriver extends Homey.Driver {
+class evChargerCloudDriver extends evChargerDriver.Driver {
   onInit() {
     this.log('[Driver] - init', this.id);
     this.log('[Driver] - version', this.homey.app.manifest.version);
   }
 
   async onPair(session) {
-    const deviceDriver = this.id;
-    let pairingApiKey = '';
+    let username = "";
+    let password = "";
 
-    session.setHandler('set_api_key', async ({ apiKey } = {}) => {
-      const trimmedApiKey = typeof apiKey === 'string' ? apiKey.trim() : '';
-      if (!trimmedApiKey) {
-        throw new Error('Cloud API key is required.');
-      }
+    session.setHandler("login", async (data) => {
+      username = data.username;
+      password = data.password;
 
-      pairingApiKey = trimmedApiKey;
-      this.log(`[Driver] ${deviceDriver} - Cloud API key received for pairing`);
-      return true;
+      const credentialsAreValid = await goeChargerAPI.testCredentials({
+        username,
+        password,
+      });
+
+      // return true to continue adding the device if the login succeeded
+      // return false to indicate to the user the login attempt failed
+      // thrown errors will also be shown to the user
+      return credentialsAreValid;
     });
 
-    session.setHandler('list_devices', async () => {
-      if (!pairingApiKey) {
-        throw new Error('Please provide the Cloud API key first.');
-      }
+    session.setHandler("list_devices", async () => {
+      const api = await goeChargerAPI.login({ username, password });
+      const myDevices = await api.getDevices();
 
-      const model = getModelFromDriverId(deviceDriver);
-      const cloudDeviceId = crypto.createHash('sha256').update(pairingApiKey).digest('hex').slice(0, 24);
-
-      return [
-        {
-          name: `${model} (Cloud)`,
+      const devices = myDevices.map((myDevice) => {
+        return {
+          name: myDevice.name,
           data: {
-            id: cloudDeviceId
+            id: myDevice.id,
           },
           settings: {
-            address: 'api.go-e.com',
-            version: '',
-            type: `${model}/cloud`,
-            api_key: pairingApiKey
+            // Store username & password in settings
+            // so the user can change them later
+            username,
+            password,
           },
-          store: {}
-        }
-      ];
+        };
+      });
+
+      return devices;
     });
   }
 }
