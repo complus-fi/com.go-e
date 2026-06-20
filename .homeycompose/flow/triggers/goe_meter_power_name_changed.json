@@ -1,0 +1,34 @@
+{
+  "title": {
+    "en": "Meter power name changed"
+  },
+  "titleFormatted": {
+    "en": "Meter power name changed to [[goe_meter_power_name]]"
+  },
+  "hint": {
+    "en": "Triggers when the meter power card name changes."
+  },
+  "tokens": [
+    {
+      "name": "goe_meter_power_name",
+      "type": "string",
+      "title": {
+        "en": "Meter power name"
+      }
+    },
+    {
+      "name": "card_name",
+      "type": "string",
+      "title": {
+        "en": "Card name"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
+    }
+  ]
+}

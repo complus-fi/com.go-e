@@ -15,19 +15,19 @@
     "ar": "تم تغيير المعاملة"
   },
   "titleFormatted": {
-    "en": "Transaction changed to [[goe_transaction]]",
-    "nl": "Transactie gewijzigd naar [[goe_transaction]]",
-    "da": "Transaktion ændret til [[goe_transaction]]",
-    "de": "Transaktion geändert zu [[goe_transaction]]",
-    "es": "La transacción cambió a [[goe_transaction]]",
-    "fr": "La transaction a été changée en [[goe_transaction]]",
-    "it": "Transazione cambiata in [[goe_transaction]]",
-    "no": "Transaksjon endret til [[goe_transaction]]",
-    "sv": "Transaktionen ändrades till [[goe_transaction]]",
-    "pl": "Transakcja zmieniona na [[goe_transaction]]",
-    "ru": "Транзакция изменена на [[goe_transaction]]",
-    "ko": "트랜잭션이 [[goe_transaction]](으)로 변경됨",
-    "ar": "تم تغيير المعاملة إلى [[goe_transaction]]"
+    "en": "Transaction changed to [[card_name]]",
+    "nl": "Transactie gewijzigd naar [[card_name]]",
+    "da": "Transaktion ændret til [[card_name]]",
+    "de": "Transaktion geändert zu [[card_name]]",
+    "es": "La transacción cambió a [[card_name]]",
+    "fr": "La transaction a été changée en [[card_name]]",
+    "it": "Transazione cambiata in [[card_name]]",
+    "no": "Transaksjon endret til [[card_name]]",
+    "sv": "Transaktionen ändrades till [[card_name]]",
+    "pl": "Transakcja zmieniona na [[card_name]]",
+    "ru": "Транзакция изменена на [[card_name]]",
+    "ko": "트랜잭션이 [[card_name]](으)로 변경됨",
+    "ar": "تم تغيير المعاملة إلى [[card_name]]"
   },
   "hint": {
     "en": "Triggers when the charger transaction or card selection changes.",
@@ -45,6 +45,40 @@
     "ar": "يتم تشغيله عند تغيير معاملة الشاحن أو اختيار البطاقة."
   },
   "tokens": [
+    {
+      "name": "card_name",
+      "type": "string",
+      "title": {
+        "en": "Card Name",
+        "nl": "Kaartnaam",
+        "da": "Kortnavn",
+        "de": "Kartenname",
+        "es": "Nombre de la tarjeta",
+        "fr": "Nom de la carte",
+        "it": "Nome della carta",
+        "no": "Kortnavn",
+        "sv": "Kortnamn",
+        "pl": "Nazwa karty",
+        "ru": "Имя карты",
+        "ko": "카드 이름",
+        "ar": "اسم البطاقة"
+      },
+      "example": {
+        "en": "Anonymous",
+        "nl": "Anoniem",
+        "da": "Anonym",
+        "de": "Anonym",
+        "es": "Anónimo",
+        "fr": "Anonyme",
+        "it": "Anonimo",
+        "no": "Anonym",
+        "sv": "Anonym",
+        "pl": "Anonimowa",
+        "ru": "Анонимно",
+        "ko": "익명",
+        "ar": "مجهول"
+      }
+    },
     {
       "name": "goe_transaction",
       "type": "string",

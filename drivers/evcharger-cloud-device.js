@@ -60,7 +60,11 @@ class evCloudChargerDevice extends evChargerDevice {
       driver: this.api.driver
     });
 
-    this.api.apiKeys = getStatusAttributes(this.getCapabilities(), { firmwareVersion: this.getSettings().version });
+    this.cardConfiguredFlags = Array(10).fill(undefined);
+    this.api.apiKeys = getStatusAttributes(this.getCapabilities(), {
+      firmwareVersion: this.getSettings().version,
+      cardConfiguredFlags: this.cardConfiguredFlags
+    });
     this.pollErrorMessage = null;
     this.pendingChargingState = null;
     this.pollIntervalMs = null;
