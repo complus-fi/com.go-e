@@ -2,12 +2,13 @@
 
 const Homey = require('homey');
 const goeChargerAPI = require('../lib/go-eCharger-API-v2');
-const { GOE_CHARGER_MODE, getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
+const { GOE_CHARGER_MODE, GOE_TRANSACTION, getStatusAttributes, getTransactionApiValue, getTransactionLabel, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
 
 const POLL_INTERVAL = 5000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const AUTO_SPL3_THRESHOLD_W = 4140;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
+const GOE_TRANSACTION_IDS = new Set(Object.values(GOE_TRANSACTION));
 
 class evChargerDevice extends Homey.Device {
   getApiBaseUrl(address) {
@@ -244,10 +245,10 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['evcharger_charging', 'goe_pv_surplus_enabled', 'goe_charger_mode'],
-      async ({ evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode }) => {
+      ['evcharger_charging', 'goe_pv_surplus_enabled', 'goe_charger_mode', 'goe_transaction'],
+      async ({ evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode, goe_transaction }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode, goe_transaction });
 
           const context = {
             api: this.api,
@@ -265,6 +266,10 @@ class evChargerDevice extends Homey.Device {
           if (goe_pv_surplus_enabled !== undefined) {
             await this.onCapability_SET_PV_SURPLUS_ENABLED(goe_pv_surplus_enabled);
             return;
+          }
+
+          if (goe_transaction !== undefined) {
+            await this.onCapability_SET_TRANSACTION(goe_transaction);
           }
 
           if (evcharger_charging === false) {
@@ -368,7 +373,13 @@ class evChargerDevice extends Homey.Device {
           }
         }
 
+        const previousValue = this.getCapabilityValue(capability);
+
         await this.setCapabilityValue(capability, value).catch((error) => this.error(error));
+
+        if (capability === 'goe_transaction' && previousValue !== value) {
+          await this.triggerTransactionChanged(value);
+        }
       }
     } catch (error) {
       const message = this.getErrorMessage(error, 'Polling failed');
@@ -440,6 +451,24 @@ class evChargerDevice extends Homey.Device {
 
     const apiValues = mapHomeyToApiValues({ goe_charger_mode: normalizedMode }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
     await this.applyApiValues(apiValues);
+  }
+
+  async onCapability_SET_TRANSACTION(transaction) {
+    const normalizedTransaction = typeof transaction === 'string' ? transaction.trim() : '';
+    if (!GOE_TRANSACTION_IDS.has(normalizedTransaction)) {
+      throw new Error(`Unsupported transaction: ${transaction}`);
+    }
+
+    await this.applyApiValues({ trx: getTransactionApiValue(normalizedTransaction) });
+  }
+
+  async triggerTransactionChanged(transaction) {
+    const trigger = this.homey.flow.getDeviceTriggerCard('goe_transaction_changed');
+    await trigger
+      .trigger(this, {
+        goe_transaction: getTransactionLabel(transaction)
+      })
+      .catch((error) => this.error(error));
   }
 }
 

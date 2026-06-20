@@ -1,0 +1,105 @@
+{
+  "title": {
+    "en": "Transaction changed",
+    "nl": "Transactie gewijzigd",
+    "da": "Transaktion ændret",
+    "de": "Transaktion geändert",
+    "es": "Transacción cambiada",
+    "fr": "Transaction modifiée",
+    "it": "Transazione cambiata",
+    "no": "Transaksjon endret",
+    "sv": "Transaktion ändrad",
+    "pl": "Transakcja zmieniona",
+    "ru": "Транзакция изменена",
+    "ko": "트랜잭션 변경됨",
+    "ar": "تم تغيير المعاملة"
+  },
+  "titleFormatted": {
+    "en": "Transaction changed to [[goe_transaction]]",
+    "nl": "Transactie gewijzigd naar [[goe_transaction]]",
+    "da": "Transaktion ændret til [[goe_transaction]]",
+    "de": "Transaktion geändert zu [[goe_transaction]]",
+    "es": "La transacción cambió a [[goe_transaction]]",
+    "fr": "La transaction a été changée en [[goe_transaction]]",
+    "it": "Transazione cambiata in [[goe_transaction]]",
+    "no": "Transaksjon endret til [[goe_transaction]]",
+    "sv": "Transaktionen ändrades till [[goe_transaction]]",
+    "pl": "Transakcja zmieniona na [[goe_transaction]]",
+    "ru": "Транзакция изменена на [[goe_transaction]]",
+    "ko": "트랜잭션이 [[goe_transaction]](으)로 변경됨",
+    "ar": "تم تغيير المعاملة إلى [[goe_transaction]]"
+  },
+  "hint": {
+    "en": "Triggers when the charger transaction or card selection changes.",
+    "nl": "Wordt geactiveerd wanneer de ladertransactie of kaartselectie verandert.",
+    "da": "Udløses når opladerens transaktion eller kortvalg ændres.",
+    "de": "Wird ausgelöst, wenn sich Ladetransaktion oder Kartenauswahl ändern.",
+    "es": "Se activa cuando cambia la transacción del cargador o la selección de tarjeta.",
+    "fr": "Se déclenche lorsque la transaction du chargeur ou la sélection de carte change.",
+    "it": "Si attiva quando cambia la transazione del caricatore o la selezione della carta.",
+    "no": "Utløses når ladertransaksjonen eller kortvalget endres.",
+    "sv": "Utlöses när laddarens transaktion eller kortval ändras.",
+    "pl": "Wyzwala się, gdy zmienia się transakcja ładowarki lub wybór karty.",
+    "ru": "Срабатывает, когда меняется транзакция зарядного устройства или выбор карты.",
+    "ko": "충전기 트랜잭션 또는 카드 선택이 변경될 때 트리거됩니다.",
+    "ar": "يتم تشغيله عند تغيير معاملة الشاحن أو اختيار البطاقة."
+  },
+  "tokens": [
+    {
+      "name": "goe_transaction",
+      "type": "string",
+      "title": {
+        "en": "Current transaction",
+        "nl": "Huidige transactie",
+        "da": "Nuværende transaktion",
+        "de": "Aktuelle Transaktion",
+        "es": "Transacción actual",
+        "fr": "Transaction actuelle",
+        "it": "Transazione corrente",
+        "no": "Gjeldende transaksjon",
+        "sv": "Aktuell transaktion",
+        "pl": "Bieżąca transakcja",
+        "ru": "Текущая транзакция",
+        "ko": "현재 트랜잭션",
+        "ar": "المعاملة الحالية"
+      },
+      "example": {
+        "en": "Anonymous",
+        "nl": "Anoniem",
+        "da": "Anonym",
+        "de": "Anonym",
+        "es": "Anónimo",
+        "fr": "Anonyme",
+        "it": "Anonimo",
+        "no": "Anonym",
+        "sv": "Anonym",
+        "pl": "Anonimowa",
+        "ru": "Анонимно",
+        "ko": "익명",
+        "ar": "مجهول"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "title": {
+        "en": "Device",
+        "nl": "Apparaat",
+        "da": "Enhed",
+        "de": "Gerät",
+        "es": "Dispositivo",
+        "fr": "Appareil",
+        "it": "Dispositivo",
+        "no": "Enhet",
+        "sv": "Enhet",
+        "pl": "Urządzenie",
+        "ru": "Устройство",
+        "ko": "장치",
+        "ar": "الجهاز"
+      },
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
+    }
+  ]
+}
