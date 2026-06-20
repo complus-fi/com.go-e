@@ -1,12 +1,13 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.go-e",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
   "platforms": [
-    "local"
+    "local",
+    "cloud"
   ],
   "name": {
     "en": "Go-e",
@@ -79,23 +80,83 @@
     "triggers": [
       {
         "title": {
-          "en": "Charger mode changed"
+          "en": "Charger mode changed",
+          "nl": "Laadmodus gewijzigd",
+          "da": "Opladertilstand ændret",
+          "de": "Lademodus geändert",
+          "es": "Modo de carga cambiado",
+          "fr": "Mode de chargeur modifié",
+          "it": "Modalità di ricarica cambiata",
+          "no": "Lademodus endret",
+          "sv": "Laddarläge ändrat",
+          "pl": "Tryb ładowarki zmieniony",
+          "ru": "Режим зарядного устройства изменен",
+          "ko": "충전기 모드가 변경되었습니다.",
+          "ar": "تم تغيير وضع الشاحن"
         },
         "titleFormatted": {
-          "en": "Charger mode changed to [[goe_charger_mode]]"
+          "en": "Charger mode changed to [[goe_charger_mode]]",
+          "nl": "Lader modus gewijzigd naar [[goe_charger_mode]]",
+          "da": "Opladningstilstand ændret til [[goe_charger_mode]]",
+          "de": "Lademodus geändert zu [[goe_charger_mode]]",
+          "es": "El modo del cargador se cambió a [[goe_charger_mode]]",
+          "fr": "Le mode de charge a été changé en [[goe_charger_mode]]",
+          "it": "Modalità caricatore cambiata in [[goe_charger_mode]]",
+          "no": "Lademodus endret til [[goe_charger_mode]]",
+          "sv": "Laddarläge ändrat till [[goe_charger_mode]]",
+          "pl": "Tryb ładowania zmieniony na [[goe_charger_mode]]",
+          "ru": "Режим зарядного устройства изменен на [[goe_charger_mode]]",
+          "ko": "충전기 모드가 [[goe_charger_mode]]로 변경되었습니다.",
+          "ar": "تم تغيير وضع الشاحن إلى [[goe_charger_mode]]"
         },
         "hint": {
-          "en": "Triggers when the charger mode changes."
+          "en": "Triggers when the charger mode changes.",
+          "nl": "Wordt geactiveerd wanneer de laadmodus verandert.",
+          "da": "Udløser, når opladertilstanden ændres.",
+          "de": "Wird ausgelöst, wenn sich der Lademodus ändert.",
+          "es": "Se activa cuando cambia el modo del cargador.",
+          "fr": "Déclencheurs lorsque le mode de chargeur change.",
+          "it": "Attiva quando cambia la modalità del caricatore.",
+          "no": "Utøser når lademodusen endres.",
+          "sv": "Utlöser när laddarens läge ändras.",
+          "pl": "Wyzwala się, gdy zmienia się tryb ładowarki.",
+          "ru": "Срабатывает при изменении режима зарядного устройства.",
+          "ko": "충전기 모드가 변경될 때 트리거됩니다.",
+          "ar": "يتفاعل عند تغيير وضع الشاحن."
         },
         "tokens": [
           {
             "name": "goe_charger_mode",
             "type": "string",
             "title": {
-              "en": "Current mode"
+              "en": "Current mode",
+              "nl": "Huidige modus",
+              "da": "Nuværende tilstand",
+              "de": "Aktueller Modus",
+              "es": "Modo actual",
+              "fr": "Mode actuel",
+              "it": "Modalità attuale",
+              "no": "Gjeldende modus",
+              "sv": "Nuvarande läge",
+              "pl": "Bieżący tryb",
+              "ru": "Текущий режим",
+              "ko": "현재 모드",
+              "ar": "الوضع الحالي"
             },
             "example": {
-              "en": "Basic Charging"
+              "en": "Basic Charging",
+              "nl": "Basisopladen",
+              "da": "Grundlæggende opladning",
+              "de": "Grundlegendes Laden",
+              "es": "Carga básica",
+              "fr": "Charge de base",
+              "it": "Ricarica di base",
+              "no": "Grunnleggende lading",
+              "sv": "Grundläggande laddning",
+              "pl": "Podstawowe ładowanie",
+              "ru": "Базовая зарядка",
+              "ko": "기본 충전",
+              "ar": "الشحن الأساسي"
             }
           }
         ],
@@ -104,9 +165,21 @@
             "type": "device",
             "name": "device",
             "title": {
-              "en": "Device"
+              "en": "Device",
+              "nl": "Apparaat",
+              "da": "Enhed",
+              "de": "Gerät",
+              "es": "Dispositivo",
+              "fr": "Appareil",
+              "it": "Dispositivo",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Urządzenie",
+              "ru": "Устройство",
+              "ko": "장치",
+              "ar": "الجهاز"
             },
-            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
         "id": "goe_charger_mode_changed"
@@ -115,68 +188,212 @@
     "conditions": [
       {
         "title": {
-          "en": "Charger mode !{{is|isn't}} [[mode]]"
+          "en": "Charger mode !{{is|isn't}} [[mode]]",
+          "nl": "Oplaadmodus !{{is|isn't}} [[mode]]",
+          "da": "Opladertilstand !{{er|er ikke}} [[mode]]",
+          "de": "Lademodus !{{ist|ist nicht}} [[mode]]",
+          "es": "¡El modo del cargador {{es|no es}} [[mode]]!",
+          "fr": "Mode de charge !{{est|n'est pas}} [[mode]]",
+          "it": "Modalità caricatore !{{è|non è}} [[mode]]",
+          "no": "Ladermodus !{{er|er ikke}} [[mode]]",
+          "sv": "Laddarläge !{{är|är inte}} [[mode]]",
+          "pl": "Tryb ładowarki !{{jest|nie jest}} [[mode]]",
+          "ru": "Режим зарядного устройства !{{is|isn't}} [[mode]]",
+          "ko": "충전기 모드 !{{is|isn't}} [[mode]]",
+          "ar": "وضع الشاحن !{{هو|ليس}} [[mode]]"
         },
         "titleFormatted": {
-          "en": "Charger mode {{is|isn't}} [[mode]]"
+          "en": "Charger mode {{is|isn't}} [[mode]]",
+          "nl": "Lader modus {{is|isn't}} [[mode]]",
+          "da": "Ladertilstand {{er|er ikke}} [[mode]]",
+          "de": "Lademodus {{ist|ist nicht}} [[mode]]",
+          "es": "Modo del cargador {{es|no es}} [[mode]]",
+          "fr": "Le mode de charge {{est|n'est pas}} [[mode]]",
+          "it": "Modalità caricatore {{è|non è}} [[mode]]",
+          "no": "Ladermodus {{er|er ikke}} [[mode]]",
+          "sv": "Laddarläge {{är|är inte}} [[mode]]",
+          "pl": "Tryb ładowarki {{jest|nie jest}} [[mode]]",
+          "ru": "Режим зарядного устройства {{is|isn't}} [[mode]]",
+          "ko": "충전기 모드 {{is|isn't}} [[mode]]",
+          "ar": "وضع الشاحن {{هو|ليس}} [[mode]]"
         },
         "hint": {
-          "en": "Checks whether the charger is currently in the selected mode."
+          "en": "Checks whether the charger is currently in the selected mode.",
+          "nl": "Controleert of de lader momenteel in de geselecteerde modus staat.",
+          "da": "Kontrollerer, om opladeren i øjeblikket er i den valgte tilstand.",
+          "de": "Prüft, ob das Ladegerät derzeit im ausgewählten Modus ist.",
+          "es": "Verifica si el cargador está actualmente en el modo seleccionado.",
+          "fr": "Vérifie si le chargeur est actuellement dans le mode sélectionné.",
+          "it": "Verifica se il caricatore è attualmente nella modalità selezionata.",
+          "no": "Sjekker om laderen for øyeblikket er i den valgte modusen.",
+          "sv": "Kontrollerar om laddaren för närvarande är i det valda läget.",
+          "pl": "Sprawdza, czy ładowarka jest obecnie w wybranym trybie.",
+          "ru": "Проверяет, находится ли зарядное устройство в выбранном режиме.",
+          "ko": "충전기가 현재 선택된 모드에 있는지 확인합니다.",
+          "ar": "يتحقق مما إذا كان الشاحن في الوضع المحدد حاليًا."
         },
         "args": [
           {
             "name": "mode",
             "type": "dropdown",
             "title": {
-              "en": "Mode"
+              "en": "Mode",
+              "nl": "Modus",
+              "da": "Tilstand",
+              "de": "Modus",
+              "es": "Modo",
+              "fr": "Mode",
+              "it": "Modalità",
+              "no": "Modus",
+              "sv": "Läge",
+              "pl": "Tryb",
+              "ru": "Режим",
+              "ko": "모드",
+              "ar": "الوضع"
             },
             "values": [
               {
                 "id": "basic_charging",
                 "title": {
-                  "en": "Basic Charging"
+                  "en": "Basic Charging",
+                  "nl": "Basisopladen",
+                  "da": "Grundlæggende opladning",
+                  "de": "Grundlegendes Laden",
+                  "es": "Carga básica",
+                  "fr": "Charge de base",
+                  "it": "Ricarica di base",
+                  "no": "Grunnleggende lading",
+                  "sv": "Grundläggande laddning",
+                  "pl": "Podstawowe ładowanie",
+                  "ru": "Базовая зарядка",
+                  "ko": "기본 충전",
+                  "ar": "الشحن الأساسي"
                 }
               },
               {
                 "id": "eco_pv_surplus",
                 "title": {
-                  "en": "Eco: Use PV Surplus"
+                  "en": "Eco: Use PV Surplus",
+                  "nl": "Eco: Gebruik PV-overschot",
+                  "da": "Eco: Brug PV-overskud",
+                  "de": "Eco: PV-Überschuss nutzen",
+                  "es": "Eco: Usar excedente fotovoltaico",
+                  "fr": "Éco : Utiliser le surplus photovoltaïque",
+                  "it": "Eco: Usa il surplus fotovoltaico",
+                  "no": "Eco: Bruk PV-overskudd",
+                  "sv": "Eco: Använd överskott från solcellerna",
+                  "pl": "Eco: Użyj nadwyżki PV",
+                  "ru": "Эко: Использовать излишки солнечной энергии",
+                  "ko": "에코: PV 잉여 전력 사용",
+                  "ar": "إيكو: استخدام فائض الطاقة الشمسية"
                 }
               },
               {
                 "id": "eco_flexible_price",
                 "title": {
-                  "en": "Eco: Use Flexible price"
+                  "en": "Eco: Use Flexible price",
+                  "nl": "Eco: Gebruik Flexibele prijs",
+                  "da": "Eco: Brug fleksibel pris",
+                  "de": "Eco: Flexible Preise verwenden",
+                  "es": "Eco: Usar precio flexible",
+                  "fr": "Éco : Utiliser le prix flexible",
+                  "it": "Eco: Usa prezzo flessibile",
+                  "no": "Eco: Bruk fleksibel pris",
+                  "sv": "Eco: Använd Flexibelt pris",
+                  "pl": "Eco: Użyj elastycznej ceny",
+                  "ru": "Эко: Используйте гибкие цены",
+                  "ko": "에코: 유연한 가격 사용",
+                  "ar": "إيكو: استخدم السعر المرن"
                 }
               },
               {
                 "id": "eco_pv_and_flexible_price",
                 "title": {
-                  "en": "Eco: Use PV and Flexible price"
+                  "en": "Eco: Use PV and Flexible price",
+                  "nl": "Eco: Gebruik PV en Flexibele prijs",
+                  "da": "Eco: Brug solceller og fleksibel pris",
+                  "de": "Eco: PV und flexiblen Preis nutzen",
+                  "es": "Eco: Usa PV y precio flexible",
+                  "fr": "Éco : Utiliser PV et prix flexible",
+                  "it": "Eco: Usa PV e Prezzo flessibile",
+                  "no": "Eco: Bruk PV og Fleksibel pris",
+                  "sv": "Eco: Använd PV och Flexibelt pris",
+                  "pl": "Eco: Użyj PV i elastycznej ceny",
+                  "ru": "Эко: Используйте солнечные панели и гибкие тарифы",
+                  "ko": "에코: PV 및 유연한 가격 사용",
+                  "ar": "إيكو: استخدم الطاقة الشمسية والسعر المرن"
                 }
               },
               {
                 "id": "trip_pv_surplus",
                 "title": {
-                  "en": "Trip: Use PV Surplus"
+                  "en": "Trip: Use PV Surplus",
+                  "nl": "Reis: Gebruik PV-overschot",
+                  "da": "Trip: Brug PV-overskud",
+                  "de": "Reise: PV-Überschuss nutzen",
+                  "es": "Viaje: Usar excedente de PV",
+                  "fr": "Voyage : Utiliser le surplus PV",
+                  "it": "Viaggio: Usa Eccedenza Fotovoltaica",
+                  "no": "Tur: Bruk PV-overskudd",
+                  "sv": "Resa: Använd PV-överskott",
+                  "pl": "Podróż: Użyj nadwyżki PV",
+                  "ru": "Поездка: Использовать излишки солнечной энергии",
+                  "ko": "여행: PV 잉여 전력 사용",
+                  "ar": "رحلة: استخدام فائض الطاقة الشمسية"
                 }
               },
               {
                 "id": "trip_flexible_price",
                 "title": {
-                  "en": "Trip: Use Flexible price"
+                  "en": "Trip: Use Flexible price",
+                  "nl": "Reis: Gebruik Flexibele prijs",
+                  "da": "Trip: Brug fleksibel pris",
+                  "de": "Reise: Flexiblen Preis verwenden",
+                  "es": "Viaje: Usar precio flexible",
+                  "fr": "Voyage : Utiliser le prix flexible",
+                  "it": "Viaggio: Usa prezzo flessibile",
+                  "no": "Tur: Bruk Fleksibel pris",
+                  "sv": "Resa: Använd Flexibelt pris",
+                  "pl": "Podróż: Użyj elastycznej ceny",
+                  "ru": "Поездка: Используйте гибкую цену",
+                  "ko": "여행: 유연한 가격 사용",
+                  "ar": "رحلة: استخدم السعر المرن"
                 }
               },
               {
                 "id": "trip_pv_and_flexible_price",
                 "title": {
-                  "en": "Trip: Use PV and Flexible price"
+                  "en": "Trip: Use PV and Flexible price",
+                  "nl": "Reis: Gebruik PV en Flexibele prijs",
+                  "da": "Tur: Brug PV og fleksibel pris",
+                  "de": "Trip: PV und flexibler Preis verwenden",
+                  "es": "Viaje: Usar PV y precio flexible",
+                  "fr": "Voyage : Utilisez PV et prix flexible",
+                  "it": "Viaggio: Usa PV e prezzo flessibile",
+                  "no": "Tur: Bruk PV og Fleksibel pris",
+                  "sv": "Resa: Använd PV och Flexibelt pris",
+                  "pl": "Podróż: Użyj PV i elastycznej ceny",
+                  "ru": "Поездка: Используйте PV и гибкую цену",
+                  "ko": "여행: PV 및 유연한 가격 사용",
+                  "ar": "رحلة: استخدم PV وسعر مرن"
                 }
               },
               {
                 "id": "trip_no_pv_no_flexible_price",
                 "title": {
-                  "en": "Trip: No PV and No Flexible price"
+                  "en": "Trip: No PV and No Flexible price",
+                  "nl": "Reis: Geen PV en Geen Flexibele prijs",
+                  "da": "Tur: Ingen solcelleanlæg og ingen fleksibel pris",
+                  "de": "Reise: Kein PV und Kein flexibler Preis",
+                  "es": "Viaje: Sin PV y Sin precio flexible",
+                  "fr": "Voyage : Pas de PV et Pas de prix flexible",
+                  "it": "Viaggio: Nessun PV e Nessun Prezzo Flessibile",
+                  "no": "Tur: Ingen PV og Ingen Fleksibel pris",
+                  "sv": "Resa: Ingen PV och inget flexibelt pris",
+                  "pl": "Podróż: Brak PV i Brak Elastycznej ceny",
+                  "ru": "Поездка: Без фотоэлектрических панелей и без гибкой цены",
+                  "ko": "여행: PV 없음 및 유연한 가격 없음",
+                  "ar": "رحلة: لا يوجد PV ولا سعر مرن"
                 }
               }
             ]
@@ -185,9 +402,21 @@
             "type": "device",
             "name": "device",
             "title": {
-              "en": "Device"
+              "en": "Device",
+              "nl": "Apparaat",
+              "da": "Enhed",
+              "de": "Gerät",
+              "es": "Dispositivo",
+              "fr": "Appareil",
+              "it": "Dispositivo",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Urządzenie",
+              "ru": "Устройство",
+              "ko": "장치",
+              "ar": "الجهاز"
             },
-            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
         "id": "is_charger_mode"
@@ -196,68 +425,212 @@
     "actions": [
       {
         "title": {
-          "en": "Set charger mode"
+          "en": "Set charger mode",
+          "nl": "Stel laadmodus in",
+          "da": "Indstil opladertilstand",
+          "de": "Lademodus einstellen",
+          "es": "Establecer modo de cargador",
+          "fr": "Définir le mode de chargeur",
+          "it": "Imposta modalità caricatore",
+          "no": "Sett lademodus",
+          "sv": "Ställ in laddarläge",
+          "pl": "Ustaw tryb ładowarki",
+          "ru": "Установить режим зарядного устройства",
+          "ko": "충전기 모드 설정",
+          "ar": "تعيين وضع الشاحن"
         },
         "titleFormatted": {
-          "en": "Set charger mode to [[mode]]"
+          "en": "Set charger mode to [[mode]]",
+          "nl": "Stel de laadmodus in op [[mode]]",
+          "da": "Indstil opladertilstand til [[mode]]",
+          "de": "Ladegerät auf [[mode]] einstellen",
+          "es": "Establecer el modo del cargador a [[mode]]",
+          "fr": "Définir le mode du chargeur sur [[mode]]",
+          "it": "Imposta la modalità del caricatore su [[mode]]",
+          "no": "Sett ladermodus til [[mode]]",
+          "sv": "Ställ in laddarens läge till [[mode]]",
+          "pl": "Ustaw tryb ładowarki na [[mode]]",
+          "ru": "Установите режим зарядного устройства на [[mode]]",
+          "ko": "충전기 모드를 [[mode]](으)로 설정하세요.",
+          "ar": "اضبط وضع الشاحن على [[mode]]"
         },
         "hint": {
-          "en": "Sets the charger logic mode and related PV/flexible-price flags."
+          "en": "Sets the charger logic mode and related PV/flexible-price flags.",
+          "nl": "Stelt de logica-modus van de lader in en de bijbehorende PV/flexibele-prijs vlaggen.",
+          "da": "Indstiller opladerens logiktilstand og relaterede PV/fleksible prisflag.",
+          "de": "Legt den Logikmodus des Ladegeräts und die zugehörigen PV-/flexiblen Preis-Flags fest.",
+          "es": "Establece el modo de lógica del cargador y las banderas relacionadas con PV/precio flexible.",
+          "fr": "Définit le mode logique du chargeur et les indicateurs liés au PV/prix flexible.",
+          "it": "Imposta la modalità logica del caricatore e i relativi flag per PV/prezzo flessibile.",
+          "no": "Setter lademodus og relaterte PV-/fleksibel-pris-flagg.",
+          "sv": "Ställer in laddarens logikläge och relaterade PV-/flexibla prisflaggor.",
+          "pl": "Ustawia tryb logiki ładowarki oraz powiązane flagi PV/elastycznej ceny.",
+          "ru": "Устанавливает режим логики зарядного устройства и связанные флаги для солнечной энергии/гибкой цены.",
+          "ko": "충전기 로직 모드 및 관련 PV/유연한 가격 플래그를 설정합니다.",
+          "ar": "يضبط وضع منطق الشاحن والأعلام المتعلقة بالطاقة الشمسية/السعر المرن."
         },
         "args": [
           {
             "name": "mode",
             "type": "dropdown",
             "title": {
-              "en": "Mode"
+              "en": "Mode",
+              "nl": "Modus",
+              "da": "Tilstand",
+              "de": "Modus",
+              "es": "Modo",
+              "fr": "Mode",
+              "it": "Modalità",
+              "no": "Modus",
+              "sv": "Läge",
+              "pl": "Tryb",
+              "ru": "Режим",
+              "ko": "모드",
+              "ar": "الوضع"
             },
             "values": [
               {
                 "id": "basic_charging",
                 "title": {
-                  "en": "Basic Charging"
+                  "en": "Basic Charging",
+                  "nl": "Basisopladen",
+                  "da": "Grundlæggende opladning",
+                  "de": "Grundlegendes Laden",
+                  "es": "Carga básica",
+                  "fr": "Charge de base",
+                  "it": "Ricarica di base",
+                  "no": "Grunnleggende lading",
+                  "sv": "Grundläggande laddning",
+                  "pl": "Podstawowe ładowanie",
+                  "ru": "Базовая зарядка",
+                  "ko": "기본 충전",
+                  "ar": "الشحن الأساسي"
                 }
               },
               {
                 "id": "eco_pv_surplus",
                 "title": {
-                  "en": "Eco: Use PV Surplus"
+                  "en": "Eco: Use PV Surplus",
+                  "nl": "Eco: Gebruik PV-overschot",
+                  "da": "Eco: Brug PV-overskud",
+                  "de": "Eco: PV-Überschuss nutzen",
+                  "es": "Eco: Usar excedente fotovoltaico",
+                  "fr": "Éco : Utiliser le surplus photovoltaïque",
+                  "it": "Eco: Usa il surplus fotovoltaico",
+                  "no": "Eco: Bruk PV-overskudd",
+                  "sv": "Eco: Använd överskott från solceller",
+                  "pl": "Eco: Użyj nadwyżki PV",
+                  "ru": "Эко: Использовать излишки солнечной энергии",
+                  "ko": "에코: PV 잉여 전력 사용",
+                  "ar": "إيكو: استخدم فائض الطاقة الشمسية"
                 }
               },
               {
                 "id": "eco_flexible_price",
                 "title": {
-                  "en": "Eco: Use Flexible price"
+                  "en": "Eco: Use Flexible price",
+                  "nl": "Eco: Gebruik Flexibele prijs",
+                  "da": "Eco: Brug fleksibel pris",
+                  "de": "Eco: Flexible Preise verwenden",
+                  "es": "Eco: Usar precio flexible",
+                  "fr": "Éco : Utiliser le prix flexible",
+                  "it": "Eco: Usa prezzo flessibile",
+                  "no": "Eco: Bruk fleksibel pris",
+                  "sv": "Eco: Använd Flexibelt pris",
+                  "pl": "Eco: Użyj elastycznej ceny",
+                  "ru": "Эко: Используйте гибкие цены",
+                  "ko": "에코: 유연한 가격 사용",
+                  "ar": "إيكو: استخدم السعر المرن"
                 }
               },
               {
                 "id": "eco_pv_and_flexible_price",
                 "title": {
-                  "en": "Eco: Use PV and Flexible price"
+                  "en": "Eco: Use PV and Flexible price",
+                  "nl": "Eco: Gebruik PV en Flexibele prijs",
+                  "da": "Eco: Brug solenergi og fleksibel pris",
+                  "de": "Eco: PV und flexiblen Preis nutzen",
+                  "es": "Eco: Usa PV y precio flexible",
+                  "fr": "Éco : Utiliser PV et prix flexible",
+                  "it": "Eco: Usa PV e Prezzo flessibile",
+                  "no": "Eco: Bruk PV og Fleksibel pris",
+                  "sv": "Eco: Använd solenergi och flexibelt pris",
+                  "pl": "Eco: Użyj PV i elastycznej ceny",
+                  "ru": "Эко: Используйте солнечную энергию и гибкие тарифы",
+                  "ko": "에코: PV 및 유연한 가격 사용",
+                  "ar": "إيكو: استخدم الطاقة الشمسية والسعر المرن"
                 }
               },
               {
                 "id": "trip_pv_surplus",
                 "title": {
-                  "en": "Trip: Use PV Surplus"
+                  "en": "Trip: Use PV Surplus",
+                  "nl": "Trip: Gebruik PV-overschot",
+                  "da": "Tur: Brug PV-overskud",
+                  "de": "Reise: PV-Überschuss nutzen",
+                  "es": "Viaje: Usar excedente de PV",
+                  "fr": "Voyage : Utiliser le surplus PV",
+                  "it": "Viaggio: Usa Eccedenza Fotovoltaica",
+                  "no": "Tur: Bruk PV-overskudd",
+                  "sv": "Resa: Använd PV-överskott",
+                  "pl": "Podróż: Użyj nadwyżki PV",
+                  "ru": "Поездка: Использовать излишки солнечной энергии",
+                  "ko": "여행: PV 잉여 전력 사용",
+                  "ar": "الرحلة: استخدام فائض الطاقة الشمسية"
                 }
               },
               {
                 "id": "trip_flexible_price",
                 "title": {
-                  "en": "Trip: Use Flexible price"
+                  "en": "Trip: Use Flexible price",
+                  "nl": "Reis: Gebruik Flexibele prijs",
+                  "da": "Trip: Brug fleksibel pris",
+                  "de": "Reise: Flexiblen Preis verwenden",
+                  "es": "Viaje: Usa precio flexible",
+                  "fr": "Voyage : Utiliser le prix flexible",
+                  "it": "Viaggio: Usa prezzo flessibile",
+                  "no": "Tur: Bruk Fleksibel pris",
+                  "sv": "Resa: Använd Flexibelt pris",
+                  "pl": "Podróż: Użyj elastycznej ceny",
+                  "ru": "Поездка: Используйте гибкую цену",
+                  "ko": "여행: 유연한 가격 사용",
+                  "ar": "رحلة: استخدم السعر المرن"
                 }
               },
               {
                 "id": "trip_pv_and_flexible_price",
                 "title": {
-                  "en": "Trip: Use PV and Flexible price"
+                  "en": "Trip: Use PV and Flexible price",
+                  "nl": "Reis: Gebruik PV en Flexibele prijs",
+                  "da": "Tur: Brug PV og fleksibel pris",
+                  "de": "Reise: PV und flexiblen Preis verwenden",
+                  "es": "Viaje: Usar PV y precio flexible",
+                  "fr": "Voyage : Utiliser PV et prix flexible",
+                  "it": "Viaggio: Usa PV e prezzo flessibile",
+                  "no": "Tur: Bruk PV og Fleksibel pris",
+                  "sv": "Resa: Använd PV och Flexibelt pris",
+                  "pl": "Podróż: Użyj PV i elastycznej ceny",
+                  "ru": "Поездка: Используйте PV и гибкую цену",
+                  "ko": "여행: PV 및 유연한 가격 사용",
+                  "ar": "الرحلة: استخدم PV والسعر المرن"
                 }
               },
               {
                 "id": "trip_no_pv_no_flexible_price",
                 "title": {
-                  "en": "Trip: No PV and No Flexible price"
+                  "en": "Trip: No PV and No Flexible price",
+                  "nl": "Reis: Geen PV en Geen Flexibele prijs",
+                  "da": "Tur: Ingen PV og Ingen fleksibel pris",
+                  "de": "Reise: Kein PV und Kein flexibler Preis",
+                  "es": "Viaje: Sin PV y Sin precio flexible",
+                  "fr": "Voyage : Pas de PV et Pas de prix flexible",
+                  "it": "Viaggio: Nessun PV e Nessun prezzo flessibile",
+                  "no": "Tur: Ingen PV og Ingen Fleksibel pris",
+                  "sv": "Resa: Ingen PV och inget flexibelt pris",
+                  "pl": "Podróż: Brak PV i Brak Elastycznej ceny",
+                  "ru": "Поездка: Без фотоэлектрических панелей и без гибкой цены",
+                  "ko": "여행: PV 없음 및 유연한 가격 없음",
+                  "ar": "رحلة: بدون PV وبدون سعر مرن"
                 }
               }
             ]
@@ -266,41 +639,125 @@
             "type": "device",
             "name": "device",
             "title": {
-              "en": "Device"
+              "en": "Device",
+              "nl": "Apparaat",
+              "da": "Enhed",
+              "de": "Gerät",
+              "es": "Dispositivo",
+              "fr": "Appareil",
+              "it": "Dispositivo",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Urządzenie",
+              "ru": "Устройство",
+              "ko": "장치",
+              "ar": "الجهاز"
             },
-            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
         "id": "set_charger_mode"
       },
       {
         "title": {
-          "en": "Set PV surplus mode"
+          "en": "Set PV surplus mode",
+          "nl": "Stel PV-overschotmodus in",
+          "da": "Indstil PV overskudsmodus",
+          "de": "PV-Überschussmodus einstellen",
+          "es": "Configurar el modo de excedente fotovoltaico",
+          "fr": "Définir le mode surplus PV",
+          "it": "Imposta modalità surplus fotovoltaico",
+          "no": "Sett PV-overskuddsmodus",
+          "sv": "Ställ in PV-överskottsläge",
+          "pl": "Ustaw tryb nadwyżki PV",
+          "ru": "Установить режим избыточной солнечной энергии",
+          "ko": "PV 잉여 모드 설정",
+          "ar": "تعيين وضع فائض الطاقة الشمسية"
         },
         "titleFormatted": {
-          "en": "Set PV surplus mode to [[enabled]]"
+          "en": "Set PV surplus mode to [[enabled]]",
+          "nl": "Stel PV-overschotmodus in op [[enabled]]",
+          "da": "Indstil PV-overskudstilstand til [[enabled]]",
+          "de": "PV-Überschussmodus auf [[enabled]] setzen",
+          "es": "Establecer el modo de excedente fotovoltaico a [[enabled]]",
+          "fr": "Activer le mode surplus PV à [[enabled]]",
+          "it": "Imposta la modalità surplus PV su [[enabled]]",
+          "no": "Sett PV-overskuddsmodus til [[enabled]]",
+          "sv": "Ställ in PV-överskottsläge till [[enabled]]",
+          "pl": "Ustaw tryb nadwyżki PV na [[enabled]]",
+          "ru": "Установить режим PV surplus на [[enabled]]",
+          "ko": "PV 잉여 모드를 [[enabled]]로 설정하세요.",
+          "ar": "اضبط وضع فائض الطاقة الشمسية إلى [[enabled]]"
         },
         "hint": {
-          "en": "Enables or disables go-eCharger PV surplus control."
+          "en": "Enables or disables go-eCharger PV surplus control.",
+          "nl": "Schakelt de go-eCharger PV-overschotregeling in of uit.",
+          "da": "Aktiverer eller deaktiverer go-eCharger PV overskudskontrol.",
+          "de": "Aktiviert oder deaktiviert die PV-Überschusssteuerung des go-eChargers.",
+          "es": "Habilita o deshabilita el control de excedentes fotovoltaicos del go-eCharger.",
+          "fr": "Active ou désactive le contrôle de surplus PV du go-eCharger.",
+          "it": "Abilita o disabilita il controllo del surplus fotovoltaico di go-eCharger.",
+          "no": "Aktiverer eller deaktiverer go-eCharger PV overskuddskontroll.",
+          "sv": "Aktiverar eller inaktiverar go-eCharger PV-överskottskontroll.",
+          "pl": "Włącza lub wyłącza kontrolę nadwyżki PV w go-eCharger.",
+          "ru": "Включает или отключает управление избыточной мощностью солнечных панелей для go-eCharger.",
+          "ko": "go-eCharger PV 잉여 제어를 활성화하거나 비활성화합니다.",
+          "ar": "يُمكِّن أو يُعطِّل التحكم في فائض الطاقة الشمسية لـ go-eCharger."
         },
         "args": [
           {
             "name": "enabled",
             "type": "dropdown",
             "title": {
-              "en": "PV surplus mode"
+              "en": "PV surplus mode",
+              "nl": "PV-overschotmodus",
+              "da": "PV overskudsmodus",
+              "de": "PV-Überschussmodus",
+              "es": "Modo de excedente de PV",
+              "fr": "Mode surplus PV",
+              "it": "Modalità surplus PV",
+              "no": "PV-overskuddsmodus",
+              "sv": "PV-överskottsläge",
+              "pl": "Tryb nadwyżki PV",
+              "ru": "Режим избыточной мощности от солнечных панелей",
+              "ko": "PV 잉여 모드",
+              "ar": "وضع فائض الطاقة الشمسية"
             },
             "values": [
               {
                 "id": "true",
                 "title": {
-                  "en": "Enabled"
+                  "en": "Enabled",
+                  "nl": "Ingeschakeld",
+                  "da": "Aktiveret",
+                  "de": "Aktiviert",
+                  "es": "Habilitado",
+                  "fr": "Activé",
+                  "it": "Abilitato",
+                  "no": "Aktivert",
+                  "sv": "Aktiverad",
+                  "pl": "Włączone",
+                  "ru": "Включено",
+                  "ko": "사용 설정됨",
+                  "ar": "مُمكّن"
                 }
               },
               {
                 "id": "false",
                 "title": {
-                  "en": "Disabled"
+                  "en": "Disabled",
+                  "nl": "Uitgeschakeld",
+                  "da": "Deaktiveret",
+                  "de": "Deaktiviert",
+                  "es": "Desactivado",
+                  "fr": "Désactivé",
+                  "it": "Disabilitato",
+                  "no": "Deaktivert",
+                  "sv": "Inaktiverad",
+                  "pl": "Wyłączone",
+                  "ru": "Отключено",
+                  "ko": "비활성화됨",
+                  "ar": "معطل"
                 }
               }
             ]
@@ -309,29 +766,89 @@
             "type": "device",
             "name": "device",
             "title": {
-              "en": "Device"
+              "en": "Device",
+              "nl": "Apparaat",
+              "da": "Enhed",
+              "de": "Gerät",
+              "es": "Dispositivo",
+              "fr": "Appareil",
+              "it": "Dispositivo",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Urządzenie",
+              "ru": "Устройство",
+              "ko": "장치",
+              "ar": "الجهاز"
             },
-            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
         "id": "set_pv_surplus_enabled"
       },
       {
         "title": {
-          "en": "Set PV surplus information"
+          "en": "Set PV surplus information",
+          "nl": "Stel PV-overschot informatie in",
+          "da": "Indstil PV-overskudsoplysninger",
+          "de": "PV-Überschussinformationen festlegen",
+          "es": "Establecer información de excedente fotovoltaico",
+          "fr": "Définir les informations sur le surplus PV",
+          "it": "Imposta le informazioni sul surplus fotovoltaico",
+          "no": "Sett PV-overskuddsinformasjon",
+          "sv": "Ange information om överskott från solceller",
+          "pl": "Ustaw informacje o nadwyżce PV",
+          "ru": "Установить информацию о PV излишках",
+          "ko": "PV 잉여 정보 설정",
+          "ar": "قم بتعيين معلومات فائض الطاقة الشمسية (PV)"
         },
         "titleFormatted": {
-          "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W."
+          "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W.",
+          "nl": "Stel PV-overschot informatie in op net [[pGrid]]W, PV [[pPv]]W en batterij [[pAkku]]W.",
+          "da": "Indstil PV-overskudsoplysninger til net [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W.",
+          "de": "Stelle die PV-Überschussinformationen auf Netz [[pGrid]]W, PV [[pPv]]W und Batterie [[pAkku]]W ein.",
+          "es": "Establece la información del excedente de PV a la red [[pGrid]]W, PV [[pPv]]W y batería [[pAkku]]W.",
+          "fr": "Définissez les informations de surplus PV sur réseau [[pGrid]]W, PV [[pPv]]W et batterie [[pAkku]]W.",
+          "it": "Imposta le informazioni sul surplus fotovoltaico alla rete [[pGrid]]W, PV [[pPv]]W e batteria [[pAkku]]W.",
+          "no": "Sett PV-overskuddsinformasjon til nett [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W.",
+          "sv": "Ställ in PV-överskottsinformation till nät [[pGrid]]W, PV [[pPv]]W och batteri [[pAkku]]W.",
+          "pl": "Ustaw informacje o nadwyżce PV na sieć [[pGrid]]W, PV [[pPv]]W i baterię [[pAkku]]W.",
+          "ru": "Установите информацию о PV избыточной мощности на сеть [[pGrid]] Вт, PV [[pPv]] Вт и батарею [[pAkku]] Вт.",
+          "ko": "PV 잉여 정보를 그리드 [[pGrid]]W, PV [[pPv]]W 및 배터리 [[pAkku]]W로 설정하세요.",
+          "ar": "اضبط معلومات فائض الطاقة الشمسية إلى الشبكة [[pGrid]]W، والطاقة الشمسية [[pPv]]W والبطارية [[pAkku]]W."
         },
         "hint": {
-          "en": "Updates go-eCharger available wattage for automatic PV surplus mode."
+          "en": "Updates go-eCharger available wattage for automatic PV surplus mode.",
+          "nl": "Updates de beschikbare wattage van de go-eCharger voor de automatische PV-overschotmodus.",
+          "da": "Opdaterer go-eCharger tilgængelig watt for automatisk PV-overskudstilstand.",
+          "de": "Aktualisiert die verfügbare Leistung des go-eChargers für den automatischen PV-Überschussmodus.",
+          "es": "Actualiza la potencia disponible del go-eCharger para el modo automático de excedente de energía solar fotovoltaica.",
+          "fr": "Met à jour la puissance disponible du go-eCharger pour le mode automatique de surplus photovoltaïque.",
+          "it": "Aggiorna la disponibilità di watt del go-eCharger per la modalità automatica di surplus fotovoltaico.",
+          "no": "Oppdaterer tilgjengelig wattstyrke for go-eCharger for automatisk PV-overskuddsmodus.",
+          "sv": "Uppdaterar tillgänglig effekt för go-eCharger för automatisk PV-överskottsläge.",
+          "pl": "Aktualizuje dostępne waty go-eCharger dla automatycznego trybu nadwyżki PV.",
+          "ru": "Обновляет доступную мощность go-eCharger для автоматического режима избыточной солнечной энергии.",
+          "ko": "자동 PV 잉여 모드를 위한 go-eCharger 사용 가능 전력 업데이트.",
+          "ar": "يقوم بتحديث الطاقة المتاحة لشاحن go-e لوضع الفائض الشمسي التلقائي."
         },
         "args": [
           {
             "name": "pGrid",
             "type": "number",
             "title": {
-              "en": "Grid power (W)"
+              "en": "Grid power (W)",
+              "nl": "Netvermogen (W)",
+              "da": "Netstrøm (W)",
+              "de": "Netzleistung (W)",
+              "es": "Potencia de la red (W)",
+              "fr": "Puissance du réseau (W)",
+              "it": "Potenza di rete (W)",
+              "no": "Nettstrøm (W)",
+              "sv": "Nätström (W)",
+              "pl": "Moc sieci (W)",
+              "ru": "Мощность сети (Вт)",
+              "ko": "그리드 전력 (W)",
+              "ar": "طاقة الشبكة (واط)"
             }
           },
           {
@@ -339,7 +856,19 @@
             "type": "number",
             "optional": true,
             "title": {
-              "en": "PV power (W, optional)"
+              "en": "PV power (W, optional)",
+              "nl": "PV-vermogen (W, optioneel)",
+              "da": "PV-effekt (W, valgfrit)",
+              "de": "PV-Leistung (W, optional)",
+              "es": "Potencia PV (W, opcional)",
+              "fr": "Puissance PV (W, optionnel)",
+              "it": "Potenza FV (W, facoltativa)",
+              "no": "PV-effekt (W, valgfritt)",
+              "sv": "PV-effekt (W, valfritt)",
+              "pl": "Moc PV (W, opcjonalnie)",
+              "ru": "Мощность солнечных панелей (Вт, необязательно)",
+              "ko": "PV 전력 (W, 선택 사항)",
+              "ar": "طاقة PV (واط، اختياري)"
             }
           },
           {
@@ -347,16 +876,40 @@
             "type": "number",
             "optional": true,
             "title": {
-              "en": "Battery power (W, optional)"
+              "en": "Battery power (W, optional)",
+              "nl": "Batterijvermogen (W, optioneel)",
+              "da": "Batteristrøm (W, valgfrit)",
+              "de": "Batterieleistung (W, optional)",
+              "es": "Potencia de la batería (W, opcional)",
+              "fr": "Puissance de la batterie (W, optionnel)",
+              "it": "Potenza della batteria (W, opzionale)",
+              "no": "Batterikraft (W, valgfritt)",
+              "sv": "Batterikraft (W, valfritt)",
+              "pl": "Moc baterii (W, opcjonalnie)",
+              "ru": "Мощность батареи (Вт, необязательно)",
+              "ko": "배터리 전력 (W, 선택 사항)",
+              "ar": "طاقة البطارية (واط، اختياري)"
             }
           },
           {
             "type": "device",
             "name": "device",
             "title": {
-              "en": "Device"
+              "en": "Device",
+              "nl": "Apparaat",
+              "da": "Enhed",
+              "de": "Gerät",
+              "es": "Dispositivo",
+              "fr": "Appareil",
+              "it": "Dispositivo",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Urządzenie",
+              "ru": "Устройство",
+              "ko": "장치",
+              "ar": "الجهاز"
             },
-            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|go-eCharger-local"
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
         "id": "set_pv_surplus_info"
@@ -366,37 +919,11 @@
   "drivers": [
     {
       "class": "evcharger",
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "lan"
-      ],
       "images": {
         "small": "/drivers/go-eCharger-CORE/assets/images/small.png",
         "large": "/drivers/go-eCharger-CORE/assets/images/large.png",
         "xlarge": "/drivers/go-eCharger-CORE/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices",
-          "navigation": {
-            "next": "done"
-          }
-        },
-        {
-          "id": "done",
-          "template": "done"
-        }
-      ],
       "capabilities": [
         "measure_temperature",
         "meter_power",
@@ -686,20 +1213,46 @@
         "evCharger": true,
         "meterPowerImportedCapability": "meter_power"
       },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
       "name": {
-        "en": "go-eCharger CORE",
-        "nl": "go-eCharger CORE",
-        "da": "go-eCharger CORE",
-        "de": "go-eCharger CORE",
-        "es": "go-eCharger CORE",
-        "fr": "go-eCharger CORE",
-        "it": "go-eCharger CORE",
-        "no": "go-eCharger CORE",
-        "sv": "go-eCharger CORE",
-        "pl": "go-eCharger CORE",
-        "ru": "go-eCharger CORE",
-        "ko": "go-eCharger CORE",
-        "ar": "go-eCharger CORE"
+        "en": "go-eCharger CORE (local)",
+        "nl": "go-eCharger CORE (local)",
+        "da": "go-eCharger CORE (local)",
+        "de": "go-eCharger CORE (local)",
+        "es": "go-eCharger CORE (local)",
+        "fr": "go-eCharger CORE (local)",
+        "it": "go-eCharger CORE (local)",
+        "no": "go-eCharger CORE (local)",
+        "sv": "go-eCharger CORE (local)",
+        "pl": "go-eCharger CORE (local)",
+        "ru": "go-eCharger CORE (local)",
+        "ko": "go-eCharger CORE (local)",
+        "ar": "go-eCharger CORE (local)"
       },
       "discovery": "mdns_http_go-echarger-core",
       "id": "go-eCharger-CORE",
@@ -835,37 +1388,11 @@
     },
     {
       "class": "evcharger",
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "lan"
-      ],
       "images": {
         "small": "/drivers/go-eCharger-Gemini/assets/images/small.png",
         "large": "/drivers/go-eCharger-Gemini/assets/images/large.png",
         "xlarge": "/drivers/go-eCharger-Gemini/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices",
-          "navigation": {
-            "next": "done"
-          }
-        },
-        {
-          "id": "done",
-          "template": "done"
-        }
-      ],
       "capabilities": [
         "measure_temperature",
         "meter_power",
@@ -1155,20 +1682,46 @@
         "evCharger": true,
         "meterPowerImportedCapability": "meter_power"
       },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
       "name": {
-        "en": "go-eCharger Gemini",
-        "nl": "go-eCharger Gemini",
-        "da": "go-eCharger Gemini",
-        "de": "go-eCharger Gemini",
-        "es": "go-eCharger Gemini",
-        "fr": "go-eCharger Gemini",
-        "it": "go-eCharger Gemini",
-        "no": "go-eCharger Gemini",
-        "sv": "go-eCharger Gemini",
-        "pl": "go-eCharger Gemini",
-        "ru": "go-eCharger Gemini",
-        "ko": "go-eCharger Gemini",
-        "ar": "go-eCharger Gemini"
+        "en": "go-eCharger Gemini (local)",
+        "nl": "go-eCharger Gemini (local)",
+        "da": "go-eCharger Gemini (local)",
+        "de": "go-eCharger Gemini (local)",
+        "es": "go-eCharger Gemini (local)",
+        "fr": "go-eCharger Gemini (local)",
+        "it": "go-eCharger Gemini (local)",
+        "no": "go-eCharger Gemini (local)",
+        "sv": "go-eCharger Gemini (local)",
+        "pl": "go-eCharger Gemini (local)",
+        "ru": "go-eCharger Gemini (local)",
+        "ko": "go-eCharger Gemini (local)",
+        "ar": "go-eCharger Gemini (local)"
       },
       "discovery": "mdns_http_go-echarger-gemini",
       "id": "go-eCharger-Gemini",
@@ -1304,37 +1857,11 @@
     },
     {
       "class": "evcharger",
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "lan"
-      ],
       "images": {
         "small": "/drivers/go-eCharger-Homeplus/assets/images/small.png",
         "large": "/drivers/go-eCharger-Homeplus/assets/images/large.png",
         "xlarge": "/drivers/go-eCharger-Homeplus/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices",
-          "navigation": {
-            "next": "done"
-          }
-        },
-        {
-          "id": "done",
-          "template": "done"
-        }
-      ],
       "capabilities": [
         "measure_temperature",
         "meter_power",
@@ -1624,20 +2151,46 @@
         "evCharger": true,
         "meterPowerImportedCapability": "meter_power"
       },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
       "name": {
-        "en": "go-eCharger Home+",
-        "nl": "go-eCharger Home+",
-        "da": "go-eCharger Home+",
-        "de": "go-eCharger Home+",
-        "es": "go-eCharger Home+",
-        "fr": "go-eCharger Home+",
-        "it": "go-eCharger Home+",
-        "no": "go-eCharger Home+",
-        "sv": "go-eCharger Home+",
-        "pl": "go-eCharger Home+",
-        "ru": "go-eCharger Home+",
-        "ko": "go-eCharger Home+",
-        "ar": "go-eCharger Home+"
+        "en": "go-eCharger Home+ (local)",
+        "nl": "go-eCharger Home+ (local)",
+        "da": "go-eCharger Home+ (local)",
+        "de": "go-eCharger Home+ (local)",
+        "es": "go-eCharger Home+ (local)",
+        "fr": "go-eCharger Home+ (local)",
+        "it": "go-eCharger Home+ (local)",
+        "no": "go-eCharger Home+ (local)",
+        "sv": "go-eCharger Home+ (local)",
+        "pl": "go-eCharger Home+ (local)",
+        "ru": "go-eCharger Home+ (local)",
+        "ko": "go-eCharger Home+ (local)",
+        "ar": "go-eCharger Home+ (local)"
       },
       "discovery": "mdns_http_go-echarger-homeplus",
       "id": "go-eCharger-Homeplus",
@@ -1773,37 +2326,11 @@
     },
     {
       "class": "evcharger",
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "lan"
-      ],
       "images": {
         "small": "/drivers/go-eCharger-PRO/assets/images/small.png",
         "large": "/drivers/go-eCharger-PRO/assets/images/large.png",
         "xlarge": "/drivers/go-eCharger-PRO/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices",
-          "navigation": {
-            "next": "done"
-          }
-        },
-        {
-          "id": "done",
-          "template": "done"
-        }
-      ],
       "capabilities": [
         "measure_temperature",
         "meter_power",
@@ -2093,20 +2620,46 @@
         "evCharger": true,
         "meterPowerImportedCapability": "meter_power"
       },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
       "name": {
-        "en": "go-eCharger PRO",
-        "nl": "go-eCharger PRO",
-        "da": "go-eCharger PRO",
-        "de": "go-eCharger PRO",
-        "es": "go-eCharger PRO",
-        "fr": "go-eCharger PRO",
-        "it": "go-eCharger PRO",
-        "no": "go-eCharger PRO",
-        "sv": "go-eCharger PRO",
-        "pl": "go-eCharger PRO",
-        "ru": "go-eCharger PRO",
-        "ko": "go-eCharger PRO",
-        "ar": "go-eCharger PRO"
+        "en": "go-eCharger PRO (local)",
+        "nl": "go-eCharger PRO (local)",
+        "da": "go-eCharger PRO (local)",
+        "de": "go-eCharger PRO (local)",
+        "es": "go-eCharger PRO (local)",
+        "fr": "go-eCharger PRO (local)",
+        "it": "go-eCharger PRO (local)",
+        "no": "go-eCharger PRO (local)",
+        "sv": "go-eCharger PRO (local)",
+        "pl": "go-eCharger PRO (local)",
+        "ru": "go-eCharger PRO (local)",
+        "ko": "go-eCharger PRO (local)",
+        "ar": "go-eCharger PRO (local)"
       },
       "discovery": "mdns_http_go-echarger-pro",
       "id": "go-eCharger-PRO",
@@ -2242,37 +2795,11 @@
     },
     {
       "class": "evcharger",
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "lan"
-      ],
       "images": {
-        "small": "/drivers/go-eCharger-local/assets/images/small.png",
-        "large": "/drivers/go-eCharger-local/assets/images/large.png",
-        "xlarge": "/drivers/go-eCharger-local/assets/images/xlarge.png"
+        "small": "/drivers/goe-Cloud-CORE/assets/images/small.png",
+        "large": "/drivers/goe-Cloud-CORE/assets/images/large.png",
+        "xlarge": "/drivers/goe-Cloud-CORE/assets/images/xlarge.png"
       },
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices",
-          "navigation": {
-            "next": "done"
-          }
-        },
-        {
-          "id": "done",
-          "template": "done"
-        }
-      ],
       "capabilities": [
         "measure_temperature",
         "meter_power",
@@ -2562,60 +3089,2060 @@
         "evCharger": true,
         "meterPowerImportedCapability": "meter_power"
       },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "../../../assets/logo.png",
+            "title": {
+              "en": "go-e Cloud Access",
+              "nl": "go-e Cloud-toegang",
+              "da": "go-e Cloud-adgang",
+              "de": "go-e Cloud-Zugang",
+              "es": "Acceso a go-e Cloud",
+              "fr": "Accès au Cloud go-e",
+              "it": "Accesso al Cloud go-e",
+              "no": "go-e Cloud-tilgang",
+              "sv": "go-e Cloud-åtkomst",
+              "pl": "Dostęp do chmury go-e",
+              "ru": "Доступ к облаку go-e",
+              "ko": "go-e 클라우드 액세스",
+              "ar": "الوصول إلى سحابة go-e"
+            },
+            "usernameLabel": {
+              "en": "Serial Number (get from go-e Charger mobile app)",
+              "nl": "Serienummer (verkrijg via de go-e Charger mobiele app)",
+              "da": "Serienummer (hent fra go-e Charger mobilapp)",
+              "de": "Seriennummer (aus der go-e Charger Mobile App abrufen)",
+              "es": "Número de serie (obtenido de la aplicación móvil go-e Charger)",
+              "fr": "Numéro de série (à obtenir depuis l'application mobile go-e Charger)",
+              "it": "Numero di serie (ottieni dall'app mobile go-e Charger)",
+              "no": "Seriennummer (få fra go-e Charger mobilapp)",
+              "sv": "Serienummer (hämta från go-e Charger mobilapp)",
+              "pl": "Numer seryjny (pobierz z aplikacji mobilnej go-e Charger)",
+              "ru": "Серийный номер (получите из мобильного приложения go-e Charger)",
+              "ko": "일련 번호 (go-e Charger 모바일 앱에서 확인)",
+              "ar": "الرقم التسلسلي (احصل عليه من تطبيق go-e Charger على الهاتف المحمول)"
+            },
+            "usernamePlaceholder": {
+              "en": "123456",
+              "nl": "123456",
+              "da": "123456",
+              "de": "123456",
+              "es": "123456",
+              "fr": "123456",
+              "it": "123456",
+              "no": "123456",
+              "sv": "123456",
+              "pl": "123456",
+              "ru": "123456",
+              "ko": "123456",
+              "ar": "١٢٣٤٥٦"
+            },
+            "passwordLabel": {
+              "en": "Cloud API Key (get from go-e Charger mobile app)",
+              "nl": "Cloud API-sleutel (verkrijg via de go-e Charger mobiele app)",
+              "da": "Cloud API-nøgle (fås fra go-e Charger mobilapp)",
+              "de": "Cloud-API-Schlüssel (erhalte ihn aus der go-e Charger Mobile-App)",
+              "es": "Clave de API de Cloud (obtenla desde la app móvil go-e Charger)",
+              "fr": "Clé API Cloud (obtenez-la depuis l'application mobile go-e Charger)",
+              "it": "Chiave API Cloud (ottieni dall'app mobile go-e Charger)",
+              "no": "Cloud API-nøkkel (få fra go-e Charger mobilapp)",
+              "sv": "Moln-API-nyckel (fås från go-e Charger-mobilappen)",
+              "pl": "Klucz API Cloud (pobierz z aplikacji mobilnej go-e Charger)",
+              "ru": "Ключ API облака (получите в мобильном приложении go-e Charger)",
+              "ko": "클라우드 API 키 (go-e Charger 모바일 앱에서 가져오기)",
+              "ar": "مفتاح API السحابي (احصل عليه من تطبيق go-e Charger للهواتف المحمولة)"
+            },
+            "passwordPlaceholder": {
+              "en": "Your Cloud API Key",
+              "nl": "Je Cloud API-sleutel",
+              "da": "Din Cloud API-nøgle",
+              "de": "Ihr Cloud-API-Schlüssel",
+              "es": "Tu clave API de Cloud",
+              "fr": "Votre clé API Cloud",
+              "it": "La tua chiave API Cloud",
+              "no": "Din Cloud API-nøkkel",
+              "sv": "Din Cloud API-nyckel",
+              "pl": "Twój klucz API w chmurze",
+              "ru": "Ваш Cloud API ключ",
+              "ko": "귀하의 클라우드 API 키",
+              "ar": "مفتاح API السحابي الخاص بك"
+            }
+          },
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
       "name": {
-        "en": "go-eCharger Local",
-        "nl": "go-eCharger Local",
-        "da": "go-eCharger Local",
-        "de": "go-eCharger Local",
-        "es": "go-eCharger Local",
-        "fr": "go-eCharger Local",
-        "it": "go-eCharger Local",
-        "no": "go-eCharger Local",
-        "sv": "go-eCharger Local",
-        "pl": "go-eCharger Local",
-        "ru": "go-eCharger Local",
-        "ko": "go-eCharger Local",
-        "ar": "go-eCharger Local"
+        "en": "go-eCharger CORE (cloud)",
+        "nl": "go-eCharger CORE (cloud)",
+        "da": "go-eCharger CORE (cloud)",
+        "de": "go-eCharger CORE (cloud)",
+        "es": "go-eCharger CORE (cloud)",
+        "fr": "go-eCharger CORE (cloud)",
+        "it": "go-eCharger CORE (cloud)",
+        "no": "go-eCharger CORE (cloud)",
+        "sv": "go-eCharger CORE (cloud)",
+        "pl": "go-eCharger CORE (cloud)",
+        "ru": "go-eCharger CORE (cloud)",
+        "ko": "go-eCharger CORE (cloud)",
+        "ar": "go-eCharger CORE (cloud)"
       },
-      "discovery": "mdns_http_go-echarger",
-      "deprecated": true,
-      "id": "go-eCharger-local",
+      "id": "goe-Cloud-CORE",
       "settings": [
         {
-          "id": "address",
-          "type": "text",
+          "id": "cloud_info",
+          "type": "group",
           "label": {
-            "en": "IP address",
-            "nl": "IP-adres",
-            "da": "IP-adresse",
-            "de": "IP-Adresse",
-            "es": "Dirección IP",
-            "fr": "Adresse IP",
-            "it": "Indirizzo IP",
-            "no": "IP-adresse",
-            "sv": "IP-adress",
-            "pl": "Adres IP",
-            "ru": "IP-адрес",
-            "ko": "IP 주소",
-            "ar": "عنوان IP"
+            "en": "Cloud API login credentials.",
+            "nl": "Cloud API-inloggegevens.",
+            "da": "Cloud API-loginoplysninger.",
+            "de": "Cloud API-Anmeldeinformationen.",
+            "es": "Credenciales de inicio de sesión de la API de la nube.",
+            "fr": "Identifiants de connexion à l'API cloud.",
+            "it": "Credenziali di accesso all'API cloud.",
+            "no": "Cloud API-påloggingsinformasjon.",
+            "sv": "Cloud API-inloggningsuppgifter.",
+            "pl": "Dane logowania do API chmury.",
+            "ru": "Учетные данные для входа в облачный API.",
+            "ko": "Cloud API 로그인 자격 증명.",
+            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
           },
-          "value": "0.0.0.0",
+          "children": [
+            {
+              "id": "serialnumber",
+              "type": "text",
+              "label": {
+                "en": "Charger serial number",
+                "nl": "Serienummer van de lader",
+                "da": "Oplader serienummer",
+                "de": "Seriennummer des Ladegerats",
+                "es": "Número de serie del cargador",
+                "fr": "Numéro de série du chargeur",
+                "it": "Numero di serie del caricatore",
+                "no": "Lader serienummer",
+                "sv": "Laddarens serienummer",
+                "pl": "Numer seryjny ładowarki",
+                "ru": "Серийный номер зарядного устройства",
+                "ko": "충전기 일련 번호",
+                "ar": "الرقم التسلسلي للشاحن"
+              },
+              "value": "",
+              "hint": {
+                "en": "Serial number of the charger to connect to.",
+                "nl": "Serienummer van de lader om verbinding mee te maken.",
+                "da": "Serienummer på opladeren for at oprette forbindelse til.",
+                "de": "Serienummer des Ladegerats, mit dem eine Verbindung hergestellt werden soll.",
+                "es": "Número de serie del cargador al que conectarse.",
+                "fr": "Numéro de série du chargeur auquel se connecter.",
+                "it": "Numero di serie del caricatore a cui connettersi.",
+                "no": "Serienummeret til laderen som skal kobles til.",
+                "sv": "Serienummer på laddaren att ansluta till.",
+                "pl": "Numer seryjny ładowarki, do której należy się połączyć.",
+                "ru": "Серийный номер зарядного устройства для подключения.",
+                "ko": "연결할 충전기의 일련 번호입니다.",
+                "ar": "الرقم التسلسلي للشاحن للاتصال به."
+              },
+              "highlight": true
+            },
+            {
+              "id": "token",
+              "type": "password",
+              "label": {
+                "en": "Cloud API key",
+                "nl": "Cloud API-sleutel",
+                "da": "Cloud API-nogle",
+                "de": "Cloud API-Schlussel",
+                "es": "Clave API de Cloud",
+                "fr": "Cle API Cloud",
+                "it": "Chiave API Cloud",
+                "no": "Cloud API-nokkel",
+                "sv": "Cloud API-nyckel",
+                "pl": "Klucz API Cloud",
+                "ru": "Cloud API ключ",
+                "ko": "Cloud API 키",
+                "ar": "مفتاح Cloud API"
+              },
+              "value": "",
+              "hint": {
+                "en": "Used to connect this charger through the go-e Cloud API.",
+                "nl": "Wordt gebruikt om deze lader via de go-e Cloud API te verbinden.",
+                "da": "Bruges til at forbinde denne oplader via go-e Cloud API.",
+                "de": "Wird verwendet, um dieses Ladegerat uber die go-e Cloud API zu verbinden.",
+                "es": "Se usa para conectar este cargador a traves de la API de go-e Cloud.",
+                "fr": "Utilise pour connecter ce chargeur via l'API go-e Cloud.",
+                "it": "Usata per collegare questo caricatore tramite la API Cloud di go-e.",
+                "no": "Brukes til a koble denne laderen til via go-e Cloud API.",
+                "sv": "Anvands for att ansluta denna laddare via go-e Cloud API.",
+                "pl": "Uzywany do polaczenia tej ladowarki przez API go-e Cloud.",
+                "ru": "Используется для подключения этого зарядного устройства через go-e Cloud API.",
+                "ko": "go-e Cloud API를 통해 이 충전기를 연결하는 데 사용됩니다.",
+                "ar": "يستخدم للاتصال بهذا الشاحن عبر واجهة go-e Cloud API."
+              },
+              "highlight": true
+            }
+          ]
+        },
+        {
+          "id": "device_info",
+          "type": "group",
+          "label": {
+            "en": "Discovered device information.",
+            "nl": "Ontdekte apparaatinformatie.",
+            "da": "Opdaget enhedsinformation.",
+            "de": "Entdeckte Geräteinformationen.",
+            "es": "Información del dispositivo descubierto.",
+            "fr": "Informations sur l'appareil découvert.",
+            "it": "Informazioni sul dispositivo rilevato.",
+            "no": "Oppdaget enhetsinformasjon.",
+            "sv": "Upptäckt enhetsinformation.",
+            "pl": "Odkryto informacje o urządzeniu.",
+            "ru": "Обнаружена информация об устройстве.",
+            "ko": "발견된 장치 정보.",
+            "ar": "تم اكتشاف معلومات الجهاز."
+          },
+          "children": [
+            {
+              "id": "version",
+              "type": "label",
+              "label": {
+                "en": "Firmware",
+                "nl": "Firmware",
+                "da": "Firmware",
+                "de": "Firmware",
+                "es": "Firmware",
+                "fr": "Micrologiciel",
+                "it": "Firmware",
+                "no": "Fastvare",
+                "sv": "Firmware",
+                "pl": "Oprogramowanie układowe",
+                "ru": "Прошивка",
+                "ko": "펌웨어",
+                "ar": "البرامج الثابتة"
+              },
+              "value": "",
+              "hint": {
+                "en": "Device firmware version.",
+                "nl": "Apparaat firmwareversie.",
+                "da": "Enhedens firmwareversion.",
+                "de": "Firmware-Version des Geräts.",
+                "es": "Versión del firmware del dispositivo.",
+                "fr": "Version du firmware de l'appareil.",
+                "it": "Versione firmware del dispositivo.",
+                "no": "Enhetsprogramvareversjon.",
+                "sv": "Enhetens firmwareversion.",
+                "pl": "Wersja oprogramowania urządzenia.",
+                "ru": "Версия прошивки устройства.",
+                "ko": "기기 펌웨어 버전.",
+                "ar": "إصدار البرنامج الثابت للجهاز."
+              }
+            },
+            {
+              "id": "type",
+              "type": "label",
+              "label": {
+                "en": "Type",
+                "nl": "Typ",
+                "da": "Type",
+                "de": "Typ",
+                "es": "Escribe",
+                "fr": "Tapez",
+                "it": "Tipo",
+                "no": "Type",
+                "sv": "Typ",
+                "pl": "Rodzaj",
+                "ru": "Тип",
+                "ko": "유형",
+                "ar": "نوع"
+              },
+              "value": "",
+              "hint": {
+                "en": "Device type.",
+                "nl": "Apparaattype.",
+                "da": "Enhedstype.",
+                "de": "Gerätetyp.",
+                "es": "Tipo de dispositivo.",
+                "fr": "Type d'appareil.",
+                "it": "Tipo di dispositivo.",
+                "no": "Enhetstype.",
+                "sv": "Enhetstyp.",
+                "pl": "Typ urządzenia.",
+                "ru": "Тип устройства.",
+                "ko": "장치 유형.",
+                "ar": "نوع الجهاز."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "class": "evcharger",
+      "images": {
+        "small": "/drivers/goe-Cloud-Gemini/assets/images/small.png",
+        "large": "/drivers/goe-Cloud-Gemini/assets/images/large.png",
+        "xlarge": "/drivers/goe-Cloud-Gemini/assets/images/xlarge.png"
+      },
+      "capabilities": [
+        "measure_temperature",
+        "meter_power",
+        "meter_power.session",
+        "alarm_problem",
+        "measure_power",
+        "measure_voltage",
+        "measure_voltage.output",
+        "measure_current",
+        "evcharger_charging",
+        "evcharger_charging_state",
+        "goe_charger_mode",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv"
+      ],
+      "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
+        "meter_power.session": {
+          "type": "number",
+          "title": {
+            "en": "Energy Last Session",
+            "nl": "Energie Laatste Sessie",
+            "da": "Energi sidste session",
+            "de": "Energie letzte Sitzung",
+            "es": "Energía de la Última Sesión",
+            "fr": "Énergie de la dernière session",
+            "it": "Energia Ultima Sessione",
+            "no": "Energi siste økt",
+            "sv": "Energi senaste sessionen",
+            "pl": "Energia ostatniej sesji",
+            "ru": "Энергия за последнюю сессию",
+            "ko": "마지막 세션 에너지",
+            "ar": "الطاقة في الجلسة الأخيرة"
+          },
+          "hint:": {
+            "en": "Energy (kWh) delivered during last session. Reset automatically when a car is connected.",
+            "nl": "Energie (kWh) geleverd tijdens de laatste sessie. Wordt automatisch gereset wanneer een auto wordt aangesloten.",
+            "da": "Energi (kWh) leveret under sidste session. Nulstilles automatisk, når en bil tilsluttes.",
+            "de": "Energie (kWh), die während der letzten Sitzung geliefert wurde. Wird automatisch zurückgesetzt, wenn ein Auto angeschlossen wird.",
+            "es": "Energía (kWh) entregada durante la última sesión. Se restablece automáticamente cuando se conecta un coche.",
+            "fr": "Énergie (kWh) délivrée lors de la dernière session. Réinitialisation automatique lorsqu'une voiture est connectée.",
+            "it": "Energia (kWh) erogata durante l'ultima sessione. Si azzera automaticamente quando un'auto è collegata.",
+            "no": "Energi (kWh) levert under siste økt. Nullstilles automatisk når en bil kobles til.",
+            "sv": "Energi (kWh) levererad under senaste sessionen. Återställs automatiskt när en bil ansluts.",
+            "pl": "Energia (kWh) dostarczona podczas ostatniej sesji. Resetuje się automatycznie po podłączeniu samochodu.",
+            "ru": "Энергия (кВтч), переданная за последнюю сессию. Сбрасывается автоматически при подключении автомобиля.",
+            "ko": "마지막 세션 동안 전달된 에너지(kWh). 자동차가 연결되면 자동으로 초기화됩니다.",
+            "ar": "الطاقة (كيلوواط ساعة) التي تم تسليمها خلال الجلسة الأخيرة. يتم إعادة التعيين تلقائيًا عند توصيل سيارة."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "kWh",
+            "nl": "kWh",
+            "da": "kWh",
+            "de": "kWh",
+            "es": "kWh",
+            "fr": "kWh",
+            "it": "kWh",
+            "no": "kWh",
+            "sv": "kWh",
+            "pl": "kWh",
+            "ru": "кВтч",
+            "ko": "kWh",
+            "ar": "كيلوواط ساعة"
+          },
+          "insights": true
+        },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
+          },
           "hint": {
-            "en": "Discovered IP address of the device.",
-            "nl": "IP-adres van het apparaat ontdekt.",
-            "da": "Opdaget IP-adresse for enheden.",
-            "de": "IP-Adresse des Geräts entdeckt.",
-            "es": "Dirección IP del dispositivo descubierta.",
-            "fr": "Adresse IP de l'appareil découverte.",
-            "it": "Indirizzo IP del dispositivo rilevato.",
-            "no": "Oppdaget IP-adressen til enheten.",
-            "sv": "Upptäckt IP-adress för enheten.",
-            "pl": "Odkryto adres IP urządzenia.",
-            "ru": "Обнаружен IP-адрес устройства.",
-            "ko": "장치의 IP 주소를 발견했습니다.",
-            "ar": "تم اكتشاف عنوان IP للجهاز."
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
           },
-          "highlight": true
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
+          },
+          "hint": {
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
+          },
+          "hint": {
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_voltage.output": {
+          "type": "number",
+          "title": {
+            "en": "Output Voltage",
+            "nl": "Uitgangsspanning",
+            "da": "Udgangsspænding",
+            "de": "Ausgangsspannung",
+            "es": "Voltaje de salida",
+            "fr": "Tension de sortie",
+            "it": "Tensione di uscita",
+            "no": "Utgangsspenning",
+            "sv": "Utspänning",
+            "pl": "Napięcie wyjściowe",
+            "ru": "Выходное напряжение",
+            "ko": "출력 전압",
+            "ar": "جهد الخرج"
+          },
+          "hint": {
+            "en": "Currently delivered voltage in volts.",
+            "nl": "Huidige geleverde spanning in volt.",
+            "da": "Aktuelt leveret spænding i volt.",
+            "de": "Derzeit gelieferte Spannung in Volt.",
+            "es": "Voltaje entregado actualmente en voltios.",
+            "fr": "Tension actuellement délivrée en volts.",
+            "it": "Tensione attualmente erogata in volt.",
+            "no": "For øyeblikket levert spenning i volt.",
+            "sv": "För närvarande levererad spänning i volt.",
+            "pl": "Aktualnie dostarczane napięcie w woltach.",
+            "ru": "Текущее напряжение в вольтах.",
+            "ko": "현재 공급되는 전압(볼트)입니다.",
+            "ar": "الجهد الحالي المُسلم بالفولت."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "V",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
+            "es": "V",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
+            "pl": "V",
+            "ru": "V",
+            "ko": "V",
+            "ar": "V"
+          },
+          "min": 0,
+          "max": 500,
+          "insights": true
+        }
+      },
+      "energy": {
+        "evCharger": true,
+        "meterPowerImportedCapability": "meter_power"
+      },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "../../../assets/logo.png",
+            "title": {
+              "en": "go-e Cloud Access",
+              "nl": "go-e Cloud-toegang",
+              "da": "go-e Cloud-adgang",
+              "de": "go-e Cloud-Zugang",
+              "es": "Acceso a go-e Cloud",
+              "fr": "Accès au Cloud go-e",
+              "it": "Accesso al Cloud go-e",
+              "no": "go-e Cloud-tilgang",
+              "sv": "go-e Cloud-åtkomst",
+              "pl": "Dostęp do chmury go-e",
+              "ru": "Доступ к облаку go-e",
+              "ko": "go-e 클라우드 액세스",
+              "ar": "الوصول إلى سحابة go-e"
+            },
+            "usernameLabel": {
+              "en": "Serial Number (get from go-e Charger mobile app)",
+              "nl": "Serienummer (verkrijg via de go-e Charger mobiele app)",
+              "da": "Serienummer (hent fra go-e Charger mobilapp)",
+              "de": "Seriennummer (aus der go-e Charger Mobile App abrufen)",
+              "es": "Número de serie (obtenido de la aplicación móvil go-e Charger)",
+              "fr": "Numéro de série (à obtenir depuis l'application mobile go-e Charger)",
+              "it": "Numero di serie (ottieni dall'app mobile go-e Charger)",
+              "no": "Seriennummer (få fra go-e Charger mobilapp)",
+              "sv": "Serienummer (hämta från go-e Charger mobilapp)",
+              "pl": "Numer seryjny (pobierz z aplikacji mobilnej go-e Charger)",
+              "ru": "Серийный номер (получите из мобильного приложения go-e Charger)",
+              "ko": "일련 번호 (go-e Charger 모바일 앱에서 확인)",
+              "ar": "الرقم التسلسلي (احصل عليه من تطبيق go-e Charger على الهاتف المحمول)"
+            },
+            "usernamePlaceholder": {
+              "en": "123456",
+              "nl": "123456",
+              "da": "123456",
+              "de": "123456",
+              "es": "123456",
+              "fr": "123456",
+              "it": "123456",
+              "no": "123456",
+              "sv": "123456",
+              "pl": "123456",
+              "ru": "123456",
+              "ko": "123456",
+              "ar": "١٢٣٤٥٦"
+            },
+            "passwordLabel": {
+              "en": "Cloud API Key (get from go-e Charger mobile app)",
+              "nl": "Cloud API-sleutel (verkrijg via de go-e Charger mobiele app)",
+              "da": "Cloud API-nøgle (fås fra go-e Charger mobilapp)",
+              "de": "Cloud-API-Schlüssel (erhalte ihn aus der go-e Charger Mobile-App)",
+              "es": "Clave de API de Cloud (obtenla desde la app móvil go-e Charger)",
+              "fr": "Clé API Cloud (obtenez-la depuis l'application mobile go-e Charger)",
+              "it": "Chiave API Cloud (ottieni dall'app mobile go-e Charger)",
+              "no": "Cloud API-nøkkel (få fra go-e Charger mobilapp)",
+              "sv": "Moln-API-nyckel (fås från go-e Charger-mobilappen)",
+              "pl": "Klucz API Cloud (pobierz z aplikacji mobilnej go-e Charger)",
+              "ru": "Ключ API облака (получите в мобильном приложении go-e Charger)",
+              "ko": "클라우드 API 키 (go-e Charger 모바일 앱에서 가져오기)",
+              "ar": "مفتاح API السحابي (احصل عليه من تطبيق go-e Charger للهواتف المحمولة)"
+            },
+            "passwordPlaceholder": {
+              "en": "Your Cloud API Key",
+              "nl": "Je Cloud API-sleutel",
+              "da": "Din Cloud API-nøgle",
+              "de": "Ihr Cloud-API-Schlüssel",
+              "es": "Tu clave API de Cloud",
+              "fr": "Votre clé API Cloud",
+              "it": "La tua chiave API Cloud",
+              "no": "Din Cloud API-nøkkel",
+              "sv": "Din Cloud API-nyckel",
+              "pl": "Twój klucz API w chmurze",
+              "ru": "Ваш Cloud API ключ",
+              "ko": "귀하의 클라우드 API 키",
+              "ar": "مفتاح API السحابي الخاص بك"
+            }
+          },
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "name": {
+        "en": "go-eCharger Gemini (cloud)",
+        "nl": "go-eCharger Gemini (cloud)",
+        "da": "go-eCharger Gemini (cloud)",
+        "de": "go-eCharger Gemini (cloud)",
+        "es": "go-eCharger Gemini (cloud)",
+        "fr": "go-eCharger Gemini (cloud)",
+        "it": "go-eCharger Gemini (cloud)",
+        "no": "go-eCharger Gemini (cloud)",
+        "sv": "go-eCharger Gemini (cloud)",
+        "pl": "go-eCharger Gemini (cloud)",
+        "ru": "go-eCharger Gemini (cloud)",
+        "ko": "go-eCharger Gemini (cloud)",
+        "ar": "go-eCharger Gemini (cloud)"
+      },
+      "id": "goe-Cloud-Gemini",
+      "settings": [
+        {
+          "id": "cloud_info",
+          "type": "group",
+          "label": {
+            "en": "Cloud API login credentials.",
+            "nl": "Cloud API-inloggegevens.",
+            "da": "Cloud API-loginoplysninger.",
+            "de": "Cloud API-Anmeldeinformationen.",
+            "es": "Credenciales de inicio de sesión de la API de la nube.",
+            "fr": "Identifiants de connexion à l'API cloud.",
+            "it": "Credenziali di accesso all'API cloud.",
+            "no": "Cloud API-påloggingsinformasjon.",
+            "sv": "Cloud API-inloggningsuppgifter.",
+            "pl": "Dane logowania do API chmury.",
+            "ru": "Учетные данные для входа в облачный API.",
+            "ko": "Cloud API 로그인 자격 증명.",
+            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
+          },
+          "children": [
+            {
+              "id": "serialnumber",
+              "type": "text",
+              "label": {
+                "en": "Charger serial number",
+                "nl": "Serienummer van de lader",
+                "da": "Oplader serienummer",
+                "de": "Seriennummer des Ladegerats",
+                "es": "Número de serie del cargador",
+                "fr": "Numéro de série du chargeur",
+                "it": "Numero di serie del caricatore",
+                "no": "Lader serienummer",
+                "sv": "Laddarens serienummer",
+                "pl": "Numer seryjny ładowarki",
+                "ru": "Серийный номер зарядного устройства",
+                "ko": "충전기 일련 번호",
+                "ar": "الرقم التسلسلي للشاحن"
+              },
+              "value": "",
+              "hint": {
+                "en": "Serial number of the charger to connect to.",
+                "nl": "Serienummer van de lader om verbinding mee te maken.",
+                "da": "Serienummer på opladeren for at oprette forbindelse til.",
+                "de": "Serienummer des Ladegerats, mit dem eine Verbindung hergestellt werden soll.",
+                "es": "Número de serie del cargador al que conectarse.",
+                "fr": "Numéro de série du chargeur auquel se connecter.",
+                "it": "Numero di serie del caricatore a cui connettersi.",
+                "no": "Serienummeret til laderen som skal kobles til.",
+                "sv": "Serienummer på laddaren att ansluta till.",
+                "pl": "Numer seryjny ładowarki, do której należy się połączyć.",
+                "ru": "Серийный номер зарядного устройства для подключения.",
+                "ko": "연결할 충전기의 일련 번호입니다.",
+                "ar": "الرقم التسلسلي للشاحن للاتصال به."
+              },
+              "highlight": true
+            },
+            {
+              "id": "token",
+              "type": "password",
+              "label": {
+                "en": "Cloud API key",
+                "nl": "Cloud API-sleutel",
+                "da": "Cloud API-nogle",
+                "de": "Cloud API-Schlussel",
+                "es": "Clave API de Cloud",
+                "fr": "Cle API Cloud",
+                "it": "Chiave API Cloud",
+                "no": "Cloud API-nokkel",
+                "sv": "Cloud API-nyckel",
+                "pl": "Klucz API Cloud",
+                "ru": "Cloud API ключ",
+                "ko": "Cloud API 키",
+                "ar": "مفتاح Cloud API"
+              },
+              "value": "",
+              "hint": {
+                "en": "Used to connect this charger through the go-e Cloud API.",
+                "nl": "Wordt gebruikt om deze lader via de go-e Cloud API te verbinden.",
+                "da": "Bruges til at forbinde denne oplader via go-e Cloud API.",
+                "de": "Wird verwendet, um dieses Ladegerat uber die go-e Cloud API zu verbinden.",
+                "es": "Se usa para conectar este cargador a traves de la API de go-e Cloud.",
+                "fr": "Utilise pour connecter ce chargeur via l'API go-e Cloud.",
+                "it": "Usata per collegare questo caricatore tramite la API Cloud di go-e.",
+                "no": "Brukes til a koble denne laderen til via go-e Cloud API.",
+                "sv": "Anvands for att ansluta denna laddare via go-e Cloud API.",
+                "pl": "Uzywany do polaczenia tej ladowarki przez API go-e Cloud.",
+                "ru": "Используется для подключения этого зарядного устройства через go-e Cloud API.",
+                "ko": "go-e Cloud API를 통해 이 충전기를 연결하는 데 사용됩니다.",
+                "ar": "يستخدم للاتصال بهذا الشاحن عبر واجهة go-e Cloud API."
+              },
+              "highlight": true
+            }
+          ]
+        },
+        {
+          "id": "device_info",
+          "type": "group",
+          "label": {
+            "en": "Discovered device information.",
+            "nl": "Ontdekte apparaatinformatie.",
+            "da": "Opdaget enhedsinformation.",
+            "de": "Entdeckte Geräteinformationen.",
+            "es": "Información del dispositivo descubierto.",
+            "fr": "Informations sur l'appareil découvert.",
+            "it": "Informazioni sul dispositivo rilevato.",
+            "no": "Oppdaget enhetsinformasjon.",
+            "sv": "Upptäckt enhetsinformation.",
+            "pl": "Odkryto informacje o urządzeniu.",
+            "ru": "Обнаружена информация об устройстве.",
+            "ko": "발견된 장치 정보.",
+            "ar": "تم اكتشاف معلومات الجهاز."
+          },
+          "children": [
+            {
+              "id": "version",
+              "type": "label",
+              "label": {
+                "en": "Firmware",
+                "nl": "Firmware",
+                "da": "Firmware",
+                "de": "Firmware",
+                "es": "Firmware",
+                "fr": "Micrologiciel",
+                "it": "Firmware",
+                "no": "Fastvare",
+                "sv": "Firmware",
+                "pl": "Oprogramowanie układowe",
+                "ru": "Прошивка",
+                "ko": "펌웨어",
+                "ar": "البرامج الثابتة"
+              },
+              "value": "",
+              "hint": {
+                "en": "Device firmware version.",
+                "nl": "Apparaat firmwareversie.",
+                "da": "Enhedens firmwareversion.",
+                "de": "Firmware-Version des Geräts.",
+                "es": "Versión del firmware del dispositivo.",
+                "fr": "Version du firmware de l'appareil.",
+                "it": "Versione firmware del dispositivo.",
+                "no": "Enhetsprogramvareversjon.",
+                "sv": "Enhetens firmwareversion.",
+                "pl": "Wersja oprogramowania urządzenia.",
+                "ru": "Версия прошивки устройства.",
+                "ko": "기기 펌웨어 버전.",
+                "ar": "إصدار البرنامج الثابت للجهاز."
+              }
+            },
+            {
+              "id": "type",
+              "type": "label",
+              "label": {
+                "en": "Type",
+                "nl": "Typ",
+                "da": "Type",
+                "de": "Typ",
+                "es": "Escribe",
+                "fr": "Tapez",
+                "it": "Tipo",
+                "no": "Type",
+                "sv": "Typ",
+                "pl": "Rodzaj",
+                "ru": "Тип",
+                "ko": "유형",
+                "ar": "نوع"
+              },
+              "value": "",
+              "hint": {
+                "en": "Device type.",
+                "nl": "Apparaattype.",
+                "da": "Enhedstype.",
+                "de": "Gerätetyp.",
+                "es": "Tipo de dispositivo.",
+                "fr": "Type d'appareil.",
+                "it": "Tipo di dispositivo.",
+                "no": "Enhetstype.",
+                "sv": "Enhetstyp.",
+                "pl": "Typ urządzenia.",
+                "ru": "Тип устройства.",
+                "ko": "장치 유형.",
+                "ar": "نوع الجهاز."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "class": "evcharger",
+      "images": {
+        "small": "/drivers/goe-Cloud-Homeplus/assets/images/small.png",
+        "large": "/drivers/goe-Cloud-Homeplus/assets/images/large.png",
+        "xlarge": "/drivers/goe-Cloud-Homeplus/assets/images/xlarge.png"
+      },
+      "capabilities": [
+        "measure_temperature",
+        "meter_power",
+        "meter_power.session",
+        "alarm_problem",
+        "measure_power",
+        "measure_voltage",
+        "measure_voltage.output",
+        "measure_current",
+        "evcharger_charging",
+        "evcharger_charging_state",
+        "goe_charger_mode",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv"
+      ],
+      "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
+        "meter_power.session": {
+          "type": "number",
+          "title": {
+            "en": "Energy Last Session",
+            "nl": "Energie Laatste Sessie",
+            "da": "Energi sidste session",
+            "de": "Energie letzte Sitzung",
+            "es": "Energía de la Última Sesión",
+            "fr": "Énergie de la dernière session",
+            "it": "Energia Ultima Sessione",
+            "no": "Energi siste økt",
+            "sv": "Energi senaste sessionen",
+            "pl": "Energia ostatniej sesji",
+            "ru": "Энергия за последнюю сессию",
+            "ko": "마지막 세션 에너지",
+            "ar": "الطاقة في الجلسة الأخيرة"
+          },
+          "hint:": {
+            "en": "Energy (kWh) delivered during last session. Reset automatically when a car is connected.",
+            "nl": "Energie (kWh) geleverd tijdens de laatste sessie. Wordt automatisch gereset wanneer een auto wordt aangesloten.",
+            "da": "Energi (kWh) leveret under sidste session. Nulstilles automatisk, når en bil tilsluttes.",
+            "de": "Energie (kWh), die während der letzten Sitzung geliefert wurde. Wird automatisch zurückgesetzt, wenn ein Auto angeschlossen wird.",
+            "es": "Energía (kWh) entregada durante la última sesión. Se restablece automáticamente cuando se conecta un coche.",
+            "fr": "Énergie (kWh) délivrée lors de la dernière session. Réinitialisation automatique lorsqu'une voiture est connectée.",
+            "it": "Energia (kWh) erogata durante l'ultima sessione. Si azzera automaticamente quando un'auto è collegata.",
+            "no": "Energi (kWh) levert under siste økt. Nullstilles automatisk når en bil kobles til.",
+            "sv": "Energi (kWh) levererad under senaste sessionen. Återställs automatiskt när en bil ansluts.",
+            "pl": "Energia (kWh) dostarczona podczas ostatniej sesji. Resetuje się automatycznie po podłączeniu samochodu.",
+            "ru": "Энергия (кВтч), переданная за последнюю сессию. Сбрасывается автоматически при подключении автомобиля.",
+            "ko": "마지막 세션 동안 전달된 에너지(kWh). 자동차가 연결되면 자동으로 초기화됩니다.",
+            "ar": "الطاقة (كيلوواط ساعة) التي تم تسليمها خلال الجلسة الأخيرة. يتم إعادة التعيين تلقائيًا عند توصيل سيارة."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "kWh",
+            "nl": "kWh",
+            "da": "kWh",
+            "de": "kWh",
+            "es": "kWh",
+            "fr": "kWh",
+            "it": "kWh",
+            "no": "kWh",
+            "sv": "kWh",
+            "pl": "kWh",
+            "ru": "кВтч",
+            "ko": "kWh",
+            "ar": "كيلوواط ساعة"
+          },
+          "insights": true
+        },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
+          },
+          "hint": {
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
+          },
+          "hint": {
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
+          },
+          "hint": {
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_voltage.output": {
+          "type": "number",
+          "title": {
+            "en": "Output Voltage",
+            "nl": "Uitgangsspanning",
+            "da": "Udgangsspænding",
+            "de": "Ausgangsspannung",
+            "es": "Voltaje de salida",
+            "fr": "Tension de sortie",
+            "it": "Tensione di uscita",
+            "no": "Utgangsspenning",
+            "sv": "Utspänning",
+            "pl": "Napięcie wyjściowe",
+            "ru": "Выходное напряжение",
+            "ko": "출력 전압",
+            "ar": "جهد الخرج"
+          },
+          "hint": {
+            "en": "Currently delivered voltage in volts.",
+            "nl": "Huidige geleverde spanning in volt.",
+            "da": "Aktuelt leveret spænding i volt.",
+            "de": "Derzeit gelieferte Spannung in Volt.",
+            "es": "Voltaje entregado actualmente en voltios.",
+            "fr": "Tension actuellement délivrée en volts.",
+            "it": "Tensione attualmente erogata in volt.",
+            "no": "For øyeblikket levert spenning i volt.",
+            "sv": "För närvarande levererad spänning i volt.",
+            "pl": "Aktualnie dostarczane napięcie w woltach.",
+            "ru": "Текущее напряжение в вольтах.",
+            "ko": "현재 공급되는 전압(볼트)입니다.",
+            "ar": "الجهد الحالي المُسلم بالفولت."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "V",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
+            "es": "V",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
+            "pl": "V",
+            "ru": "V",
+            "ko": "V",
+            "ar": "V"
+          },
+          "min": 0,
+          "max": 500,
+          "insights": true
+        }
+      },
+      "energy": {
+        "evCharger": true,
+        "meterPowerImportedCapability": "meter_power"
+      },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "../../../assets/logo.png",
+            "title": {
+              "en": "go-e Cloud Access",
+              "nl": "go-e Cloud-toegang",
+              "da": "go-e Cloud-adgang",
+              "de": "go-e Cloud-Zugang",
+              "es": "Acceso a go-e Cloud",
+              "fr": "Accès au Cloud go-e",
+              "it": "Accesso al Cloud go-e",
+              "no": "go-e Cloud-tilgang",
+              "sv": "go-e Cloud-åtkomst",
+              "pl": "Dostęp do chmury go-e",
+              "ru": "Доступ к облаку go-e",
+              "ko": "go-e 클라우드 액세스",
+              "ar": "الوصول إلى سحابة go-e"
+            },
+            "usernameLabel": {
+              "en": "Serial Number (get from go-e Charger mobile app)",
+              "nl": "Serienummer (verkrijg via de go-e Charger mobiele app)",
+              "da": "Serienummer (hent fra go-e Charger mobilapp)",
+              "de": "Seriennummer (aus der go-e Charger Mobile App abrufen)",
+              "es": "Número de serie (obtenido de la aplicación móvil go-e Charger)",
+              "fr": "Numéro de série (à obtenir depuis l'application mobile go-e Charger)",
+              "it": "Numero di serie (ottieni dall'app mobile go-e Charger)",
+              "no": "Seriennummer (få fra go-e Charger mobilapp)",
+              "sv": "Serienummer (hämta från go-e Charger mobilapp)",
+              "pl": "Numer seryjny (pobierz z aplikacji mobilnej go-e Charger)",
+              "ru": "Серийный номер (получите из мобильного приложения go-e Charger)",
+              "ko": "일련 번호 (go-e Charger 모바일 앱에서 확인)",
+              "ar": "الرقم التسلسلي (احصل عليه من تطبيق go-e Charger على الهاتف المحمول)"
+            },
+            "usernamePlaceholder": {
+              "en": "123456",
+              "nl": "123456",
+              "da": "123456",
+              "de": "123456",
+              "es": "123456",
+              "fr": "123456",
+              "it": "123456",
+              "no": "123456",
+              "sv": "123456",
+              "pl": "123456",
+              "ru": "123456",
+              "ko": "123456",
+              "ar": "١٢٣٤٥٦"
+            },
+            "passwordLabel": {
+              "en": "Cloud API Key (get from go-e Charger mobile app)",
+              "nl": "Cloud API-sleutel (verkrijg via de go-e Charger mobiele app)",
+              "da": "Cloud API-nøgle (fås fra go-e Charger mobilapp)",
+              "de": "Cloud-API-Schlüssel (erhalte ihn aus der go-e Charger Mobile-App)",
+              "es": "Clave de API de Cloud (obtenla desde la app móvil go-e Charger)",
+              "fr": "Clé API Cloud (obtenez-la depuis l'application mobile go-e Charger)",
+              "it": "Chiave API Cloud (ottieni dall'app mobile go-e Charger)",
+              "no": "Cloud API-nøkkel (få fra go-e Charger mobilapp)",
+              "sv": "Moln-API-nyckel (fås från go-e Charger-mobilappen)",
+              "pl": "Klucz API Cloud (pobierz z aplikacji mobilnej go-e Charger)",
+              "ru": "Ключ API облака (получите в мобильном приложении go-e Charger)",
+              "ko": "클라우드 API 키 (go-e Charger 모바일 앱에서 가져오기)",
+              "ar": "مفتاح API السحابي (احصل عليه من تطبيق go-e Charger للهواتف المحمولة)"
+            },
+            "passwordPlaceholder": {
+              "en": "Your Cloud API Key",
+              "nl": "Je Cloud API-sleutel",
+              "da": "Din Cloud API-nøgle",
+              "de": "Ihr Cloud-API-Schlüssel",
+              "es": "Tu clave API de Cloud",
+              "fr": "Votre clé API Cloud",
+              "it": "La tua chiave API Cloud",
+              "no": "Din Cloud API-nøkkel",
+              "sv": "Din Cloud API-nyckel",
+              "pl": "Twój klucz API w chmurze",
+              "ru": "Ваш Cloud API ключ",
+              "ko": "귀하의 클라우드 API 키",
+              "ar": "مفتاح API السحابي الخاص بك"
+            }
+          },
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "name": {
+        "en": "go-eCharger Home+ (cloud)",
+        "nl": "go-eCharger Home+ (cloud)",
+        "da": "go-eCharger Home+ (cloud)",
+        "de": "go-eCharger Home+ (cloud)",
+        "es": "go-eCharger Home+ (cloud)",
+        "fr": "go-eCharger Home+ (cloud)",
+        "it": "go-eCharger Home+ (cloud)",
+        "no": "go-eCharger Home+ (cloud)",
+        "sv": "go-eCharger Home+ (cloud)",
+        "pl": "go-eCharger Home+ (cloud)",
+        "ru": "go-eCharger Home+ (cloud)",
+        "ko": "go-eCharger Home+ (cloud)",
+        "ar": "go-eCharger Home+ (cloud)"
+      },
+      "id": "goe-Cloud-Homeplus",
+      "settings": [
+        {
+          "id": "cloud_info",
+          "type": "group",
+          "label": {
+            "en": "Cloud API login credentials.",
+            "nl": "Cloud API-inloggegevens.",
+            "da": "Cloud API-loginoplysninger.",
+            "de": "Cloud API-Anmeldeinformationen.",
+            "es": "Credenciales de inicio de sesión de la API de la nube.",
+            "fr": "Identifiants de connexion à l'API cloud.",
+            "it": "Credenziali di accesso all'API cloud.",
+            "no": "Cloud API-påloggingsinformasjon.",
+            "sv": "Cloud API-inloggningsuppgifter.",
+            "pl": "Dane logowania do API chmury.",
+            "ru": "Учетные данные для входа в облачный API.",
+            "ko": "Cloud API 로그인 자격 증명.",
+            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
+          },
+          "children": [
+            {
+              "id": "serialnumber",
+              "type": "text",
+              "label": {
+                "en": "Charger serial number",
+                "nl": "Serienummer van de lader",
+                "da": "Oplader serienummer",
+                "de": "Seriennummer des Ladegerats",
+                "es": "Número de serie del cargador",
+                "fr": "Numéro de série du chargeur",
+                "it": "Numero di serie del caricatore",
+                "no": "Lader serienummer",
+                "sv": "Laddarens serienummer",
+                "pl": "Numer seryjny ładowarki",
+                "ru": "Серийный номер зарядного устройства",
+                "ko": "충전기 일련 번호",
+                "ar": "الرقم التسلسلي للشاحن"
+              },
+              "value": "",
+              "hint": {
+                "en": "Serial number of the charger to connect to.",
+                "nl": "Serienummer van de lader om verbinding mee te maken.",
+                "da": "Serienummer på opladeren for at oprette forbindelse til.",
+                "de": "Serienummer des Ladegerats, mit dem eine Verbindung hergestellt werden soll.",
+                "es": "Número de serie del cargador al que conectarse.",
+                "fr": "Numéro de série du chargeur auquel se connecter.",
+                "it": "Numero di serie del caricatore a cui connettersi.",
+                "no": "Serienummeret til laderen som skal kobles til.",
+                "sv": "Serienummer på laddaren att ansluta till.",
+                "pl": "Numer seryjny ładowarki, do której należy się połączyć.",
+                "ru": "Серийный номер зарядного устройства для подключения.",
+                "ko": "연결할 충전기의 일련 번호입니다.",
+                "ar": "الرقم التسلسلي للشاحن للاتصال به."
+              },
+              "highlight": true
+            },
+            {
+              "id": "token",
+              "type": "password",
+              "label": {
+                "en": "Cloud API key",
+                "nl": "Cloud API-sleutel",
+                "da": "Cloud API-nogle",
+                "de": "Cloud API-Schlussel",
+                "es": "Clave API de Cloud",
+                "fr": "Cle API Cloud",
+                "it": "Chiave API Cloud",
+                "no": "Cloud API-nokkel",
+                "sv": "Cloud API-nyckel",
+                "pl": "Klucz API Cloud",
+                "ru": "Cloud API ключ",
+                "ko": "Cloud API 키",
+                "ar": "مفتاح Cloud API"
+              },
+              "value": "",
+              "hint": {
+                "en": "Used to connect this charger through the go-e Cloud API.",
+                "nl": "Wordt gebruikt om deze lader via de go-e Cloud API te verbinden.",
+                "da": "Bruges til at forbinde denne oplader via go-e Cloud API.",
+                "de": "Wird verwendet, um dieses Ladegerat uber die go-e Cloud API zu verbinden.",
+                "es": "Se usa para conectar este cargador a traves de la API de go-e Cloud.",
+                "fr": "Utilise pour connecter ce chargeur via l'API go-e Cloud.",
+                "it": "Usata per collegare questo caricatore tramite la API Cloud di go-e.",
+                "no": "Brukes til a koble denne laderen til via go-e Cloud API.",
+                "sv": "Anvands for att ansluta denna laddare via go-e Cloud API.",
+                "pl": "Uzywany do polaczenia tej ladowarki przez API go-e Cloud.",
+                "ru": "Используется для подключения этого зарядного устройства через go-e Cloud API.",
+                "ko": "go-e Cloud API를 통해 이 충전기를 연결하는 데 사용됩니다.",
+                "ar": "يستخدم للاتصال بهذا الشاحن عبر واجهة go-e Cloud API."
+              },
+              "highlight": true
+            }
+          ]
+        },
+        {
+          "id": "device_info",
+          "type": "group",
+          "label": {
+            "en": "Discovered device information.",
+            "nl": "Ontdekte apparaatinformatie.",
+            "da": "Opdaget enhedsinformation.",
+            "de": "Entdeckte Geräteinformationen.",
+            "es": "Información del dispositivo descubierto.",
+            "fr": "Informations sur l'appareil découvert.",
+            "it": "Informazioni sul dispositivo rilevato.",
+            "no": "Oppdaget enhetsinformasjon.",
+            "sv": "Upptäckt enhetsinformation.",
+            "pl": "Odkryto informacje o urządzeniu.",
+            "ru": "Обнаружена информация об устройстве.",
+            "ko": "발견된 장치 정보.",
+            "ar": "تم اكتشاف معلومات الجهاز."
+          },
+          "children": [
+            {
+              "id": "version",
+              "type": "label",
+              "label": {
+                "en": "Firmware",
+                "nl": "Firmware",
+                "da": "Firmware",
+                "de": "Firmware",
+                "es": "Firmware",
+                "fr": "Micrologiciel",
+                "it": "Firmware",
+                "no": "Fastvare",
+                "sv": "Firmware",
+                "pl": "Oprogramowanie układowe",
+                "ru": "Прошивка",
+                "ko": "펌웨어",
+                "ar": "البرامج الثابتة"
+              },
+              "value": "",
+              "hint": {
+                "en": "Device firmware version.",
+                "nl": "Apparaat firmwareversie.",
+                "da": "Enhedens firmwareversion.",
+                "de": "Firmware-Version des Geräts.",
+                "es": "Versión del firmware del dispositivo.",
+                "fr": "Version du firmware de l'appareil.",
+                "it": "Versione firmware del dispositivo.",
+                "no": "Enhetsprogramvareversjon.",
+                "sv": "Enhetens firmwareversion.",
+                "pl": "Wersja oprogramowania urządzenia.",
+                "ru": "Версия прошивки устройства.",
+                "ko": "기기 펌웨어 버전.",
+                "ar": "إصدار البرنامج الثابت للجهاز."
+              }
+            },
+            {
+              "id": "type",
+              "type": "label",
+              "label": {
+                "en": "Type",
+                "nl": "Typ",
+                "da": "Type",
+                "de": "Typ",
+                "es": "Escribe",
+                "fr": "Tapez",
+                "it": "Tipo",
+                "no": "Type",
+                "sv": "Typ",
+                "pl": "Rodzaj",
+                "ru": "Тип",
+                "ko": "유형",
+                "ar": "نوع"
+              },
+              "value": "",
+              "hint": {
+                "en": "Device type.",
+                "nl": "Apparaattype.",
+                "da": "Enhedstype.",
+                "de": "Gerätetyp.",
+                "es": "Tipo de dispositivo.",
+                "fr": "Type d'appareil.",
+                "it": "Tipo di dispositivo.",
+                "no": "Enhetstype.",
+                "sv": "Enhetstyp.",
+                "pl": "Typ urządzenia.",
+                "ru": "Тип устройства.",
+                "ko": "장치 유형.",
+                "ar": "نوع الجهاز."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "class": "evcharger",
+      "images": {
+        "small": "/drivers/goe-Cloud-PRO/assets/images/small.png",
+        "large": "/drivers/goe-Cloud-PRO/assets/images/large.png",
+        "xlarge": "/drivers/goe-Cloud-PRO/assets/images/xlarge.png"
+      },
+      "capabilities": [
+        "measure_temperature",
+        "meter_power",
+        "meter_power.session",
+        "alarm_problem",
+        "measure_power",
+        "measure_voltage",
+        "measure_voltage.output",
+        "measure_current",
+        "evcharger_charging",
+        "evcharger_charging_state",
+        "goe_charger_mode",
+        "goe_pv_surplus_enabled",
+        "goe_measure_phase_switching",
+        "goe_measure_modelStatus",
+        "measure_power.pakku",
+        "measure_power.pgrid",
+        "measure_power.ppv"
+      ],
+      "capabilitiesOptions": {
+        "evcharger_charging": {
+          "uiComponent": "button",
+          "uiQuickAction": true
+        },
+        "meter_power.session": {
+          "type": "number",
+          "title": {
+            "en": "Energy Last Session",
+            "nl": "Energie Laatste Sessie",
+            "da": "Energi sidste session",
+            "de": "Energie letzte Sitzung",
+            "es": "Energía de la Última Sesión",
+            "fr": "Énergie de la dernière session",
+            "it": "Energia Ultima Sessione",
+            "no": "Energi siste økt",
+            "sv": "Energi senaste sessionen",
+            "pl": "Energia ostatniej sesji",
+            "ru": "Энергия за последнюю сессию",
+            "ko": "마지막 세션 에너지",
+            "ar": "الطاقة في الجلسة الأخيرة"
+          },
+          "hint:": {
+            "en": "Energy (kWh) delivered during last session. Reset automatically when a car is connected.",
+            "nl": "Energie (kWh) geleverd tijdens de laatste sessie. Wordt automatisch gereset wanneer een auto wordt aangesloten.",
+            "da": "Energi (kWh) leveret under sidste session. Nulstilles automatisk, når en bil tilsluttes.",
+            "de": "Energie (kWh), die während der letzten Sitzung geliefert wurde. Wird automatisch zurückgesetzt, wenn ein Auto angeschlossen wird.",
+            "es": "Energía (kWh) entregada durante la última sesión. Se restablece automáticamente cuando se conecta un coche.",
+            "fr": "Énergie (kWh) délivrée lors de la dernière session. Réinitialisation automatique lorsqu'une voiture est connectée.",
+            "it": "Energia (kWh) erogata durante l'ultima sessione. Si azzera automaticamente quando un'auto è collegata.",
+            "no": "Energi (kWh) levert under siste økt. Nullstilles automatisk når en bil kobles til.",
+            "sv": "Energi (kWh) levererad under senaste sessionen. Återställs automatiskt när en bil ansluts.",
+            "pl": "Energia (kWh) dostarczona podczas ostatniej sesji. Resetuje się automatycznie po podłączeniu samochodu.",
+            "ru": "Энергия (кВтч), переданная за последнюю сессию. Сбрасывается автоматически при подключении автомобиля.",
+            "ko": "마지막 세션 동안 전달된 에너지(kWh). 자동차가 연결되면 자동으로 초기화됩니다.",
+            "ar": "الطاقة (كيلوواط ساعة) التي تم تسليمها خلال الجلسة الأخيرة. يتم إعادة التعيين تلقائيًا عند توصيل سيارة."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "kWh",
+            "nl": "kWh",
+            "da": "kWh",
+            "de": "kWh",
+            "es": "kWh",
+            "fr": "kWh",
+            "it": "kWh",
+            "no": "kWh",
+            "sv": "kWh",
+            "pl": "kWh",
+            "ru": "кВтч",
+            "ko": "kWh",
+            "ar": "كيلوواط ساعة"
+          },
+          "insights": true
+        },
+        "measure_power.pakku": {
+          "type": "number",
+          "title": {
+            "en": "Available House Battery Power",
+            "nl": "Beschikbare Batterijkracht",
+            "da": "Tilgængelig batterikraft",
+            "de": "Verfügbare Batterieleistung",
+            "es": "Potencia de la batería disponible",
+            "fr": "Puissance de la batterie disponible",
+            "it": "Potenza della batteria disponibile",
+            "no": "Tilgjengelig batterikraft",
+            "sv": "Tillgänglig batterikraft",
+            "pl": "Dostępna moc baterii",
+            "ru": "Доступная мощность батареи",
+            "ko": "사용 가능한 배터리 전력",
+            "ar": "الطاقة المتاحة للبطارية"
+          },
+          "hint": {
+            "en": "Available power from the house battery.",
+            "nl": "Beschikbare vermogen van de huisbatterij.",
+            "da": "Tilgængelig effekt fra husets batteri.",
+            "de": "Verfügbare Leistung aus der Hausbatterie.",
+            "es": "Potencia disponible de la batería de la casa.",
+            "fr": "Puissance disponible de la batterie de la maison.",
+            "it": "Potenza disponibile dalla batteria della casa.",
+            "no": "Tilgjengelig effekt fra husets batteri.",
+            "sv": "Tillgänglig effekt från husets batteri.",
+            "pl": "Dostępna moc z baterii domowej.",
+            "ru": "Доступная мощность от домашней батареи.",
+            "ko": "사용 가능한 배터리 전력입니다.",
+            "ar": "الطاقة المتاحة من البطارية المنزلية."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.pgrid": {
+          "type": "number",
+          "title": {
+            "en": "Available Grid Power",
+            "nl": "Beschikbare Netstroom",
+            "da": "Tilgængelig Net Effekt",
+            "de": "Verfügbare Netzleistung",
+            "es": "Potencia Disponible de la Red",
+            "fr": "Puissance Disponible du Réseau",
+            "it": "Potenza Disponibile della Rete",
+            "no": "Tilgjengelig Nettkraft",
+            "sv": "Tillgänglig Nätkraft",
+            "pl": "Dostępna Moc Sieci",
+            "ru": "Доступная мощность сети",
+            "ko": "사용 가능한 그리드 전력",
+            "ar": "الطاقة المتاحة من الشبكة"
+          },
+          "hint": {
+            "en": "Available power from the grid for PV optimization.",
+            "nl": "Beschikbare stroom van het net voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra nettet til PV-optimering.",
+            "de": "Verfügbare Leistung aus dem Netz für PV-Optimierung.",
+            "es": "Potencia disponible de la red para optimización PV.",
+            "fr": "Puissance disponible du réseau pour optimisation PV.",
+            "it": "Potenza disponibile dalla rete per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra nettet for PV-optimalisering.",
+            "sv": "Tillgänglig effekt från nätet för PV-optimering.",
+            "pl": "Dostępna moc z sieci do optymalizacji PV.",
+            "ru": "Доступная мощность из сети для оптимизации PV.",
+            "ko": "PV 최적화를 위해 그리드에서 사용할 수 있는 전력입니다.",
+            "ar": "الطاقة المتاحة من الشبكة من خلال تحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_power.ppv": {
+          "type": "number",
+          "title": {
+            "en": "Available PV Power",
+            "nl": "Beschikbare PV-vermogen",
+            "da": "Tilgængelig PV-effekt",
+            "de": "Verfügbare PV-Leistung",
+            "es": "Potencia PV disponible",
+            "fr": "Puissance PV disponible",
+            "it": "Potenza PV disponibile",
+            "no": "Tilgjengelig PV-kraft",
+            "sv": "Tillgänglig PV-kraft",
+            "pl": "Dostępna Moc PV",
+            "ru": "Доступная мощность PV",
+            "ko": "사용 가능한 PV 전력",
+            "ar": "الطاقة المتاحة من PV"
+          },
+          "hint": {
+            "en": "Available power from the solar panels for PV optimization.",
+            "nl": "Beschikbare vermogen van de zonnepanelen voor PV-optimalisatie.",
+            "da": "Tilgængelig effekt fra solpanelerne til PV-optimering.",
+            "de": "Verfügbare Leistung von den Solarmodulen für die PV-Optimierung.",
+            "es": "Potencia disponible de los paneles solares para la optimización de PV.",
+            "fr": "Puissance disponible des panneaux solaires pour l'optimisation PV.",
+            "it": "Potenza disponibile dai pannelli solari per l'ottimizzazione PV.",
+            "no": "Tilgjengelig effekt fra solcellepanelene som brukes til PV-optimalisering.",
+            "sv": "Tillgänglig effekt från solpanelerna som används för PV-optimering.",
+            "pl": "Dostępna moc z paneli słonecznych do optymalizacji PV.",
+            "ru": "Доступная мощность от солнечных панелей для оптимизации PV.",
+            "ko": "PV 최적화에 사용되는 태양광 패널에서 생성되는 전력입니다.",
+            "ar": "الطاقة المتاحة من الألواح الشمسية المستخدمة لتحسين PV."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "W",
+            "nl": "W",
+            "da": "W",
+            "de": "W",
+            "es": "W",
+            "fr": "W",
+            "it": "W",
+            "no": "W",
+            "sv": "W",
+            "pl": "W",
+            "ru": "W",
+            "ko": "W",
+            "ar": "W"
+          },
+          "decimals": 2,
+          "insights": false
+        },
+        "measure_voltage.output": {
+          "type": "number",
+          "title": {
+            "en": "Output Voltage",
+            "nl": "Uitgangsspanning",
+            "da": "Udgangsspænding",
+            "de": "Ausgangsspannung",
+            "es": "Voltaje de salida",
+            "fr": "Tension de sortie",
+            "it": "Tensione di uscita",
+            "no": "Utgangsspenning",
+            "sv": "Utspänning",
+            "pl": "Napięcie wyjściowe",
+            "ru": "Выходное напряжение",
+            "ko": "출력 전압",
+            "ar": "جهد الخرج"
+          },
+          "hint": {
+            "en": "Currently delivered voltage in volts.",
+            "nl": "Huidige geleverde spanning in volt.",
+            "da": "Aktuelt leveret spænding i volt.",
+            "de": "Derzeit gelieferte Spannung in Volt.",
+            "es": "Voltaje entregado actualmente en voltios.",
+            "fr": "Tension actuellement délivrée en volts.",
+            "it": "Tensione attualmente erogata in volt.",
+            "no": "For øyeblikket levert spenning i volt.",
+            "sv": "För närvarande levererad spänning i volt.",
+            "pl": "Aktualnie dostarczane napięcie w woltach.",
+            "ru": "Текущее напряжение в вольтах.",
+            "ko": "현재 공급되는 전압(볼트)입니다.",
+            "ar": "الجهد الحالي المُسلم بالفولت."
+          },
+          "getable": true,
+          "setable": false,
+          "units": {
+            "en": "V",
+            "nl": "V",
+            "da": "V",
+            "de": "V",
+            "es": "V",
+            "fr": "V",
+            "it": "V",
+            "no": "V",
+            "sv": "V",
+            "pl": "V",
+            "ru": "V",
+            "ko": "V",
+            "ar": "V"
+          },
+          "min": 0,
+          "max": 500,
+          "insights": true
+        }
+      },
+      "energy": {
+        "evCharger": true,
+        "meterPowerImportedCapability": "meter_power"
+      },
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "../../../assets/logo.png",
+            "title": {
+              "en": "go-e Cloud Access",
+              "nl": "go-e Cloud-toegang",
+              "da": "go-e Cloud-adgang",
+              "de": "go-e Cloud-Zugang",
+              "es": "Acceso a go-e Cloud",
+              "fr": "Accès au Cloud go-e",
+              "it": "Accesso al Cloud go-e",
+              "no": "go-e Cloud-tilgang",
+              "sv": "go-e Cloud-åtkomst",
+              "pl": "Dostęp do chmury go-e",
+              "ru": "Доступ к облаку go-e",
+              "ko": "go-e 클라우드 액세스",
+              "ar": "الوصول إلى سحابة go-e"
+            },
+            "usernameLabel": {
+              "en": "Serial Number (get from go-e Charger mobile app)",
+              "nl": "Serienummer (verkrijg via de go-e Charger mobiele app)",
+              "da": "Serienummer (hent fra go-e Charger mobilapp)",
+              "de": "Seriennummer (aus der go-e Charger Mobile App abrufen)",
+              "es": "Número de serie (obtenido de la aplicación móvil go-e Charger)",
+              "fr": "Numéro de série (à obtenir depuis l'application mobile go-e Charger)",
+              "it": "Numero di serie (ottieni dall'app mobile go-e Charger)",
+              "no": "Seriennummer (få fra go-e Charger mobilapp)",
+              "sv": "Serienummer (hämta från go-e Charger mobilapp)",
+              "pl": "Numer seryjny (pobierz z aplikacji mobilnej go-e Charger)",
+              "ru": "Серийный номер (получите из мобильного приложения go-e Charger)",
+              "ko": "일련 번호 (go-e Charger 모바일 앱에서 확인)",
+              "ar": "الرقم التسلسلي (احصل عليه من تطبيق go-e Charger على الهاتف المحمول)"
+            },
+            "usernamePlaceholder": {
+              "en": "123456",
+              "nl": "123456",
+              "da": "123456",
+              "de": "123456",
+              "es": "123456",
+              "fr": "123456",
+              "it": "123456",
+              "no": "123456",
+              "sv": "123456",
+              "pl": "123456",
+              "ru": "123456",
+              "ko": "123456",
+              "ar": "١٢٣٤٥٦"
+            },
+            "passwordLabel": {
+              "en": "Cloud API Key (get from go-e Charger mobile app)",
+              "nl": "Cloud API-sleutel (verkrijg via de go-e Charger mobiele app)",
+              "da": "Cloud API-nøgle (fås fra go-e Charger mobilapp)",
+              "de": "Cloud-API-Schlüssel (erhalte ihn aus der go-e Charger Mobile-App)",
+              "es": "Clave de API de Cloud (obtenla desde la app móvil go-e Charger)",
+              "fr": "Clé API Cloud (obtenez-la depuis l'application mobile go-e Charger)",
+              "it": "Chiave API Cloud (ottieni dall'app mobile go-e Charger)",
+              "no": "Cloud API-nøkkel (få fra go-e Charger mobilapp)",
+              "sv": "Moln-API-nyckel (fås från go-e Charger-mobilappen)",
+              "pl": "Klucz API Cloud (pobierz z aplikacji mobilnej go-e Charger)",
+              "ru": "Ключ API облака (получите в мобильном приложении go-e Charger)",
+              "ko": "클라우드 API 키 (go-e Charger 모바일 앱에서 가져오기)",
+              "ar": "مفتاح API السحابي (احصل عليه من تطبيق go-e Charger للهواتف المحمولة)"
+            },
+            "passwordPlaceholder": {
+              "en": "Your Cloud API Key",
+              "nl": "Je Cloud API-sleutel",
+              "da": "Din Cloud API-nøgle",
+              "de": "Ihr Cloud-API-Schlüssel",
+              "es": "Tu clave API de Cloud",
+              "fr": "Votre clé API Cloud",
+              "it": "La tua chiave API Cloud",
+              "no": "Din Cloud API-nøkkel",
+              "sv": "Din Cloud API-nyckel",
+              "pl": "Twój klucz API w chmurze",
+              "ru": "Ваш Cloud API ключ",
+              "ko": "귀하의 클라우드 API 키",
+              "ar": "مفتاح API السحابي الخاص بك"
+            }
+          },
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices",
+          "navigation": {
+            "next": "done"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "name": {
+        "en": "go-eCharger PRO (cloud)",
+        "nl": "go-eCharger PRO (cloud)",
+        "da": "go-eCharger PRO (cloud)",
+        "de": "go-eCharger PRO (cloud)",
+        "es": "go-eCharger PRO (cloud)",
+        "fr": "go-eCharger PRO (cloud)",
+        "it": "go-eCharger PRO (cloud)",
+        "no": "go-eCharger PRO (cloud)",
+        "sv": "go-eCharger PRO (cloud)",
+        "pl": "go-eCharger PRO (cloud)",
+        "ru": "go-eCharger PRO (cloud)",
+        "ko": "go-eCharger PRO (cloud)",
+        "ar": "go-eCharger PRO (cloud)"
+      },
+      "id": "goe-Cloud-PRO",
+      "settings": [
+        {
+          "id": "cloud_info",
+          "type": "group",
+          "label": {
+            "en": "Cloud API login credentials.",
+            "nl": "Cloud API-inloggegevens.",
+            "da": "Cloud API-loginoplysninger.",
+            "de": "Cloud API-Anmeldeinformationen.",
+            "es": "Credenciales de inicio de sesión de la API de la nube.",
+            "fr": "Identifiants de connexion à l'API cloud.",
+            "it": "Credenziali di accesso all'API cloud.",
+            "no": "Cloud API-påloggingsinformasjon.",
+            "sv": "Cloud API-inloggningsuppgifter.",
+            "pl": "Dane logowania do API chmury.",
+            "ru": "Учетные данные для входа в облачный API.",
+            "ko": "Cloud API 로그인 자격 증명.",
+            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
+          },
+          "children": [
+            {
+              "id": "serialnumber",
+              "type": "text",
+              "label": {
+                "en": "Charger serial number",
+                "nl": "Serienummer van de lader",
+                "da": "Oplader serienummer",
+                "de": "Seriennummer des Ladegerats",
+                "es": "Número de serie del cargador",
+                "fr": "Numéro de série du chargeur",
+                "it": "Numero di serie del caricatore",
+                "no": "Lader serienummer",
+                "sv": "Laddarens serienummer",
+                "pl": "Numer seryjny ładowarki",
+                "ru": "Серийный номер зарядного устройства",
+                "ko": "충전기 일련 번호",
+                "ar": "الرقم التسلسلي للشاحن"
+              },
+              "value": "",
+              "hint": {
+                "en": "Serial number of the charger to connect to.",
+                "nl": "Serienummer van de lader om verbinding mee te maken.",
+                "da": "Serienummer på opladeren for at oprette forbindelse til.",
+                "de": "Serienummer des Ladegerats, mit dem eine Verbindung hergestellt werden soll.",
+                "es": "Número de serie del cargador al que conectarse.",
+                "fr": "Numéro de série du chargeur auquel se connecter.",
+                "it": "Numero di serie del caricatore a cui connettersi.",
+                "no": "Serienummeret til laderen som skal kobles til.",
+                "sv": "Serienummer på laddaren att ansluta till.",
+                "pl": "Numer seryjny ładowarki, do której należy się połączyć.",
+                "ru": "Серийный номер зарядного устройства для подключения.",
+                "ko": "연결할 충전기의 일련 번호입니다.",
+                "ar": "الرقم التسلسلي للشاحن للاتصال به."
+              },
+              "highlight": true
+            },
+            {
+              "id": "token",
+              "type": "password",
+              "label": {
+                "en": "Cloud API key",
+                "nl": "Cloud API-sleutel",
+                "da": "Cloud API-nogle",
+                "de": "Cloud API-Schlussel",
+                "es": "Clave API de Cloud",
+                "fr": "Cle API Cloud",
+                "it": "Chiave API Cloud",
+                "no": "Cloud API-nokkel",
+                "sv": "Cloud API-nyckel",
+                "pl": "Klucz API Cloud",
+                "ru": "Cloud API ключ",
+                "ko": "Cloud API 키",
+                "ar": "مفتاح Cloud API"
+              },
+              "value": "",
+              "hint": {
+                "en": "Used to connect this charger through the go-e Cloud API.",
+                "nl": "Wordt gebruikt om deze lader via de go-e Cloud API te verbinden.",
+                "da": "Bruges til at forbinde denne oplader via go-e Cloud API.",
+                "de": "Wird verwendet, um dieses Ladegerat uber die go-e Cloud API zu verbinden.",
+                "es": "Se usa para conectar este cargador a traves de la API de go-e Cloud.",
+                "fr": "Utilise pour connecter ce chargeur via l'API go-e Cloud.",
+                "it": "Usata per collegare questo caricatore tramite la API Cloud di go-e.",
+                "no": "Brukes til a koble denne laderen til via go-e Cloud API.",
+                "sv": "Anvands for att ansluta denna laddare via go-e Cloud API.",
+                "pl": "Uzywany do polaczenia tej ladowarki przez API go-e Cloud.",
+                "ru": "Используется для подключения этого зарядного устройства через go-e Cloud API.",
+                "ko": "go-e Cloud API를 통해 이 충전기를 연결하는 데 사용됩니다.",
+                "ar": "يستخدم للاتصال بهذا الشاحن عبر واجهة go-e Cloud API."
+              },
+              "highlight": true
+            }
+          ]
         },
         {
           "id": "device_info",
@@ -2715,7 +5242,19 @@
     "goe_charger_mode": {
       "type": "enum",
       "title": {
-        "en": "Charger mode"
+        "en": "Charger mode",
+        "nl": "Laadmodus",
+        "da": "Ladertilstand",
+        "de": "Lademodus",
+        "es": "Modo de carga",
+        "fr": "Mode de chargeur",
+        "it": "Modalità caricatore",
+        "no": "Lademodus",
+        "sv": "Laddarläge",
+        "pl": "Tryb ładowarki",
+        "ru": "Режим зарядки",
+        "ko": "충전기 모드",
+        "ar": "وضع الشاحن"
       },
       "getable": true,
       "setable": true,
@@ -2724,49 +5263,145 @@
         {
           "id": "basic_charging",
           "title": {
-            "en": "Basic Charging"
+            "en": "Basic Charging",
+            "nl": "Basisopladen",
+            "da": "Grundlæggende opladning",
+            "de": "Grundlegendes Laden",
+            "es": "Carga básica",
+            "fr": "Charge de base",
+            "it": "Ricarica di base",
+            "no": "Grunnleggende lading",
+            "sv": "Grundläggande laddning",
+            "pl": "Podstawowe ładowanie",
+            "ru": "Базовая зарядка",
+            "ko": "기본 충전",
+            "ar": "الشحن الأساسي"
           }
         },
         {
           "id": "eco_pv_surplus",
           "title": {
-            "en": "Eco: Use PV Surplus"
+            "en": "Eco: Use PV Surplus",
+            "nl": "Eco: Gebruik PV-overschot",
+            "da": "Eco: Brug PV-overskud",
+            "de": "Eco: PV-Überschuss nutzen",
+            "es": "Eco: Usar excedente fotovoltaico",
+            "fr": "Éco : Utiliser le surplus photovoltaïque",
+            "it": "Eco: Usa il surplus fotovoltaico",
+            "no": "Eco: Bruk PV-overskudd",
+            "sv": "Eco: Använd överskott från solceller",
+            "pl": "Eco: Użyj nadwyżki PV",
+            "ru": "Эко: Использовать излишки солнечной энергии",
+            "ko": "에코: PV 잉여 전력 사용",
+            "ar": "إيكو: استخدام فائض الطاقة الشمسية"
           }
         },
         {
           "id": "eco_flexible_price",
           "title": {
-            "en": "Eco: Use Flexible price"
+            "en": "Eco: Use Flexible price",
+            "nl": "Eco: Gebruik Flexibele prijs",
+            "da": "Eco: Brug fleksibel pris",
+            "de": "Eco: Flexible Preise verwenden",
+            "es": "Eco: Usar precio flexible",
+            "fr": "Éco : Utiliser le prix flexible",
+            "it": "Eco: Usa prezzo flessibile",
+            "no": "Eco: Bruk fleksibel pris",
+            "sv": "Eco: Använd Flexibelt pris",
+            "pl": "Eco: Użyj elastycznej ceny",
+            "ru": "Эко: Используйте гибкую цену",
+            "ko": "에코: 유연한 가격 사용",
+            "ar": "إيكو: استخدم السعر المرن"
           }
         },
         {
           "id": "eco_pv_and_flexible_price",
           "title": {
-            "en": "Eco: Use PV and Flexible price"
+            "en": "Eco: Use PV and Flexible price",
+            "nl": "Eco: Gebruik PV en Flexibele prijs",
+            "da": "Eco: Brug solceller og fleksibel pris",
+            "de": "Eco: PV und flexiblen Preis nutzen",
+            "es": "Eco: Usa PV y precio flexible",
+            "fr": "Éco : Utiliser PV et prix flexible",
+            "it": "Eco: Usa PV e Prezzo flessibile",
+            "no": "Eco: Bruk PV og Fleksibel pris",
+            "sv": "Eco: Använd PV och Flexibelt pris",
+            "pl": "Eco: Użyj PV i elastycznej ceny",
+            "ru": "Эко: Используйте солнечную энергию и гибкие тарифы",
+            "ko": "에코: PV 및 유연한 가격 사용",
+            "ar": "إيكو: استخدم الطاقة الشمسية والسعر المرن"
           }
         },
         {
           "id": "trip_pv_surplus",
           "title": {
-            "en": "Trip: Use PV Surplus"
+            "en": "Trip: Use PV Surplus",
+            "nl": "Trip: Gebruik PV-overschot",
+            "da": "Trip: Brug PV-overskud",
+            "de": "Trip: PV-Überschuss nutzen",
+            "es": "Viaje: Usar excedente de PV",
+            "fr": "Voyage : Utiliser le surplus PV",
+            "it": "Viaggio: Usa Eccedenza Fotovoltaica",
+            "no": "Tur: Bruk PV-overskudd",
+            "sv": "Resa: Använd PV-överskott",
+            "pl": "Podróż: Użyj nadwyżki PV",
+            "ru": "Поездка: Использовать избыток солнечной энергии",
+            "ko": "여행: PV 잉여 사용",
+            "ar": "الرحلة: استخدام فائض الطاقة الشمسية"
           }
         },
         {
           "id": "trip_flexible_price",
           "title": {
-            "en": "Trip: Use Flexible price"
+            "en": "Trip: Use Flexible price",
+            "nl": "Reis: Gebruik Flexibele prijs",
+            "da": "Trip: Brug fleksibel pris",
+            "de": "Reise: Flexiblen Preis verwenden",
+            "es": "Viaje: Usar precio flexible",
+            "fr": "Voyage : Utiliser le prix flexible",
+            "it": "Viaggio: Usa prezzo flessibile",
+            "no": "Tur: Bruk fleksibel pris",
+            "sv": "Resa: Använd Flexibelt pris",
+            "pl": "Podróż: Użyj elastycznej ceny",
+            "ru": "Поездка: Используйте гибкую цену",
+            "ko": "여행: 유연한 가격 사용",
+            "ar": "رحلة: استخدم السعر المرن"
           }
         },
         {
           "id": "trip_pv_and_flexible_price",
           "title": {
-            "en": "Trip: Use PV and Flexible price"
+            "en": "Trip: Use PV and Flexible price",
+            "nl": "Reis: Gebruik PV en Flexibele prijs",
+            "da": "Tur: Brug PV og fleksibel pris",
+            "de": "Trip: PV und flexibler Preis verwenden",
+            "es": "Viaje: Usar PV y precio flexible",
+            "fr": "Voyage : Utiliser PV et prix flexible",
+            "it": "Viaggio: Usa PV e Prezzo flessibile",
+            "no": "Tur: Bruk PV og Fleksibel pris",
+            "sv": "Resa: Använd PV och Flexibelt pris",
+            "pl": "Podróż: Użyj PV i elastycznej ceny",
+            "ru": "Поездка: Используйте PV и гибкую цену",
+            "ko": "여행: PV 및 유연한 가격 사용",
+            "ar": "رحلة: استخدم PV وسعر مرن"
           }
         },
         {
           "id": "trip_no_pv_no_flexible_price",
           "title": {
-            "en": "Trip: No PV and No Flexible price"
+            "en": "Trip: No PV and No Flexible price",
+            "nl": "Trip: Geen PV en Geen Flexibele prijs",
+            "da": "Tur: Ingen PV og ingen fleksibel pris",
+            "de": "Reise: Kein PV und Kein flexibler Preis",
+            "es": "Viaje: Sin PV y Sin precio flexible",
+            "fr": "Voyage : Pas de PV et Pas de prix flexible",
+            "it": "Viaggio: Nessun PV e Nessun prezzo flessibile",
+            "no": "Tur: Ingen PV og Ingen Fleksibel pris",
+            "sv": "Resa: Ingen PV och inget flexibelt pris",
+            "pl": "Podróż: Brak PV i Brak Elastycznej ceny",
+            "ru": "Поездка: Без фотоэлектрических панелей и без гибкой цены",
+            "ko": "여행: PV 없음 및 유연한 가격 없음",
+            "ar": "رحلة: بدون PV وبدون سعر مرن"
           }
         }
       ]
@@ -2774,7 +5409,19 @@
     "goe_measure_modelStatus": {
       "type": "enum",
       "title": {
-        "en": "Model status"
+        "en": "Model status",
+        "nl": "Modelstatus",
+        "da": "Modelstatus",
+        "de": "Modellstatus",
+        "es": "Estado del modelo",
+        "fr": "Statut du modèle",
+        "it": "Stato del modello",
+        "no": "Modellstatus",
+        "sv": "Modellstatus",
+        "pl": "Status modelu",
+        "ru": "Статус модели",
+        "ko": "모델 상태",
+        "ar": "حالة النموذج"
       },
       "getable": true,
       "setable": false,
@@ -2784,253 +5431,757 @@
         {
           "id": "0",
           "title": {
-            "en": "Charging (No Charge Control Data)"
+            "en": "Charging (No Charge Control Data)",
+            "nl": "Opladen (Geen laadcontrolegegevens)",
+            "da": "Oplader (Ingen opladningskontroldata)",
+            "de": "Laden (Keine Ladesteuerungsdaten)",
+            "es": "Cargando (Sin datos de control de carga)",
+            "fr": "Chargement (Pas de données de contrôle de charge)",
+            "it": "Caricamento (Nessun dato di controllo di carica)",
+            "no": "Lader (Ingen lade-kontroll-data)",
+            "sv": "Laddar (Ingen laddningskontrolldata)",
+            "pl": "Ładowanie (Brak danych o kontroli ładowania)",
+            "ru": "Зарядка (Нет данных управления зарядкой)",
+            "ko": "충전 중 (충전 제어 데이터 없음)",
+            "ar": "الشحن (لا توجد بيانات تحكم في الشحن)"
           }
         },
         {
           "id": "1",
           "title": {
-            "en": "Not Charging (Overtemperature)"
+            "en": "Not Charging (Overtemperature)",
+            "nl": "Niet aan het opladen (Overtemperatuur)",
+            "da": "Lader ikke (Overtemperatur)",
+            "de": "Nicht laden (Übertemperatur)",
+            "es": "No está cargando (sobretemperatura)",
+            "fr": "Pas de charge (surchauffe)",
+            "it": "Non in carica (Surriscaldamento)",
+            "no": "Lader ikke (Overtemperatur)",
+            "sv": "Laddar inte (Övertemperatur)",
+            "pl": "Nie ładuje (przegrzanie)",
+            "ru": "Не заряжается (перегрев)",
+            "ko": "충전 안 됨 (온도 과열)",
+            "ar": "لا يتم الشحن (درجة حرارة زائدة)"
           }
         },
         {
           "id": "2",
           "title": {
-            "en": "Not Charging (Access Control)"
+            "en": "Not Charging (Access Control)",
+            "nl": "Niet opladen (Toegangscontrole)",
+            "da": "Lader ikke (Adgangskontrol)",
+            "de": "Nicht laden (Zugangskontrolle)",
+            "es": "No está cargando (Control de acceso)",
+            "fr": "Pas de charge (Contrôle d'accès)",
+            "it": "Non in carica (Controllo accessi)",
+            "no": "Lader ikke (Tilgangskontroll)",
+            "sv": "Laddar inte (Åtkomstkontroll)",
+            "pl": "Nie ładuje (Kontrola dostępu)",
+            "ru": "Не заряжается (Контроль доступа)",
+            "ko": "충전 안 됨 (접근 제어)",
+            "ar": "لا يتم الشحن (التحكم في الوصول)"
           }
         },
         {
           "id": "3",
           "title": {
-            "en": "Charging (Force State On)"
+            "en": "Charging (Force State On)",
+            "nl": "Opladen (Force State Aan)",
+            "da": "Oplader (Tving tilstand til at være tændt)",
+            "de": "Laden (Zustand erzwingen: Ein)",
+            "es": "Cargando (Forzar estado activado)",
+            "fr": "Chargement (Forcer l'état activé)",
+            "it": "Caricamento (Forza Stato Attivo)",
+            "no": "Lader (Tving tilstand på)",
+            "sv": "Laddar (Tvinga tillstånd på)",
+            "pl": "Ładowanie (Wymuś stan włączony)",
+            "ru": "Зарядка (Принудительное включение)",
+            "ko": "충전 중 (상태 강제 켜기)",
+            "ar": "الشحن (فرض الحالة تشغيل)"
           }
         },
         {
           "id": "4",
           "title": {
-            "en": "Not Charging (Force State Off)"
+            "en": "Not Charging (Force State Off)",
+            "nl": "Niet opladen (Forceer status uit)",
+            "da": "Lader ikke (Tving tilstand fra)",
+            "de": "Nicht laden (Zustand erzwingen: Aus)",
+            "es": "No está cargando (Forzar estado apagado)",
+            "fr": "Pas de charge (État forcé désactivé)",
+            "it": "Non in carica (Forza stato spento)",
+            "no": "Lader ikke (Tving tilstand av)",
+            "sv": "Laddar inte (Tvinga tillstånd av)",
+            "pl": "Nie ładuje (wymuszone wyłączenie)",
+            "ru": "Не заряжается (принудительное отключение)",
+            "ko": "충전 안 함 (상태 강제 종료)",
+            "ar": "غير مشحون (إيقاف الحالة بالقوة)"
           }
         },
         {
           "id": "5",
           "title": {
-            "en": "Not Charging (Scheduler)"
+            "en": "Not Charging (Scheduler)",
+            "nl": "Niet opladen (Planner)",
+            "da": "Lader ikke (Tidsplanlægger)",
+            "de": "Nicht laden (Zeitplaner)",
+            "es": "No cargando (Programador)",
+            "fr": "Pas de charge (Planificateur)",
+            "it": "Non in carica (Programmatore)",
+            "no": "Lader ikke (Tidsplanlegger)",
+            "sv": "Laddar inte (Schemaläggare)",
+            "pl": "Nie ładuje (Harmonogram)",
+            "ru": "Не заряжается (планировщик)",
+            "ko": "충전 안 함 (스케줄러)",
+            "ar": "غير مشحون (الجدول الزمني)"
           }
         },
         {
           "id": "6",
           "title": {
-            "en": "Not Charging (Energy Limit)"
+            "en": "Not Charging (Energy Limit)",
+            "nl": "Niet aan het opladen (Energielimiet)",
+            "da": "Lader ikke (Energigrænse)",
+            "de": "Nicht laden (Energiegrenze)",
+            "es": "No está cargando (Límite de energía)",
+            "fr": "Pas de charge (Limite d'énergie)",
+            "it": "Non in carica (Limite di energia)",
+            "no": "Lader ikke (Energigrense)",
+            "sv": "Laddar inte (Energigräns)",
+            "pl": "Nie ładuje (Limit energii)",
+            "ru": "Не заряжается (лимит энергии)",
+            "ko": "충전 안 됨 (에너지 제한)",
+            "ar": "لا يتم الشحن (حد الطاقة)"
           }
         },
         {
           "id": "7",
           "title": {
-            "en": "Charging (Dynamic Pricing Low)"
+            "en": "Charging (Dynamic Pricing Low)",
+            "nl": "Opladen (Dynamische Prijs Laag)",
+            "da": "Opladning (Dynamisk Prissætning Lav)",
+            "de": "Laden (Dynamische Preisgestaltung Niedrig)",
+            "es": "Cargando (Precio Dinámico Bajo)",
+            "fr": "Chargement (Tarification dynamique basse)",
+            "it": "Caricamento (Prezzo Dinamico Basso)",
+            "no": "Lading (Dynamisk prising lav)",
+            "sv": "Laddar (Dynamisk prissättning låg)",
+            "pl": "Ładowanie (Dynamiczne Ceny Niskie)",
+            "ru": "Зарядка (Динамическое ценообразование - низкая цена)",
+            "ko": "충전 중 (동적 가격 낮음)",
+            "ar": "الشحن (تسعير ديناميكي منخفض)"
           }
         },
         {
           "id": "8",
           "title": {
-            "en": "Charging (Automatic Stop Test Charge)"
+            "en": "Charging (Automatic Stop Test Charge)",
+            "nl": "Opladen (Automatische Stop Testlading)",
+            "da": "Opladning (Automatisk Stop Testopladning)",
+            "de": "Laden (Automatischer Stopp Testladung)",
+            "es": "Cargando (Prueba de Carga con Parada Automática)",
+            "fr": "Charge (Arrêt automatique du test de charge)",
+            "it": "Ricarica (Test di Arresto Automatico)",
+            "no": "Lading (Automatisk stopp testlading)",
+            "sv": "Laddar (Automatisk stopp testladdning)",
+            "pl": "Ładowanie (Automatyczne Zatrzymanie Testu Ładowania)",
+            "ru": "Зарядка (Автоматическая остановка тестовой зарядки)",
+            "ko": "충전 (자동 정지 테스트 충전)",
+            "ar": "الشحن (اختبار التوقف التلقائي للشحن)"
           }
         },
         {
           "id": "9",
           "title": {
-            "en": "Charging (Automatic Stop, Not Enough Time)"
+            "en": "Charging (Automatic Stop, Not Enough Time)",
+            "nl": "Opladen (Automatisch Stoppen, Niet Genoeg Tijd)",
+            "da": "Opladning (Automatisk Stop, Ikke Nok Tid)",
+            "de": "Laden (Automatischer Stopp, Nicht genug Zeit)",
+            "es": "Carga (Parada Automática, No Hay Suficiente Tiempo)",
+            "fr": "Chargement (Arrêt automatique, Pas assez de temps)",
+            "it": "Carica (Arresto Automatico, Tempo Insufficiente)",
+            "no": "Lading (Automatisk Stopp, Ikke Nok Tid)",
+            "sv": "Laddar (Automatisk stopp, Inte tillräckligt med tid)",
+            "pl": "Ładowanie (Automatyczne Zatrzymanie, Za Mało Czasu)",
+            "ru": "Зарядка (Автоматическая остановка, Недостаточно времени)",
+            "ko": "충전 (자동 중지, 시간 부족)",
+            "ar": "الشحن (إيقاف تلقائي، ليس هناك وقت كافٍ)"
           }
         },
         {
           "id": "10",
           "title": {
-            "en": "Charging (Automatic Stop)"
+            "en": "Charging (Automatic Stop)",
+            "nl": "Opladen (Automatisch Stoppen)",
+            "da": "Opladning (Automatisk Stop)",
+            "de": "Laden (Automatischer Stopp)",
+            "es": "Carga (Parada Automática)",
+            "fr": "Chargement (Arrêt automatique)",
+            "it": "Ricarica (Arresto Automatico)",
+            "no": "Lading (Automatisk stopp)",
+            "sv": "Laddning (Automatisk stopp)",
+            "pl": "Ładowanie (Automatyczne Zatrzymanie)",
+            "ru": "Зарядка (Автоматическая остановка)",
+            "ko": "충전 (자동 정지)",
+            "ar": "الشحن (إيقاف تلقائي)"
           }
         },
         {
           "id": "11",
           "title": {
-            "en": "Charging (Automatic Stop, No Clock)"
+            "en": "Charging (Automatic Stop, No Clock)",
+            "nl": "Opladen (Automatisch Stoppen, Geen Klok)",
+            "da": "Opladning (Automatisk stop, Ingen ur)",
+            "de": "Laden (Automatischer Stopp, Keine Uhr)",
+            "es": "Cargando (Parada Automática, Sin Reloj)",
+            "fr": "Chargement (Arrêt automatique, Pas d'horloge)",
+            "it": "Ricarica (Arresto Automatico, Senza Orologio)",
+            "no": "Lading (Automatisk stopp, Ingen klokke)",
+            "sv": "Laddar (Automatisk stopp, Ingen klocka)",
+            "pl": "Ładowanie (Automatyczne zatrzymanie, Bez zegara)",
+            "ru": "Зарядка (Автоматическая остановка, Без таймера)",
+            "ko": "충전 (자동 정지, 시계 없음)",
+            "ar": "الشحن (إيقاف تلقائي، بدون ساعة)"
           }
         },
         {
           "id": "12",
           "title": {
-            "en": "Charging (PV Surplus)"
+            "en": "Charging (PV Surplus)",
+            "nl": "Opladen (PV Overschot)",
+            "da": "Opladning (PV Overskud)",
+            "de": "Laden (PV-Überschuss)",
+            "es": "Carga (Excedente FV)",
+            "fr": "Chargement (Surplus PV)",
+            "it": "Carica (Eccedenza FV)",
+            "no": "Lading (PV-overskudd)",
+            "sv": "Laddar (PV-överskott)",
+            "pl": "Ładowanie (nadwyżka PV)",
+            "ru": "Зарядка (избыток солнечной энергии)",
+            "ko": "충전 (PV 잉여)",
+            "ar": "الشحن (الفائض الشمسي)"
           }
         },
         {
           "id": "13",
           "title": {
-            "en": "Charging (Fallback v2 Default)"
+            "en": "Charging (Fallback v2 Default)",
+            "nl": "Opladen (Fallback v2 Standaard)",
+            "da": "Opladning (Fallback v2 Standard)",
+            "de": "Laden (Fallback v2 Standard)",
+            "es": "Cargando (Fallback v2 Default)",
+            "fr": "Chargement (Fallback v2 Default)",
+            "it": "Caricamento (Fallback v2 Default)",
+            "no": "Lading (Fallback v2 Standard)",
+            "sv": "Laddar (Standardalternativ v2)",
+            "pl": "Ładowanie (Domyślne Fallback v2)",
+            "ru": "Зарядка (Резервный v2 по умолчанию)",
+            "ko": "충전 (기본 v2 대체)",
+            "ar": "الشحن (الافتراضي النسخة الثانية)"
           }
         },
         {
           "id": "14",
           "title": {
-            "en": "Charging (Fallback v2 Scheduler)"
+            "en": "Charging (Fallback v2 Scheduler)",
+            "nl": "Opladen (Fallback v2 Planner)",
+            "da": "Opladning (Fallback v2 Scheduler)",
+            "de": "Laden (Fallback v2 Zeitplaner)",
+            "es": "Cargando (Programador de respaldo v2)",
+            "fr": "Chargement (Planificateur de secours v2)",
+            "it": "Ricarica (Pianificatore di riserva v2)",
+            "no": "Lading (Fallback v2 Planlegger)",
+            "sv": "Laddar (Reservplan v2 Schemaläggare)",
+            "pl": "Ładowanie (Harmonogram awaryjny v2)",
+            "ru": "Зарядка (Резервный планировщик v2)",
+            "ko": "충전 (대체 v2 스케줄러)",
+            "ar": "الشحن (جدولة النسخة الاحتياطية v2)"
           }
         },
         {
           "id": "15",
           "title": {
-            "en": "Charging (Fallback Default)"
+            "en": "Charging (Fallback Default)",
+            "nl": "Opladen (Standaardinstelling)",
+            "da": "Opladning (Standardtilstand)",
+            "de": "Laden (Standard-Einstellung)",
+            "es": "Cargando (Predeterminado de Respaldo)",
+            "fr": "Chargement (Valeur par défaut de secours)",
+            "it": "Ricarica (Predefinito di Riserva)",
+            "no": "Lader (Standard fallback)",
+            "sv": "Laddar (Standardalternativ)",
+            "pl": "Ładowanie (domyślne awaryjne)",
+            "ru": "Зарядка (резервное значение по умолчанию)",
+            "ko": "충전 (기본값)",
+            "ar": "الشحن (الإعداد الافتراضي)"
           }
         },
         {
           "id": "16",
           "title": {
-            "en": "Not Charging (Fallback v2 Dynamic Pricing)"
+            "en": "Not Charging (Fallback v2 Dynamic Pricing)",
+            "nl": "Niet aan het opladen (Fallback v2 Dynamische Prijzen)",
+            "da": "Ikke oplader (Fallback v2 Dynamisk Prissætning)",
+            "de": "Nicht laden (Fallback v2 Dynamische Preisgestaltung)",
+            "es": "No está cargando (Precios dinámicos de respaldo v2)",
+            "fr": "Pas de charge (Tarification dynamique de secours v2)",
+            "it": "Non in carica (Prezzi dinamici Fallback v2)",
+            "no": "Lader ikke (Fallback v2 Dynamisk Prising)",
+            "sv": "Laddar inte (Fallback v2 Dynamisk Prissättning)",
+            "pl": "Nie ładuje (Dynamiczne ceny awaryjne v2)",
+            "ru": "Не заряжается (Резервный вариант v2 Динамическое ценообразование)",
+            "ko": "충전되지 않음 (대체 v2 동적 가격 책정)",
+            "ar": "لا يتم الشحن (التسعير الديناميكي البديل v2)"
           }
         },
         {
           "id": "17",
           "title": {
-            "en": "Not Charging (Fallback Dynamic Pricing)"
+            "en": "Not Charging (Fallback Dynamic Pricing)",
+            "nl": "Niet aan het opladen (Fallback Dynamische Prijsstelling)",
+            "da": "Ikke oplader (Fallback dynamisk prissætning)",
+            "de": "Nicht laden (Fallback-Dynamische Preisgestaltung)",
+            "es": "No está cargando (Precios dinámicos de respaldo)",
+            "fr": "Pas de charge (Tarification dynamique de secours)",
+            "it": "Non in carica (Prezzi dinamici di riserva)",
+            "no": "Lader ikke (Fallback dynamisk prising)",
+            "sv": "Laddar inte (Fallback Dynamisk Prissättning)",
+            "pl": "Nie ładuje (awaryjne dynamiczne ustalanie cen)",
+            "ru": "Не заряжается (резервное динамическое ценообразование)",
+            "ko": "충전되지 않음 (대체 동적 가격)",
+            "ar": "لا يتم الشحن (تسعير ديناميكي احتياطي)"
           }
         },
         {
           "id": "18",
           "title": {
-            "en": "Not Charging (Fallback Automatic Stop)"
+            "en": "Not Charging (Fallback Automatic Stop)",
+            "nl": "Niet aan het opladen (Automatische stop als back-up)",
+            "da": "Ikke oplader (Automatisk stop som fallback)",
+            "de": "Nicht laden (Automatischer Stopp als Fallback)",
+            "es": "No está cargando (Parada automática de respaldo)",
+            "fr": "Pas de charge (Arrêt automatique de secours)",
+            "it": "Non in carica (Arresto automatico di emergenza)",
+            "no": "Lader ikke (Automatisk stopp som reserve)",
+            "sv": "Laddar inte (Automatisk stopp som reserv)",
+            "pl": "Nie ładuje (Automatyczne zatrzymanie awaryjne)",
+            "ru": "Не заряжается (автоматическая остановка)",
+            "ko": "충전 안 됨 (자동 중지)",
+            "ar": "لا يتم الشحن (توقف تلقائي احتياطي)"
           }
         },
         {
           "id": "19",
           "title": {
-            "en": "Charging (Car Compatibility Keep-Alive)"
+            "en": "Charging (Car Compatibility Keep-Alive)",
+            "nl": "Opladen (Auto-compatibiliteit Keep-Alive)",
+            "da": "Opladning (Bilkompatibilitet Keep-Alive)",
+            "de": "Laden (Auto-Kompatibilität Keep-Alive)",
+            "es": "Carga (Compatibilidad del Coche Mantener Activo)",
+            "fr": "Chargement (Compatibilité Voiture Keep-Alive)",
+            "it": "Ricarica (Compatibilità Auto Keep-Alive)",
+            "no": "Lading (Bilkompatibilitet Keep-Alive)",
+            "sv": "Laddning (Bilkompatibilitet Håll-igång)",
+            "pl": "Ładowanie (Kompatybilność Samochodu - Utrzymanie Połączenia)",
+            "ru": "Зарядка (Совместимость с автомобилем, поддержание активности)",
+            "ko": "충전 (자동차 호환성 유지)",
+            "ar": "الشحن (التوافق مع السيارة - الحفاظ على الاتصال)"
           }
         },
         {
           "id": "20",
           "title": {
-            "en": "Charging (Charge Pause Not Allowed)"
+            "en": "Charging (Charge Pause Not Allowed)",
+            "nl": "Opladen (Oplaadpauze Niet Toegestaan)",
+            "da": "Oplader (Pause i opladning ikke tilladt)",
+            "de": "Laden (Ladepause nicht erlaubt)",
+            "es": "Cargando (Pausa de carga no permitida)",
+            "fr": "Chargement (Pause de charge non autorisée)",
+            "it": "Caricamento (Pausa di Carica Non Consentita)",
+            "no": "Lader (Ladepause Ikke Tillatt)",
+            "sv": "Laddar (Laddningspaus Ej Tillåten)",
+            "pl": "Ładowanie (Wstrzymanie ładowania niedozwolone)",
+            "ru": "Зарядка (Пауза Зарядки Не Разрешена)",
+            "ko": "충전 중 (충전 일시 중지 불가)",
+            "ar": "الشحن (إيقاف الشحن غير مسموح)"
           }
         },
         {
           "id": "21",
           "title": {
-            "en": "Unknown (21)"
+            "en": "Unknown (21)",
+            "nl": "Onbekend (21)",
+            "da": "Ukendt (21)",
+            "de": "Unbekannt (21)",
+            "es": "Desconocido (21)",
+            "fr": "Inconnu (21)",
+            "it": "Sconosciuto (21)",
+            "no": "Ukjent (21)",
+            "sv": "Okänd (21)",
+            "pl": "Nieznany (21)",
+            "ru": "Неизвестно (21)",
+            "ko": "알 수 없음 (21)",
+            "ar": "غير معروف (21)"
           }
         },
         {
           "id": "22",
           "title": {
-            "en": "Not Charging (Simulate Unplugging)"
+            "en": "Not Charging (Simulate Unplugging)",
+            "nl": "Niet aan het opladen (Simuleer loskoppelen)",
+            "da": "Ikke oplader (simuler frakobling)",
+            "de": "Nicht laden (Steckerziehen simulieren)",
+            "es": "No está cargando (Simular desconexión)",
+            "fr": "Pas de charge (Simuler le débranchement)",
+            "it": "Non in carica (Simula scollegamento)",
+            "no": "Lader ikke (Simuler frakobling)",
+            "sv": "Laddar inte (Simulera urkoppling)",
+            "pl": "Nie ładuje (symuluj odłączenie)",
+            "ru": "Не заряжается (симуляция отключения)",
+            "ko": "충전 안 함 (플러그 뽑기 시뮬레이션)",
+            "ar": "غير مشحون (محاكاة فصل الشحن)"
           }
         },
         {
           "id": "23",
           "title": {
-            "en": "Not Charging (Phase Switch)"
+            "en": "Not Charging (Phase Switch)",
+            "nl": "Niet aan het opladen (Fase Schakelaar)",
+            "da": "Lader ikke (Faseskift)",
+            "de": "Nicht laden (Phasenwechsel)",
+            "es": "No está cargando (Cambio de fase)",
+            "fr": "Pas de charge (Changement de phase)",
+            "it": "Non in carica (Cambio fase)",
+            "no": "Lader ikke (Faseskifte)",
+            "sv": "Laddar inte (Fasbyte)",
+            "pl": "Nie ładuje (Przełącznik faz)",
+            "ru": "Не заряжается (переключение фаз)",
+            "ko": "충전 안 됨 (위상 전환)",
+            "ar": "لا يتم الشحن (تبديل الطور)"
           }
         },
         {
           "id": "24",
           "title": {
-            "en": "Not Charging (Minimum Pause Duration)"
+            "en": "Not Charging (Minimum Pause Duration)",
+            "nl": "Niet aan het opladen (Minimale pauzeduur)",
+            "da": "Lader ikke (Minimum pausevarighed)",
+            "de": "Nicht laden (Mindestpausendauer)",
+            "es": "No está cargando (Duración mínima de pausa)",
+            "fr": "Pas de charge (Durée minimale de pause)",
+            "it": "Non in carica (Durata minima di pausa)",
+            "no": "Lader ikke (Minimum pausevarighet)",
+            "sv": "Laddar inte (Minsta pauslängd)",
+            "pl": "Nie ładuje (Minimalny czas przerwy)",
+            "ru": "Не заряжается (минимальная продолжительность паузы)",
+            "ko": "충전 중지 (최소 일시 중지 시간)",
+            "ar": "غير مشحون (مدة التوقف الأدنى)"
           }
         },
         {
           "id": "25",
           "title": {
-            "en": "Unknown (25)"
+            "en": "Unknown (25)",
+            "nl": "Onbekend (25)",
+            "da": "Ukendt (25)",
+            "de": "Unbekannt (25)",
+            "es": "Desconocido (25)",
+            "fr": "Inconnu (25)",
+            "it": "Sconosciuto (25)",
+            "no": "Ukjent (25)",
+            "sv": "Okänd (25)",
+            "pl": "Nieznany (25)",
+            "ru": "Неизвестно (25)",
+            "ko": "알 수 없음 (25)",
+            "ar": "غير معروف (25)"
           }
         },
         {
           "id": "26",
           "title": {
-            "en": "Not Charging (Error)"
+            "en": "Not Charging (Error)",
+            "nl": "Niet aan het opladen (Fout)",
+            "da": "Lader ikke (Fejl)",
+            "de": "Nicht Laden (Fehler)",
+            "es": "No está cargando (Error)",
+            "fr": "Pas de charge (Erreur)",
+            "it": "Non in carica (Errore)",
+            "no": "Lader ikke (Feil)",
+            "sv": "Laddar inte (Fel)",
+            "pl": "Nie ładuje (Błąd)",
+            "ru": "Не заряжается (Ошибка)",
+            "ko": "충전되지 않음 (오류)",
+            "ar": "لا يشحن (خطأ)"
           }
         },
         {
           "id": "27",
           "title": {
-            "en": "Not Charging (Load Management Does Not Allow)"
+            "en": "Not Charging (Load Management Does Not Allow)",
+            "nl": "Niet aan het laden (Laadbeheer staat het niet toe)",
+            "da": "Lader ikke (Belastningsstyring tillader det ikke)",
+            "de": "Nicht laden (Lastmanagement erlaubt es nicht)",
+            "es": "No está cargando (la gestión de carga no lo permite)",
+            "fr": "Pas de charge (Gestion de charge non autorisée)",
+            "it": "Non in carica (Gestione del carico non consente)",
+            "no": "Lader ikke (Laststyring tillater ikke)",
+            "sv": "Laddar inte (Laststyrning tillåter inte)",
+            "pl": "Nie ładuje (Zarządzanie obciążeniem nie pozwala)",
+            "ru": "Не заряжается (управление нагрузкой не позволяет)",
+            "ko": "충전되지 않음 (부하 관리가 허용하지 않음)",
+            "ar": "لا يتم الشحن (إدارة الحمل لا تسمح بذلك)"
           }
         },
         {
           "id": "28",
           "title": {
-            "en": "Not Charging (OCPP Does Not Allow)"
+            "en": "Not Charging (OCPP Does Not Allow)",
+            "nl": "Niet aan het opladen (OCPP staat het niet toe)",
+            "da": "Lader ikke (OCPP tillader det ikke)",
+            "de": "Nicht laden (OCPP erlaubt es nicht)",
+            "es": "No está cargando (OCPP no lo permite)",
+            "fr": "Pas de charge (OCPP ne permet pas)",
+            "it": "Non in carica (OCPP non consente)",
+            "no": "Lader ikke (OCPP tillater ikke)",
+            "sv": "Laddar inte (OCPP tillåter inte)",
+            "pl": "Nie ładuje (OCPP nie pozwala)",
+            "ru": "Не заряжается (OCPP не разрешает)",
+            "ko": "충전되지 않음 (OCPP에서 허용하지 않음)",
+            "ar": "لا يتم الشحن (OCPP لا يسمح بذلك)"
           }
         },
         {
           "id": "29",
           "title": {
-            "en": "Not Charging (Reconnect Delay)"
+            "en": "Not Charging (Reconnect Delay)",
+            "nl": "Niet aan het opladen (Vertraging bij opnieuw verbinden)",
+            "da": "Lader ikke (Genforbindelsesforsinkelse)",
+            "de": "Nicht laden (Verzögerung beim Wiederverbinden)",
+            "es": "No está cargando (Retraso de reconexión)",
+            "fr": "Pas de charge (Délai de reconnexion)",
+            "it": "Non in carica (Ritardo di riconnessione)",
+            "no": "Lader ikke (forsinkelse ved tilkobling)",
+            "sv": "Laddar inte (Återanslutningsfördröjning)",
+            "pl": "Nie ładuje (Opóźnienie ponownego połączenia)",
+            "ru": "Не заряжается (задержка переподключения)",
+            "ko": "충전 안 됨 (재연결 지연)",
+            "ar": "غير مشحون (تأخير إعادة الاتصال)"
           }
         },
         {
           "id": "30",
           "title": {
-            "en": "Not Charging (Adapter Blocking)"
+            "en": "Not Charging (Adapter Blocking)",
+            "nl": "Niet opladen (adapter blokkering)",
+            "da": "Lader ikke (Adapter blokerer)",
+            "de": "Nicht laden (Adapter blockiert)",
+            "es": "No está cargando (bloqueo del adaptador)",
+            "fr": "Pas de charge (adaptateur bloqué)",
+            "it": "Non in carica (Blocco adattatore)",
+            "no": "Lader ikke (Adapter blokkering)",
+            "sv": "Laddar inte (Adapter blockerar)",
+            "pl": "Nie ładuje (blokada adaptera)",
+            "ru": "Не заряжается (блокировка адаптера)",
+            "ko": "충전 안 됨 (어댑터 차단)",
+            "ar": "لا يتم الشحن (حظر المحول)"
           }
         },
         {
           "id": "31",
           "title": {
-            "en": "Not Charging (Underfrequency Control)"
+            "en": "Not Charging (Underfrequency Control)",
+            "nl": "Niet aan het opladen (onderfrequentieregeling)",
+            "da": "Ikke oplader (underfrekvenskontrol)",
+            "de": "Nicht laden (Unterfrequenzregelung)",
+            "es": "No está cargando (Control de subfrecuencia)",
+            "fr": "Pas de charge (contrôle de sous-fréquence)",
+            "it": "Non in carica (Controllo di sottofrequenza)",
+            "no": "Lader ikke (Underfrekvenskontroll)",
+            "sv": "Laddar inte (Underfrekvenskontroll)",
+            "pl": "Nie ładuje (kontrola podczęstotliwości)",
+            "ru": "Не заряжается (контроль пониженной частоты)",
+            "ko": "충전 안 됨 (저주파 제어)",
+            "ar": "لا يتم الشحن (التحكم في التردد المنخفض)"
           }
         },
         {
           "id": "32",
           "title": {
-            "en": "Not Charging (Unbalanced Load)"
+            "en": "Not Charging (Unbalanced Load)",
+            "nl": "Niet aan het opladen (ongebalanceerde belasting)",
+            "da": "Lader ikke (Ubalance i belastning)",
+            "de": "Nicht laden (Unausgeglichene Last)",
+            "es": "No está cargando (Carga desequilibrada)",
+            "fr": "Pas de charge (Charge déséquilibrée)",
+            "it": "Non in carica (Carico sbilanciato)",
+            "no": "Lader ikke (Ubalansert belastning)",
+            "sv": "Laddar inte (Obalanserad belastning)",
+            "pl": "Nie ładuje (Niezrównoważone obciążenie)",
+            "ru": "Не заряжается (несбалансированная нагрузка)",
+            "ko": "충전되지 않음 (부하 불균형)",
+            "ar": "لا يتم الشحن (تحميل غير متوازن)"
           }
         },
         {
           "id": "33",
           "title": {
-            "en": "Charging (Discharging PV Battery)"
+            "en": "Charging (Discharging PV Battery)",
+            "nl": "Opladen (Ontladen PV-batterij)",
+            "da": "Opladning (Afladning af solcellebatteri)",
+            "de": "Laden (Entladen der PV-Batterie)",
+            "es": "Cargando (Descargando batería fotovoltaica)",
+            "fr": "Chargement (Décharge de la batterie PV)",
+            "it": "Caricamento (Scaricamento batteria fotovoltaica)",
+            "no": "Lading (Utlading PV-batteri)",
+            "sv": "Laddar (Utladdning av solcellsbatteri)",
+            "pl": "Ładowanie (Rozładowywanie baterii PV)",
+            "ru": "Зарядка (Разрядка солнечной батареи)",
+            "ko": "충전 중 (태양광 배터리 방전 중)",
+            "ar": "الشحن (تفريغ بطارية الطاقة الشمسية)"
           }
         },
         {
           "id": "34",
           "title": {
-            "en": "Not Charging (Grid Monitoring)"
+            "en": "Not Charging (Grid Monitoring)",
+            "nl": "Niet aan het opladen (Netbewaking)",
+            "da": "Ikke oplader (Netovervågning)",
+            "de": "Nicht laden (Netzüberwachung)",
+            "es": "No está cargando (Monitoreo de red)",
+            "fr": "Pas de charge (Surveillance du réseau)",
+            "it": "Non in carica (Monitoraggio della rete)",
+            "no": "Lader ikke (Nettverksovervåking)",
+            "sv": "Laddar inte (Nätövervakning)",
+            "pl": "Nie ładuje (Monitorowanie sieci)",
+            "ru": "Не заряжается (Мониторинг сети)",
+            "ko": "충전 안 됨 (전력망 모니터링)",
+            "ar": "لا يتم الشحن (مراقبة الشبكة)"
           }
         },
         {
           "id": "35",
           "title": {
-            "en": "Not Charging (OCPP Fallback)"
+            "en": "Not Charging (OCPP Fallback)",
+            "nl": "Niet aan het opladen (OCPP Terugval)",
+            "da": "Lader ikke (OCPP Fallback)",
+            "de": "Nicht laden (OCPP Fallback)",
+            "es": "No está cargando (Reversión OCPP)",
+            "fr": "Pas de charge (Repli OCPP)",
+            "it": "Non in carica (Ripiego OCPP)",
+            "no": "Lader ikke (OCPP reserve)",
+            "sv": "Laddar inte (OCPP Fallback)",
+            "pl": "Nie ładuje (tryb awaryjny OCPP)",
+            "ru": "Не заряжается (резервный режим OCPP)",
+            "ko": "충전되지 않음 (OCPP 폴백)",
+            "ar": "لا يتم الشحن (الرجوع إلى OCPP)"
           }
         },
         {
           "id": "36",
           "title": {
-            "en": "Not Charging (Floor Detected)"
+            "en": "Not Charging (Floor Detected)",
+            "nl": "Niet aan het opladen (vloer gedetecteerd)",
+            "da": "Lader ikke (Gulv registreret)",
+            "de": "Nicht laden (Boden erkannt)",
+            "es": "No está cargando (se detectó suelo)",
+            "fr": "Pas de charge (sol détecté)",
+            "it": "Non in carica (Pavimento rilevato)",
+            "no": "Lader ikke (Gulv oppdaget)",
+            "sv": "Laddar inte (Golvet upptäckt)",
+            "pl": "Nie ładuje (Wykryto podłogę)",
+            "ru": "Не заряжается (обнаружен пол)",
+            "ko": "충전되지 않음 (바닥 감지됨)",
+            "ar": "لا يتم الشحن (تم اكتشاف الأرضية)"
           }
         },
         {
           "id": "37",
           "title": {
-            "en": "Not Charging (OCPP Inoperable)"
+            "en": "Not Charging (OCPP Inoperable)",
+            "nl": "Niet aan het opladen (OCPP niet operationeel)",
+            "da": "Lader ikke (OCPP ude af drift)",
+            "de": "Nicht laden (OCPP nicht funktionsfähig)",
+            "es": "No está cargando (OCPP inoperable)",
+            "fr": "Pas de charge (OCPP inopérant)",
+            "it": "Non in carica (OCPP non operativo)",
+            "no": "Lader ikke (OCPP fungerer ikke)",
+            "sv": "Laddar inte (OCPP fungerar inte)",
+            "pl": "Nie ładuje (OCPP nie działa)",
+            "ru": "Не заряжается (OCPP не работает)",
+            "ko": "충전되지 않음 (OCPP 작동 불가)",
+            "ar": "لا يتم الشحن (OCPP غير قابل للتشغيل)"
           }
         },
         {
           "id": "38",
           "title": {
-            "en": "Not Charging (Undervoltage Control)"
+            "en": "Not Charging (Undervoltage Control)",
+            "nl": "Niet opladen (onderspanningscontrole)",
+            "da": "Lader ikke (Underspændingskontrol)",
+            "de": "Nicht laden (Unterspannungskontrolle)",
+            "es": "No está cargando (Control de subtensión)",
+            "fr": "Pas de charge (contrôle de sous-tension)",
+            "it": "Non in carica (Controllo sottotensione)",
+            "no": "Lader ikke (Underspenning kontroll)",
+            "sv": "Laddar inte (Underspänningskontroll)",
+            "pl": "Nie ładuje (Kontrola niskiego napięcia)",
+            "ru": "Не заряжается (Контроль пониженного напряжения)",
+            "ko": "충전되지 않음 (저전압 제어)",
+            "ar": "لا يتم الشحن (التحكم في انخفاض الجهد)"
           }
         },
         {
           "id": "39",
           "title": {
-            "en": "Not Charging (Zero Setpoint)"
+            "en": "Not Charging (Zero Setpoint)",
+            "nl": "Niet aan het opladen (Nul Instelpunt)",
+            "da": "Ikke oplader (Nulpunkt)",
+            "de": "Nicht laden (Nullpunkt)",
+            "es": "No está cargando (Punto de ajuste cero)",
+            "fr": "Pas de charge (Point de consigne zéro)",
+            "it": "Non in carica (Punto di regolazione zero)",
+            "no": "Lader ikke (Nullpunkt)",
+            "sv": "Laddar inte (Noll inställning)",
+            "pl": "Nie ładuje (ustawienie zerowe)",
+            "ru": "Не заряжается (нулевая уставка)",
+            "ko": "충전 안 함 (제로 설정점)",
+            "ar": "غير مشحون (نقطة ضبط صفر)"
           }
         },
         {
           "id": "40",
           "title": {
-            "en": "Not Charging (Initializing)"
+            "en": "Not Charging (Initializing)",
+            "nl": "Niet aan het opladen (Initialiseren)",
+            "da": "Lader ikke (Initialiserer)",
+            "de": "Nicht laden (Initialisierung)",
+            "es": "No está cargando (Inicializando)",
+            "fr": "Pas de charge (Initialisation)",
+            "it": "Non in carica (Inizializzazione)",
+            "no": "Lader ikke (Initialiserer)",
+            "sv": "Laddar inte (Initierar)",
+            "pl": "Nie ładuje (Inicjalizacja)",
+            "ru": "Не заряжается (Инициализация)",
+            "ko": "충전 안 됨 (초기화 중)",
+            "ar": "لا يشحن (جارٍ التهيئة)"
           }
         },
         {
           "id": "41",
           "title": {
-            "en": "Not Charging (Failsafe Limit)"
+            "en": "Not Charging (Failsafe Limit)",
+            "nl": "Niet opladen (Failsafe-limiet)",
+            "da": "Ikke oplader (Failsafe-grænse)",
+            "de": "Nicht laden (Failsafe-Grenze)",
+            "es": "No se está cargando (Límite de seguridad)",
+            "fr": "Pas de charge (Limite de sécurité)",
+            "it": "Non in carica (Limite di sicurezza)",
+            "no": "Lader ikke (Sikkerhetsgrense)",
+            "sv": "Laddar inte (Failsafe-gräns)",
+            "pl": "Nie ładuje (limit awaryjny)",
+            "ru": "Не заряжается (предел аварийного режима)",
+            "ko": "충전 안 됨 (안전장치 한계)",
+            "ar": "لا يتم الشحن (حد الأمان)"
           }
         }
       ]
@@ -3038,7 +6189,19 @@
     "goe_measure_phase_switching": {
       "type": "enum",
       "title": {
-        "en": "Phase switching"
+        "en": "Phase switching",
+        "nl": "Fase omschakeling",
+        "da": "Faseskift",
+        "de": "Phasenumschaltung",
+        "es": "Cambio de fase",
+        "fr": "Changement de phase",
+        "it": "Commutazione di fase",
+        "no": "Faseskifting",
+        "sv": "Fasväxling",
+        "pl": "Przełączanie faz",
+        "ru": "Переключение фаз",
+        "ko": "위상 전환",
+        "ar": "تبديل الطور"
       },
       "getable": true,
       "setable": false,
@@ -3048,19 +6211,55 @@
         {
           "id": "0",
           "title": {
-            "en": "Automatic"
+            "en": "Automatic",
+            "nl": "Automatisch",
+            "da": "Automatisk",
+            "de": "Automatisch",
+            "es": "Automático",
+            "fr": "Automatique",
+            "it": "Automatico",
+            "no": "Automatisk",
+            "sv": "Automatisk",
+            "pl": "Automatyczny",
+            "ru": "Автоматический",
+            "ko": "자동",
+            "ar": "تلقائي"
           }
         },
         {
           "id": "1",
           "title": {
-            "en": "1-Phase"
+            "en": "1-Phase",
+            "nl": "1-fase",
+            "da": "1-fase",
+            "de": "1-Phase",
+            "es": "Monofásico",
+            "fr": "Monophasé",
+            "it": "Monofase",
+            "no": "1-fase",
+            "sv": "1-fas",
+            "pl": "1-faza",
+            "ru": "1-фаза",
+            "ko": "단상",
+            "ar": "1-فاز"
           }
         },
         {
           "id": "2",
           "title": {
-            "en": "3-Phase"
+            "en": "3-Phase",
+            "nl": "3-fase",
+            "da": "3-fase",
+            "de": "3-Phasen",
+            "es": "Trifásico",
+            "fr": "Triphasé",
+            "it": "Trifase",
+            "no": "3-fase",
+            "sv": "3-fas",
+            "pl": "3-fazowy",
+            "ru": "3-фазный",
+            "ko": "3상",
+            "ar": "ثلاثي الطور"
           }
         }
       ]
@@ -3068,7 +6267,19 @@
     "goe_pv_surplus_enabled": {
       "type": "boolean",
       "title": {
-        "en": "PV Surplus Enabled"
+        "en": "PV Surplus Enabled",
+        "nl": "PV-overschot ingeschakeld",
+        "da": "PV-overskud aktiveret",
+        "de": "PV-Überschuss aktiviert",
+        "es": "Excedente de PV Activado",
+        "fr": "Surplus PV Activé",
+        "it": "Surplus PV Abilitato",
+        "no": "PV-overskudd aktivert",
+        "sv": "PV-överskott aktiverat",
+        "pl": "Nadwyżka PV włączona",
+        "ru": "Избыток PV включен",
+        "ko": "PV 잉여 활성화됨",
+        "ar": "تمكين الفائض الكهروضوئي"
       },
       "getable": true,
       "setable": true,

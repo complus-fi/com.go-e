@@ -1,0 +1,21 @@
+{
+  "name": {
+    "en": "go-eCharger CORE (cloud)",
+    "nl": "go-eCharger CORE (cloud)",
+    "da": "go-eCharger CORE (cloud)",
+    "de": "go-eCharger CORE (cloud)",
+    "es": "go-eCharger CORE (cloud)",
+    "fr": "go-eCharger CORE (cloud)",
+    "it": "go-eCharger CORE (cloud)",
+    "no": "go-eCharger CORE (cloud)",
+    "sv": "go-eCharger CORE (cloud)",
+    "pl": "go-eCharger CORE (cloud)",
+    "ru": "go-eCharger CORE (cloud)",
+    "ko": "go-eCharger CORE (cloud)",
+    "ar": "go-eCharger CORE (cloud)"
+  },
+  "$extends": [
+    "go-eCharger",
+    "go-eCharger-cloud"
+  ]
+}

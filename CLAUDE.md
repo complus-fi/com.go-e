@@ -2,7 +2,9 @@
 
 ## Project Overview
 
-- Homey app for go-e chargers (Home+, Gemini, CORE, PRO, and Local) using the V2 API.
+- Homey app for go-e chargers (Home+, Gemini, CORE, PRO) using the V2 API.
+- Support both local network connections wIth mDNS discovery and Cloud API devices.
+- API V2 is used for both types, only base url changes and a Bearer token is needed with Cloud API
 - Main runtime files are in `drivers/` and `lib/`.
 
 ## Repository Rules
@@ -25,8 +27,7 @@
 
 ## Validation
 
-- Run lint after JavaScript changes:
-  - `npm run lint`
+- VScode does the main validation internally if .js files.
 - Validate changed JSON/compose files are syntactically correct.
 
 ## Driver Notes

@@ -1,8 +1,0 @@
-[
-  {
-    "$extends": "go-echarger"
-  },
-  {
-    "$extends": "go-echarger-device-info"
-  }
-]

@@ -1,0 +1,93 @@
+{
+  "id": "cloud_info",
+  "type": "group",
+  "label": {
+    "en": "Cloud API login credentials.",
+    "nl": "Cloud API-inloggegevens.",
+    "da": "Cloud API-loginoplysninger.",
+    "de": "Cloud API-Anmeldeinformationen.",
+    "es": "Credenciales de inicio de sesión de la API de la nube.",
+    "fr": "Identifiants de connexion à l'API cloud.",
+    "it": "Credenziali di accesso all'API cloud.",
+    "no": "Cloud API-påloggingsinformasjon.",
+    "sv": "Cloud API-inloggningsuppgifter.",
+    "pl": "Dane logowania do API chmury.",
+    "ru": "Учетные данные для входа в облачный API.",
+    "ko": "Cloud API 로그인 자격 증명.",
+    "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
+  },
+  "children": [
+    {
+      "id": "serialnumber",
+      "type": "text",
+      "label": {
+        "en": "Charger serial number",
+        "nl": "Serienummer van de lader",
+        "da": "Oplader serienummer",
+        "de": "Seriennummer des Ladegerats",
+        "es": "Número de serie del cargador",
+        "fr": "Numéro de série du chargeur",
+        "it": "Numero di serie del caricatore",
+        "no": "Lader serienummer",
+        "sv": "Laddarens serienummer",
+        "pl": "Numer seryjny ładowarki",
+        "ru": "Серийный номер зарядного устройства",
+        "ko": "충전기 일련 번호",
+        "ar": "الرقم التسلسلي للشاحن"
+      },
+      "value": "",
+      "hint": {
+        "en": "Serial number of the charger to connect to.",
+        "nl": "Serienummer van de lader om verbinding mee te maken.",
+        "da": "Serienummer på opladeren for at oprette forbindelse til.",
+        "de": "Serienummer des Ladegerats, mit dem eine Verbindung hergestellt werden soll.",
+        "es": "Número de serie del cargador al que conectarse.",
+        "fr": "Numéro de série du chargeur auquel se connecter.",
+        "it": "Numero di serie del caricatore a cui connettersi.",
+        "no": "Serienummeret til laderen som skal kobles til.",
+        "sv": "Serienummer på laddaren att ansluta till.",
+        "pl": "Numer seryjny ładowarki, do której należy się połączyć.",
+        "ru": "Серийный номер зарядного устройства для подключения.",
+        "ko": "연결할 충전기의 일련 번호입니다.",
+        "ar": "الرقم التسلسلي للشاحن للاتصال به."
+      },
+      "highlight": true
+    },
+    {
+      "id": "token",
+      "type": "password",
+      "label": {
+        "en": "Cloud API key",
+        "nl": "Cloud API-sleutel",
+        "da": "Cloud API-nogle",
+        "de": "Cloud API-Schlussel",
+        "es": "Clave API de Cloud",
+        "fr": "Cle API Cloud",
+        "it": "Chiave API Cloud",
+        "no": "Cloud API-nokkel",
+        "sv": "Cloud API-nyckel",
+        "pl": "Klucz API Cloud",
+        "ru": "Cloud API ключ",
+        "ko": "Cloud API 키",
+        "ar": "مفتاح Cloud API"
+      },
+      "value": "",
+      "hint": {
+        "en": "Used to connect this charger through the go-e Cloud API.",
+        "nl": "Wordt gebruikt om deze lader via de go-e Cloud API te verbinden.",
+        "da": "Bruges til at forbinde denne oplader via go-e Cloud API.",
+        "de": "Wird verwendet, um dieses Ladegerat uber die go-e Cloud API zu verbinden.",
+        "es": "Se usa para conectar este cargador a traves de la API de go-e Cloud.",
+        "fr": "Utilise pour connecter ce chargeur via l'API go-e Cloud.",
+        "it": "Usata per collegare questo caricatore tramite la API Cloud di go-e.",
+        "no": "Brukes til a koble denne laderen til via go-e Cloud API.",
+        "sv": "Anvands for att ansluta denna laddare via go-e Cloud API.",
+        "pl": "Uzywany do polaczenia tej ladowarki przez API go-e Cloud.",
+        "ru": "Используется для подключения этого зарядного устройства через go-e Cloud API.",
+        "ko": "go-e Cloud API를 통해 이 충전기를 연결하는 데 사용됩니다.",
+        "ar": "يستخدم للاتصال بهذا الشاحن عبر واجهة go-e Cloud API."
+      },
+      "highlight": true
+    }
+  ]
+}

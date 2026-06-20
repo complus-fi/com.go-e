@@ -1,0 +1,114 @@
+{
+  "platforms": [
+    "local",
+    "cloud"
+  ],
+  "connectivity": [
+    "cloud"
+  ],
+  "pair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "logo": "../../../assets/logo.png",
+        "title": {
+          "en": "go-e Cloud Access",
+          "nl": "go-e Cloud-toegang",
+          "da": "go-e Cloud-adgang",
+          "de": "go-e Cloud-Zugang",
+          "es": "Acceso a go-e Cloud",
+          "fr": "Accès au Cloud go-e",
+          "it": "Accesso al Cloud go-e",
+          "no": "go-e Cloud-tilgang",
+          "sv": "go-e Cloud-åtkomst",
+          "pl": "Dostęp do chmury go-e",
+          "ru": "Доступ к облаку go-e",
+          "ko": "go-e 클라우드 액세스",
+          "ar": "الوصول إلى سحابة go-e"
+        },
+        "usernameLabel": {
+          "en": "Serial Number (get from go-e Charger mobile app)",
+          "nl": "Serienummer (verkrijg via de go-e Charger mobiele app)",
+          "da": "Serienummer (hent fra go-e Charger mobilapp)",
+          "de": "Seriennummer (aus der go-e Charger Mobile App abrufen)",
+          "es": "Número de serie (obtenido de la aplicación móvil go-e Charger)",
+          "fr": "Numéro de série (à obtenir depuis l'application mobile go-e Charger)",
+          "it": "Numero di serie (ottieni dall'app mobile go-e Charger)",
+          "no": "Seriennummer (få fra go-e Charger mobilapp)",
+          "sv": "Serienummer (hämta från go-e Charger mobilapp)",
+          "pl": "Numer seryjny (pobierz z aplikacji mobilnej go-e Charger)",
+          "ru": "Серийный номер (получите из мобильного приложения go-e Charger)",
+          "ko": "일련 번호 (go-e Charger 모바일 앱에서 확인)",
+          "ar": "الرقم التسلسلي (احصل عليه من تطبيق go-e Charger على الهاتف المحمول)"
+        },
+        "usernamePlaceholder": {
+          "en": "123456",
+          "nl": "123456",
+          "da": "123456",
+          "de": "123456",
+          "es": "123456",
+          "fr": "123456",
+          "it": "123456",
+          "no": "123456",
+          "sv": "123456",
+          "pl": "123456",
+          "ru": "123456",
+          "ko": "123456",
+          "ar": "١٢٣٤٥٦"
+        },
+        "passwordLabel": {
+          "en": "Cloud API Key (get from go-e Charger mobile app)",
+          "nl": "Cloud API-sleutel (verkrijg via de go-e Charger mobiele app)",
+          "da": "Cloud API-nøgle (fås fra go-e Charger mobilapp)",
+          "de": "Cloud-API-Schlüssel (erhalte ihn aus der go-e Charger Mobile-App)",
+          "es": "Clave de API de Cloud (obtenla desde la app móvil go-e Charger)",
+          "fr": "Clé API Cloud (obtenez-la depuis l'application mobile go-e Charger)",
+          "it": "Chiave API Cloud (ottieni dall'app mobile go-e Charger)",
+          "no": "Cloud API-nøkkel (få fra go-e Charger mobilapp)",
+          "sv": "Moln-API-nyckel (fås från go-e Charger-mobilappen)",
+          "pl": "Klucz API Cloud (pobierz z aplikacji mobilnej go-e Charger)",
+          "ru": "Ключ API облака (получите в мобильном приложении go-e Charger)",
+          "ko": "클라우드 API 키 (go-e Charger 모바일 앱에서 가져오기)",
+          "ar": "مفتاح API السحابي (احصل عليه من تطبيق go-e Charger للهواتف المحمولة)"
+        },
+        "passwordPlaceholder": {
+          "en": "Your Cloud API Key",
+          "nl": "Je Cloud API-sleutel",
+          "da": "Din Cloud API-nøgle",
+          "de": "Ihr Cloud-API-Schlüssel",
+          "es": "Tu clave API de Cloud",
+          "fr": "Votre clé API Cloud",
+          "it": "La tua chiave API Cloud",
+          "no": "Din Cloud API-nøkkel",
+          "sv": "Din Cloud API-nyckel",
+          "pl": "Twój klucz API w chmurze",
+          "ru": "Ваш Cloud API ключ",
+          "ko": "귀하의 클라우드 API 키",
+          "ar": "مفتاح API السحابي الخاص بك"
+        }
+      },
+      "navigation": {
+        "next": "list_devices"
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices",
+      "navigation": {
+        "next": "done"
+      }
+    },
+    {
+      "id": "done",
+      "template": "done"
+    }
+  ]
+}

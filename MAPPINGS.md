@@ -20,25 +20,25 @@ Primary sources:
 
 ## Capability Matrix
 
-| Homey capability            | Direction    | API keys used        | Mapping behavior                                                    | Notes                                                             |
-| --------------------------- | ------------ | -------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| evcharger_charging          | Read + write | alw (read), trx, frc | Read: `alw` bool. Write true -> `trx=0` when null; false -> `frc=1` | `alw` is read-only in API; transaction enables anonymous charging |
-| evcharger_charging_state    | Read         | car                  | car state mapped to enum values                                     | When `car === 5`, state becomes null and `alarm_problem` is true  |
-| alarm_problem               | Read         | car                  | true when `car === 5`                                               | Fault indicator                                                   |
-| meter_power                 | Read         | eto                  | Wh to kWh conversion with rounding                                  | Returns null if value is not positive                             |
-| meter_power.session         | Read         | wh                   | Session Wh to kWh conversion with rounding                          | Capability options are defined in compose template                |
-| measure_temperature         | Read         | tma                  | Averages non-zero temperatures from array                           | 0 when all values are zero or missing                             |
-| measure_power               | Read         | nrg                  | Uses `nrg[11]` total power                                          | Rounded to 2 decimals                                             |
-| measure_current             | Read         | nrg                  | Average of non-zero phase currents (`nrg[4..6]`)                    | 0 when no active phases                                           |
-| measure_voltage             | Read         | nrg, pha             | Phase-aware input voltage calculation                               | 3-phase uses sqrt(3) scaling                                      |
-| measure_voltage.output      | Read         | nrg, pha             | Phase-aware output voltage calculation                              | 0 if no output phases active                                      |
-| goe_charger_mode            | Read + write | lmo, fup, awe        | Maps go-e charger mode combinations to enum values                  | Primary charger mode capability                                   |
-| goe_pv_surplus_enabled      | Read + write | fup                  | Read mirrors `fup`; write true sets automatic PV parameters         | Write true sets `lmo=4`; write false sets `lmo=3`, `fup=false`    |
-| goe_measure_phase_switching | Read         | psm                  | Enum capability for automatic / 1-phase / 3-phase status            | Capability ids are stringified `0`, `1`, `2`                      |
-| goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code         | Capability id is the stringified status code                      |
-| measure_power.pakku         | Read         | pakku                | Reads charger PV optimization average battery power                 | Rounded to 2 decimals                                             |
-| measure_power.pgrid         | Read         | pgrid                | Reads charger PV optimization average grid power                    | Rounded to 2 decimals                                             |
-| measure_power.ppv           | Read         | ppv                  | Reads charger PV optimization average PV power                      | Rounded to 2 decimals                                             |
+| Homey capability            | Direction    | API keys used        | Mapping behavior                                                    | Notes                                                                                                |
+| --------------------------- | ------------ | -------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| evcharger_charging          | Read + write | alw (read), trx, frc | Read: `alw` bool. Write true -> `trx=0` when null; false -> `frc=1` | `alw` is read-only in API; transaction enables anonymous charging                                    |
+| evcharger_charging_state    | Read         | car                  | car state mapped to enum values                                     | When `car === 5`, state becomes null and `alarm_problem` is true                                     |
+| alarm_problem               | Read         | car                  | true when `car === 5`                                               | Fault indicator                                                                                      |
+| meter_power                 | Read         | eto                  | Wh to kWh conversion with rounding                                  | Returns null if value is not positive                                                                |
+| meter_power.session         | Read         | wh                   | Session Wh to kWh conversion with rounding                          | Capability options are defined in compose template                                                   |
+| measure_temperature         | Read         | tma                  | Averages non-zero temperatures from array                           | 0 when all values are zero or missing                                                                |
+| measure_power               | Read         | nrg                  | Uses `nrg[11]` total power                                          | Rounded to 2 decimals                                                                                |
+| measure_current             | Read         | nrg                  | Average of non-zero phase currents (`nrg[4..6]`)                    | 0 when no active phases                                                                              |
+| measure_voltage             | Read         | nrg, pha             | Phase-aware input voltage calculation                               | 3-phase uses sqrt(3) scaling                                                                         |
+| measure_voltage.output      | Read         | nrg, pha             | Phase-aware output voltage calculation                              | 0 if no output phases active                                                                         |
+| goe_charger_mode            | Read + write | lmo, fup, awe        | Maps go-e charger mode combinations to enum values                  | Primary charger mode capability                                                                      |
+| goe_pv_surplus_enabled      | Read + write | fup                  | Read mirrors `fup`; write true sets automatic PV parameters         | Write true sets `lmo=4`, `fup=true`, `awe=false`; write false sets `lmo=3`, `fup=false`, `awe=false` |
+| goe_measure_phase_switching | Read         | psm                  | Enum capability for automatic / 1-phase / 3-phase status            | Capability ids are stringified `0`, `1`, `2`                                                         |
+| goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code         | Capability id is the stringified status code                                                         |
+| measure_power.pakku         | Read         | pakku                | Reads charger PV optimization average battery power                 | Rounded to 2 decimals                                                                                |
+| measure_power.pgrid         | Read         | pgrid                | Reads charger PV optimization average grid power                    | Rounded to 2 decimals                                                                                |
+| measure_power.ppv           | Read         | ppv                  | Reads charger PV optimization average PV power                      | Rounded to 2 decimals                                                                                |
 
 Additional mode/power mappings:
 
@@ -51,7 +51,7 @@ Additional mode/power mappings:
   - `trip_flexible_price` => `lmo=5`, `fup=false`, `awe=true`
   - `trip_pv_and_flexible_price` => `lmo=5`, `fup=true`, `awe=true`
   - `trip_no_pv_no_flexible_price` => `lmo=5`, `fup=false`, `awe=false`
-- `goe_pv_surplus_enabled`: uses `fup` for read/write; enabling applies `lmo=4`, `fup=true`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`; disabling applies `lmo=3`, `fup=false`.
+- `goe_pv_surplus_enabled`: uses `fup` for read/write; enabling applies `lmo=4`, `fup=true`, `awe=false`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`; disabling applies `lmo=3`, `fup=false`, `awe=false`.
 
 ## Control Behavior
 

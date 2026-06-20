@@ -1,19 +1,22 @@
 {
   "name": {
-    "en": "go-eCharger Home+",
-    "nl": "go-eCharger Home+",
-    "da": "go-eCharger Home+",
-    "de": "go-eCharger Home+",
-    "es": "go-eCharger Home+",
-    "fr": "go-eCharger Home+",
-    "it": "go-eCharger Home+",
-    "no": "go-eCharger Home+",
-    "sv": "go-eCharger Home+",
-    "pl": "go-eCharger Home+",
-    "ru": "go-eCharger Home+",
-    "ko": "go-eCharger Home+",
-    "ar": "go-eCharger Home+"
+    "en": "go-eCharger Home+ (local)",
+    "nl": "go-eCharger Home+ (local)",
+    "da": "go-eCharger Home+ (local)",
+    "de": "go-eCharger Home+ (local)",
+    "es": "go-eCharger Home+ (local)",
+    "fr": "go-eCharger Home+ (local)",
+    "it": "go-eCharger Home+ (local)",
+    "no": "go-eCharger Home+ (local)",
+    "sv": "go-eCharger Home+ (local)",
+    "pl": "go-eCharger Home+ (local)",
+    "ru": "go-eCharger Home+ (local)",
+    "ko": "go-eCharger Home+ (local)",
+    "ar": "go-eCharger Home+ (local)"
   },
   "discovery": "mdns_http_go-echarger-homeplus",
-  "$extends": ["go-eCharger"]
+  "$extends": [
+    "go-eCharger",
+    "go-eCharger-local"
+  ]
 }

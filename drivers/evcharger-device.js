@@ -1,7 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
-const goeCharger = require('../lib/go-eCharger-API-v2');
+const goeChargerAPI = require('../lib/go-eCharger-API-v2');
 const { GOE_CHARGER_MODE, getStatusAttributes, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
 
 const POLL_INTERVAL = 5000;
@@ -10,6 +10,11 @@ const AUTO_SPL3_THRESHOLD_W = 4140;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
 class evChargerDevice extends Homey.Device {
+  getApiBaseUrl(address) {
+    const host = typeof address === 'string' ? address.trim() : '';
+    return host ? `http://${host}/api` : null;
+  }
+
   /**
    * onInit is called when the device is initialized.
    */
@@ -18,8 +23,8 @@ class evChargerDevice extends Homey.Device {
     this.setUnavailable(`Initializing ${this.getName()}`).catch(() => {});
 
     const settings = this.getSettings();
-    this.api = new goeCharger();
-    this.api.address = settings.address;
+    this.api = new goeChargerAPI();
+    this.api.base_url = this.getApiBaseUrl(settings.address);
     this.api.driver = this.driver.id;
 
     await this.checkCapabilities();
@@ -78,19 +83,19 @@ class evChargerDevice extends Homey.Device {
       return;
     }
 
-    this.api.address = newAddress;
+    this.api.base_url = this.getApiBaseUrl(newAddress);
     try {
       const isConnected = await this.api.testConnection();
       if (!isConnected) {
-        const error = `Could not connect to go-eCharger at ${this.api.address}`;
+        const error = `Could not connect to go-eCharger at ${newAddress}`;
         this.setUnavailable(error).catch(() => {});
-        return Promise.reject(error);
+        throw new Error(error);
       }
       this.log(`[Device] ${this.getName()}: ${this.getData().id} new settings OK.`);
       await this.setAvailable();
     } catch (error) {
       await this.setUnavailable(error);
-      return Promise.reject(error);
+      throw error;
     }
   }
 
@@ -128,9 +133,9 @@ class evChargerDevice extends Homey.Device {
   async onDiscoveryAvailable(discoveryResult) {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} available - result: ${discoveryResult.address}.`);
     this.log(`[Device] ${this.getName()}: ${this.getData().id} type: ${discoveryResult.txt.devicetype}.`);
-    this.api.address = discoveryResult.address;
+    this.api.base_url = this.getApiBaseUrl(discoveryResult.address);
     await this.setSettings({
-      address: this.api.address
+      address: discoveryResult.address
     });
     await this.setAvailable();
     await this.clearIntervals();
@@ -142,9 +147,9 @@ class evChargerDevice extends Homey.Device {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.address}.`);
     this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.name}.`);
     // Update your connection details here, reconnect when the device is offline
-    this.api.address = discoveryResult.address;
+    this.api.base_url = this.getApiBaseUrl(discoveryResult.address);
     await this.setSettings({
-      address: this.api.address
+      address: discoveryResult.address
     });
     await this.setAvailable();
   }
@@ -363,7 +368,7 @@ class evChargerDevice extends Homey.Device {
           }
         }
 
-        await this.setCapabilityValue(capability, value).catch(this.error);
+        await this.setCapabilityValue(capability, value).catch((error) => this.error(error));
       }
     } catch (error) {
       const message = this.getErrorMessage(error, 'Polling failed');

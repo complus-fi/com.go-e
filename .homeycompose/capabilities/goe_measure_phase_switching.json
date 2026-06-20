@@ -1,7 +1,19 @@
 {
   "type": "enum",
   "title": {
-    "en": "Phase switching"
+    "en": "Phase switching",
+    "nl": "Fase omschakeling",
+    "da": "Faseskift",
+    "de": "Phasenumschaltung",
+    "es": "Cambio de fase",
+    "fr": "Changement de phase",
+    "it": "Commutazione di fase",
+    "no": "Faseskifting",
+    "sv": "Fasväxling",
+    "pl": "Przełączanie faz",
+    "ru": "Переключение фаз",
+    "ko": "위상 전환",
+    "ar": "تبديل الطور"
   },
   "getable": true,
   "setable": false,
@@ -11,19 +23,55 @@
     {
       "id": "0",
       "title": {
-        "en": "Automatic"
+        "en": "Automatic",
+        "nl": "Automatisch",
+        "da": "Automatisk",
+        "de": "Automatisch",
+        "es": "Automático",
+        "fr": "Automatique",
+        "it": "Automatico",
+        "no": "Automatisk",
+        "sv": "Automatisk",
+        "pl": "Automatyczny",
+        "ru": "Автоматический",
+        "ko": "자동",
+        "ar": "تلقائي"
       }
     },
     {
       "id": "1",
       "title": {
-        "en": "1-Phase"
+        "en": "1-Phase",
+        "nl": "1-fase",
+        "da": "1-fase",
+        "de": "1-Phase",
+        "es": "Monofásico",
+        "fr": "Monophasé",
+        "it": "Monofase",
+        "no": "1-fase",
+        "sv": "1-fas",
+        "pl": "1-faza",
+        "ru": "1-фаза",
+        "ko": "단상",
+        "ar": "1-فاز"
       }
     },
     {
       "id": "2",
       "title": {
-        "en": "3-Phase"
+        "en": "3-Phase",
+        "nl": "3-fase",
+        "da": "3-fase",
+        "de": "3-Phasen",
+        "es": "Trifásico",
+        "fr": "Triphasé",
+        "it": "Trifase",
+        "no": "3-fase",
+        "sv": "3-fas",
+        "pl": "3-fazowy",
+        "ru": "3-фазный",
+        "ko": "3상",
+        "ar": "ثلاثي الطور"
       }
     }
   ]

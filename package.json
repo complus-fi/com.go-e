@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.12",
-    "eslint": "^7.32.0",
-    "eslint-config-athom": "^3.1.5"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.5.0",
+    "globals": "^17.6.0"
   }
 }

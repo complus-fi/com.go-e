@@ -1,5 +1,9 @@
-Ładuj sprytnie. Ładuj swój samochód elektryczny tanio i inteligentnie.
+Ładuj prosto i inteligentnie. Ładuj swój samochód elektryczny tanio i z głową.
 
-Wsparcie dla modeli Home+(V3), Gemini, CORE i PRO ładowarek go-eCharger z API V2. Włącz API V2 w ustawieniach aplikacji mobilnej go-eCharger.
+Obsługa modeli Home+(V3), Gemini, CORE i PRO ładowarek go-e zarówno z dostępem przez sieć lokalną, jak i przez chmurę.
 
-Ta aplikacja Homey jest niezależnie rozwijana przez Complus Ky i nie jest oficjalnym produktem go-e GmbH. W sprawie wsparcia i zapytań, prosimy o bezpośredni kontakt z deweloperem.
+Aby korzystać z dostępu lokalnego, włącz V2 API w ustawieniach aplikacji mobilnej go-e.
+
+Aby korzystać z dostępu przez chmurę, włącz Cloud API w ustawieniach aplikacji mobilnej go-e i podaj numer seryjny urządzenia oraz wygenerowany klucz Cloud API w ustawieniach urządzenia Homey.
+
+Ta aplikacja Homey jest rozwijana niezależnie przez Complus Ky przy wsparciu go-e GmbH. W sprawie wsparcia i pytań skontaktuj się bezpośrednio z deweloperem.

@@ -1,5 +1,9 @@
-Laad slim en makkelijk. Laad je elektrische auto voordelig en op een slimme manier op.
+Laad eenvoudig slim op. Laad je elektrische auto voordelig en intelligent op.
 
-Ondersteuning voor de Home+(V3), Gemini, CORE en PRO modellen van go-eChargers met V2 API. Schakel de V2 API in via de instellingen van de go-eCharger mobiele app.
+Ondersteuning voor de Home+(V3), Gemini, CORE en PRO-modellen van go-e laders, zowel met lokale netwerktoegang als cloudtoegang.
 
-Deze Homey app is onafhankelijk ontwikkeld door Complus Ky en is geen officieel product van go-e GmbH. Voor ondersteuning en vragen, neem direct contact op met de ontwikkelaar.
+Schakel voor lokale toegang de V2 API in via de instellingen van de go-e mobiele app.
+
+Schakel voor cloudtoegang de Cloud API in via de instellingen van de go-e mobiele app en voer het serienummer van je apparaat en de gegenereerde Cloud API-sleutel in bij de Homey apparaatinstellingen.
+
+Deze Homey-app is onafhankelijk ontwikkeld door Complus Ky met ondersteuning van go-e GmbH. Neem voor ondersteuning en vragen rechtstreeks contact op met de ontwikkelaar.
