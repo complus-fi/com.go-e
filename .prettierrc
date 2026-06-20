@@ -1,7 +1,7 @@
 {
   "overrides": [
     {
-      "files": ["*.html", "*.js", "*.json"],
+      "files": ["*.html", "*.js"],
       "options": {
         "semi": true,
         "singleQuote": true,

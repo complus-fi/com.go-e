@@ -1,5 +1,5 @@
 {
-  "id": "com.go-e.cloud",
+  "id": "com.go-e",
   "version": "0.5.0",
   "compatibility": ">=12.13.0",
   "sdk": 3,
@@ -8,7 +8,7 @@
     "local", "cloud"
   ],
   "name": {
-    "en": "Go-e Cloud",
+    "en": "Go-e",
     "ar": "Go-e",
     "da": "Go-e",
     "de": "Go-e",
