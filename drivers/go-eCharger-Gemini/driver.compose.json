@@ -15,5 +15,8 @@
     "ar": "go-eCharger Gemini (local)"
   },
   "discovery": "mdns_http_go-echarger-gemini",
-  "$extends": ["go-eCharger", "go-eCharger-local"]
+  "$extends": [
+    "go-eCharger",
+    "go-eCharger-local"
+  ]
 }

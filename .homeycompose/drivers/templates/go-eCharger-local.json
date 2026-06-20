@@ -1,7 +1,11 @@
 {
   "$extends": "go-eCharger",
-  "platforms": ["local"],
-  "connectivity": ["lan"],
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
   "pair": [
     {
       "id": "list_devices",

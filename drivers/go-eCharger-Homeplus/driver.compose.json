@@ -15,5 +15,8 @@
     "ar": "go-eCharger Home+ (local)"
   },
   "discovery": "mdns_http_go-echarger-homeplus",
-  "$extends": ["go-eCharger", "go-eCharger-local"]
+  "$extends": [
+    "go-eCharger",
+    "go-eCharger-local"
+  ]
 }

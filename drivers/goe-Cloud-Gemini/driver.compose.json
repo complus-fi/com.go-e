@@ -14,5 +14,8 @@
     "ko": "go-eCharger Gemini (cloud)",
     "ar": "go-eCharger Gemini (cloud)"
   },
-  "$extends": ["go-eCharger", "go-eCharger-cloud"]
+  "$extends": [
+    "go-eCharger",
+    "go-eCharger-cloud"
+  ]
 }

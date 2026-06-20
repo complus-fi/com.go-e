@@ -14,5 +14,8 @@
     "ko": "go-eCharger PRO (cloud)",
     "ar": "go-eCharger PRO (cloud)"
   },
-  "$extends": ["go-eCharger", "go-eCharger-cloud"]
+  "$extends": [
+    "go-eCharger",
+    "go-eCharger-cloud"
+  ]
 }

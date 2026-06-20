@@ -15,5 +15,8 @@
     "ar": "go-eCharger CORE (local)"
   },
   "discovery": "mdns_http_go-echarger-core",
-  "$extends": ["go-eCharger", "go-eCharger-local"]
+  "$extends": [
+    "go-eCharger",
+    "go-eCharger-local"
+  ]
 }
