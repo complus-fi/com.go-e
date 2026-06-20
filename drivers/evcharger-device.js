@@ -89,13 +89,13 @@ class evChargerDevice extends Homey.Device {
       if (!isConnected) {
         const error = `Could not connect to go-eCharger at ${newAddress}`;
         this.setUnavailable(error).catch(() => {});
-        return Promise.reject(error);
+        throw new Error(error);
       }
       this.log(`[Device] ${this.getName()}: ${this.getData().id} new settings OK.`);
       await this.setAvailable();
     } catch (error) {
       await this.setUnavailable(error);
-      return Promise.reject(error);
+      throw error;
     }
   }
 
@@ -368,7 +368,7 @@ class evChargerDevice extends Homey.Device {
           }
         }
 
-        await this.setCapabilityValue(capability, value).catch(this.error);
+        await this.setCapabilityValue(capability, value).catch((error) => this.error(error));
       }
     } catch (error) {
       const message = this.getErrorMessage(error, 'Polling failed');

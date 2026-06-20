@@ -100,7 +100,7 @@ class evCloudChargerDevice extends evChargerDevice {
     if (!newSerialnumber) {
       const error = 'Cloud charger serial number is required';
       this.setUnavailable(error).catch(() => {});
-      return Promise.reject(error);
+      throw new Error(error);
     }
 
     this.api.base_url = this.getApiBaseUrl(newSerialnumber);
@@ -111,14 +111,14 @@ class evCloudChargerDevice extends evChargerDevice {
       if (!isConnected) {
         const error = `Could not connect to go-e Cloud charger ${newSerialnumber}`;
         this.setUnavailable(error).catch(() => {});
-        return Promise.reject(error);
+        throw new Error(error);
       }
 
       this.log(`[Device] ${this.getName()}: ${this.getData().id} new cloud settings OK.`);
       await this.setAvailable();
     } catch (error) {
       await this.setUnavailable(error);
-      return Promise.reject(error);
+      throw error;
     }
   }
 }
