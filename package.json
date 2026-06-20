@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "lint": "eslint --ext .js,.ts --ignore-path .eslintignore ."
+    "lint": "eslint --ext .js ."
   },
   "devDependencies": {
     "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.12",
