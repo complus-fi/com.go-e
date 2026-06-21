@@ -603,13 +603,13 @@ class evChargerDevice extends Homey.Device {
     const transactionCapabilityValue = capability === 'goe_transaction' ? value : this.getCapabilityValue('goe_transaction');
     const transactionName = capability === 'goe_transaction_name' ? value : getTransactionCardName(status);
     const meterPowerName = capability === 'goe_meter_power_name' ? value : getMeterPowerName(status);
+    const triggerId = capability === 'goe_transaction_name' ? 'goe_transaction_changed' : `${capability}_changed`;
 
-    const trigger = this.homey.flow.getDeviceTriggerCard(`${capability}_changed`);
+    const trigger = this.homey.flow.getDeviceTriggerCard(triggerId);
     await trigger
       .trigger(this, {
         card_name: capability === 'goe_meter_power_name' ? meterPowerName : transactionName,
         goe_transaction: getTransactionLabel(transactionCapabilityValue),
-        goe_transaction_name: transactionName,
         goe_meter_power_name: meterPowerName
       })
       .catch((error) => this.error(error));

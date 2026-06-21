@@ -105,21 +105,6 @@
     {
       "type": "device",
       "name": "device",
-      "title": {
-        "en": "Device",
-        "nl": "Apparaat",
-        "da": "Enhed",
-        "de": "Gerät",
-        "es": "Dispositivo",
-        "fr": "Appareil",
-        "it": "Dispositivo",
-        "no": "Enhet",
-        "sv": "Enhet",
-        "pl": "Urządzenie",
-        "ru": "Устройство",
-        "ko": "장치",
-        "ar": "الجهاز"
-      },
       "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
     }
   ]

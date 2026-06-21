@@ -164,21 +164,6 @@
           {
             "type": "device",
             "name": "device",
-            "title": {
-              "en": "Device",
-              "nl": "Apparaat",
-              "da": "Enhed",
-              "de": "Gerät",
-              "es": "Dispositivo",
-              "fr": "Appareil",
-              "it": "Dispositivo",
-              "no": "Enhet",
-              "sv": "Enhet",
-              "pl": "Urządzenie",
-              "ru": "Устройство",
-              "ko": "장치",
-              "ar": "الجهاز"
-            },
             "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
@@ -236,19 +221,19 @@
           "ar": "تم تغيير المعاملة"
         },
         "titleFormatted": {
-          "en": "Transaction changed to [[card_name]]",
-          "nl": "Transactie gewijzigd naar [[card_name]]",
-          "da": "Transaktion ændret til [[card_name]]",
-          "de": "Transaktion geändert zu [[card_name]]",
-          "es": "La transacción cambió a [[card_name]]",
-          "fr": "La transaction a été changée en [[card_name]]",
-          "it": "Transazione cambiata in [[card_name]]",
-          "no": "Transaksjon endret til [[card_name]]",
-          "sv": "Transaktionen ändrades till [[card_name]]",
-          "pl": "Transakcja zmieniona na [[card_name]]",
-          "ru": "Транзакция изменена на [[card_name]]",
-          "ko": "트랜잭션이 [[card_name]](으)로 변경됨",
-          "ar": "تم تغيير المعاملة إلى [[card_name]]"
+          "en": "Transaction changed",
+          "nl": "Transactie gewijzigd",
+          "da": "Transaktion ændret",
+          "de": "Transaktion geändert",
+          "es": "Transacción cambiada",
+          "fr": "Transaction modifiée",
+          "it": "Transazione cambiata",
+          "no": "Transaksjon endret",
+          "sv": "Transaktionen ändrad",
+          "pl": "Transakcja zmieniona",
+          "ru": "Транзакция изменена",
+          "ko": "트랜잭션 변경됨",
+          "ar": "تم تغيير المعاملة"
         },
         "hint": {
           "en": "Triggers when the charger transaction or card selection changes.",
@@ -283,55 +268,6 @@
               "ru": "Имя карты",
               "ko": "카드 이름",
               "ar": "اسم البطاقة"
-            },
-            "example": {
-              "en": "Anonymous",
-              "nl": "Anoniem",
-              "da": "Anonym",
-              "de": "Anonym",
-              "es": "Anónimo",
-              "fr": "Anonyme",
-              "it": "Anonimo",
-              "no": "Anonym",
-              "sv": "Anonym",
-              "pl": "Anonimowa",
-              "ru": "Анонимно",
-              "ko": "익명",
-              "ar": "مجهول"
-            }
-          },
-          {
-            "name": "goe_transaction",
-            "type": "string",
-            "title": {
-              "en": "Current transaction",
-              "nl": "Huidige transactie",
-              "da": "Nuværende transaktion",
-              "de": "Aktuelle Transaktion",
-              "es": "Transacción actual",
-              "fr": "Transaction actuelle",
-              "it": "Transazione corrente",
-              "no": "Gjeldende transaksjon",
-              "sv": "Aktuell transaktion",
-              "pl": "Bieżąca transakcja",
-              "ru": "Текущая транзакция",
-              "ko": "현재 트랜잭션",
-              "ar": "المعاملة الحالية"
-            },
-            "example": {
-              "en": "Anonymous",
-              "nl": "Anoniem",
-              "da": "Anonym",
-              "de": "Anonym",
-              "es": "Anónimo",
-              "fr": "Anonyme",
-              "it": "Anonimo",
-              "no": "Anonym",
-              "sv": "Anonym",
-              "pl": "Anonimowa",
-              "ru": "Анонимно",
-              "ko": "익명",
-              "ar": "مجهول"
             }
           }
         ],
@@ -339,53 +275,10 @@
           {
             "type": "device",
             "name": "device",
-            "title": {
-              "en": "Device",
-              "nl": "Apparaat",
-              "da": "Enhed",
-              "de": "Gerät",
-              "es": "Dispositivo",
-              "fr": "Appareil",
-              "it": "Dispositivo",
-              "no": "Enhet",
-              "sv": "Enhet",
-              "pl": "Urządzenie",
-              "ru": "Устройство",
-              "ko": "장치",
-              "ar": "الجهاز"
-            },
             "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
         "id": "goe_transaction_changed"
-      },
-      {
-        "title": {
-          "en": "Transaction name changed"
-        },
-        "titleFormatted": {
-          "en": "Transaction name changed to [[goe_transaction_name]]"
-        },
-        "hint": {
-          "en": "Triggers when the current transaction card name changes."
-        },
-        "tokens": [
-          {
-            "name": "goe_transaction_name",
-            "type": "string",
-            "title": {
-              "en": "Transaction name"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
-          }
-        ],
-        "id": "goe_transaction_name_changed"
       }
     ],
     "conditions": [
@@ -604,21 +497,6 @@
           {
             "type": "device",
             "name": "device",
-            "title": {
-              "en": "Device",
-              "nl": "Apparaat",
-              "da": "Enhed",
-              "de": "Gerät",
-              "es": "Dispositivo",
-              "fr": "Appareil",
-              "it": "Dispositivo",
-              "no": "Enhet",
-              "sv": "Enhet",
-              "pl": "Urządzenie",
-              "ru": "Устройство",
-              "ko": "장치",
-              "ar": "الجهاز"
-            },
             "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
@@ -841,21 +719,6 @@
           {
             "type": "device",
             "name": "device",
-            "title": {
-              "en": "Device",
-              "nl": "Apparaat",
-              "da": "Enhed",
-              "de": "Gerät",
-              "es": "Dispositivo",
-              "fr": "Appareil",
-              "it": "Dispositivo",
-              "no": "Enhet",
-              "sv": "Enhet",
-              "pl": "Urządzenie",
-              "ru": "Устройство",
-              "ko": "장치",
-              "ar": "الجهاز"
-            },
             "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
@@ -968,21 +831,6 @@
           {
             "type": "device",
             "name": "device",
-            "title": {
-              "en": "Device",
-              "nl": "Apparaat",
-              "da": "Enhed",
-              "de": "Gerät",
-              "es": "Dispositivo",
-              "fr": "Appareil",
-              "it": "Dispositivo",
-              "no": "Enhet",
-              "sv": "Enhet",
-              "pl": "Urządzenie",
-              "ru": "Устройство",
-              "ko": "장치",
-              "ar": "الجهاز"
-            },
             "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
@@ -1097,21 +945,6 @@
           {
             "type": "device",
             "name": "device",
-            "title": {
-              "en": "Device",
-              "nl": "Apparaat",
-              "da": "Enhed",
-              "de": "Gerät",
-              "es": "Dispositivo",
-              "fr": "Appareil",
-              "it": "Dispositivo",
-              "no": "Enhet",
-              "sv": "Enhet",
-              "pl": "Urządzenie",
-              "ru": "Устройство",
-              "ko": "장치",
-              "ar": "الجهاز"
-            },
             "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
@@ -1386,21 +1219,6 @@
           {
             "type": "device",
             "name": "device",
-            "title": {
-              "en": "Device",
-              "nl": "Apparaat",
-              "da": "Enhed",
-              "de": "Gerät",
-              "es": "Dispositivo",
-              "fr": "Appareil",
-              "it": "Dispositivo",
-              "no": "Enhet",
-              "sv": "Enhet",
-              "pl": "Urządzenie",
-              "ru": "Устройство",
-              "ko": "장치",
-              "ar": "الجهاز"
-            },
             "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
@@ -8307,19 +8125,19 @@
     "goe_transaction": {
       "type": "enum",
       "title": {
-        "en": "Transaction",
-        "nl": "Transactie",
-        "da": "Transaktion",
-        "de": "Transaktion",
-        "es": "Transacción",
-        "fr": "Transaction",
-        "it": "Transazione",
-        "no": "Transaksjon",
-        "sv": "Transaktion",
-        "pl": "Transakcja",
-        "ru": "Транзакция",
-        "ko": "트랜잭션",
-        "ar": "المعاملة"
+        "en": "User Card",
+        "nl": "Gebruikerskaart",
+        "da": "Brugerkort",
+        "de": "Benutzerkarte",
+        "es": "Tarjeta de usuario",
+        "fr": "Carte utilisateur",
+        "it": "Carta utente",
+        "no": "Brukerkort",
+        "sv": "Användarkort",
+        "pl": "Karta użytkownika",
+        "ru": "Пользовательская карта",
+        "ko": "사용자 카드",
+        "ar": "بطاقة المستخدم"
       },
       "hint": {
         "en": "Active charging transaction or RFID card selection.",
