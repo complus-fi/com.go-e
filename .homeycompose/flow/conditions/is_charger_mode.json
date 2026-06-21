@@ -1,6 +1,6 @@
 {
   "title": {
-    "en": "Charger mode !{{is|isn't}} [[mode]]",
+    "en": "The EV charger mode !{{is|isn't}} [[mode]]",
     "nl": "Oplaadmodus !{{is|isn't}} [[mode]]",
     "da": "Opladertilstand !{{er|er ikke}} [[mode]]",
     "de": "Lademodus !{{ist|ist nicht}} [[mode]]",
@@ -15,19 +15,19 @@
     "ar": "وضع الشاحن !{{هو|ليس}} [[mode]]"
   },
   "titleFormatted": {
-    "en": "Charger mode {{is|isn't}} [[mode]]",
-    "nl": "Lader modus {{is|isn't}} [[mode]]",
-    "da": "Ladertilstand {{er|er ikke}} [[mode]]",
-    "de": "Lademodus {{ist|ist nicht}} [[mode]]",
-    "es": "Modo del cargador {{es|no es}} [[mode]]",
-    "fr": "Le mode de charge {{est|n'est pas}} [[mode]]",
-    "it": "Modalità caricatore {{è|non è}} [[mode]]",
-    "no": "Ladermodus {{er|er ikke}} [[mode]]",
-    "sv": "Laddarläge {{är|är inte}} [[mode]]",
-    "pl": "Tryb ładowarki {{jest|nie jest}} [[mode]]",
-    "ru": "Режим зарядного устройства {{is|isn't}} [[mode]]",
-    "ko": "충전기 모드 {{is|isn't}} [[mode]]",
-    "ar": "وضع الشاحن {{هو|ليس}} [[mode]]"
+    "en": "The EV charger mode !{{is|isn't}} [[mode]]",
+    "nl": "Oplaadmodus !{{is|isn't}} [[mode]]",
+    "da": "Opladertilstand !{{er|er ikke}} [[mode]]",
+    "de": "Lademodus !{{ist|ist nicht}} [[mode]]",
+    "es": "¡El modo del cargador !{{es|no es}} [[mode]]!",
+    "fr": "Mode de charge !{{est|n'est pas}} [[mode]]",
+    "it": "Modalità caricatore !{{è|non è}} [[mode]]",
+    "no": "Ladermodus !{{er|er ikke}} [[mode]]",
+    "sv": "Laddarläge !{{är|är inte}} [[mode]]",
+    "pl": "Tryb ładowarki !{{jest|nie jest}} [[mode]]",
+    "ru": "Режим зарядного устройства !{{is|isn't}} [[mode]]",
+    "ko": "충전기 모드 !{{is|isn't}} [[mode]]",
+    "ar": "وضع الشاحن !{{هو|ليس}} [[mode]]"
   },
   "hint": {
     "en": "Checks whether the charger is currently in the selected mode.",
@@ -213,21 +213,6 @@
     {
       "type": "device",
       "name": "device",
-      "title": {
-        "en": "Device",
-        "nl": "Apparaat",
-        "da": "Enhed",
-        "de": "Gerät",
-        "es": "Dispositivo",
-        "fr": "Appareil",
-        "it": "Dispositivo",
-        "no": "Enhet",
-        "sv": "Enhet",
-        "pl": "Urządzenie",
-        "ru": "Устройство",
-        "ko": "장치",
-        "ar": "الجهاز"
-      },
       "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
     }
   ]

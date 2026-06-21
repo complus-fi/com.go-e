@@ -1,19 +1,19 @@
 {
   "type": "enum",
   "title": {
-    "en": "Transaction",
-    "nl": "Transactie",
-    "da": "Transaktion",
-    "de": "Transaktion",
-    "es": "Transacción",
-    "fr": "Transaction",
-    "it": "Transazione",
-    "no": "Transaksjon",
-    "sv": "Transaktion",
-    "pl": "Transakcja",
-    "ru": "Транзакция",
-    "ko": "트랜잭션",
-    "ar": "المعاملة"
+    "en": "User Card",
+    "nl": "Gebruikerskaart",
+    "da": "Brugerkort",
+    "de": "Benutzerkarte",
+    "es": "Tarjeta de usuario",
+    "fr": "Carte utilisateur",
+    "it": "Carta utente",
+    "no": "Brukerkort",
+    "sv": "Användarkort",
+    "pl": "Karta użytkownika",
+    "ru": "Пользовательская карта",
+    "ko": "사용자 카드",
+    "ar": "بطاقة المستخدم"
   },
   "hint": {
     "en": "Active charging transaction or RFID card selection.",

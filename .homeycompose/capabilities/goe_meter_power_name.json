@@ -1,0 +1,37 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Power Meter Name",
+    "nl": "Vermogensmeter Naam",
+    "da": "Effektmåler Navn",
+    "de": "Stromzählername",
+    "es": "Nombre del Medidor de Energía",
+    "fr": "Nom du compteur d'énergie",
+    "it": "Nome del Contatore di Energia",
+    "no": "Strømmålernavn",
+    "sv": "Effektmätarens namn",
+    "pl": "Nazwa Licznika Energii",
+    "ru": "Имя счетчика мощности",
+    "ko": "전력 미터 이름",
+    "ar": "اسم عداد الطاقة"
+  },
+  "hint": {
+    "en": "The card name from go-e Charger for the power meter.",
+    "nl": "De kaartnaam van go-e Charger voor de energiemeter.",
+    "da": "Kortnavnet fra go-e Charger til elmåleren.",
+    "de": "Der Kartenname vom go-e Charger für den Stromzähler.",
+    "es": "El nombre de la tarjeta del cargador go-e para el medidor de energía.",
+    "fr": "Le nom de la carte du go-e Charger pour le compteur d'énergie.",
+    "it": "Il nome della scheda dal go-e Charger per il misuratore di potenza.",
+    "no": "Kortnavnet fra go-e Charger for strømmåleren.",
+    "sv": "Kortnamn från go-e Charger för elmätaren.",
+    "pl": "Nazwa karty z go-e Charger dla licznika mocy.",
+    "ru": "Название карты от go-e Charger для измерителя мощности.",
+    "ko": "go-e Charger의 전력 미터 카드 이름.",
+    "ar": "اسم البطاقة من شاحن go-e لعداد الطاقة."
+  },
+  "uiComponent": null,
+  "getable": true,
+  "setable": false,
+  "insights": false
+}

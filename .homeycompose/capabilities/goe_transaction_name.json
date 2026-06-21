@@ -1,0 +1,37 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Transaction Name",
+    "nl": "Transactienaam",
+    "da": "Transaktionsnavn",
+    "de": "Transaktionsname",
+    "es": "Nombre de transacción",
+    "fr": "Nom de transaction",
+    "it": "Nome transazione",
+    "no": "Transaksjonsnavn",
+    "sv": "Transaktionsnamn",
+    "pl": "Nazwa transakcji",
+    "ru": "Имя транзакции",
+    "ko": "트랜잭션 이름",
+    "ar": "اسم المعاملة"
+  },
+  "hint": {
+    "en": "The user card name for the current transaction.",
+    "nl": "De gebruikerskaartnaam voor de huidige transactie.",
+    "da": "Brugerkortnavnet for den aktuelle transaktion.",
+    "de": "Der Benutzerkartenname für die aktuelle Transaktion.",
+    "es": "El nombre de la tarjeta de usuario para la transacción actual.",
+    "fr": "Le nom de la carte utilisateur pour la transaction en cours.",
+    "it": "Il nome della carta utente per la transazione corrente.",
+    "no": "Brukerkortnavnet for gjeldende transaksjon.",
+    "sv": "Användarkortnamnet för den aktuella transaktionen.",
+    "pl": "Nazwa karty użytkownika dla bieżącej transakcji.",
+    "ru": "Имя пользовательской карты для текущей транзакции.",
+    "ko": "현재 트랜잭션의 사용자 카드 이름입니다.",
+    "ar": "اسم بطاقة المستخدم للمعاملة الحالية."
+  },
+  "uiComponent": null,
+  "getable": true,
+  "setable": false,
+  "insights": false
+}

@@ -34,7 +34,7 @@ Primary sources:
 | measure_voltage.output      | Read         | nrg, pha             | Phase-aware output voltage calculation                              | 0 if no output phases active                                                                         |
 | goe_charger_mode            | Read + write | lmo, fup, awe        | Maps go-e charger mode combinations to enum values                  | Primary charger mode capability                                                                      |
 | goe_pv_surplus_enabled      | Read + write | fup                  | Read mirrors `fup`; write true sets automatic PV parameters         | Write true sets `lmo=4`, `fup=true`, `awe=false`; write false sets `lmo=3`, `fup=false`, `awe=false` |
-| goe_transaction             | Read + write | trx                  | Read maps `trx` to `card_none`/`card_0..10`; write sets `trx`.      | Writing `card_none` follows legacy behavior and falls back to anonymous transaction `trx=0`          |
+| goe_transaction             | Read + write | trx, c0n..c9i        | Read maps `trx` to `card_none`/`card_0..10`; names use RFID keys    | Writing `card_none` follows legacy behavior and falls back to anonymous transaction `trx=0`          |
 | goe_measure_phase_switching | Read         | psm                  | Enum capability for automatic / 1-phase / 3-phase status            | Capability ids are stringified `0`, `1`, `2`                                                         |
 | goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code         | Capability id is the stringified status code                                                         |
 | measure_power.pakku         | Read         | pakku                | Reads charger PV optimization average battery power                 | Rounded to 2 decimals                                                                                |
@@ -53,6 +53,8 @@ Additional mode/power mappings:
   - `trip_pv_and_flexible_price` => `lmo=5`, `fup=true`, `awe=true`
   - `trip_no_pv_no_flexible_price` => `lmo=5`, `fup=false`, `awe=false`
 - `goe_pv_surplus_enabled`: uses `fup` for read/write; enabling applies `lmo=4`, `fup=true`, `awe=false`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`; disabling applies `lmo=3`, `fup=false`, `awe=false`.
+- `meter_power.1..10` and `goe_meter_power_name.1..10`: dynamic per-card capabilities controlled by `c0i..c9i` (configured=true adds capabilities, configured=false removes capabilities).
+- Dynamic per-card energy/name values map from `c0e..c9e` and `c0n..c9n` respectively.
 
 ## Control Behavior
 
@@ -68,11 +70,12 @@ Additional mode/power mappings:
 - If charging is turned on and `goe_charger_mode` is any Eco/Trip mode, command flow sends `frc=0` (automatic).
 - If charging is turned on and `goe_charger_mode` is `basic_charging`, command flow sends `frc=2` (homey).
 - Inverter/grid/battery telemetry can be sent via the `set_pv_surplus_info` flow action, which calls `onCapability_SET_PV_SURPLUS_INFO` and writes the `ids` payload only when `goe_pv_surplus_enabled` is true.
-- The `set_pv_surplus_enabled` flow action passes `enabled` through to `onCapability_SET_PV_SURPLUS_ENABLED`; device-side normalization accepts booleans and string booleans.
 - The `set_charger_mode` flow action writes `goe_charger_mode`; `is_charger_mode` checks the current enum value.
 - The `set_transaction` flow action writes `goe_transaction`; device-side validation accepts `card_none` and `card_0..10`, with `card_none` mapped to anonymous transaction `trx=0`.
+- `goe_transaction` requests the 60.0 RFID card key groups `c0n..c9n`, `c0e..c9e`, and `c0i..c9i` so transaction card names can be derived from charger status.
+- `goe_transaction_name` and `goe_meter_power_name` both derive the active RFID card name from the 60.0 RFID key groups.
 - The `goe_charger_mode_changed` trigger uses Homey's custom capability changed trigger for enum capabilities and exposes the current mode token.
-- The `goe_transaction_changed` trigger fires on polled charger-state changes and exposes the current transaction label token.
+- The `goe_transaction_changed` trigger fires on polled charger-state changes and exposes the current card name token, with the raw transaction label still available as an extra token.
 - After a UI toggle of `evcharger_charging`, one mismatching poll value is ignored to prevent temporary switch bounce.
 
 ## Polling and Availability

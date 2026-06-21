@@ -4,38 +4,7 @@ const evChargerDevice = require('./evcharger-device');
 const goeChargerAPI = require('../lib/go-eCharger-API-v2');
 const { getStatusAttributes } = require('../lib/mappings');
 
-const POLL_INTERVAL_CHARGING = 5000;
-const POLL_INTERVAL_IDLE = 30000;
-
 class evCloudChargerDevice extends evChargerDevice {
-  getDynamicPollIntervalMs(status = this.lastStatus) {
-    if (Number(status?.car) === 2) {
-      return POLL_INTERVAL_CHARGING;
-    }
-
-    if (this.hasCapability('evcharger_charging_state')) {
-      const chargingState = this.getCapabilityValue('evcharger_charging_state');
-      if (chargingState === 'plugged_in_charging') {
-        return POLL_INTERVAL_CHARGING;
-      }
-    }
-
-    return POLL_INTERVAL_IDLE;
-  }
-
-  updatePollInterval(intervalMs) {
-    if (this.pollIntervalMs === intervalMs && this.onPollInterval) {
-      return;
-    }
-
-    if (this.onPollInterval) {
-      this.homey.clearInterval(this.onPollInterval);
-    }
-
-    this.onPollInterval = this.homey.setInterval(this.onPoll.bind(this), intervalMs);
-    this.pollIntervalMs = intervalMs;
-  }
-
   getApiBaseUrl(serialnumber) {
     const host = typeof serialnumber === 'string' ? serialnumber.trim() : '';
     return host ? `https://${serialnumber}.api.v3.go-e.io/api` : null;
@@ -60,7 +29,11 @@ class evCloudChargerDevice extends evChargerDevice {
       driver: this.api.driver
     });
 
-    this.api.apiKeys = getStatusAttributes(this.getCapabilities(), { firmwareVersion: this.getSettings().version });
+    this.cardConfiguredFlags = Array(10).fill(undefined);
+    this.api.apiKeys = getStatusAttributes(this.getCapabilities(), {
+      firmwareVersion: this.getSettings().version,
+      cardConfiguredFlags: this.cardConfiguredFlags
+    });
     this.pollErrorMessage = null;
     this.pendingChargingState = null;
     this.pollIntervalMs = null;
@@ -69,12 +42,6 @@ class evCloudChargerDevice extends evChargerDevice {
     await this.setAvailable();
     await this.clearIntervals();
     await this.onPoll();
-    this.updatePollInterval(this.getDynamicPollIntervalMs());
-  }
-
-  async onPoll() {
-    await super.onPoll();
-    this.updatePollInterval(this.getDynamicPollIntervalMs());
   }
 
   /**

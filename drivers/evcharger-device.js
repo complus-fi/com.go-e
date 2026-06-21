@@ -2,15 +2,55 @@
 
 const Homey = require('homey');
 const goeChargerAPI = require('../lib/go-eCharger-API-v2');
-const { GOE_CHARGER_MODE, GOE_TRANSACTION, getStatusAttributes, getTransactionApiValue, getTransactionLabel, mapHomeyToApiValues, mapStatusToCapabilities } = require('../lib/mappings');
+const { formatStatusForLog } = require('../lib/helpers');
+const {
+  GOE_CHARGER_MODE,
+  GOE_TRANSACTION,
+  getStatusAttributes,
+  getTransactionApiValue,
+  getTransactionCardName,
+  getTransactionLabel,
+  mapHomeyToApiValues,
+  mapStatusToCapabilities
+} = require('../lib/mappings');
 
 const POLL_INTERVAL = 5000;
+const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const AUTO_SPL3_THRESHOLD_W = 4140;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 const GOE_TRANSACTION_IDS = new Set(Object.values(GOE_TRANSACTION));
+const GOE_NAME_TRIGGER_CAPABILITIES = new Set(['goe_transaction', 'goe_transaction_name']);
 
 class evChargerDevice extends Homey.Device {
+  getDynamicPollIntervalMs(status = this.lastStatus) {
+    if (Number(status?.car) === 2) {
+      return POLL_INTERVAL;
+    }
+
+    if (this.hasCapability('evcharger_charging_state')) {
+      const chargingState = this.getCapabilityValue('evcharger_charging_state');
+      if (chargingState === 'plugged_in_charging') {
+        return POLL_INTERVAL;
+      }
+    }
+
+    return POLL_INTERVAL_IDLE;
+  }
+
+  updatePollInterval(intervalMs) {
+    if (this.pollIntervalMs === intervalMs && this.onPollInterval) {
+      return;
+    }
+
+    if (this.onPollInterval) {
+      this.homey.clearInterval(this.onPollInterval);
+    }
+
+    this.onPollInterval = this.homey.setInterval(this.onPoll.bind(this), intervalMs);
+    this.pollIntervalMs = intervalMs;
+  }
+
   getApiBaseUrl(address) {
     const host = typeof address === 'string' ? address.trim() : '';
     return host ? `http://${host}/api` : null;
@@ -34,9 +74,14 @@ class evChargerDevice extends Homey.Device {
       driver: this.api.driver
     });
 
-    this.api.apiKeys = getStatusAttributes(this.getCapabilities(), { firmwareVersion: this.getSettings().version });
+    this.cardConfiguredFlags = Array(10).fill(undefined);
+    this.api.apiKeys = getStatusAttributes(this.getCapabilities(), {
+      firmwareVersion: this.getSettings().version,
+      cardConfiguredFlags: this.cardConfiguredFlags
+    });
     this.pollErrorMessage = null;
     this.pendingChargingState = null;
+    this.pollIntervalMs = null;
     this.registerCapabilityListeners();
   }
 
@@ -140,8 +185,8 @@ class evChargerDevice extends Homey.Device {
     });
     await this.setAvailable();
     await this.clearIntervals();
-    this.onPollInterval = this.homey.setInterval(this.onPoll.bind(this), POLL_INTERVAL);
     await this.onPoll();
+    this.updatePollInterval(this.getDynamicPollIntervalMs());
   }
 
   async onDiscoveryAddressChanged(discoveryResult) {
@@ -164,6 +209,7 @@ class evChargerDevice extends Homey.Device {
     try {
       this.log(`[Device] ${this.getName()}: ${this.getData().id} clearIntervals`);
       this.homey.clearInterval(this.onPollInterval);
+      this.pollIntervalMs = null;
     } catch (error) {
       this.log(error);
     }
@@ -190,7 +236,13 @@ class evChargerDevice extends Homey.Device {
   async updateCapabilities(driverCapabilities, deviceCapabilities) {
     try {
       const newC = driverCapabilities.filter((d) => !deviceCapabilities.includes(d));
-      const oldC = deviceCapabilities.filter((d) => !driverCapabilities.includes(d));
+      const oldC = deviceCapabilities.filter((d) => {
+        if (driverCapabilities.includes(d)) return false;
+        // Dynamic RFID card capabilities are reconciled on poll from cXi state.
+        if (/^meter_power\.(10|[1-9])$/.test(d)) return false;
+        if (/^goe_meter_power_name\.(10|[1-9])$/.test(d)) return false;
+        return true;
+      });
 
       this.log(`[Device] ${this.getName()} - Got old capabilities =>`, oldC);
       this.log(`[Device] ${this.getName()} - Got new capabilities =>`, newC);
@@ -245,10 +297,10 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['evcharger_charging', 'goe_pv_surplus_enabled', 'goe_charger_mode', 'goe_transaction'],
-      async ({ evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode, goe_transaction }) => {
+      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction'],
+      async ({ evcharger_charging, goe_charger_mode, goe_transaction }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode, goe_transaction });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_charger_mode, goe_transaction });
 
           const context = {
             api: this.api,
@@ -260,11 +312,6 @@ class evChargerDevice extends Homey.Device {
 
           if (goe_charger_mode !== undefined) {
             await this.onCapability_SET_CHARGER_MODE(goe_charger_mode);
-            return;
-          }
-
-          if (goe_pv_surplus_enabled !== undefined) {
-            await this.onCapability_SET_PV_SURPLUS_ENABLED(goe_pv_surplus_enabled);
             return;
           }
 
@@ -328,8 +375,10 @@ class evChargerDevice extends Homey.Device {
   async onPoll() {
     try {
       const status = await this.api.getStatus();
-      this.log(`[Device] ${this.getName()} - onPoll status:`, status);
+      this.log(`[Device] ${this.getName()} - onPoll status:\n${formatStatusForLog(status)}`);
       this.lastStatus = status;
+
+      await this.syncDynamicCardCapabilities(status);
 
       if (this.pollErrorMessage) {
         this.pollErrorMessage = null;
@@ -341,7 +390,10 @@ class evChargerDevice extends Homey.Device {
         const currentVersion = String(this.getSettings().version || '').trim();
         if (firmwareVersion && firmwareVersion !== currentVersion) {
           await this.setSettings({ version: firmwareVersion });
-          this.api.apiKeys = getStatusAttributes(this.getCapabilities(), { firmwareVersion });
+          this.api.apiKeys = getStatusAttributes(this.getCapabilities(), {
+            firmwareVersion,
+            cardConfiguredFlags: this.cardConfiguredFlags
+          });
           this.log(`[Device] ${this.getName()} - firmware updated to ${firmwareVersion}`);
         }
       }
@@ -355,6 +407,8 @@ class evChargerDevice extends Homey.Device {
       if (this.hasCapability('goe_pv_surplus_enabled') && status.fup !== undefined) {
         nextValues.goe_pv_surplus_enabled = Boolean(status.fup);
       }
+
+      this.applyMeterPowerNameForSession(status, nextValues);
 
       for (const [capability, value] of Object.entries(nextValues)) {
         if (!this.hasCapability(capability)) continue;
@@ -377,8 +431,8 @@ class evChargerDevice extends Homey.Device {
 
         await this.setCapabilityValue(capability, value).catch((error) => this.error(error));
 
-        if (capability === 'goe_transaction' && previousValue !== value) {
-          await this.triggerTransactionChanged(value);
+        if (GOE_NAME_TRIGGER_CAPABILITIES.has(capability) && previousValue !== value) {
+          await this.triggerNameChanged(capability, status, value);
         }
       }
     } catch (error) {
@@ -389,12 +443,16 @@ class evChargerDevice extends Homey.Device {
       }
       await this.setUnavailable(`Connection issue: ${message}`).catch(() => {});
     }
+
+    this.updatePollInterval(this.getDynamicPollIntervalMs());
   }
 
   async onCapability_SET_PV_SURPLUS_INFO({ pGrid, pPv, pAkku }) {
-    const pvSurplusEnabled = Boolean(this.getCapabilityValue('goe_pv_surplus_enabled'));
-    if (!pvSurplusEnabled) {
-      this.log(`[Device] ${this.getName()} - Skip ids update because goe_pv_surplus_enabled is false`);
+    const chargerMode = this.getCapabilityValue('goe_charger_mode');
+    const chargingState = this.getCapabilityValue('evcharger_charging_state');
+    const pvSurplusModes = new Set(['eco_pv_surplus', 'eco_pv_and_flexible_price', 'trip_pv_surplus', 'trip_pv_and_flexible_price']);
+    if (!pvSurplusModes.has(chargerMode) || chargingState === 'plugged_out') {
+      this.log(`[Device] ${this.getName()} - Skip ids update because goe_charger_mode (${chargerMode}) is not a PV surplus mode or evcharger_charging_state is plugged_out`);
       return;
     }
 
@@ -425,19 +483,6 @@ class evChargerDevice extends Homey.Device {
     await this.applyApiValues({ ids: payload });
   }
 
-  async onCapability_SET_PV_SURPLUS_ENABLED(enabled) {
-    const normalizedEnabled = typeof enabled === 'string' ? enabled.trim().toLowerCase() === 'true' : Boolean(enabled);
-
-    const context = {
-      status: this.lastStatus,
-      spl3Threshold: AUTO_SPL3_THRESHOLD_W
-    };
-
-    const apiValues = mapHomeyToApiValues({ goe_pv_surplus_enabled: normalizedEnabled }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-
-    await this.applyApiValues(apiValues);
-  }
-
   async onCapability_SET_CHARGER_MODE(mode) {
     const normalizedMode = typeof mode === 'string' ? mode.trim() : '';
     if (!GOE_CHARGER_MODE_IDS.has(normalizedMode)) {
@@ -462,11 +507,125 @@ class evChargerDevice extends Homey.Device {
     await this.applyApiValues({ trx: getTransactionApiValue(normalizedTransaction) });
   }
 
-  async triggerTransactionChanged(transaction) {
-    const trigger = this.homey.flow.getDeviceTriggerCard('goe_transaction_changed');
+  applyMeterPowerNameForSession(status, nextValues) {
+    if (!this.hasCapability('goe_meter_power_name')) return;
+
+    const transactionName = typeof nextValues.goe_transaction_name === 'string' ? nextValues.goe_transaction_name : getTransactionCardName(status);
+    const currentMeterPowerName = this.getCapabilityValue('goe_meter_power_name');
+    const sessionEnergyValue = nextValues['meter_power.session'] ?? this.getCapabilityValue('meter_power.session');
+    const sessionEnergy = Number(sessionEnergyValue);
+
+    // Match old app behavior: bind name at session start and keep it while session energy is accumulating.
+    if (!Number.isFinite(sessionEnergy) || sessionEnergy <= 0) {
+      nextValues.goe_meter_power_name = transactionName;
+      return;
+    }
+
+    if (typeof currentMeterPowerName === 'string' && currentMeterPowerName.trim() !== '') {
+      nextValues.goe_meter_power_name = currentMeterPowerName;
+      return;
+    }
+
+    nextValues.goe_meter_power_name = transactionName;
+  }
+
+  isCardConfigured(value) {
+    if (typeof value === 'boolean') return value;
+    if (typeof value === 'number') return value !== 0;
+    if (typeof value === 'string') {
+      const normalized = value.trim().toLowerCase();
+      return normalized === 'true' || normalized === '1';
+    }
+    return false;
+  }
+
+  async syncDynamicCardCapabilities(status = {}) {
+    const capsToAdd = [];
+    const capsToRemove = [];
+    const nextCardConfiguredFlags = [...this.cardConfiguredFlags];
+    let cardStateChanged = false;
+
+    for (let index = 0; index < 10; index += 1) {
+      const configKey = `c${index}i`;
+      if (status[configKey] === undefined || status[configKey] === null) {
+        continue;
+      }
+
+      const cardNumber = index + 1;
+      const configured = this.isCardConfigured(status[configKey]);
+      const previousConfigured = this.cardConfiguredFlags[index];
+      const meterCapability = `meter_power.${cardNumber}`;
+      const nameCapability = `goe_meter_power_name.${cardNumber}`;
+
+      // On first seen value, reconcile only if device capability state does not match charger state.
+      if (previousConfigured !== undefined && previousConfigured === configured) {
+        continue;
+      }
+
+      if (configured) {
+        if (!this.hasCapability(meterCapability)) capsToAdd.push(meterCapability);
+        if (!this.hasCapability(nameCapability)) capsToAdd.push(nameCapability);
+      } else {
+        if (this.hasCapability(meterCapability)) capsToRemove.push(meterCapability);
+        if (this.hasCapability(nameCapability)) capsToRemove.push(nameCapability);
+      }
+
+      nextCardConfiguredFlags[index] = configured;
+      cardStateChanged = true;
+    }
+
+    if (capsToAdd.length === 0 && capsToRemove.length === 0) {
+      this.cardConfiguredFlags = nextCardConfiguredFlags;
+
+      if (cardStateChanged) {
+        this.api.apiKeys = getStatusAttributes(this.getCapabilities(), {
+          firmwareVersion: this.getSettings().version,
+          cardConfiguredFlags: this.cardConfiguredFlags
+        });
+      }
+
+      return;
+    }
+
+    for (const capability of capsToRemove) {
+      try {
+        await this.removeCapability(capability);
+      } catch (error) {
+        const message = error?.message || '';
+        if (!message.includes('Invalid Capability')) {
+          throw error;
+        }
+      }
+    }
+
+    for (const capability of capsToAdd) {
+      try {
+        await this.addCapability(capability);
+      } catch (error) {
+        const message = error?.message || '';
+        if (!message.includes('already exists')) {
+          throw error;
+        }
+      }
+    }
+
+    this.cardConfiguredFlags = nextCardConfiguredFlags;
+    this.api.apiKeys = getStatusAttributes(this.getCapabilities(), {
+      firmwareVersion: this.getSettings().version,
+      cardConfiguredFlags: this.cardConfiguredFlags
+    });
+  }
+
+  async triggerNameChanged(capability, status, value) {
+    const transactionCapabilityValue = capability === 'goe_transaction' ? value : this.getCapabilityValue('goe_transaction');
+    const transactionName = capability === 'goe_transaction_name' ? value : getTransactionCardName(status);
+    const triggerId = capability === 'goe_transaction_name' ? 'goe_transaction_changed' : `${capability}_changed`;
+
+    const trigger = this.homey.flow.getDeviceTriggerCard(triggerId);
     await trigger
       .trigger(this, {
-        goe_transaction: getTransactionLabel(transaction)
+        card_name: transactionName,
+        goe_transaction: getTransactionLabel(transactionCapabilityValue)
       })
       .catch((error) => this.error(error));
   }
