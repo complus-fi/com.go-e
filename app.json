@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.go-e",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -95,19 +95,19 @@
           "ar": "تم تغيير وضع الشاحن"
         },
         "titleFormatted": {
-          "en": "Charger mode changed to [[goe_charger_mode]]",
-          "nl": "Lader modus gewijzigd naar [[goe_charger_mode]]",
-          "da": "Opladningstilstand ændret til [[goe_charger_mode]]",
-          "de": "Lademodus geändert zu [[goe_charger_mode]]",
-          "es": "El modo del cargador se cambió a [[goe_charger_mode]]",
-          "fr": "Le mode de charge a été changé en [[goe_charger_mode]]",
-          "it": "Modalità caricatore cambiata in [[goe_charger_mode]]",
-          "no": "Lademodus endret til [[goe_charger_mode]]",
-          "sv": "Laddarläge ändrat till [[goe_charger_mode]]",
-          "pl": "Tryb ładowania zmieniony na [[goe_charger_mode]]",
-          "ru": "Режим зарядного устройства изменен на [[goe_charger_mode]]",
-          "ko": "충전기 모드가 [[goe_charger_mode]]로 변경되었습니다.",
-          "ar": "تم تغيير وضع الشاحن إلى [[goe_charger_mode]]"
+          "en": "Charger mode changed.",
+          "nl": "Lader modus gewijzigd",
+          "da": "Opladningstilstand ændret",
+          "de": "Lademodus geändert",
+          "es": "El modo del cargador se cambió",
+          "fr": "Le mode de charge a été changé",
+          "it": "Modalità caricatore cambiata",
+          "no": "Lademodus endret",
+          "sv": "Laddarläge ändrat",
+          "pl": "Tryb ładowania zmieniony",
+          "ru": "Режим зарядного устройства изменен",
+          "ko": "충전기 모드가 변경되었습니다.",
+          "ar": "تم تغيير وضع الشاحن"
         },
         "hint": {
           "en": "Triggers when the charger mode changes.",
@@ -168,101 +168,6 @@
           }
         ],
         "id": "goe_charger_mode_changed"
-      },
-      {
-        "title": {
-          "en": "Meter power name changed",
-          "nl": "Naam van metervermogen gewijzigd",
-          "da": "Målerens navn ændret",
-          "de": "Zählerleistungsname geändert",
-          "es": "Nombre del medidor de energía cambiado",
-          "fr": "Nom du compteur de puissance modifié",
-          "it": "Nome del contatore di potenza modificato",
-          "no": "Navn på målerkraft endret",
-          "sv": "Mätarens namn har ändrats",
-          "pl": "Nazwa mocy licznika została zmieniona",
-          "ru": "Имя счетчика мощности изменено",
-          "ko": "미터 전력 이름이 변경되었습니다.",
-          "ar": "تم تغيير اسم طاقة العداد"
-        },
-        "titleFormatted": {
-          "en": "Meter power name changed to [[goe_meter_power_name]]",
-          "nl": "Metervermogen naam gewijzigd naar [[goe_meter_power_name]]",
-          "da": "Målerens strømnavn ændret til [[goe_meter_power_name]]",
-          "de": "Zählerleistungsname geändert zu [[goe_meter_power_name]]",
-          "es": "El nombre del medidor de energía se cambió a [[goe_meter_power_name]]",
-          "fr": "Le nom de la puissance du compteur a été changé en [[goe_meter_power_name]]",
-          "it": "Il nome del contatore di potenza è stato cambiato in [[goe_meter_power_name]]",
-          "no": "Målerens navn er endret til [[goe_meter_power_name]]",
-          "sv": "Mätarens effekt namn ändrades till [[goe_meter_power_name]]",
-          "pl": "Nazwa mocy licznika zmieniona na [[goe_meter_power_name]]",
-          "ru": "Имя мощности счетчика изменено на [[goe_meter_power_name]]",
-          "ko": "미터 전력 이름이 [[goe_meter_power_name]](으)로 변경되었습니다.",
-          "ar": "تم تغيير اسم طاقة العداد إلى [[goe_meter_power_name]]"
-        },
-        "hint": {
-          "en": "Triggers when the meter power card name changes.",
-          "nl": "Triggert wanneer de naam van de meterstroomkaart verandert.",
-          "da": "Udløses, når navnet på målerens strømkort ændres.",
-          "de": "Wird ausgelöst, wenn sich der Name der Stromzählerkarte ändert.",
-          "es": "Se activa cuando cambia el nombre de la tarjeta de potencia del medidor.",
-          "fr": "Déclenchement lorsque le nom de la carte de puissance du compteur change.",
-          "it": "Attiva quando il nome della scheda del contatore cambia.",
-          "no": "Utøses når navnet på strømmålerkortet endres.",
-          "sv": "Utlöses när namnet på mätarens strömkort ändras.",
-          "pl": "Wyzwala się, gdy zmienia się nazwa karty mocy licznika.",
-          "ru": "Срабатывает, когда изменяется название карты мощности счетчика.",
-          "ko": "미터 전력 카드 이름이 변경될 때 트리거됩니다.",
-          "ar": "يتفاعل عند تغيير اسم بطاقة طاقة العداد."
-        },
-        "tokens": [
-          {
-            "name": "goe_meter_power_name",
-            "type": "string",
-            "title": {
-              "en": "Meter power name",
-              "nl": "Metervermogen naam",
-              "da": "Målerens strømnavn",
-              "de": "Zählerleistungsname",
-              "es": "Nombre del medidor de energía",
-              "fr": "Nom du compteur de puissance",
-              "it": "Nome potenza contatore",
-              "no": "Målerkraftnavn",
-              "sv": "Mätarens namn",
-              "pl": "Nazwa licznika mocy",
-              "ru": "Имя мощности счетчика",
-              "ko": "미터 전력 이름",
-              "ar": "اسم طاقة العداد"
-            }
-          },
-          {
-            "name": "card_name",
-            "type": "string",
-            "title": {
-              "en": "Card name",
-              "nl": "Kaartnaam",
-              "da": "Kortnavn",
-              "de": "Kartenname",
-              "es": "Nombre de la tarjeta",
-              "fr": "Nom de la carte",
-              "it": "Nome della scheda",
-              "no": "Kortnavn",
-              "sv": "Kortnamn",
-              "pl": "Nazwa karty",
-              "ru": "Название карточки",
-              "ko": "카드 이름",
-              "ar": "اسم البطاقة"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
-          }
-        ],
-        "id": "goe_meter_power_name_changed"
       },
       {
         "title": {
@@ -338,6 +243,7 @@
             "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
           }
         ],
+        "highlight": true,
         "id": "goe_transaction_changed"
       }
     ],
