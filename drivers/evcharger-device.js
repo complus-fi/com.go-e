@@ -7,7 +7,6 @@ const {
   GOE_CHARGER_MODE,
   GOE_TRANSACTION,
   getStatusAttributes,
-  getMeterPowerName,
   getTransactionApiValue,
   getTransactionCardName,
   getTransactionLabel,
@@ -21,7 +20,7 @@ const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const AUTO_SPL3_THRESHOLD_W = 4140;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 const GOE_TRANSACTION_IDS = new Set(Object.values(GOE_TRANSACTION));
-const GOE_NAME_TRIGGER_CAPABILITIES = new Set(['goe_transaction', 'goe_transaction_name', 'goe_meter_power_name']);
+const GOE_NAME_TRIGGER_CAPABILITIES = new Set(['goe_transaction', 'goe_transaction_name']);
 
 class evChargerDevice extends Homey.Device {
   getDynamicPollIntervalMs(status = this.lastStatus) {
@@ -620,15 +619,13 @@ class evChargerDevice extends Homey.Device {
   async triggerNameChanged(capability, status, value) {
     const transactionCapabilityValue = capability === 'goe_transaction' ? value : this.getCapabilityValue('goe_transaction');
     const transactionName = capability === 'goe_transaction_name' ? value : getTransactionCardName(status);
-    const meterPowerName = capability === 'goe_meter_power_name' ? value : getMeterPowerName(status);
     const triggerId = capability === 'goe_transaction_name' ? 'goe_transaction_changed' : `${capability}_changed`;
 
     const trigger = this.homey.flow.getDeviceTriggerCard(triggerId);
     await trigger
       .trigger(this, {
-        card_name: capability === 'goe_meter_power_name' ? meterPowerName : transactionName,
-        goe_transaction: getTransactionLabel(transactionCapabilityValue),
-        goe_meter_power_name: meterPowerName
+        card_name: transactionName,
+        goe_transaction: getTransactionLabel(transactionCapabilityValue)
       })
       .catch((error) => this.error(error));
   }

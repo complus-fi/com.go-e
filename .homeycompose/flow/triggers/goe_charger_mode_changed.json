@@ -15,19 +15,19 @@
     "ar": "تم تغيير وضع الشاحن"
   },
   "titleFormatted": {
-    "en": "Charger mode changed to [[goe_charger_mode]]",
-    "nl": "Lader modus gewijzigd naar [[goe_charger_mode]]",
-    "da": "Opladningstilstand ændret til [[goe_charger_mode]]",
-    "de": "Lademodus geändert zu [[goe_charger_mode]]",
-    "es": "El modo del cargador se cambió a [[goe_charger_mode]]",
-    "fr": "Le mode de charge a été changé en [[goe_charger_mode]]",
-    "it": "Modalità caricatore cambiata in [[goe_charger_mode]]",
-    "no": "Lademodus endret til [[goe_charger_mode]]",
-    "sv": "Laddarläge ändrat till [[goe_charger_mode]]",
-    "pl": "Tryb ładowania zmieniony na [[goe_charger_mode]]",
-    "ru": "Режим зарядного устройства изменен на [[goe_charger_mode]]",
-    "ko": "충전기 모드가 [[goe_charger_mode]]로 변경되었습니다.",
-    "ar": "تم تغيير وضع الشاحن إلى [[goe_charger_mode]]"
+    "en": "Charger mode changed.",
+    "nl": "Lader modus gewijzigd",
+    "da": "Opladningstilstand ændret",
+    "de": "Lademodus geändert",
+    "es": "El modo del cargador se cambió",
+    "fr": "Le mode de charge a été changé",
+    "it": "Modalità caricatore cambiata",
+    "no": "Lademodus endret",
+    "sv": "Laddarläge ändrat",
+    "pl": "Tryb ładowania zmieniony",
+    "ru": "Режим зарядного устройства изменен",
+    "ko": "충전기 모드가 변경되었습니다.",
+    "ar": "تم تغيير وضع الشاحن"
   },
   "hint": {
     "en": "Triggers when the charger mode changes.",

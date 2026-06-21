@@ -76,7 +76,6 @@ Additional mode/power mappings:
 - `goe_transaction_name` and `goe_meter_power_name` both derive the active RFID card name from the 60.0 RFID key groups.
 - The `goe_charger_mode_changed` trigger uses Homey's custom capability changed trigger for enum capabilities and exposes the current mode token.
 - The `goe_transaction_changed` trigger fires on polled charger-state changes and exposes the current card name token, with the raw transaction label still available as an extra token.
-- The `goe_meter_power_name_changed` trigger exposes the derived card name for meter-name changes.
 - After a UI toggle of `evcharger_charging`, one mismatching poll value is ignored to prevent temporary switch bounce.
 
 ## Polling and Availability

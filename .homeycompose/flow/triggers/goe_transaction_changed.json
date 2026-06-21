@@ -71,5 +71,6 @@
       "name": "device",
       "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
     }
-  ]
+  ],
+  "highlight": true
 }
