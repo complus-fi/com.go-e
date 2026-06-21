@@ -15,19 +15,19 @@
     "ar": "تعيين المعاملة"
   },
   "titleFormatted": {
-    "en": "Set transaction to [[transaction]]",
-    "nl": "Stel transactie in op [[transaction]]",
-    "da": "Indstil transaktion til [[transaction]]",
-    "de": "Transaktion auf [[transaction]] setzen",
-    "es": "Establecer la transacción en [[transaction]]",
-    "fr": "Définir la transaction sur [[transaction]]",
-    "it": "Imposta la transazione su [[transaction]]",
-    "no": "Sett transaksjon til [[transaction]]",
-    "sv": "Ställ in transaktionen till [[transaction]]",
-    "pl": "Ustaw transakcję na [[transaction]]",
-    "ru": "Установить транзакцию на [[transaction]]",
-    "ko": "트랜잭션을 [[transaction]](으)로 설정",
-    "ar": "اضبط المعاملة على [[transaction]]"
+    "en": "Set transaction to [[transaction]].",
+    "nl": "Stel transactie in op [[transaction]].",
+    "da": "Indstil transaktion til [[transaction]].",
+    "de": "Transaktion auf [[transaction]] setzen.",
+    "es": "Establecer la transacción en [[transaction]].",
+    "fr": "Définir la transaction sur [[transaction]].",
+    "it": "Imposta la transazione su [[transaction]].",
+    "no": "Sett transaksjon til [[transaction]].",
+    "sv": "Ställ in transaktionen till [[transaction]].",
+    "pl": "Ustaw transakcję na [[transaction]].",
+    "ru": "Установить транзакцию на [[transaction]].",
+    "ko": "트랜잭션을 [[transaction]](으)로 설정합니다.",
+    "ar": "اضبط المعاملة على [[transaction]]."
   },
   "hint": {
     "en": "Sets the charger transaction to the selected card.",
