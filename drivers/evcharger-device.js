@@ -16,6 +16,7 @@ const {
 } = require('../lib/mappings');
 
 const POLL_INTERVAL = 5000;
+const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const AUTO_SPL3_THRESHOLD_W = 4140;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
@@ -23,6 +24,34 @@ const GOE_TRANSACTION_IDS = new Set(Object.values(GOE_TRANSACTION));
 const GOE_NAME_TRIGGER_CAPABILITIES = new Set(['goe_transaction', 'goe_transaction_name', 'goe_meter_power_name']);
 
 class evChargerDevice extends Homey.Device {
+  getDynamicPollIntervalMs(status = this.lastStatus) {
+    if (Number(status?.car) === 2) {
+      return POLL_INTERVAL;
+    }
+
+    if (this.hasCapability('evcharger_charging_state')) {
+      const chargingState = this.getCapabilityValue('evcharger_charging_state');
+      if (chargingState === 'plugged_in_charging') {
+        return POLL_INTERVAL;
+      }
+    }
+
+    return POLL_INTERVAL_IDLE;
+  }
+
+  updatePollInterval(intervalMs) {
+    if (this.pollIntervalMs === intervalMs && this.onPollInterval) {
+      return;
+    }
+
+    if (this.onPollInterval) {
+      this.homey.clearInterval(this.onPollInterval);
+    }
+
+    this.onPollInterval = this.homey.setInterval(this.onPoll.bind(this), intervalMs);
+    this.pollIntervalMs = intervalMs;
+  }
+
   getApiBaseUrl(address) {
     const host = typeof address === 'string' ? address.trim() : '';
     return host ? `http://${host}/api` : null;
@@ -53,6 +82,7 @@ class evChargerDevice extends Homey.Device {
     });
     this.pollErrorMessage = null;
     this.pendingChargingState = null;
+    this.pollIntervalMs = null;
     this.registerCapabilityListeners();
   }
 
@@ -156,8 +186,8 @@ class evChargerDevice extends Homey.Device {
     });
     await this.setAvailable();
     await this.clearIntervals();
-    this.onPollInterval = this.homey.setInterval(this.onPoll.bind(this), POLL_INTERVAL);
     await this.onPoll();
+    this.updatePollInterval(this.getDynamicPollIntervalMs());
   }
 
   async onDiscoveryAddressChanged(discoveryResult) {
@@ -180,6 +210,7 @@ class evChargerDevice extends Homey.Device {
     try {
       this.log(`[Device] ${this.getName()}: ${this.getData().id} clearIntervals`);
       this.homey.clearInterval(this.onPollInterval);
+      this.pollIntervalMs = null;
     } catch (error) {
       this.log(error);
     }
@@ -413,6 +444,8 @@ class evChargerDevice extends Homey.Device {
       }
       await this.setUnavailable(`Connection issue: ${message}`).catch(() => {});
     }
+
+    this.updatePollInterval(this.getDynamicPollIntervalMs());
   }
 
   async onCapability_SET_PV_SURPLUS_INFO({ pGrid, pPv, pAkku }) {
