@@ -450,9 +450,10 @@ class evChargerDevice extends Homey.Device {
 
   async onCapability_SET_PV_SURPLUS_INFO({ pGrid, pPv, pAkku }) {
     const chargerMode = this.getCapabilityValue('goe_charger_mode');
+    const chargingState = this.getCapabilityValue('evcharger_charging_state');
     const pvSurplusModes = new Set(['eco_pv_surplus', 'eco_pv_and_flexible_price', 'trip_pv_surplus', 'trip_pv_and_flexible_price']);
-    if (!pvSurplusModes.has(chargerMode)) {
-      this.log(`[Device] ${this.getName()} - Skip ids update because goe_charger_mode (${chargerMode}) is not a PV surplus mode`);
+    if (!pvSurplusModes.has(chargerMode) || chargingState === 'plugged_out') {
+      this.log(`[Device] ${this.getName()} - Skip ids update because goe_charger_mode (${chargerMode}) is not a PV surplus mode or evcharger_charging_state is plugged_out`);
       return;
     }
 

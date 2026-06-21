@@ -34,7 +34,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "킬로와트시 (kWh)",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -43,16 +55,40 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
     },
-      "meter_power.ppv": {
+    "meter_power.ppv": {
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -61,7 +97,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -70,7 +118,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -79,7 +139,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -88,7 +160,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -97,7 +181,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -106,7 +202,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -115,7 +223,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -124,7 +244,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -133,7 +265,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "킬로와트시 (kWh)",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -142,7 +286,19 @@
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
