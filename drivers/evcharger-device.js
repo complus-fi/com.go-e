@@ -2,6 +2,7 @@
 
 const Homey = require('homey');
 const goeChargerAPI = require('../lib/go-eCharger-API-v2');
+const { formatStatusForLog } = require('../lib/helpers');
 const {
   GOE_CHARGER_MODE,
   GOE_TRANSACTION,
@@ -344,7 +345,7 @@ class evChargerDevice extends Homey.Device {
   async onPoll() {
     try {
       const status = await this.api.getStatus();
-      this.log(`[Device] ${this.getName()} - onPoll status:`, status);
+      this.log(`[Device] ${this.getName()} - onPoll status:\n${formatStatusForLog(status)}`);
       this.lastStatus = status;
 
       await this.syncDynamicCardCapabilities(status);

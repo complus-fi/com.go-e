@@ -7979,29 +7979,6 @@
       "setable": false,
       "insights": false
     },
-    "goe_pv_surplus_enabled": {
-      "type": "boolean",
-      "title": {
-        "en": "PV Surplus Enabled",
-        "nl": "PV-overschot ingeschakeld",
-        "da": "PV-overskud aktiveret",
-        "de": "PV-Überschuss aktiviert",
-        "es": "Excedente de PV Activado",
-        "fr": "Surplus PV Activé",
-        "it": "Surplus PV Abilitato",
-        "no": "PV-overskudd aktivert",
-        "sv": "PV-överskott aktiverat",
-        "pl": "Nadwyżka PV włączona",
-        "ru": "Избыток PV включен",
-        "ko": "PV 잉여 활성화됨",
-        "ar": "تمكين الفائض الكهروضوئي"
-      },
-      "getable": true,
-      "setable": true,
-      "uiComponent": "button",
-      "insights": true,
-      "deprecated": true
-    },
     "goe_transaction": {
       "type": "enum",
       "title": {
