@@ -70,7 +70,6 @@ Additional mode/power mappings:
 - If charging is turned on and `goe_charger_mode` is any Eco/Trip mode, command flow sends `frc=0` (automatic).
 - If charging is turned on and `goe_charger_mode` is `basic_charging`, command flow sends `frc=2` (homey).
 - Inverter/grid/battery telemetry can be sent via the `set_pv_surplus_info` flow action, which calls `onCapability_SET_PV_SURPLUS_INFO` and writes the `ids` payload only when `goe_pv_surplus_enabled` is true.
-- The `set_pv_surplus_enabled` flow action passes `enabled` through to `onCapability_SET_PV_SURPLUS_ENABLED`; device-side normalization accepts booleans and string booleans.
 - The `set_charger_mode` flow action writes `goe_charger_mode`; `is_charger_mode` checks the current enum value.
 - The `set_transaction` flow action writes `goe_transaction`; device-side validation accepts `card_none` and `card_0..10`, with `card_none` mapped to anonymous transaction `trx=0`.
 - `goe_transaction` requests the 60.0 RFID card key groups `c0n..c9n`, `c0e..c9e`, and `c0i..c9i` so transaction card names can be derived from charger status.

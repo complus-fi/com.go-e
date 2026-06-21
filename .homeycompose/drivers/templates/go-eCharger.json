@@ -17,7 +17,6 @@
     "evcharger_charging",
     "evcharger_charging_state",
     "goe_charger_mode",
-    "goe_pv_surplus_enabled",
     "goe_transaction",
     "goe_transaction_name",
     "goe_measure_phase_switching",

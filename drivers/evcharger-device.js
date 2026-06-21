@@ -266,10 +266,10 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['evcharger_charging', 'goe_pv_surplus_enabled', 'goe_charger_mode', 'goe_transaction'],
-      async ({ evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode, goe_transaction }) => {
+      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction'],
+      async ({ evcharger_charging, goe_charger_mode, goe_transaction }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_pv_surplus_enabled, goe_charger_mode, goe_transaction });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_charger_mode, goe_transaction });
 
           const context = {
             api: this.api,
@@ -281,11 +281,6 @@ class evChargerDevice extends Homey.Device {
 
           if (goe_charger_mode !== undefined) {
             await this.onCapability_SET_CHARGER_MODE(goe_charger_mode);
-            return;
-          }
-
-          if (goe_pv_surplus_enabled !== undefined) {
-            await this.onCapability_SET_PV_SURPLUS_ENABLED(goe_pv_surplus_enabled);
             return;
           }
 
@@ -420,9 +415,10 @@ class evChargerDevice extends Homey.Device {
   }
 
   async onCapability_SET_PV_SURPLUS_INFO({ pGrid, pPv, pAkku }) {
-    const pvSurplusEnabled = Boolean(this.getCapabilityValue('goe_pv_surplus_enabled'));
-    if (!pvSurplusEnabled) {
-      this.log(`[Device] ${this.getName()} - Skip ids update because goe_pv_surplus_enabled is false`);
+    const chargerMode = this.getCapabilityValue('goe_charger_mode');
+    const pvSurplusModes = new Set(['eco_pv_surplus', 'eco_pv_and_flexible_price', 'trip_pv_surplus', 'trip_pv_and_flexible_price']);
+    if (!pvSurplusModes.has(chargerMode)) {
+      this.log(`[Device] ${this.getName()} - Skip ids update because goe_charger_mode (${chargerMode}) is not a PV surplus mode`);
       return;
     }
 
@@ -451,19 +447,6 @@ class evChargerDevice extends Homey.Device {
     }
 
     await this.applyApiValues({ ids: payload });
-  }
-
-  async onCapability_SET_PV_SURPLUS_ENABLED(enabled) {
-    const normalizedEnabled = typeof enabled === 'string' ? enabled.trim().toLowerCase() === 'true' : Boolean(enabled);
-
-    const context = {
-      status: this.lastStatus,
-      spl3Threshold: AUTO_SPL3_THRESHOLD_W
-    };
-
-    const apiValues = mapHomeyToApiValues({ goe_pv_surplus_enabled: normalizedEnabled }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-
-    await this.applyApiValues(apiValues);
   }
 
   async onCapability_SET_CHARGER_MODE(mode) {
