@@ -30,19 +30,19 @@
     "ar": "اضبط وضع شاحن EV على [[mode]]"
   },
   "hint": {
-    "en": "Sets the charger logic mode and related PV/flexible-price flags.",
-    "nl": "Stelt de logica-modus van de lader in en de bijbehorende PV/flexibele-prijs vlaggen.",
-    "da": "Indstiller opladerens logiktilstand og relaterede PV/fleksible prisflag.",
-    "de": "Legt den Logikmodus des Ladegeräts und die zugehörigen PV-/flexiblen Preis-Flags fest.",
-    "es": "Establece el modo de lógica del cargador y las banderas relacionadas con PV/precio flexible.",
-    "fr": "Définit le mode logique du chargeur et les indicateurs liés au PV/prix flexible.",
-    "it": "Imposta la modalità logica del caricatore e i relativi flag per PV/prezzo flessibile.",
-    "no": "Setter lademodus og relaterte PV-/fleksibel-pris-flagg.",
-    "sv": "Ställer in laddarens logikläge och relaterade PV-/flexibla prisflaggor.",
-    "pl": "Ustawia tryb logiki ładowarki oraz powiązane flagi PV/elastycznej ceny.",
-    "ru": "Устанавливает режим логики зарядного устройства и связанные флаги для солнечной энергии/гибкой цены.",
-    "ko": "충전기 로직 모드 및 관련 PV/유연한 가격 플래그를 설정합니다.",
-    "ar": "يضبط وضع منطق الشاحن والأعلام المتعلقة بالطاقة الشمسية/السعر المرن."
+    "en": "With Basic Charging, use Target Power to set the charging power. With Eco modes, the charger will automatically adjust the charging power based on PV surplus and/or flexible price.",
+    "nl": "Met Basisladen kunt u het laadvermogen instellen met Doelvermogen. Met Eco-modi past de lader het laadvermogen automatisch aan op basis van PV-overschot en/of flexibele prijs.",
+    "da": "Med Grundlæggende opladning kan du bruge Målstrøm til at indstille opladningsstrømmen. Med Eco-tilstande justerer opladeren automatisk opladningsstrømmen baseret på PV-overskud og/eller fleksibel pris.",
+    "de": "Mit Basisladung können Sie die Ladeleistung mit Zielleistung einstellen. Mit Eco-Modi passt das Ladegerät die Ladeleistung automatisch basierend auf PV-Überschuss und/oder flexiblem Preis an.",
+    "es": "Con Carga Básica, use Potencia Objetivo para establecer la potencia de carga. Con los modos Eco, el cargador ajustará automáticamente la potencia de carga en función del excedente de PV y/o del precio flexible.",
+    "fr": "Avec la charge de base, utilisez la puissance cible pour définir la puissance de charge. Avec les modes Eco, le chargeur ajustera automatiquement la puissance de charge en fonction du surplus de PV et/ou du prix flexible.",
+    "it": "Con la ricarica di base, utilizzare la potenza target per impostare la potenza di ricarica. Con le modalità Eco, il caricatore regolerà automaticamente la potenza di ricarica in base al surplus di PV e/o al prezzo flessibile.",
+    "no": "Med grunnleggende lading kan du bruke målstrøm for å sette ladeeffekten. Med Eco-moduser vil laderen automatisk justere ladeeffekten basert på PV-overskudd og/eller fleksibel pris.",
+    "sv": "Med grundläggande laddning kan du använda måleffekt för att ställa in laddningseffekten. Med Eco-lägen justerar laddaren automatiskt laddningseffekten baserat på PV-överskott och/eller flexibelt pris.",
+    "pl": "Podczas podstawowego ładowania użyj mocy docelowej, aby ustawić moc ładowania. W trybach Eco ładowarka automatycznie dostosuje moc ładowania w oparciu o nadwyżkę PV i/lub elastyczną cenę.",
+    "ru": "При базовой зарядке используйте целевую мощность для установки мощности зарядки. В режимах Eco зарядное устройство автоматически регулирует мощность зарядки в зависимости от избыточной солнечной энергии и/или гибкой цены.",
+    "ko": "기본 충전 모드에서는 목표 전력을 사용하여 충전 전력을 설정합니다. 에코 모드에서는 충전기가 PV 잉여 및/또는 유연한 가격에 따라 충전 전력을 자동으로 조정합니다.",
+    "ar": "مع الشحن الأساسي، استخدم الطاقة المستهدفة لتحديد طاقة الشحن. مع أوضاع Eco، سيقوم الشاحن بضبط طاقة الشحن تلقائيًا بناءً على فائض الطاقة الشمسية و/أو السعر المرن."
   },
   "args": [
     {

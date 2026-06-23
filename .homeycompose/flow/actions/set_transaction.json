@@ -30,19 +30,19 @@
     "ar": "اضبط المعاملة على [[transaction]]"
   },
   "hint": {
-    "en": "Sets the charger transaction to the selected card.",
-    "nl": "Stelt de ladertransactie in op de geselecteerde kaart.",
-    "da": "Indstiller opladertransaktionen til det valgte kort.",
-    "de": "Stellt die Ladetransaktion auf die ausgewählte Karte ein.",
-    "es": "Establece la transacción del cargador en la tarjeta seleccionada.",
-    "fr": "Définit la transaction du chargeur sur la carte sélectionnée.",
-    "it": "Imposta la transazione del caricatore sulla carta selezionata.",
-    "no": "Setter ladertransaksjonen til det valgte kortet.",
-    "sv": "Ställer in laddartransaktionen till det valda kortet.",
-    "pl": "Ustawia transakcję ładowarki na wybraną kartę.",
-    "ru": "Устанавливает транзакцию зарядного устройства на выбранную карту.",
-    "ko": "충전기 트랜잭션을 선택한 카드로 설정합니다.",
-    "ar": "يضبط معاملة الشاحن على البطاقة المحددة."
+    "en": "Sets the charger transaction to the selected user card.",
+    "nl": "Stelt de ladertransactie in op de geselecteerde gebruikerskaart.",
+    "da": "Indstiller opladertransaktionen til det valgte brugerkort.",
+    "de": "Stellt die Ladetransaktion auf die ausgewählte Benutzerkarte ein.",
+    "es": "Establece la transacción del cargador en la tarjeta de usuario seleccionada.",
+    "fr": "Définit la transaction du chargeur sur la carte utilisateur sélectionnée.",
+    "it": "Imposta la transazione del caricatore sulla carta utente selezionata.",
+    "no": "Setter ladertransaksjonen til det valgte brukerkortet.",
+    "sv": "Ställer in laddartransaktionen till det valda användarkortet.",
+    "pl": "Ustawia transakcję ładowarki na wybraną kartę użytkownika.",
+    "ru": "Устанавливает транзакцию зарядного устройства на выбранную карту пользователя.",
+    "ko": "충전기 트랜잭션을 선택한 사용자 카드로 설정합니다.",
+    "ar": "يضبط معاملة الشاحن على بطاقة المستخدم المحددة."
   },
   "args": [
     {
