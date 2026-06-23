@@ -25,19 +25,19 @@
     "sv": "Go-e"
   },
   "description": {
-    "en": "Simply Charge Smart. Charge your electric car at a low cost and intelligently.",
-    "nl": "Laad slim en eenvoudig. Laad je elektrische auto tegen een lage kostprijs en intelligent op.",
-    "da": "Lad smart og enkelt. Lad din elbil til en lav pris og intelligent.",
-    "de": "Einfach intelligent laden. Laden Sie Ihr Elektroauto zu einem niedrigen Preis und intelligent auf.",
-    "es": "Carga inteligente y sencilla. Carga tu coche eléctrico a un bajo costo e inteligentemente.",
-    "fr": "Chargez intelligemment et simplement. Chargez votre voiture électrique à un coût bas et de manière intelligente.",
-    "it": "Carica in modo intelligente e semplice. Carica la tua auto elettrica a basso costo e in modo intelligente.",
-    "no": "Lad smart og enkelt. Lad din elbil til en lav pris og intelligent.",
-    "sv": "Ladda smart och enkelt. Ladda din elbil till en låg kostnad och intelligent.",
-    "pl": "Ładuj inteligentnie i prosto. Ładuj swój samochód elektryczny tanio i inteligentnie.",
-    "ru": "Просто заряжайте умно. Заряжайте свой электромобиль по низкой цене и интеллектуально.",
-    "ko": "스마트하고 간단하게 충전하세요. 저렴한 비용으로 전기차를 지능적으로 충전하세요.",
-    "ar": "اشحن بذكاء وببساطة. اشحن سيارتك الكهربائية بتكلفة منخفضة وبذكاء."
+    "en": "Simply Charge Smart.",
+    "nl": "Laad slim en eenvoudig.",
+    "da": "Lad smart og enkelt.",
+    "de": "Einfach intelligent laden.",
+    "es": "Carga inteligente y sencilla.",
+    "fr": "Chargez intelligemment et simplement.",
+    "it": "Carica in modo intelligente e semplice.",
+    "no": "Lad smart og enkelt.",
+    "sv": "Ladda smart och enkelt.",
+    "pl": "Ładuj inteligentnie i prosto.",
+    "ru": "Просто заряжайте умно.",
+    "ko": "스마트하고 간단하게 충전하세요.",
+    "ar": "اشحن بذكاء وببساطة."
   },
   "category": [
     "energy"
@@ -80,7 +80,7 @@
     "triggers": [
       {
         "title": {
-          "en": "Charger mode changed",
+          "en": "The EV charger mode changed",
           "nl": "Laadmodus gewijzigd",
           "da": "Opladertilstand ændret",
           "de": "Lademodus geändert",
@@ -95,18 +95,18 @@
           "ar": "تم تغيير وضع الشاحن"
         },
         "titleFormatted": {
-          "en": "Charger mode changed.",
-          "nl": "Lader modus gewijzigd",
-          "da": "Opladningstilstand ændret",
-          "de": "Lademodus geändert",
-          "es": "El modo del cargador se cambió",
-          "fr": "Le mode de charge a été changé",
-          "it": "Modalità caricatore cambiata",
+          "en": "The EV charger mode changed",
+          "nl": "De laadmodus van de EV-lader is gewijzigd",
+          "da": "Opladningstilstanden for EV-laderen ændret",
+          "de": "Der Lademodus des EV-Ladegeräts wurde geändert",
+          "es": "El modo del cargador de EV ha cambiado",
+          "fr": "Le mode du chargeur EV a été modifié",
+          "it": "La modalità del caricatore EV è cambiata",
           "no": "Lademodus endret",
           "sv": "Laddarläge ändrat",
           "pl": "Tryb ładowania zmieniony",
           "ru": "Режим зарядного устройства изменен",
-          "ko": "충전기 모드가 변경되었습니다.",
+          "ko": "충전기 모드가 변경되었습니다",
           "ar": "تم تغيير وضع الشاحن"
         },
         "hint": {
@@ -194,7 +194,7 @@
           "fr": "Transaction modifiée",
           "it": "Transazione cambiata",
           "no": "Transaksjon endret",
-          "sv": "Transaktionen ändrad",
+          "sv": "Transaktion ändrad",
           "pl": "Transakcja zmieniona",
           "ru": "Транзакция изменена",
           "ko": "트랜잭션 변경됨",
@@ -269,7 +269,7 @@
           "nl": "Oplaadmodus !{{is|isn't}} [[mode]]",
           "da": "Opladertilstand !{{er|er ikke}} [[mode]]",
           "de": "Lademodus !{{ist|ist nicht}} [[mode]]",
-          "es": "¡El modo del cargador !{{es|no es}} [[mode]]!",
+          "es": "¡El modo del cargador !{{es|no es}} [[mode]]",
           "fr": "Mode de charge !{{est|n'est pas}} [[mode]]",
           "it": "Modalità caricatore !{{è|non è}} [[mode]]",
           "no": "Ladermodus !{{er|er ikke}} [[mode]]",
@@ -498,7 +498,7 @@
           "sv": "Ställ in EV-laddarläge till [[mode]]",
           "pl": "Ustaw tryb ładowarki EV na [[mode]]",
           "ru": "Установите режим зарядного устройства EV на [[mode]]",
-          "ko": "EV 충전기 모드를 [[mode]](으)로 설정하세요.",
+          "ko": "EV 충전기 모드를 [[mode]](으)로 설정하세요",
           "ar": "اضبط وضع شاحن EV على [[mode]]"
         },
         "hint": {
@@ -707,19 +707,19 @@
           "ar": "قم بتعيين معلومات فائض الطاقة الشمسية (PV)"
         },
         "titleFormatted": {
-          "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W.",
-          "nl": "Stel PV-overschot informatie in op net [[pGrid]]W, PV [[pPv]]W en batterij [[pAkku]]W.",
-          "da": "Indstil PV-overskudsoplysninger til net [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W.",
-          "de": "Stelle die PV-Überschussinformationen auf Netz [[pGrid]]W, PV [[pPv]]W und Batterie [[pAkku]]W ein.",
-          "es": "Establece la información del excedente de PV a la red [[pGrid]]W, PV [[pPv]]W y batería [[pAkku]]W.",
-          "fr": "Définissez les informations de surplus PV sur réseau [[pGrid]]W, PV [[pPv]]W et batterie [[pAkku]]W.",
-          "it": "Imposta le informazioni sul surplus fotovoltaico alla rete [[pGrid]]W, PV [[pPv]]W e batteria [[pAkku]]W.",
-          "no": "Sett PV-overskuddsinformasjon til nett [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W.",
-          "sv": "Ställ in PV-överskottsinformation till nät [[pGrid]]W, PV [[pPv]]W och batteri [[pAkku]]W.",
-          "pl": "Ustaw informacje o nadwyżce PV na sieć [[pGrid]]W, PV [[pPv]]W i baterię [[pAkku]]W.",
-          "ru": "Установите информацию о PV избыточной мощности на сеть [[pGrid]] Вт, PV [[pPv]] Вт и батарею [[pAkku]] Вт.",
-          "ko": "PV 잉여 정보를 그리드 [[pGrid]]W, PV [[pPv]]W 및 배터리 [[pAkku]]W로 설정하세요.",
-          "ar": "اضبط معلومات فائض الطاقة الشمسية إلى الشبكة [[pGrid]]W، والطاقة الشمسية [[pPv]]W والبطارية [[pAkku]]W."
+          "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W",
+          "nl": "Stel PV-overschot informatie in op net [[pGrid]]W, PV [[pPv]]W en batterij [[pAkku]]W",
+          "da": "Indstil PV-overskudsoplysninger til net [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W",
+          "de": "Stelle die PV-Überschussinformationen auf Netz [[pGrid]]W, PV [[pPv]]W und Batterie [[pAkku]]W ein",
+          "es": "Establece la información del excedente de PV a la red [[pGrid]]W, PV [[pPv]]W y batería [[pAkku]]W",
+          "fr": "Définissez les informations de surplus PV sur réseau [[pGrid]]W, PV [[pPv]]W et batterie [[pAkku]]W",
+          "it": "Imposta le informazioni sul surplus fotovoltaico alla rete [[pGrid]]W, PV [[pPv]]W e batteria [[pAkku]]W",
+          "no": "Sett PV-overskuddsinformasjon til nett [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W",
+          "sv": "Ställ in PV-överskottsinformation till nät [[pGrid]]W, PV [[pPv]]W och batteri [[pAkku]]W",
+          "pl": "Ustaw informacje o nadwyżce PV na sieć [[pGrid]]W, PV [[pPv]]W i baterię [[pAkku]]W",
+          "ru": "Установите информацию о PV избыточной мощности на сеть [[pGrid]] Вт, PV [[pPv]] Вт и батарею [[pAkku]] Вт",
+          "ko": "PV 잉여 정보를 그리드 [[pGrid]]W, PV [[pPv]]W 및 배터리 [[pAkku]]W로 설정하세요",
+          "ar": "اضبط معلومات فائض الطاقة الشمسية إلى الشبكة [[pGrid]]W، والطاقة الشمسية [[pPv]]W والبطارية [[pAkku]]W"
         },
         "hint": {
           "en": "Updates go-eCharger available wattage for automatic PV surplus mode.",
@@ -832,7 +832,7 @@
           "sv": "Ställ in transaktionen till [[transaction]]",
           "pl": "Ustaw transakcję na [[transaction]]",
           "ru": "Установить транзакцию на [[transaction]]",
-          "ko": "트랜잭션을 [[transaction]](으)로 설정",
+          "ko": "트랜잭션을 [[transaction]](으)로 설정합니다",
           "ar": "اضبط المعاملة على [[transaction]]"
         },
         "hint": {
@@ -1097,6 +1097,7 @@
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
+        "target_power",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
@@ -1109,6 +1110,13 @@
         "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        },
         "evcharger_charging": {
           "uiComponent": "button",
           "uiQuickAction": true
@@ -1910,6 +1918,7 @@
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
+        "target_power",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
@@ -1922,6 +1931,13 @@
         "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        },
         "evcharger_charging": {
           "uiComponent": "button",
           "uiQuickAction": true
@@ -2723,6 +2739,7 @@
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
+        "target_power",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
@@ -2735,6 +2752,13 @@
         "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        },
         "evcharger_charging": {
           "uiComponent": "button",
           "uiQuickAction": true
@@ -3536,6 +3560,7 @@
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
+        "target_power",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
@@ -3548,6 +3573,13 @@
         "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        },
         "evcharger_charging": {
           "uiComponent": "button",
           "uiQuickAction": true
@@ -4349,6 +4381,7 @@
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
+        "target_power",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
@@ -4361,6 +4394,13 @@
         "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        },
         "evcharger_charging": {
           "uiComponent": "button",
           "uiQuickAction": true
@@ -5304,6 +5344,7 @@
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
+        "target_power",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
@@ -5316,6 +5357,13 @@
         "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        },
         "evcharger_charging": {
           "uiComponent": "button",
           "uiQuickAction": true
@@ -6259,6 +6307,7 @@
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
+        "target_power",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
@@ -6271,6 +6320,13 @@
         "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        },
         "evcharger_charging": {
           "uiComponent": "button",
           "uiQuickAction": true
@@ -7214,6 +7270,7 @@
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
+        "target_power",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
@@ -7226,6 +7283,13 @@
         "measure_power.ppv"
       ],
       "capabilitiesOptions": {
+        "target_power": {
+          "min": 0,
+          "max": 22080,
+          "step": 230,
+          "excludeMin": 0,
+          "excludeMax": 1380
+        },
         "evcharger_charging": {
           "uiComponent": "button",
           "uiQuickAction": true
