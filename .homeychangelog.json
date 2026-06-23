@@ -10,5 +10,8 @@
   },
   "1.1.0": {
     "en": "ADD: Target Power capability for Basic Charging mode."
+  },
+  "1.1.1": {
+    "en": "Update translations"
   }
 }

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.go-e",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -502,19 +502,19 @@
           "ar": "اضبط وضع شاحن EV على [[mode]]"
         },
         "hint": {
-          "en": "Sets the charger logic mode and related PV/flexible-price flags.",
-          "nl": "Stelt de logica-modus van de lader in en de bijbehorende PV/flexibele-prijs vlaggen.",
-          "da": "Indstiller opladerens logiktilstand og relaterede PV/fleksible prisflag.",
-          "de": "Legt den Logikmodus des Ladegeräts und die zugehörigen PV-/flexiblen Preis-Flags fest.",
-          "es": "Establece el modo de lógica del cargador y las banderas relacionadas con PV/precio flexible.",
-          "fr": "Définit le mode logique du chargeur et les indicateurs liés au PV/prix flexible.",
-          "it": "Imposta la modalità logica del caricatore e i relativi flag per PV/prezzo flessibile.",
-          "no": "Setter lademodus og relaterte PV-/fleksibel-pris-flagg.",
-          "sv": "Ställer in laddarens logikläge och relaterade PV-/flexibla prisflaggor.",
-          "pl": "Ustawia tryb logiki ładowarki oraz powiązane flagi PV/elastycznej ceny.",
-          "ru": "Устанавливает режим логики зарядного устройства и связанные флаги для солнечной энергии/гибкой цены.",
-          "ko": "충전기 로직 모드 및 관련 PV/유연한 가격 플래그를 설정합니다.",
-          "ar": "يضبط وضع منطق الشاحن والأعلام المتعلقة بالطاقة الشمسية/السعر المرن."
+          "en": "With Basic Charging, use Target Power to set the charging power. With Eco modes, the charger will automatically adjust the charging power based on PV surplus and/or flexible price.",
+          "nl": "Met Basisladen kunt u het laadvermogen instellen met Doelvermogen. Met Eco-modi past de lader het laadvermogen automatisch aan op basis van PV-overschot en/of flexibele prijs.",
+          "da": "Med Grundlæggende opladning kan du bruge Målstrøm til at indstille opladningsstrømmen. Med Eco-tilstande justerer opladeren automatisk opladningsstrømmen baseret på PV-overskud og/eller fleksibel pris.",
+          "de": "Mit Basisladung können Sie die Ladeleistung mit Zielleistung einstellen. Mit Eco-Modi passt das Ladegerät die Ladeleistung automatisch basierend auf PV-Überschuss und/oder flexiblem Preis an.",
+          "es": "Con Carga Básica, use Potencia Objetivo para establecer la potencia de carga. Con los modos Eco, el cargador ajustará automáticamente la potencia de carga en función del excedente de PV y/o del precio flexible.",
+          "fr": "Avec la charge de base, utilisez la puissance cible pour définir la puissance de charge. Avec les modes Eco, le chargeur ajustera automatiquement la puissance de charge en fonction du surplus de PV et/ou du prix flexible.",
+          "it": "Con la ricarica di base, utilizzare la potenza target per impostare la potenza di ricarica. Con le modalità Eco, il caricatore regolerà automaticamente la potenza di ricarica in base al surplus di PV e/o al prezzo flessibile.",
+          "no": "Med grunnleggende lading kan du bruke målstrøm for å sette ladeeffekten. Med Eco-moduser vil laderen automatisk justere ladeeffekten basert på PV-overskudd og/eller fleksibel pris.",
+          "sv": "Med grundläggande laddning kan du använda måleffekt för att ställa in laddningseffekten. Med Eco-lägen justerar laddaren automatiskt laddningseffekten baserat på PV-överskott och/eller flexibelt pris.",
+          "pl": "Podczas podstawowego ładowania użyj mocy docelowej, aby ustawić moc ładowania. W trybach Eco ładowarka automatycznie dostosuje moc ładowania w oparciu o nadwyżkę PV i/lub elastyczną cenę.",
+          "ru": "При базовой зарядке используйте целевую мощность для установки мощности зарядки. В режимах Eco зарядное устройство автоматически регулирует мощность зарядки в зависимости от избыточной солнечной энергии и/или гибкой цены.",
+          "ko": "기본 충전 모드에서는 목표 전력을 사용하여 충전 전력을 설정합니다. 에코 모드에서는 충전기가 PV 잉여 및/또는 유연한 가격에 따라 충전 전력을 자동으로 조정합니다.",
+          "ar": "مع الشحن الأساسي، استخدم الطاقة المستهدفة لتحديد طاقة الشحن. مع أوضاع Eco، سيقوم الشاحن بضبط طاقة الشحن تلقائيًا بناءً على فائض الطاقة الشمسية و/أو السعر المرن."
         },
         "args": [
           {
@@ -722,19 +722,19 @@
           "ar": "اضبط معلومات فائض الطاقة الشمسية إلى الشبكة [[pGrid]]W، والطاقة الشمسية [[pPv]]W والبطارية [[pAkku]]W"
         },
         "hint": {
-          "en": "Updates go-eCharger available wattage for automatic PV surplus mode.",
-          "nl": "Updates de beschikbare wattage van de go-eCharger voor de automatische PV-overschotmodus.",
-          "da": "Opdaterer go-eCharger tilgængelig watt for automatisk PV-overskudstilstand.",
-          "de": "Aktualisiert die verfügbare Leistung des go-eChargers für den automatischen PV-Überschussmodus.",
-          "es": "Actualiza la potencia disponible del go-eCharger para el modo automático de excedente de energía solar fotovoltaica.",
-          "fr": "Met à jour la puissance disponible du go-eCharger pour le mode automatique de surplus photovoltaïque.",
-          "it": "Aggiorna la disponibilità di watt del go-eCharger per la modalità automatica di surplus fotovoltaico.",
-          "no": "Oppdaterer tilgjengelig wattstyrke for go-eCharger for automatisk PV-overskuddsmodus.",
-          "sv": "Uppdaterar tillgänglig effekt för go-eCharger för automatisk PV-överskottsläge.",
-          "pl": "Aktualizuje dostępne waty go-eCharger dla automatycznego trybu nadwyżki PV.",
-          "ru": "Обновляет доступную мощность go-eCharger для автоматического режима избыточной солнечной энергии.",
-          "ko": "자동 PV 잉여 모드를 위한 go-eCharger 사용 가능 전력 업데이트.",
-          "ar": "يقوم بتحديث الطاقة المتاحة لشاحن go-e لوضع الفائض الشمسي التلقائي."
+          "en": "When using ECO modes, set the power values for grid, PV and battery to let the EV charger automatically adjust the charging power based on PV surplus.",
+          "nl": "Wanneer ECO-modi worden gebruikt, stelt u de vermogenswaarden voor net, PV en batterij in om de EV-lader automatisch het laadvermogen te laten aanpassen op basis van PV-overschot.",
+          "da": "Når ECO-tilstande bruges, skal du indstille effektværdierne for net, PV og batteri for at lade EV-opladeren automatisk justere opladningseffekten baseret på PV-overskud.",
+          "de": "Bei Verwendung von ECO-Modi legen Sie die Leistungswerte für Netz, PV und Batterie fest, damit der EV-Lader die Ladeleistung automatisch basierend auf PV-Überschuss anpassen kann.",
+          "es": "Cuando se utilizan modos ECO, establezca los valores de potencia para la red, PV y batería para que el EV cargador ajuste automáticamente la potencia de carga en función del excedente de PV.",
+          "fr": "Lors de l'utilisation des modes ECO, définissez les valeurs de puissance pour le réseau, le PV et la batterie afin que le EV chargeur ajuste automatiquement la puissance de charge en fonction du surplus de PV.",
+          "it": "Quando si utilizzano le modalità ECO, impostare i valori di potenza per rete, PV e batteria in modo che il EV charger regoli automaticamente la potenza di carica in base al surplus di PV.",
+          "no": "Når ECO-moduser brukes, sett effektverdiene for nett, PV og batteri slik at EV-laderen automatisk justerer ladeeffekten basert på PV-overskudd.",
+          "sv": "När ECO-lägen används, ställ in effektvärdena för nät, PV och batteri så att EV-laddaren automatiskt justerar laddningseffekten baserat på PV-överskott.",
+          "pl": "Podczas korzystania z trybów ECO, ustaw wartości mocy dla sieci, PV i baterii, aby EV-lader automatycznie dostosowywał moc ładowania w oparciu o nadwyżkę PV.",
+          "ru": "При использовании режимов ECO установите значения мощности для сети, PV и батареи, чтобы EV зарядное устройство автоматически регулировало мощность зарядки в зависимости от избыточной солнечной энергии.",
+          "ko": "ECO 모드를 사용할 때, 그리드, PV 및 배터리의 전력 값을 설정하여 EV 충전기가 PV 잉여에 따라 충전 전력을 자동으로 조정하도록 합니다.",
+          "ar": "عند استخدام أوضاع ECO، قم بتعيين قيم الطاقة للشبكة والطاقة الشمسية والبطارية بحيث يقوم EV الشاحن بضبط طاقة الشحن تلقائيًا بناءً على فائض الطاقة الشمسية."
         },
         "args": [
           {
@@ -836,19 +836,19 @@
           "ar": "اضبط المعاملة على [[transaction]]"
         },
         "hint": {
-          "en": "Sets the charger transaction to the selected card.",
-          "nl": "Stelt de ladertransactie in op de geselecteerde kaart.",
-          "da": "Indstiller opladertransaktionen til det valgte kort.",
-          "de": "Stellt die Ladetransaktion auf die ausgewählte Karte ein.",
-          "es": "Establece la transacción del cargador en la tarjeta seleccionada.",
-          "fr": "Définit la transaction du chargeur sur la carte sélectionnée.",
-          "it": "Imposta la transazione del caricatore sulla carta selezionata.",
-          "no": "Setter ladertransaksjonen til det valgte kortet.",
-          "sv": "Ställer in laddartransaktionen till det valda kortet.",
-          "pl": "Ustawia transakcję ładowarki na wybraną kartę.",
-          "ru": "Устанавливает транзакцию зарядного устройства на выбранную карту.",
-          "ko": "충전기 트랜잭션을 선택한 카드로 설정합니다.",
-          "ar": "يضبط معاملة الشاحن على البطاقة المحددة."
+          "en": "Sets the charger transaction to the selected user card.",
+          "nl": "Stelt de ladertransactie in op de geselecteerde gebruikerskaart.",
+          "da": "Indstiller opladertransaktionen til det valgte brugerkort.",
+          "de": "Stellt die Ladetransaktion auf die ausgewählte Benutzerkarte ein.",
+          "es": "Establece la transacción del cargador en la tarjeta de usuario seleccionada.",
+          "fr": "Définit la transaction du chargeur sur la carte utilisateur sélectionnée.",
+          "it": "Imposta la transazione del caricatore sulla carta utente selezionata.",
+          "no": "Setter ladertransaksjonen til det valgte brukerkortet.",
+          "sv": "Ställer in laddartransaktionen till det valda användarkortet.",
+          "pl": "Ustawia transakcję ładowarki na wybraną kartę użytkownika.",
+          "ru": "Устанавливает транзакцию зарядного устройства на выбранную карту пользователя.",
+          "ko": "충전기 트랜잭션을 선택한 사용자 카드로 설정합니다.",
+          "ar": "يضبط معاملة الشاحن على بطاقة المستخدم المحددة."
         },
         "args": [
           {
