@@ -1,3 +1,3 @@
-Obsługa modeli Home+(V3), Gemini, CORE i PRO ładowarek go-e, z dostępem zarówno przez sieć lokalną, jak i przez chmurę.
+Obsługa modeli Go-e Home+ (V3), Gemini, CORE i PRO ładowarek do pojazdów elektrycznych.
 
-Ta aplikacja Homey jest rozwijana niezależnie przez Complus Ky przy wsparciu go-e GmbH. W sprawie wsparcia i pytań skontaktuj się bezpośrednio z deweloperem.
+Aplicacja Homey jest opracowywana niezależnie przez Complus Ky we wspólpracy z go-e GmbH. W celu uzyskania pomocy i wysłania zapytań, prosimy o bezpośredni kontakt z deweloperem.

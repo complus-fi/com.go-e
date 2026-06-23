@@ -1,3 +1,3 @@
-로컬 네트워크 접속과 클라우드 기반 접속 모두에서 go-e 충전기 Home+(V3), Gemini, CORE, PRO 모델을 지원합니다.
+Go-e Home+ (V3), Gemini, CORE 및 PRO 모델의 전기차 충전기를 지원합니다.
 
-이 Homey 앱은 Complus Ky가 go-e GmbH의 지원을 받아 독립적으로 개발합니다. 지원 및 문의는 개발자에게 직접 연락해 주세요.
+이 Homey 앱은 go-e GmbH의 지원을 받아 Complus Ky에서 독립적으로 개발했습니다. 지원 및 문의사항은 개발자에게 직접 문의하시기 바랍니다.

@@ -1,3 +1,3 @@
-Stöd för Home+(V3)-, Gemini-, CORE- och PRO-modellerna av go-e-laddare med både lokal nätverksåtkomst och molnbaserad åtkomst.
+Stöd för Go-e Home+ (V3), Gemini, CORE och PRO modeller av elfordonsladdare.
 
-Denna Homey-app utvecklas oberoende av Complus Ky med stöd från go-e GmbH. För support och frågor, kontakta utvecklaren direkt.
+Denna Homey-app utvecklas oberoende av Complus Ky med stöd från go-e GmbH. För support och frågor, vänligen kontakta utvecklaren direkt.

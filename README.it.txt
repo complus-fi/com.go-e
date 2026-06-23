@@ -1,3 +1,3 @@
-Supporto per i modelli Home+(V3), Gemini, CORE e PRO dei caricabatterie go-e, con accesso sia alla rete locale sia al cloud.
+Supporto per i modelli Go-e Home+ (V3), Gemini, CORE e PRO di caricabatterie per veicoli elettrici.
 
-Questa app Homey è sviluppata in modo indipendente da Complus Ky con il supporto di go-e GmbH. Per assistenza e richieste, contatta direttamente lo sviluppatore.
+Questa app Homey è sviluppata indipendentemente da Complus Ky con il supporto di go-e GmbH. Per supporto e domande, si prega di contattare direttamente lo sviluppatore.
