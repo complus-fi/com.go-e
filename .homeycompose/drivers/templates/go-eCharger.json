@@ -482,7 +482,8 @@
         "ar": "W"
       },
       "decimals": 2,
-      "insights": false
+      "insights": false,
+      "uiComponent": null
     },
     "measure_power.pgrid": {
       "type": "number",
@@ -534,7 +535,8 @@
         "ar": "W"
       },
       "decimals": 2,
-      "insights": false
+      "insights": false,
+      "uiComponent": null
     },
     "measure_power.ppv": {
       "type": "number",
@@ -586,7 +588,8 @@
         "ar": "W"
       },
       "decimals": 2,
-      "insights": false
+      "insights": false,
+      "uiComponent": null
     },
     "measure_voltage.output": {
       "type": "number",
