@@ -67,7 +67,7 @@
     {
       "name": "pPv",
       "type": "number",
-      "optional": true,
+      "required": false,
       "title": {
         "en": "PV power (W, optional)",
         "nl": "PV-vermogen (W, optioneel)",
@@ -87,7 +87,7 @@
     {
       "name": "pAkku",
       "type": "number",
-      "optional": true,
+      "required": false,
       "title": {
         "en": "Battery power (W, optional)",
         "nl": "Batterijvermogen (W, optioneel)",
