@@ -16,7 +16,7 @@ Primary sources:
 2. Polling fetches charger status every 5 seconds.
 3. Status values are converted to capability values.
 4. Capability writes are converted back to API key/value commands.
-5. API command ordering prioritizes `ids`, `lmo`, `fup`, `psm`, `pgt`, `frm`, `spl3`, `fst`, `trx`, `frc`, `amp`.
+5. API command ordering prioritizes `ids`, `lmo`, `fup`, `psm`, `pgt`, `frm`, `spl3`, `fst`, `trx`, `frc`, `fsp`, `amp`.
 
 ## Capability Matrix
 
@@ -43,6 +43,9 @@ Primary sources:
 
 Additional mode/power mappings:
 
+- `target_power`: read/write mapping with API keys `amp` and `fsp`.
+  - Read derives watts from charger config: single-phase (`fsp=true`) => `amp*230`, three-phase (`fsp=false`) => `amp*690`.
+  - Write is unidirectional only: values `<0` are rejected, `0` sends no API write, and positive values map to integer `amp` + `fsp` using a `4140W` phase switch threshold.
 - `goe_charger_mode`: read/write enum with these combinations:
   - `basic_charging` => `lmo=3`, `fup=false`, `awe=false`
   - `eco_pv_surplus` => `lmo=4`, `fup=true`, `awe=false`
@@ -59,13 +62,17 @@ Additional mode/power mappings:
 ## Control Behavior
 
 - Listener handles control capabilities in one debounced batch:
+  - `target_power`
   - `evcharger_charging`
   - `goe_charger_mode`
   - `goe_pv_surplus_enabled`
   - `goe_transaction`
-- If `goe_charger_mode` is included in a batch, it is processed first and the listener returns immediately.
+- If `goe_charger_mode` is included in a batch, it is processed first.
 - If `goe_pv_surplus_enabled` is included in a batch, it is processed next and the listener returns immediately.
 - If `goe_transaction` is included, it writes `trx` directly and allows any charging command in the same batch to continue.
+- If `target_power` is included and `goe_charger_mode` is `basic_charging`, writes use `amp` and `fsp` with integer amps and a 4140W single/three-phase switch threshold.
+- If `target_power` is included and `goe_charger_mode` is not `basic_charging`, Homey still accepts and stores the setpoint, but no `amp`/`fsp` write is sent to charger.
+- Polling only syncs `target_power` from `amp`/`fsp` while in `basic_charging`; in other modes the stored setpoint is preserved.
 - If charging is turned off, command flow sends force-off behavior (`frc=1`).
 - If charging is turned on and `goe_charger_mode` is any Eco/Trip mode, command flow sends `frc=0` (automatic).
 - If charging is turned on and `goe_charger_mode` is `basic_charging`, command flow sends `frc=2` (homey).
@@ -81,6 +88,9 @@ Additional mode/power mappings:
 ## Polling and Availability
 
 - Poll interval is 5000 ms.
+- `target_power` capability max is updated from charger `ama` via `setCapabilityOptions()`:
+  - `ama=16` => `max=11000`
+  - `ama=32` => `max=22000`
 - Poll failures set device unavailable with connection issue text.
 - Recovery sets device available on next successful poll.
 - Firmware version changes update settings and API key filtering.
@@ -99,7 +109,7 @@ Update this file when:
 - A capability is added, removed, or renamed.
 - An API key mapping changes.
 - Read or write conversion logic changes.
-- Control semantics change for `trx`, `frc`, `amp`, or `psm`.
+- Control semantics change for `trx`, `frc`, `fsp`, `amp`, or `psm`.
 - Runtime constraints such as power limits or polling behavior change.
 
 ## Development Checklist

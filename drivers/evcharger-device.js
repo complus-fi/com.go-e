@@ -23,6 +23,37 @@ const GOE_TRANSACTION_IDS = new Set(Object.values(GOE_TRANSACTION));
 const GOE_NAME_TRIGGER_CAPABILITIES = new Set(['goe_transaction', 'goe_transaction_name']);
 
 class evChargerDevice extends Homey.Device {
+  getTargetPowerMaxWattsFromAma(maxAmps) {
+    const parsedMaxAmps = Number(maxAmps);
+    if (!Number.isFinite(parsedMaxAmps)) return null;
+
+    if (parsedMaxAmps === 16) return 11000;
+    if (parsedMaxAmps === 32) return 22000;
+    return null;
+  }
+
+  async syncTargetPowerCapabilityOptions(maxAmps) {
+    if (!this.hasCapability('target_power')) return;
+
+    const maxWatts = this.getTargetPowerMaxWattsFromAma(maxAmps);
+    if (!maxWatts) return;
+    if (this.targetPowerMaxW === maxWatts) return;
+
+    const currentOptions = this.getCapabilityOptions('target_power') || {};
+    if (currentOptions.max === maxWatts) {
+      this.targetPowerMaxW = maxWatts;
+      return;
+    }
+
+    await this.setCapabilityOptions('target_power', {
+      ...currentOptions,
+      max: maxWatts
+    });
+
+    this.targetPowerMaxW = maxWatts;
+    this.log(`[Device] ${this.getName()} - target_power max updated to ${maxWatts}W from ama=${maxAmps}`);
+  }
+
   getDynamicPollIntervalMs(status = this.lastStatus) {
     if (Number(status?.car) === 2) {
       return POLL_INTERVAL;
@@ -81,6 +112,7 @@ class evChargerDevice extends Homey.Device {
     });
     this.pollErrorMessage = null;
     this.pendingChargingState = null;
+    this.targetPowerMaxW = null;
     this.pollIntervalMs = null;
     this.registerCapabilityListeners();
   }
@@ -297,10 +329,10 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction'],
-      async ({ evcharger_charging, goe_charger_mode, goe_transaction }) => {
+      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction', 'target_power'],
+      async ({ evcharger_charging, goe_charger_mode, goe_transaction, target_power }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_charger_mode, goe_transaction });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_charger_mode, goe_transaction, target_power });
 
           const context = {
             api: this.api,
@@ -312,11 +344,21 @@ class evChargerDevice extends Homey.Device {
 
           if (goe_charger_mode !== undefined) {
             await this.onCapability_SET_CHARGER_MODE(goe_charger_mode);
-            return;
           }
 
           if (goe_transaction !== undefined) {
             await this.onCapability_SET_TRANSACTION(goe_transaction);
+          }
+
+          const effectiveChargerMode = goe_charger_mode !== undefined ? goe_charger_mode : this.getCapabilityValue('goe_charger_mode');
+
+          if (target_power !== undefined) {
+            if (effectiveChargerMode === GOE_CHARGER_MODE.BASIC_CHARGING) {
+              const apiValues = mapHomeyToApiValues({ target_power }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+              await this.applyApiValues(apiValues);
+            } else {
+              this.log(`[Device] ${this.getName()} - target_power updated as setpoint outside basic_charging mode`);
+            }
           }
 
           if (evcharger_charging === false) {
@@ -327,8 +369,7 @@ class evChargerDevice extends Homey.Device {
           }
 
           if (evcharger_charging === true) {
-            const chargerMode = this.getCapabilityValue('goe_charger_mode');
-            const automaticMode = chargerMode && chargerMode !== GOE_CHARGER_MODE.BASIC_CHARGING;
+            const automaticMode = effectiveChargerMode && effectiveChargerMode !== GOE_CHARGER_MODE.BASIC_CHARGING;
 
             // Start/resume charging in automatic mode for Eco/Trip charger logic, otherwise use Homey/manual mode.
             const startValues = mapHomeyToApiValues({ evcharger_charging: true }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
@@ -348,7 +389,7 @@ class evChargerDevice extends Homey.Device {
   }
 
   async applyApiValues(apiValues = {}) {
-    const orderedKeys = ['ids', 'lmo', 'fup', 'psm', 'pgt', 'frm', 'spl3', 'fst', 'trx', 'frc', 'amp'];
+    const orderedKeys = ['ids', 'lmo', 'fup', 'psm', 'pgt', 'frm', 'spl3', 'fst', 'trx', 'frc', 'fsp', 'amp'];
 
     const orderedApiValues = {};
     for (const key of orderedKeys) {
@@ -400,9 +441,19 @@ class evChargerDevice extends Homey.Device {
 
       if (status.ama !== undefined) {
         this.maxAmps = Number(status.ama);
+        await this.syncTargetPowerCapabilityOptions(this.maxAmps);
       }
 
       const nextValues = mapStatusToCapabilities(status, this.getCapabilities(), this.api);
+
+      // Outside basic mode, keep the Homey target_power setpoint and do not
+      // overwrite it with derived amp/fsp status from charger internals.
+      if (this.hasCapability('target_power')) {
+        const chargerMode = this.getCapabilityValue('goe_charger_mode');
+        if (chargerMode && chargerMode !== GOE_CHARGER_MODE.BASIC_CHARGING) {
+          delete nextValues.target_power;
+        }
+      }
 
       if (this.hasCapability('goe_pv_surplus_enabled') && status.fup !== undefined) {
         nextValues.goe_pv_surplus_enabled = Boolean(status.fup);

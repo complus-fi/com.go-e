@@ -14,6 +14,7 @@
     "measure_voltage",
     "measure_voltage.output",
     "measure_current",
+    "target_power",
     "evcharger_charging",
     "evcharger_charging_state",
     "goe_charger_mode",
@@ -26,6 +27,13 @@
     "measure_power.ppv"
   ],
   "capabilitiesOptions": {
+    "target_power": {
+      "min": 0,
+      "max": 22080,
+      "step": 230,
+      "excludeMin": 0,
+      "excludeMax": 1380
+    },
     "evcharger_charging": {
       "uiComponent": "button",
       "uiQuickAction": true
