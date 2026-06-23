@@ -119,5 +119,4 @@ Before committing mapping-related changes:
 1. Update this document.
 2. Verify capability names match compose templates.
 3. Verify API key dependencies match mapping code.
-4. Run lint: `npm run lint`.
-5. Keep commits small and focused.
+4. Keep commits small and focused.
