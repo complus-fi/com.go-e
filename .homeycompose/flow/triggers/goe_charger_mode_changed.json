@@ -15,18 +15,18 @@
     "ar": "تم تغيير وضع الشاحن"
   },
   "titleFormatted": {
-    "en": "The EV charger mode changed.",
-    "nl": "De laadmodus van de EV-lader is gewijzigd.",
+    "en": "The EV charger mode changed",
+    "nl": "De laadmodus van de EV-lader is gewijzigd",
     "da": "Opladningstilstanden for EV-laderen ændret",
-    "de": "Der Lademodus des EV-Ladegeräts wurde geändert.",
-    "es": "El modo del cargador de EV ha cambiado.",
-    "fr": "Le mode du chargeur EV a été modifié.",
-    "it": "La modalità del caricatore EV è cambiata.",
+    "de": "Der Lademodus des EV-Ladegeräts wurde geändert",
+    "es": "El modo del cargador de EV ha cambiado",
+    "fr": "Le mode du chargeur EV a été modifié",
+    "it": "La modalità del caricatore EV è cambiata",
     "no": "Lademodus endret",
     "sv": "Laddarläge ändrat",
     "pl": "Tryb ładowania zmieniony",
     "ru": "Режим зарядного устройства изменен",
-    "ko": "충전기 모드가 변경되었습니다.",
+    "ko": "충전기 모드가 변경되었습니다",
     "ar": "تم تغيير وضع الشاحن"
   },
   "hint": {

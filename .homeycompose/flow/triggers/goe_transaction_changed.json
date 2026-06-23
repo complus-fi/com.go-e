@@ -15,19 +15,19 @@
     "ar": "تم تغيير المعاملة"
   },
   "titleFormatted": {
-    "en": "Transaction changed.",
-    "nl": "Transactie gewijzigd.",
-    "da": "Transaktion ændret.",
-    "de": "Transaktion geändert.",
-    "es": "Transacción cambiada.",
-    "fr": "Transaction modifiée.",
-    "it": "Transazione cambiata.",
-    "no": "Transaksjon endret.",
-    "sv": "Transaktionen ändrad.",
-    "pl": "Transakcja zmieniona.",
-    "ru": "Транзакция изменена.",
-    "ko": "트랜잭션 변경됨.",
-    "ar": "تم تغيير المعاملة."
+    "en": "Transaction changed",
+    "nl": "Transactie gewijzigd",
+    "da": "Transaktion ændret",
+    "de": "Transaktion geändert",
+    "es": "Transacción cambiada",
+    "fr": "Transaction modifiée",
+    "it": "Transazione cambiata",
+    "no": "Transaksjon endret",
+    "sv": "Transaktion ändrad",
+    "pl": "Transakcja zmieniona",
+    "ru": "Транзакция изменена",
+    "ko": "트랜잭션 변경됨",
+    "ar": "تم تغيير المعاملة"
   },
   "hint": {
     "en": "Triggers when the charger transaction or card selection changes.",

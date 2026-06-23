@@ -15,19 +15,19 @@
     "ar": "قم بتعيين معلومات فائض الطاقة الشمسية (PV)"
   },
   "titleFormatted": {
-    "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W.",
-    "nl": "Stel PV-overschot informatie in op net [[pGrid]]W, PV [[pPv]]W en batterij [[pAkku]]W.",
-    "da": "Indstil PV-overskudsoplysninger til net [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W.",
-    "de": "Stelle die PV-Überschussinformationen auf Netz [[pGrid]]W, PV [[pPv]]W und Batterie [[pAkku]]W ein.",
-    "es": "Establece la información del excedente de PV a la red [[pGrid]]W, PV [[pPv]]W y batería [[pAkku]]W.",
-    "fr": "Définissez les informations de surplus PV sur réseau [[pGrid]]W, PV [[pPv]]W et batterie [[pAkku]]W.",
-    "it": "Imposta le informazioni sul surplus fotovoltaico alla rete [[pGrid]]W, PV [[pPv]]W e batteria [[pAkku]]W.",
-    "no": "Sett PV-overskuddsinformasjon til nett [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W.",
-    "sv": "Ställ in PV-överskottsinformation till nät [[pGrid]]W, PV [[pPv]]W och batteri [[pAkku]]W.",
-    "pl": "Ustaw informacje o nadwyżce PV na sieć [[pGrid]]W, PV [[pPv]]W i baterię [[pAkku]]W.",
-    "ru": "Установите информацию о PV избыточной мощности на сеть [[pGrid]] Вт, PV [[pPv]] Вт и батарею [[pAkku]] Вт.",
-    "ko": "PV 잉여 정보를 그리드 [[pGrid]]W, PV [[pPv]]W 및 배터리 [[pAkku]]W로 설정하세요.",
-    "ar": "اضبط معلومات فائض الطاقة الشمسية إلى الشبكة [[pGrid]]W، والطاقة الشمسية [[pPv]]W والبطارية [[pAkku]]W."
+    "en": "Set PV surplus information to grid [[pGrid]]W, PV [[pPv]]W and battery [[pAkku]]W",
+    "nl": "Stel PV-overschot informatie in op net [[pGrid]]W, PV [[pPv]]W en batterij [[pAkku]]W",
+    "da": "Indstil PV-overskudsoplysninger til net [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W",
+    "de": "Stelle die PV-Überschussinformationen auf Netz [[pGrid]]W, PV [[pPv]]W und Batterie [[pAkku]]W ein",
+    "es": "Establece la información del excedente de PV a la red [[pGrid]]W, PV [[pPv]]W y batería [[pAkku]]W",
+    "fr": "Définissez les informations de surplus PV sur réseau [[pGrid]]W, PV [[pPv]]W et batterie [[pAkku]]W",
+    "it": "Imposta le informazioni sul surplus fotovoltaico alla rete [[pGrid]]W, PV [[pPv]]W e batteria [[pAkku]]W",
+    "no": "Sett PV-overskuddsinformasjon til nett [[pGrid]]W, PV [[pPv]]W og batteri [[pAkku]]W",
+    "sv": "Ställ in PV-överskottsinformation till nät [[pGrid]]W, PV [[pPv]]W och batteri [[pAkku]]W",
+    "pl": "Ustaw informacje o nadwyżce PV na sieć [[pGrid]]W, PV [[pPv]]W i baterię [[pAkku]]W",
+    "ru": "Установите информацию о PV избыточной мощности на сеть [[pGrid]] Вт, PV [[pPv]] Вт и батарею [[pAkku]] Вт",
+    "ko": "PV 잉여 정보를 그리드 [[pGrid]]W, PV [[pPv]]W 및 배터리 [[pAkku]]W로 설정하세요",
+    "ar": "اضبط معلومات فائض الطاقة الشمسية إلى الشبكة [[pGrid]]W، والطاقة الشمسية [[pPv]]W والبطارية [[pAkku]]W"
   },
   "hint": {
     "en": "Updates go-eCharger available wattage for automatic PV surplus mode.",

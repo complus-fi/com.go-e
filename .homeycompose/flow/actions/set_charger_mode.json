@@ -15,19 +15,19 @@
     "ar": "تعيين وضع شاحن EV"
   },
   "titleFormatted": {
-    "en": "Set EV charger mode to [[mode]].",
-    "nl": "Stel de EV-laadmodus in op [[mode]].",
-    "da": "Indstil EV-opladertilstand til [[mode]].",
-    "de": "EV-Ladegerät auf [[mode]] einstellen.",
-    "es": "Establecer el modo del cargador EV a [[mode]].",
-    "fr": "Définir le mode du chargeur EV sur [[mode]].",
-    "it": "Imposta la modalità del caricatore EV su [[mode]].",
-    "no": "Sett EV-lademodus til [[mode]].",
-    "sv": "Ställ in EV-laddarläge till [[mode]].",
-    "pl": "Ustaw tryb ładowarki EV na [[mode]].",
-    "ru": "Установите режим зарядного устройства EV на [[mode]].",
-    "ko": "EV 충전기 모드를 [[mode]](으)로 설정하세요.",
-    "ar": "اضبط وضع شاحن EV على [[mode]]."
+    "en": "Set EV charger mode to [[mode]]",
+    "nl": "Stel de EV-laadmodus in op [[mode]]",
+    "da": "Indstil EV-opladertilstand til [[mode]]",
+    "de": "EV-Ladegerät auf [[mode]] einstellen",
+    "es": "Establecer el modo del cargador EV a [[mode]]",
+    "fr": "Définir le mode du chargeur EV sur [[mode]]",
+    "it": "Imposta la modalità del caricatore EV su [[mode]]",
+    "no": "Sett EV-lademodus til [[mode]]",
+    "sv": "Ställ in EV-laddarläge till [[mode]]",
+    "pl": "Ustaw tryb ładowarki EV na [[mode]]",
+    "ru": "Установите режим зарядного устройства EV на [[mode]]",
+    "ko": "EV 충전기 모드를 [[mode]](으)로 설정하세요",
+    "ar": "اضبط وضع شاحن EV على [[mode]]"
   },
   "hint": {
     "en": "Sets the charger logic mode and related PV/flexible-price flags.",
