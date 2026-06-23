@@ -7,5 +7,8 @@
   },
   "1.0.1": {
     "en": "Flow card title fix and remove one extra."
+  },
+  "1.1.0": {
+    "en": "ADD: Target Power capability for Basic Charging mode."
   }
 }
