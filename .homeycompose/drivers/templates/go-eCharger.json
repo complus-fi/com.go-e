@@ -21,6 +21,7 @@
     "goe_charger_mode",
     "goe_transaction",
     "goe_transaction_name",
+    "goe_transaction_name.prev_session",
     "goe_measure_phase_switching",
     "goe_measure_modelStatus",
     "measure_power.pakku",
@@ -140,6 +141,43 @@
         "ar": "كيلوواط ساعة"
       },
       "insights": true
+    },
+    "goe_transaction_name.prev_session": {
+      "type": "string",
+      "title": {
+        "en": "User Previous Session",
+        "nl": "Vorige sessie gebruiker",
+        "da": "Brugerens tidligere session",
+        "de": "Benutzersitzung vorheriger Sitzung",
+        "es": "Sesión Anterior del Usuario",
+        "fr": "Session précédente de l'utilisateur",
+        "it": "Sessione Utente Precedente",
+        "no": "Brukerens forrige økt",
+        "sv": "Användarens föregående session",
+        "pl": "Poprzednia sesja użytkownika",
+        "ru": "Предыдущая сессия пользователя",
+        "ko": "이전 사용자 세션",
+        "ar": "الجلسة السابقة للمستخدم"
+      },
+      "hint": {
+        "en": "The user card name for prevous session.",
+        "nl": "De gebruikerskaartnaam voor de vorige sessie.",
+        "da": "Brugerkortnavnet for den tidligere session.",
+        "de": "Der Benutzerkartenname für die vorherige Sitzung.",
+        "es": "El nombre de la tarjeta de usuario para la sesión anterior.",
+        "fr": "Le nom de la carte utilisateur pour la session précédente.",
+        "it": "Il nome della scheda utente per la sessione precedente.",
+        "no": "Brukerkortnavnet for forrige økt.",
+        "sv": "Användarkortets namn för föregående session.",
+        "pl": "Nazwa karty użytkownika z poprzedniej sesji.",
+        "ru": "Имя карты пользователя для предыдущей сессии.",
+        "ko": "이전 세션의 사용자 카드 이름.",
+        "ar": "اسم بطاقة المستخدم للجلسة السابقة."
+      },
+      "uiComponent": null,
+      "getable": true,
+      "setable": false,
+      "insights": false
     },
     "meter_power.1": {
       "type": "number",

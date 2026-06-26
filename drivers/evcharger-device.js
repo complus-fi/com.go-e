@@ -411,7 +411,7 @@ class evChargerDevice extends Homey.Device {
       }
 
       this.applyMeterPowerNameForSession(status, nextValues);
-      this.capturePreviousSessionOnDisconnect(nextValues);
+      this.capturePreviousSessionValuesOnDisconnect(nextValues);
 
       // Update target_power max capability option based on ama (ampere max limit)
       if (this.hasCapability('target_power') && status.ama !== undefined && Number.isFinite(Number(status.ama))) {
@@ -543,8 +543,7 @@ class evChargerDevice extends Homey.Device {
     nextValues.goe_meter_power_name = transactionName;
   }
 
-  capturePreviousSessionOnDisconnect(nextValues) {
-    if (!this.hasCapability('meter_power.prev_session')) return;
+  capturePreviousSessionValuesOnDisconnect(nextValues) {
     if (!this.hasCapability('evcharger_charging_state')) return;
 
     const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
@@ -553,11 +552,23 @@ class evChargerDevice extends Homey.Device {
     if (nextChargingState !== 'plugged_out') return;
     if (previousChargingState === 'plugged_out') return;
 
-    const sessionEnergyValue = nextValues['meter_power.session'] ?? this.getCapabilityValue('meter_power.session');
-    const sessionEnergy = Number(sessionEnergyValue);
-    if (!Number.isFinite(sessionEnergy) || sessionEnergy < 0) return;
+    if (this.hasCapability('meter_power.prev_session')) {
+      const sessionEnergyValue = nextValues['meter_power.session'] ?? this.getCapabilityValue('meter_power.session');
+      const sessionEnergy = Number(sessionEnergyValue);
+      if (Number.isFinite(sessionEnergy) && sessionEnergy >= 0) {
+        nextValues['meter_power.prev_session'] = sessionEnergy;
+      }
+    }
 
-    nextValues['meter_power.prev_session'] = sessionEnergy;
+    if (!this.hasCapability('goe_transaction_name.prev_session')) return;
+
+    const sessionTransactionName = this.getCapabilityValue('goe_transaction_name') ?? nextValues.goe_transaction_name;
+    if (typeof sessionTransactionName !== 'string') return;
+
+    const normalizedSessionTransactionName = sessionTransactionName.trim();
+    if (!normalizedSessionTransactionName) return;
+
+    nextValues['goe_transaction_name.prev_session'] = normalizedSessionTransactionName;
   }
 
   isCardConfigured(value) {

@@ -57,6 +57,7 @@ Additional mode/power mappings:
   - `trip_pv_and_flexible_price` => `lmo=5`, `fup=true`, `awe=true`
   - `trip_no_pv_no_flexible_price` => `lmo=5`, `fup=false`, `awe=false`
 - `goe_pv_surplus_enabled`: uses `fup` for read/write; enabling applies `lmo=4`, `fup=true`, `awe=false`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`; disabling applies `lmo=3`, `fup=false`, `awe=false`.
+- `goe_transaction_name.prev_session`: local read-only value; snapshots `goe_transaction_name` when charging state transitions to unplugged and keeps that value until the next unplug transition.
 - `meter_power.1..10` and `goe_meter_power_name.1..10`: dynamic per-card capabilities controlled by `c0i..c9i` (configured=true adds capabilities, configured=false removes capabilities).
 - Dynamic per-card energy/name values map from `c0e..c9e` and `c0n..c9n` respectively.
 
