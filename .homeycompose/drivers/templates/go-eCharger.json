@@ -774,10 +774,34 @@
     "measure_power.max": {
       "type": "number",
       "title": {
-        "en": "Max Power"
+        "en": "Max Power",
+        "nl": "Maximaal vermogen",
+        "da": "Maksimal effekt",
+        "de": "Maximale Leistung",
+        "es": "Potencia Máxima",
+        "fr": "Puissance maximale",
+        "it": "Potenza Massima",
+        "no": "Maks effekt",
+        "sv": "Max Power",
+        "pl": "Moc maksymalna",
+        "ru": "Максимальная мощность",
+        "ko": "최대 전력",
+        "ar": "الطاقة القصوى"
       },
       "hint": {
-        "en": "Max power used in this session."
+        "en": "Max power used in this session.",
+        "nl": "Maximaal vermogen gebruikt in deze sessie.",
+        "da": "Maksimal effekt brugt i denne session.",
+        "de": "Maximale Leistung in dieser Sitzung verwendet.",
+        "es": "Potencia máxima utilizada en esta sesión.",
+        "fr": "Puissance maximale utilisée lors de cette session.",
+        "it": "Potenza massima utilizzata in questa sessione.",
+        "no": "Maksimal effekt brukt i denne økten.",
+        "sv": "Maximal effekt som användes i denna session.",
+        "pl": "Maksymalna moc użyta w tej sesji.",
+        "ru": "Максимальная мощность, использованная в этой сессии.",
+        "ko": "이 세션에서 사용된 최대 전력.",
+        "ar": "أقصى طاقة مستخدمة في هذه الجلسة."
       },
       "getable": true,
       "setable": false,
@@ -803,10 +827,34 @@
     "measure_power.prev_max": {
       "type": "number",
       "title": {
-        "en": "Max Power Previous"
+        "en": "Max Power Previous",
+        "nl": "Maximaal vermogen vorige",
+        "da": "Maksimal effekt tidligere",
+        "de": "Maximale Leistung Vorherige",
+        "es": "Potencia Máxima Anterior",
+        "fr": "Puissance Max Précédente",
+        "it": "Potenza Massima Precedente",
+        "no": "Maksimal effekt tidligere",
+        "sv": "Maxeffekt tidigare",
+        "pl": "Moc maksymalna poprzednia",
+        "ru": "Максимальная мощность предыдущая",
+        "ko": "최대 전력 이전",
+        "ar": "الطاقة القصوى السابقة"
       },
       "hint": {
-        "en": "Max power used in the previous session."
+        "en": "Max power used in the previous session.",
+        "nl": "Maximaal vermogen gebruikt in de vorige sessie.",
+        "da": "Maksimal effekt brugt i den tidligere session.",
+        "de": "Maximale Leistung im vorherigen Ladevorgang.",
+        "es": "Potencia máxima utilizada en la sesión anterior.",
+        "fr": "Puissance maximale utilisée lors de la session précédente.",
+        "it": "Potenza massima utilizzata nella sessione precedente.",
+        "no": "Maksimal effekt brukt i forrige økt.",
+        "sv": "Maximal effekt som användes i föregående session.",
+        "pl": "Maksymalna moc użyta w poprzedniej sesji.",
+        "ru": "Максимальная мощность, использованная в предыдущей сессии.",
+        "ko": "이전 세션에서 사용된 최대 전력.",
+        "ar": "أقصى طاقة مستخدمة في الجلسة السابقة."
       },
       "getable": true,
       "setable": false,
