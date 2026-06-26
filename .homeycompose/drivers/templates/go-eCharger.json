@@ -24,6 +24,8 @@
     "goe_transaction_name.prev_session",
     "goe_measure_phase_switching",
     "goe_measure_modelStatus",
+    "measure_power.max",
+    "measure_power.prev_max",
     "measure_power.pakku",
     "measure_power.pgrid",
     "measure_power.ppv"
@@ -766,6 +768,64 @@
       },
       "getable": true,
       "setable": false,
+      "insights": false,
+      "uiComponent": null
+    },
+    "measure_power.max": {
+      "type": "number",
+      "title": {
+        "en": "Max Power"
+      },
+      "hint": {
+        "en": "Max power used in this session."
+      },
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "W",
+        "nl": "W",
+        "da": "W",
+        "de": "W",
+        "es": "W",
+        "fr": "W",
+        "it": "W",
+        "no": "W",
+        "sv": "W",
+        "pl": "W",
+        "ru": "W",
+        "ko": "W",
+        "ar": "W"
+      },
+      "decimals": 2,
+      "insights": false,
+      "uiComponent": null
+    },
+    "measure_power.prev_max": {
+      "type": "number",
+      "title": {
+        "en": "Max Power Previous"
+      },
+      "hint": {
+        "en": "Max power used in the previous session."
+      },
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "W",
+        "nl": "W",
+        "da": "W",
+        "de": "W",
+        "es": "W",
+        "fr": "W",
+        "it": "W",
+        "no": "W",
+        "sv": "W",
+        "pl": "W",
+        "ru": "W",
+        "ko": "W",
+        "ar": "W"
+      },
+      "decimals": 2,
       "insights": false,
       "uiComponent": null
     },

@@ -411,6 +411,7 @@ class evChargerDevice extends Homey.Device {
       }
 
       this.applyMeterPowerNameForSession(status, nextValues);
+      this.applyMeasurePowerSessionValues(nextValues);
       this.capturePreviousSessionValuesOnDisconnect(nextValues);
 
       // Update target_power max capability option based on ama (ampere max limit)
@@ -541,6 +542,37 @@ class evChargerDevice extends Homey.Device {
     }
 
     nextValues.goe_meter_power_name = transactionName;
+  }
+
+  applyMeasurePowerSessionValues(nextValues) {
+    if (!this.hasCapability('measure_power.max')) return;
+    if (!this.hasCapability('evcharger_charging_state')) return;
+
+    const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
+    const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
+
+    if (nextChargingState === 'plugged_out') {
+      if (previousChargingState !== 'plugged_out' && this.hasCapability('measure_power.prev_max')) {
+        const currentSessionMaxValue = this.getCapabilityValue('measure_power.max');
+        const currentSessionMax = Number(currentSessionMaxValue);
+        if (Number.isFinite(currentSessionMax) && currentSessionMax >= 0) {
+          nextValues['measure_power.prev_max'] = currentSessionMax;
+        }
+      }
+
+      nextValues['measure_power.max'] = 0;
+      return;
+    }
+
+    const currentPowerValue = nextValues.measure_power ?? this.getCapabilityValue('measure_power');
+    const currentPower = Number(currentPowerValue);
+    if (!Number.isFinite(currentPower) || currentPower < 0) return;
+
+    const currentSessionMaxValue = this.getCapabilityValue('measure_power.max');
+    const currentSessionMax = Number(currentSessionMaxValue);
+    const normalizedSessionMax = Number.isFinite(currentSessionMax) && currentSessionMax >= 0 ? currentSessionMax : 0;
+
+    nextValues['measure_power.max'] = Math.max(normalizedSessionMax, currentPower);
   }
 
   capturePreviousSessionValuesOnDisconnect(nextValues) {
