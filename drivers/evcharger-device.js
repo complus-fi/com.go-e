@@ -23,6 +23,122 @@ const GOE_TRANSACTION_IDS = new Set(Object.values(GOE_TRANSACTION));
 const GOE_NAME_TRIGGER_CAPABILITIES = new Set(['goe_transaction', 'goe_transaction_name']);
 
 class evChargerDevice extends Homey.Device {
+  getClockTimezone() {
+    const timezone = this.homey?.clock?.getTimezone?.();
+    return typeof timezone === 'string' && timezone.trim() ? timezone.trim() : null;
+  }
+
+  formatTransactionDateTime(date = new Date()) {
+    const timezone = this.getClockTimezone();
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+      hourCycle: 'h23'
+    };
+
+    if (timezone) {
+      options.timeZone = timezone;
+    }
+
+    const formatter = new Intl.DateTimeFormat('en-GB', options);
+    const parts = formatter.formatToParts(date);
+    const byType = {};
+
+    for (const part of parts) {
+      byType[part.type] = part.value;
+    }
+
+    return `${byType.year}-${byType.month}-${byType.day} ${byType.hour}:${byType.minute}:${byType.second}`;
+  }
+
+  parseTransactionStart(value) {
+    if (typeof value !== 'string') return null;
+    const normalized = value.trim();
+    const match = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/.exec(normalized);
+    if (!match) return null;
+
+    const parsed = new Date(`${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`);
+    const timestamp = parsed.getTime();
+    if (!Number.isFinite(timestamp)) return null;
+    return timestamp;
+  }
+
+  formatTransactionDuration(durationMs) {
+    const safeDuration = Number.isFinite(durationMs) ? Math.max(0, durationMs) : 0;
+    const totalSeconds = Math.floor(safeDuration / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }
+
+  applyTransactionTimeValues(nextValues = {}) {
+    const hasStart = this.hasCapability('goe_transaction_start');
+    const hasEnd = this.hasCapability('goe_transaction_end');
+    const hasDuration = this.hasCapability('goe_transaction_duration');
+    if (!hasStart && !hasEnd && !hasDuration) return;
+
+    // Only update transaction timers from a fresh polled transaction value.
+    if (typeof nextValues.goe_transaction !== 'string') {
+      return;
+    }
+
+    const previousTransaction = this.getCapabilityValue('goe_transaction');
+    const nextTransaction = nextValues.goe_transaction;
+    const isTransactionActive = typeof nextTransaction === 'string' && nextTransaction !== GOE_TRANSACTION.NONE;
+
+    if (previousTransaction === GOE_TRANSACTION.NONE && isTransactionActive) {
+      this.transactionStartTimestamp = Date.now();
+      if (hasStart) {
+        nextValues.goe_transaction_start = this.formatTransactionDateTime(new Date(this.transactionStartTimestamp));
+      }
+    }
+
+    if (!isTransactionActive) {
+      this.transactionStartTimestamp = null;
+      return;
+    }
+
+    if (!Number.isFinite(this.transactionStartTimestamp)) {
+      const startCandidate = nextValues.goe_transaction_start ?? this.getCapabilityValue('goe_transaction_start');
+      const parsedStart = this.parseTransactionStart(startCandidate);
+      if (parsedStart !== null) {
+        this.transactionStartTimestamp = parsedStart;
+      }
+    }
+
+    if (!Number.isFinite(this.transactionStartTimestamp)) {
+      this.transactionStartTimestamp = Date.now();
+      if (hasStart) {
+        nextValues.goe_transaction_start = this.formatTransactionDateTime(new Date(this.transactionStartTimestamp));
+      }
+    }
+
+    const now = new Date();
+    const endTimestamp = now.getTime();
+    let endValue;
+    if (hasEnd) {
+      endValue = this.formatTransactionDateTime(now);
+      nextValues.goe_transaction_end = endValue;
+    } else {
+      endValue = this.formatTransactionDateTime(now);
+    }
+    if (hasDuration) {
+      const startValue = nextValues.goe_transaction_start ?? this.getCapabilityValue('goe_transaction_start');
+      const parsedStart = this.parseTransactionStart(startValue);
+      const parsedEnd = this.parseTransactionStart(endValue);
+
+      const durationMs = Number.isFinite(parsedStart) && Number.isFinite(parsedEnd) ? parsedEnd - parsedStart : endTimestamp - this.transactionStartTimestamp;
+
+      nextValues.goe_transaction_duration = this.formatTransactionDuration(durationMs);
+    }
+  }
+
   getDynamicPollIntervalMs(status = this.lastStatus) {
     if (Number(status?.car) === 2) {
       return POLL_INTERVAL;
@@ -81,6 +197,7 @@ class evChargerDevice extends Homey.Device {
     });
     this.pollErrorMessage = null;
     this.pendingChargingState = null;
+    this.transactionStartTimestamp = null;
     this.pollIntervalMs = null;
     this.registerCapabilityListeners();
   }
@@ -410,6 +527,7 @@ class evChargerDevice extends Homey.Device {
         nextValues.goe_pv_surplus_enabled = Boolean(status.fup);
       }
 
+      this.applyTransactionTimeValues(nextValues);
       this.applyMeterPowerNameForSession(status, nextValues);
       this.applyMeasurePowerSessionValues(nextValues);
       this.capturePreviousSessionValuesOnDisconnect(nextValues);

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100%" height="100%" viewBox="0 0 170 170" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .stroke { fill: none; stroke: #111827; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+      .fill { fill: #111827; }
+    </style>
+  </defs>
+  <rect x="24" y="38" width="122" height="94" rx="14" class="stroke" />
+  <rect x="38" y="56" width="28" height="16" rx="3" class="fill" />
+  <path d="M92 64c8 0 15 7 15 15" class="stroke" />
+  <path d="M92 54c14 0 25 11 25 25" class="stroke" />
+  <path d="M92 44c19 0 35 16 35 35" class="stroke" />
+  <circle cx="92" cy="79" r="5" class="fill" />
+</svg>

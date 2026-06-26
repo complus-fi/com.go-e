@@ -36,6 +36,7 @@ class evCloudChargerDevice extends evChargerDevice {
     });
     this.pollErrorMessage = null;
     this.pendingChargingState = null;
+    this.transactionStartTimestamp = null;
     this.pollIntervalMs = null;
     this.registerCapabilityListeners();
 

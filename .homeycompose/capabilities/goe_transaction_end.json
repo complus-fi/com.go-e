@@ -30,7 +30,8 @@
     "ko": "이 거래의 종료 시간.",
     "ar": "وقت انتهاء هذه المعاملة."
   },
-  "uiComponent": null,
+  "icon": "/assets/goe_transaction_time.svg",
+  "uiComponent": "sensor",
   "getable": true,
   "setable": false,
   "insights": false

@@ -30,7 +30,8 @@
     "ko": "이 세션의 사용자 카드 이름입니다.",
     "ar": "اسم بطاقة المستخدم لهذه الجلسة."
   },
-  "uiComponent": null,
+  "icon": "/assets/goe_transaction_name.svg",
+  "uiComponent": "sensor",
   "getable": true,
   "setable": false,
   "insights": false

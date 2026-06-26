@@ -1093,22 +1093,25 @@
         "meter_power",
         "meter_power.session",
         "meter_power.prev_session",
-        "alarm_problem",
         "measure_power",
+        "measure_power.max",
+        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "target_power",
+        "alarm_problem",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
         "goe_transaction",
+        "goe_transaction_start",
+        "goe_transaction_end",
+        "goe_transaction_duration",
         "goe_transaction_name",
         "goe_transaction_name.prev_session",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
-        "measure_power.max",
-        "measure_power.prev_max",
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv"
@@ -1905,7 +1908,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.prev_max": {
           "type": "number",
@@ -1958,7 +1961,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.pakku": {
           "type": "number",
@@ -2362,22 +2365,25 @@
         "meter_power",
         "meter_power.session",
         "meter_power.prev_session",
-        "alarm_problem",
         "measure_power",
+        "measure_power.max",
+        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "target_power",
+        "alarm_problem",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
         "goe_transaction",
+        "goe_transaction_start",
+        "goe_transaction_end",
+        "goe_transaction_duration",
         "goe_transaction_name",
         "goe_transaction_name.prev_session",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
-        "measure_power.max",
-        "measure_power.prev_max",
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv"
@@ -3174,7 +3180,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.prev_max": {
           "type": "number",
@@ -3227,7 +3233,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.pakku": {
           "type": "number",
@@ -3631,22 +3637,25 @@
         "meter_power",
         "meter_power.session",
         "meter_power.prev_session",
-        "alarm_problem",
         "measure_power",
+        "measure_power.max",
+        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "target_power",
+        "alarm_problem",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
         "goe_transaction",
+        "goe_transaction_start",
+        "goe_transaction_end",
+        "goe_transaction_duration",
         "goe_transaction_name",
         "goe_transaction_name.prev_session",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
-        "measure_power.max",
-        "measure_power.prev_max",
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv"
@@ -4443,7 +4452,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.prev_max": {
           "type": "number",
@@ -4496,7 +4505,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.pakku": {
           "type": "number",
@@ -4900,22 +4909,25 @@
         "meter_power",
         "meter_power.session",
         "meter_power.prev_session",
-        "alarm_problem",
         "measure_power",
+        "measure_power.max",
+        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "target_power",
+        "alarm_problem",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
         "goe_transaction",
+        "goe_transaction_start",
+        "goe_transaction_end",
+        "goe_transaction_duration",
         "goe_transaction_name",
         "goe_transaction_name.prev_session",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
-        "measure_power.max",
-        "measure_power.prev_max",
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv"
@@ -5712,7 +5724,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.prev_max": {
           "type": "number",
@@ -5765,7 +5777,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.pakku": {
           "type": "number",
@@ -6169,22 +6181,25 @@
         "meter_power",
         "meter_power.session",
         "meter_power.prev_session",
-        "alarm_problem",
         "measure_power",
+        "measure_power.max",
+        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "target_power",
+        "alarm_problem",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
         "goe_transaction",
+        "goe_transaction_start",
+        "goe_transaction_end",
+        "goe_transaction_duration",
         "goe_transaction_name",
         "goe_transaction_name.prev_session",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
-        "measure_power.max",
-        "measure_power.prev_max",
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv"
@@ -6981,7 +6996,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.prev_max": {
           "type": "number",
@@ -7034,7 +7049,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.pakku": {
           "type": "number",
@@ -7580,22 +7595,25 @@
         "meter_power",
         "meter_power.session",
         "meter_power.prev_session",
-        "alarm_problem",
         "measure_power",
+        "measure_power.max",
+        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "target_power",
+        "alarm_problem",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
         "goe_transaction",
+        "goe_transaction_start",
+        "goe_transaction_end",
+        "goe_transaction_duration",
         "goe_transaction_name",
         "goe_transaction_name.prev_session",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
-        "measure_power.max",
-        "measure_power.prev_max",
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv"
@@ -8392,7 +8410,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.prev_max": {
           "type": "number",
@@ -8445,7 +8463,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.pakku": {
           "type": "number",
@@ -8991,22 +9009,25 @@
         "meter_power",
         "meter_power.session",
         "meter_power.prev_session",
-        "alarm_problem",
         "measure_power",
+        "measure_power.max",
+        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "target_power",
+        "alarm_problem",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
         "goe_transaction",
+        "goe_transaction_start",
+        "goe_transaction_end",
+        "goe_transaction_duration",
         "goe_transaction_name",
         "goe_transaction_name.prev_session",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
-        "measure_power.max",
-        "measure_power.prev_max",
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv"
@@ -9803,7 +9824,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.prev_max": {
           "type": "number",
@@ -9856,7 +9877,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.pakku": {
           "type": "number",
@@ -10402,22 +10423,25 @@
         "meter_power",
         "meter_power.session",
         "meter_power.prev_session",
-        "alarm_problem",
         "measure_power",
+        "measure_power.max",
+        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "target_power",
+        "alarm_problem",
         "evcharger_charging",
         "evcharger_charging_state",
         "goe_charger_mode",
         "goe_transaction",
+        "goe_transaction_start",
+        "goe_transaction_end",
+        "goe_transaction_duration",
         "goe_transaction_name",
         "goe_transaction_name.prev_session",
         "goe_measure_phase_switching",
         "goe_measure_modelStatus",
-        "measure_power.max",
-        "measure_power.prev_max",
         "measure_power.pakku",
         "measure_power.pgrid",
         "measure_power.ppv"
@@ -11214,7 +11238,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.prev_max": {
           "type": "number",
@@ -11267,7 +11291,7 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": null
+          "uiComponent": "sensor"
         },
         "measure_power.pakku": {
           "type": "number",
@@ -13137,21 +13161,22 @@
         "ar": "مدة المعاملة"
       },
       "hint": {
-        "en": "The start time of this transaction.",
-        "nl": "De starttijd van deze transactie.",
-        "da": "Starttidspunktet for denne transaktion.",
-        "de": "Die Startzeit dieser Transaktion.",
-        "es": "La hora de inicio de esta transacción.",
-        "fr": "L'heure de début de cette transaction.",
-        "it": "L'orario di inizio di questa transazione.",
-        "no": "Starttidspunktet for denne transaksjonen.",
-        "sv": "Starttiden för denna transaktion.",
-        "pl": "Czas rozpoczęcia tej transakcji.",
-        "ru": "Время начала этой транзакции.",
-        "ko": "이 거래의 시작 시간.",
-        "ar": "وقت بدء هذه المعاملة."
+        "en": "The duration of this transaction.",
+        "nl": "De duur van deze transactie.",
+        "da": "Varigheden af denne transaktion.",
+        "de": "Die Dauer dieser Transaktion.",
+        "es": "La duración de esta transacción.",
+        "fr": "La durée de cette transaction.",
+        "it": "La durata di questa transazione.",
+        "no": "Varigheten av denne transaksjonen.",
+        "sv": "Varaktigheten för denna transaktion.",
+        "pl": "Czas trwania tej transakcji.",
+        "ru": "Продолжительность этой транзакции.",
+        "ko": "이 거래의 기간.",
+        "ar": "مدة هذه المعاملة."
       },
-      "uiComponent": null,
+      "icon": "/assets/goe_transaction_time.svg",
+      "uiComponent": "sensor",
       "getable": true,
       "setable": false,
       "insights": false
@@ -13188,7 +13213,8 @@
         "ko": "이 거래의 종료 시간.",
         "ar": "وقت انتهاء هذه المعاملة."
       },
-      "uiComponent": null,
+      "icon": "/assets/goe_transaction_time.svg",
+      "uiComponent": "sensor",
       "getable": true,
       "setable": false,
       "insights": false
@@ -13225,7 +13251,8 @@
         "ko": "이 세션의 사용자 카드 이름입니다.",
         "ar": "اسم بطاقة المستخدم لهذه الجلسة."
       },
-      "uiComponent": null,
+      "icon": "/assets/goe_transaction_name.svg",
+      "uiComponent": "sensor",
       "getable": true,
       "setable": false,
       "insights": false
@@ -13233,36 +13260,37 @@
     "goe_transaction_start": {
       "type": "string",
       "title": {
-        "en": "Transaction Duration",
-        "nl": "Transactieduur",
-        "da": "Transaktionsvarighed",
-        "de": "Transaktionsdauer",
-        "es": "Duración de la transacción",
-        "fr": "Durée de la transaction",
-        "it": "Durata della transazione",
-        "no": "Transaksjonsvarighet",
-        "sv": "Transaktionslängd",
-        "pl": "Czas trwania transakcji",
-        "ru": "Продолжительность транзакции",
-        "ko": "거래 기간",
-        "ar": "مدة المعاملة"
+        "en": "Transaction Start Time",
+        "nl": "Transactietijd Start",
+        "da": "Transaktionens starttidspunkt",
+        "de": "Transaktionsstartzeit",
+        "es": "Hora de inicio de la transacción",
+        "fr": "Heure de début de transaction",
+        "it": "Ora di inizio transazione",
+        "no": "Transaksjonens starttidspunkt",
+        "sv": "Transaktionens starttid",
+        "pl": "Czas rozpoczęcia transakcji",
+        "ru": "Время начала транзакции",
+        "ko": "거래 시작 시간",
+        "ar": "وقت بدء المعاملة"
       },
       "hint": {
-        "en": "The duration of this transaction (HH:mm).",
-        "nl": "De duur van deze transactie (UU:mm).",
-        "da": "Varigheden af denne transaktion (TT:mm).",
-        "de": "Die Dauer dieser Transaktion (HH:mm).",
-        "es": "La duración de esta transacción (HH:mm).",
-        "fr": "La durée de cette transaction (HH:mm).",
-        "it": "La durata di questa transazione (HH:mm).",
-        "no": "Varigheten av denne transaksjonen (TT:mm).",
-        "sv": "Varaktigheten för denna transaktion (HH:mm).",
-        "pl": "Czas trwania tej transakcji (GG:mm).",
-        "ru": "Продолжительность этой транзакции (ЧЧ:мм).",
-        "ko": "이 거래의 지속 시간 (HH:mm).",
-        "ar": "مدة هذه المعاملة (HH:mm)."
+        "en": "The start time of this transaction.",
+        "nl": "De starttijd van deze transactie.",
+        "da": "Starttidspunktet for denne transaktion.",
+        "de": "Die Startzeit dieser Transaktion.",
+        "es": "La hora de inicio de esta transacción.",
+        "fr": "L'heure de début de cette transaction.",
+        "it": "L'orario di inizio di questa transazione.",
+        "no": "Starttidspunktet for denne transaksjonen.",
+        "sv": "Starttiden för denna transaktion.",
+        "pl": "Czas rozpoczęcia tej transakcji.",
+        "ru": "Время начала этой транзакции.",
+        "ko": "이 거래의 시작 시간.",
+        "ar": "وقت بدء هذه المعاملة."
       },
-      "uiComponent": null,
+      "icon": "/assets/goe_transaction_time.svg",
+      "uiComponent": "sensor",
       "getable": true,
       "setable": false,
       "insights": false
