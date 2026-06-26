@@ -1,0 +1,37 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Transaction Duration",
+    "nl": "Transactieduur",
+    "da": "Transaktionsvarighed",
+    "de": "Transaktionsdauer",
+    "es": "Duración de la transacción",
+    "fr": "Durée de la transaction",
+    "it": "Durata della transazione",
+    "no": "Transaksjonsvarighet",
+    "sv": "Transaktionens varaktighet",
+    "pl": "Czas trwania transakcji",
+    "ru": "Продолжительность транзакции",
+    "ko": "거래 기간",
+    "ar": "مدة المعاملة"
+  },
+  "hint": {
+    "en": "The start time of this transaction.",
+    "nl": "De starttijd van deze transactie.",
+    "da": "Starttidspunktet for denne transaktion.",
+    "de": "Die Startzeit dieser Transaktion.",
+    "es": "La hora de inicio de esta transacción.",
+    "fr": "L'heure de début de cette transaction.",
+    "it": "L'orario di inizio di questa transazione.",
+    "no": "Starttidspunktet for denne transaksjonen.",
+    "sv": "Starttiden för denna transaktion.",
+    "pl": "Czas rozpoczęcia tej transakcji.",
+    "ru": "Время начала этой транзакции.",
+    "ko": "이 거래의 시작 시간.",
+    "ar": "وقت بدء هذه المعاملة."
+  },
+  "uiComponent": null,
+  "getable": true,
+  "setable": false,
+  "insights": false
+}

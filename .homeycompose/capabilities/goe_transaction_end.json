@@ -1,0 +1,37 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Transaction End Time",
+    "nl": "Transactietijd Einde",
+    "da": "Transaktionens sluttidspunkt",
+    "de": "Transaktionsendzeit",
+    "es": "Hora de finalización de la transacción",
+    "fr": "Heure de fin de transaction",
+    "it": "Ora di fine transazione",
+    "no": "Transaksjonens sluttidspunkt",
+    "sv": "Transaktionens sluttid",
+    "pl": "Czas zakończenia transakcji",
+    "ru": "Время окончания транзакции",
+    "ko": "거래 종료 시간",
+    "ar": "وقت انتهاء المعاملة"
+  },
+  "hint": {
+    "en": "The end time of this transaction.",
+    "nl": "De eindtijd van deze transactie.",
+    "da": "Sluttidspunktet for denne transaktion.",
+    "de": "Die Endzeit dieser Transaktion.",
+    "es": "La hora de finalización de esta transacción.",
+    "fr": "L'heure de fin de cette transaction.",
+    "it": "L'orario di fine di questa transazione.",
+    "no": "Slutttidspunktet for denne transaksjonen.",
+    "sv": "Sluttiden för denna transaktion.",
+    "pl": "Czas zakończenia tej transakcji.",
+    "ru": "Время окончания этой транзакции.",
+    "ko": "이 거래의 종료 시간.",
+    "ar": "وقت انتهاء هذه المعاملة."
+  },
+  "uiComponent": null,
+  "getable": true,
+  "setable": false,
+  "insights": false
+}
