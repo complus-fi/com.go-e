@@ -411,6 +411,7 @@ class evChargerDevice extends Homey.Device {
       }
 
       this.applyMeterPowerNameForSession(status, nextValues);
+      this.capturePreviousSessionOnDisconnect(nextValues);
 
       // Update target_power max capability option based on ama (ampere max limit)
       if (this.hasCapability('target_power') && status.ama !== undefined && Number.isFinite(Number(status.ama))) {
@@ -540,6 +541,23 @@ class evChargerDevice extends Homey.Device {
     }
 
     nextValues.goe_meter_power_name = transactionName;
+  }
+
+  capturePreviousSessionOnDisconnect(nextValues) {
+    if (!this.hasCapability('meter_power.prev_session')) return;
+    if (!this.hasCapability('evcharger_charging_state')) return;
+
+    const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
+    const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
+
+    if (nextChargingState !== 'plugged_out') return;
+    if (previousChargingState === 'plugged_out') return;
+
+    const sessionEnergyValue = nextValues['meter_power.session'] ?? this.getCapabilityValue('meter_power.session');
+    const sessionEnergy = Number(sessionEnergyValue);
+    if (!Number.isFinite(sessionEnergy) || sessionEnergy < 0) return;
+
+    nextValues['meter_power.prev_session'] = sessionEnergy;
   }
 
   isCardConfigured(value) {

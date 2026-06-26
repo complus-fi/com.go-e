@@ -9,6 +9,7 @@
     "measure_temperature",
     "meter_power",
     "meter_power.session",
+    "meter_power.prev_session",
     "alarm_problem",
     "measure_power",
     "measure_voltage",
@@ -38,28 +39,38 @@
       "uiComponent": "button",
       "uiQuickAction": true
     },
-    "meter_power.pakku": {
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "kWh",
-        "nl": "kWh",
-        "da": "kWh",
-        "de": "kWh",
-        "es": "kWh",
-        "fr": "kWh",
-        "it": "kWh",
-        "no": "kWh",
-        "sv": "kWh",
-        "pl": "kWh",
-        "ru": "кВтч",
-        "ko": "킬로와트시 (kWh)",
-        "ar": "كيلوواط ساعة"
+    "meter_power.session": {
+      "type": "number",
+      "title": {
+        "en": "Energy This Session",
+        "nl": "Energie Deze Sessie",
+        "da": "Energi denne session",
+        "de": "Energie diese Sitzung",
+        "es": "Energía de esta sesión",
+        "fr": "Énergie de cette session",
+        "it": "Energia Questa Sessione",
+        "no": "Energi denne økten",
+        "sv": "Energi denna session",
+        "pl": "Energia tej sesji",
+        "ru": "Энергия за эту сессию",
+        "ko": "이번 세션 에너지",
+        "ar": "الطاقة في هذه الجلسة"
       },
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.pgrid": {
+      "hint:": {
+        "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
+        "nl": "Energie (kWh) geleverd tijdens deze sessie. Wordt automatisch gereset wanneer een auto wordt aangesloten.",
+        "da": "Energi (kWh) leveret under denne session. Nulstilles automatisk, når en bil tilsluttes.",
+        "de": "Energie (kWh), die während dieser Sitzung geliefert wurde. Wird automatisch zurückgesetzt, wenn ein Auto angeschlossen wird.",
+        "es": "Energía (kWh) entregada durante esta sesión. Se restablece automáticamente cuando se conecta un coche.",
+        "fr": "Énergie (kWh) délivrée lors de cette session. Réinitialisation automatique lorsqu'une voiture est connectée.",
+        "it": "Energia (kWh) erogata durante questa sessione. Si azzera automaticamente quando un'auto è collegata.",
+        "no": "Energi (kWh) levert under denne økten. Nullstilles automatisk når en bil kobles til.",
+        "sv": "Energi (kWh) levererad under denna session. Återställs automatiskt när en bil ansluts.",
+        "pl": "Energia (kWh) dostarczona podczas tej sesji. Resetuje się automatycznie po podłączeniu samochodu.",
+        "ru": "Энергия (кВтч), переданная за эту сессию. Сбрасывается автоматически при подключении автомобиля.",
+        "ko": "이번 세션 동안 전달된 에너지(kWh). 자동차가 연결되면 자동으로 초기화됩니다.",
+        "ar": "الطاقة (كيلوواط ساعة) التي تم تسليمها خلال هذه الجلسة. يتم إعادة التعيين تلقائيًا عند توصيل سيارة."
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -77,10 +88,40 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
-      "insights": true,
-      "uiComponent": null
+      "insights": true
     },
-    "meter_power.ppv": {
+    "meter_power.prev_session": {
+      "type": "number",
+      "title": {
+        "en": "Energy Previous Session",
+        "nl": "Energie Vorige Sessie",
+        "da": "Energi forrige session",
+        "de": "Energie vorherige Sitzung",
+        "es": "Energía de la sesión anterior",
+        "fr": "Énergie de la session précédente",
+        "it": "Energia sessione precedente",
+        "no": "Energi forrige økt",
+        "sv": "Energi föregående session",
+        "pl": "Energia poprzedniej sesji",
+        "ru": "Энергия за предыдущую сессию",
+        "ko": "이전 세션 에너지",
+        "ar": "الطاقة في الجلسة السابقة"
+      },
+      "hint": {
+        "en": "Energy (kWh) delivered during the previous session. Captured when the car gets disconnected.",
+        "nl": "Energie (kWh) geleverd tijdens de vorige sessie. Vastgelegd wanneer de auto wordt losgekoppeld.",
+        "da": "Energi (kWh) leveret under den forrige session. Gemmes når bilen frakobles.",
+        "de": "Energie (kWh), die in der vorherigen Sitzung geliefert wurde. Wird gespeichert, wenn das Auto getrennt wird.",
+        "es": "Energía (kWh) entregada durante la sesión anterior. Se guarda cuando el coche se desconecta.",
+        "fr": "Énergie (kWh) délivrée lors de la session précédente. Enregistrée lorsque la voiture est déconnectée.",
+        "it": "Energia (kWh) erogata durante la sessione precedente. Salvata quando l'auto viene scollegata.",
+        "no": "Energi (kWh) levert i forrige økt. Lagres når bilen kobles fra.",
+        "sv": "Energi (kWh) levererad under föregående session. Sparas när bilen kopplas från.",
+        "pl": "Energia (kWh) dostarczona podczas poprzedniej sesji. Zapisywana po odłączeniu samochodu.",
+        "ru": "Энергия (кВтч), переданная за предыдущую сессию. Сохраняется при отключении автомобиля.",
+        "ko": "이전 세션 동안 전달된 에너지(kWh). 자동차가 분리되면 저장됩니다.",
+        "ar": "الطاقة (كيلوواط ساعة) التي تم تسليمها خلال الجلسة السابقة. يتم حفظها عند فصل السيارة."
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -98,10 +139,25 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
-      "insights": true,
-      "uiComponent": null
+      "insights": true
     },
     "meter_power.1": {
+      "type": "number",
+      "title": {
+        "en": "Card 1 Energy",
+        "nl": "Kaart 1 Energie",
+        "da": "Kort 1 Energi",
+        "de": "Karte 1 Energie",
+        "es": "Energía de la Tarjeta 1",
+        "fr": "Énergie de la Carte 1",
+        "it": "Energia della Scheda 1",
+        "no": "Kort 1 Energi",
+        "sv": "Kort 1 Energi",
+        "pl": "Energia Karty 1",
+        "ru": "Энергия Карты 1",
+        "ko": "카드 1 에너지",
+        "ar": "بطاقة 1 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -123,6 +179,22 @@
       "uiComponent": null
     },
     "meter_power.2": {
+      "type": "number",
+      "title": {
+        "en": "Card 2 Energy",
+        "nl": "Kaart 2 Energie",
+        "da": "Kort 2 Energi",
+        "de": "Karte 2 Energie",
+        "es": "Energía de la Tarjeta 2",
+        "fr": "Énergie de la Carte 2",
+        "it": "Energia della Scheda 2",
+        "no": "Kort 2 Energi",
+        "sv": "Kort 2 Energi",
+        "pl": "Energia Karty 2",
+        "ru": "Энергия Карты 2",
+        "ko": "카드 2 에너지",
+        "ar": "بطاقة 2 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -144,6 +216,22 @@
       "uiComponent": null
     },
     "meter_power.3": {
+      "type": "number",
+      "title": {
+        "en": "Card 3 Energy",
+        "nl": "Kaart 3 Energie",
+        "da": "Kort 3 Energi",
+        "de": "Karte 3 Energie",
+        "es": "Energía de la Tarjeta 3",
+        "fr": "Énergie de la Carte 3",
+        "it": "Energia della Scheda 3",
+        "no": "Kort 3 Energi",
+        "sv": "Kort 3 Energi",
+        "pl": "Energia Karty 3",
+        "ru": "Энергия Карты 3",
+        "ko": "카드 3 에너지",
+        "ar": "بطاقة 3 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -165,6 +253,22 @@
       "uiComponent": null
     },
     "meter_power.4": {
+      "type": "number",
+      "title": {
+        "en": "Card 4 Energy",
+        "nl": "Kaart 4 Energie",
+        "da": "Kort 4 Energi",
+        "de": "Karte 4 Energie",
+        "es": "Energía de la Tarjeta 4",
+        "fr": "Énergie de la Carte 4",
+        "it": "Energia della Scheda 4",
+        "no": "Kort 4 Energi",
+        "sv": "Kort 4 Energi",
+        "pl": "Energia Karty 4",
+        "ru": "Энергия Карты 4",
+        "ko": "카드 4 에너지",
+        "ar": "بطاقة 4 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -186,6 +290,22 @@
       "uiComponent": null
     },
     "meter_power.5": {
+      "type": "number",
+      "title": {
+        "en": "Card 5 Energy",
+        "nl": "Kaart 5 Energie",
+        "da": "Kort 5 Energi",
+        "de": "Karte 5 Energie",
+        "es": "Energía de la Tarjeta 5",
+        "fr": "Énergie de la Carte 5",
+        "it": "Energia della Scheda 5",
+        "no": "Kort 5 Energi",
+        "sv": "Kort 5 Energi",
+        "pl": "Energia Karty 5",
+        "ru": "Энергия Карты 5",
+        "ko": "카드 5 에너지",
+        "ar": "بطاقة 5 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -207,6 +327,22 @@
       "uiComponent": null
     },
     "meter_power.6": {
+      "type": "number",
+      "title": {
+        "en": "Card 6 Energy",
+        "nl": "Kaart 6 Energie",
+        "da": "Kort 6 Energi",
+        "de": "Karte 6 Energie",
+        "es": "Energía de la Tarjeta 6",
+        "fr": "Énergie de la Carte 6",
+        "it": "Energia della Scheda 6",
+        "no": "Kort 6 Energi",
+        "sv": "Kort 6 Energi",
+        "pl": "Energia Karty 6",
+        "ru": "Энергия Карты 6",
+        "ko": "카드 6 에너지",
+        "ar": "بطاقة 6 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -228,6 +364,22 @@
       "uiComponent": null
     },
     "meter_power.7": {
+      "type": "number",
+      "title": {
+        "en": "Card 7 Energy",
+        "nl": "Kaart 7 Energie",
+        "da": "Kort 7 Energi",
+        "de": "Karte 7 Energie",
+        "es": "Energía de la Tarjeta 7",
+        "fr": "Énergie de la Carte 7",
+        "it": "Energia della Scheda 7",
+        "no": "Kort 7 Energi",
+        "sv": "Kort 7 Energi",
+        "pl": "Energia Karty 7",
+        "ru": "Энергия Карты 7",
+        "ko": "카드 7 에너지",
+        "ar": "بطاقة 7 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -249,6 +401,22 @@
       "uiComponent": null
     },
     "meter_power.8": {
+      "type": "number",
+      "title": {
+        "en": "Card 8 Energy",
+        "nl": "Kaart 8 Energie",
+        "da": "Kort 8 Energi",
+        "de": "Karte 8 Energie",
+        "es": "Energía de la Tarjeta 8",
+        "fr": "Énergie de la Carte 8",
+        "it": "Energia della Scheda 8",
+        "no": "Kort 8 Energi",
+        "sv": "Kort 8 Energi",
+        "pl": "Energia Karty 8",
+        "ru": "Энергия Карты 8",
+        "ko": "카드 8 에너지",
+        "ar": "بطاقة 8 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -270,6 +438,22 @@
       "uiComponent": null
     },
     "meter_power.9": {
+      "type": "number",
+      "title": {
+        "en": "Card 9 Energy",
+        "nl": "Kaart 9 Energie",
+        "da": "Kort 9 Energi",
+        "de": "Karte 9 Energie",
+        "es": "Energía de la Tarjeta 9",
+        "fr": "Énergie de la Carte 9",
+        "it": "Energia della Scheda 9",
+        "no": "Kort 9 Energi",
+        "sv": "Kort 9 Energi",
+        "pl": "Energia Karty 9",
+        "ru": "Энергия Карты 9",
+        "ko": "카드 9 에너지",
+        "ar": "بطاقة 9 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -291,6 +475,22 @@
       "uiComponent": null
     },
     "meter_power.10": {
+      "type": "number",
+      "title": {
+        "en": "Card 1 Energy",
+        "nl": "Kaart 10 Energie",
+        "da": "Kort 10 Energi",
+        "de": "Karte 10 Energie",
+        "es": "Energía de la Tarjeta 10",
+        "fr": "Énergie de la Carte 10",
+        "it": "Energia della Scheda 10",
+        "no": "Kort 10 Energi",
+        "sv": "Kort 10 Energi",
+        "pl": "Energia Karty 10",
+        "ru": "Энергия Карты 10",
+        "ko": "카드 10 에너지",
+        "ar": "بطاقة 10 الطاقة"
+      },
       "getable": true,
       "setable": false,
       "units": {
@@ -313,6 +513,21 @@
     },
     "goe_meter_power_name.1": {
       "type": "string",
+      "title": {
+        "en": "Card 1 Name",
+        "nl": "Kaart 1 Naam",
+        "da": "Kort 1 Navn",
+        "de": "Karte 1 Name",
+        "es": "Nombre de la Tarjeta 1",
+        "fr": "Nom de la Carte 1",
+        "it": "Nome della Scheda 1",
+        "no": "Kort 1 Navn",
+        "sv": "Kort 1 Namn",
+        "pl": "Nazwa Karty 1",
+        "ru": "Имя Карты 1",
+        "ko": "카드 1 이름",
+        "ar": "بطاقة 1 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
@@ -320,6 +535,21 @@
     },
     "goe_meter_power_name.2": {
       "type": "string",
+      "title": {
+        "en": "Card 2 Name",
+        "nl": "Kaart 2 Naam",
+        "da": "Kort 2 Navn",
+        "de": "Karte 2 Name",
+        "es": "Nombre de la Tarjeta 2",
+        "fr": "Nom de la Carte 2",
+        "it": "Nome della Scheda 2",
+        "no": "Kort 2 Navn",
+        "sv": "Kort 2 Namn",
+        "pl": "Nazwa Karty 2",
+        "ru": "Имя Карты 2",
+        "ko": "카드 2 이름",
+        "ar": "بطاقة 2 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
@@ -327,6 +557,21 @@
     },
     "goe_meter_power_name.3": {
       "type": "string",
+      "title": {
+        "en": "Card 3 Name",
+        "nl": "Kaart 3 Naam",
+        "da": "Kort 3 Navn",
+        "de": "Karte 3 Name",
+        "es": "Nombre de la Tarjeta 3",
+        "fr": "Nom de la Carte 3",
+        "it": "Nome della Scheda 3",
+        "no": "Kort 3 Navn",
+        "sv": "Kort 3 Namn",
+        "pl": "Nazwa Karty 3",
+        "ru": "Имя Карты 3",
+        "ko": "카드 3 이름",
+        "ar": "بطاقة 3 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
@@ -334,6 +579,21 @@
     },
     "goe_meter_power_name.4": {
       "type": "string",
+      "title": {
+        "en": "Card 4 Name",
+        "nl": "Kaart 4 Naam",
+        "da": "Kort 4 Navn",
+        "de": "Karte 4 Name",
+        "es": "Nombre de la Tarjeta 4",
+        "fr": "Nom de la Carte 4",
+        "it": "Nome della Scheda 4",
+        "no": "Kort 4 Navn",
+        "sv": "Kort 4 Namn",
+        "pl": "Nazwa Karty 4",
+        "ru": "Имя Карты 4",
+        "ko": "카드 4 이름",
+        "ar": "بطاقة 4 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
@@ -341,6 +601,21 @@
     },
     "goe_meter_power_name.5": {
       "type": "string",
+      "title": {
+        "en": "Card 5 Name",
+        "nl": "Kaart 5 Naam",
+        "da": "Kort 5 Navn",
+        "de": "Karte 5 Name",
+        "es": "Nombre de la Tarjeta 5",
+        "fr": "Nom de la Carte 5",
+        "it": "Nome della Scheda 5",
+        "no": "Kort 5 Navn",
+        "sv": "Kort 5 Namn",
+        "pl": "Nazwa Karty 5",
+        "ru": "Имя Карты 5",
+        "ko": "카드 5 이름",
+        "ar": "بطاقة 5 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
@@ -348,6 +623,21 @@
     },
     "goe_meter_power_name.6": {
       "type": "string",
+      "title": {
+        "en": "Card 6 Name",
+        "nl": "Kaart 6 Naam",
+        "da": "Kort 6 Navn",
+        "de": "Karte 6 Name",
+        "es": "Nombre de la Tarjeta 6",
+        "fr": "Nom de la Carte 6",
+        "it": "Nome della Scheda 6",
+        "no": "Kort 6 Navn",
+        "sv": "Kort 6 Namn",
+        "pl": "Nazwa Karty 6",
+        "ru": "Имя Карты 6",
+        "ko": "카드 6 이름",
+        "ar": "بطاقة 6 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
@@ -355,6 +645,21 @@
     },
     "goe_meter_power_name.7": {
       "type": "string",
+      "title": {
+        "en": "Card 7 Name",
+        "nl": "Kaart 7 Naam",
+        "da": "Kort 7 Navn",
+        "de": "Karte 7 Name",
+        "es": "Nombre de la Tarjeta 7",
+        "fr": "Nom de la Carte 7",
+        "it": "Nome della Scheda 7",
+        "no": "Kort 7 Navn",
+        "sv": "Kort 7 Namn",
+        "pl": "Nazwa Karty 7",
+        "ru": "Имя Карты 7",
+        "ko": "카드 7 이름",
+        "ar": "بطاقة 7 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
@@ -362,6 +667,21 @@
     },
     "goe_meter_power_name.8": {
       "type": "string",
+      "title": {
+        "en": "Card 8 Name",
+        "nl": "Kaart 8 Naam",
+        "da": "Kort 8 Navn",
+        "de": "Karte 8 Name",
+        "es": "Nombre de la Tarjeta 8",
+        "fr": "Nom de la Carte 8",
+        "it": "Nome della Scheda 8",
+        "no": "Kort 8 Navn",
+        "sv": "Kort 8 Namn",
+        "pl": "Nazwa Karty 8",
+        "ru": "Имя Карты 8",
+        "ko": "카드 8 이름",
+        "ar": "بطاقة 8 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
@@ -369,6 +689,21 @@
     },
     "goe_meter_power_name.9": {
       "type": "string",
+      "title": {
+        "en": "Card 9 Name",
+        "nl": "Kaart 9 Naam",
+        "da": "Kort 9 Navn",
+        "de": "Karte 9 Name",
+        "es": "Nombre de la Tarjeta 9",
+        "fr": "Nom de la Carte 9",
+        "it": "Nome della Scheda 9",
+        "no": "Kort 9 Navn",
+        "sv": "Kort 9 Namn",
+        "pl": "Nazwa Karty 9",
+        "ru": "Имя Карты 9",
+        "ko": "카드 9 이름",
+        "ar": "بطاقة 9 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
@@ -376,61 +711,25 @@
     },
     "goe_meter_power_name.10": {
       "type": "string",
+      "title": {
+        "en": "Card 10 Name",
+        "nl": "Kaart 10 Naam",
+        "da": "Kort 10 Navn",
+        "de": "Karte 10 Name",
+        "es": "Nombre de la Tarjeta 10",
+        "fr": "Nom de la Carte 10",
+        "it": "Nome della Scheda 10",
+        "no": "Kort 10 Navn",
+        "sv": "Kort 10 Namn",
+        "pl": "Nazwa Karty 10",
+        "ru": "Имя Карты 10",
+        "ko": "카드 10 이름",
+        "ar": "بطاقة 10 الاسم"
+      },
       "getable": true,
       "setable": false,
       "insights": false,
       "uiComponent": null
-    },
-    "meter_power.session": {
-      "type": "number",
-      "title": {
-        "en": "Energy Last Session",
-        "nl": "Energie Laatste Sessie",
-        "da": "Energi sidste session",
-        "de": "Energie letzte Sitzung",
-        "es": "Energía de la Última Sesión",
-        "fr": "Énergie de la dernière session",
-        "it": "Energia Ultima Sessione",
-        "no": "Energi siste økt",
-        "sv": "Energi senaste sessionen",
-        "pl": "Energia ostatniej sesji",
-        "ru": "Энергия за последнюю сессию",
-        "ko": "마지막 세션 에너지",
-        "ar": "الطاقة في الجلسة الأخيرة"
-      },
-      "hint:": {
-        "en": "Energy (kWh) delivered during last session. Reset automatically when a car is connected.",
-        "nl": "Energie (kWh) geleverd tijdens de laatste sessie. Wordt automatisch gereset wanneer een auto wordt aangesloten.",
-        "da": "Energi (kWh) leveret under sidste session. Nulstilles automatisk, når en bil tilsluttes.",
-        "de": "Energie (kWh), die während der letzten Sitzung geliefert wurde. Wird automatisch zurückgesetzt, wenn ein Auto angeschlossen wird.",
-        "es": "Energía (kWh) entregada durante la última sesión. Se restablece automáticamente cuando se conecta un coche.",
-        "fr": "Énergie (kWh) délivrée lors de la dernière session. Réinitialisation automatique lorsqu'une voiture est connectée.",
-        "it": "Energia (kWh) erogata durante l'ultima sessione. Si azzera automaticamente quando un'auto è collegata.",
-        "no": "Energi (kWh) levert under siste økt. Nullstilles automatisk når en bil kobles til.",
-        "sv": "Energi (kWh) levererad under senaste sessionen. Återställs automatiskt när en bil ansluts.",
-        "pl": "Energia (kWh) dostarczona podczas ostatniej sesji. Resetuje się automatycznie po podłączeniu samochodu.",
-        "ru": "Энергия (кВтч), переданная за последнюю сессию. Сбрасывается автоматически при подключении автомобиля.",
-        "ko": "마지막 세션 동안 전달된 에너지(kWh). 자동차가 연결되면 자동으로 초기화됩니다.",
-        "ar": "الطاقة (كيلوواط ساعة) التي تم تسليمها خلال الجلسة الأخيرة. يتم إعادة التعيين تلقائيًا عند توصيل سيارة."
-      },
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "kWh",
-        "nl": "kWh",
-        "da": "kWh",
-        "de": "kWh",
-        "es": "kWh",
-        "fr": "kWh",
-        "it": "kWh",
-        "no": "kWh",
-        "sv": "kWh",
-        "pl": "kWh",
-        "ru": "кВтч",
-        "ko": "kWh",
-        "ar": "كيلوواط ساعة"
-      },
-      "insights": true
     },
     "measure_power.pakku": {
       "type": "number",

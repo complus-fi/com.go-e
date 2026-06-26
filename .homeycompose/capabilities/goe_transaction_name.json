@@ -1,19 +1,19 @@
 {
   "type": "string",
   "title": {
-    "en": "Transaction Name",
-    "nl": "Transactienaam",
-    "da": "Transaktionsnavn",
-    "de": "Transaktionsname",
-    "es": "Nombre de transacción",
-    "fr": "Nom de transaction",
-    "it": "Nome transazione",
-    "no": "Transaksjonsnavn",
-    "sv": "Transaktionsnamn",
-    "pl": "Nazwa transakcji",
-    "ru": "Имя транзакции",
-    "ko": "트랜잭션 이름",
-    "ar": "اسم المعاملة"
+    "en": "User Card Name",
+    "nl": "Gebruikerskaartnaam",
+    "da": "Brugerkortnavn",
+    "de": "Benutzerkartenname",
+    "es": "Nombre de la tarjeta de usuario",
+    "fr": "Nom de la carte utilisateur",
+    "it": "Nome della carta utente",
+    "no": "Brukerkortnavn",
+    "sv": "Användarkortnamn",
+    "pl": "Nazwa karty użytkownika",
+    "ru": "Имя пользовательской карты",
+    "ko": "사용자 카드 이름",
+    "ar": "اسم بطاقة المستخدم"
   },
   "hint": {
     "en": "The user card name for the current transaction.",
