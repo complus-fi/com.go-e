@@ -41,9 +41,81 @@
       "excludeMin": 0,
       "excludeMax": 1380
     },
-    "evcharger_charging": {
-      "uiComponent": "button",
-      "uiQuickAction": true
+    "evcharger_charging_state": {
+      "values": [
+        {
+          "id": "plugged_in_charging",
+          "title": {
+            "en": "Charging",
+            "nl": "Opladen",
+            "da": "Oplader",
+            "it": "In ricarica",
+            "ko": "충전 중",
+            "pl": "Ładowanie",
+            "ru": "Заряжается",
+            "sv": "Laddning\n",
+            "es": "Carga",
+            "fr": "Charge en cours",
+            "no": "Lader",
+            "de": "Wird aufgeladen",
+            "ar": "قيد الشحن"
+          }
+        },
+        {
+          "id": "plugged_in_paused",
+          "title": {
+            "en": "Paused",
+            "da": "På pause",
+            "it": "In pausa",
+            "ko": "일시 중지됨",
+            "nl": "Gepauzeerd",
+            "pl": "Wstrzymane",
+            "ru": "На паузе",
+            "sv": "Pausad\n",
+            "es": "En pausa",
+            "fr": "En pause",
+            "no": "Satt på pause",
+            "de": "Pausiert",
+            "ar": "متوقف مؤقتًا"
+          }
+        },
+        {
+          "id": "plugged_in",
+          "title": {
+            "en": "Plugged in",
+            "nl": "Aangesloten",
+            "da": "Tilsluttet",
+            "it": "Cavo collegato",
+            "ko": "충전구 연결됨",
+            "pl": "Podłączone do gniazdka",
+            "ru": "Подключено",
+            "sv": "Ansluten",
+            "es": "Enchufado",
+            "fr": "Branché",
+            "no": "Tilkoblet",
+            "de": "Eingesteckt",
+            "ar": "موصول"
+          }
+        },
+        {
+          "id": "plugged_out",
+          "title": {
+            "en": "Not plugged in",
+            "nl": "Niet aangesloten",
+            "da": "Ikke tilsluttet",
+            "it": "Cavo non collegato",
+            "ko": "충전구 연결되지 않음",
+            "pl": "Niepodłączone do gniazdka",
+            "ru": "Не подключено",
+            "sv": "Inte ansluten",
+            "es": "No enchufado",
+            "fr": "Non branché",
+            "no": "Ikke tilkoblet",
+            "de": "Nicht eingesteckt",
+            "ar": "غير موصول"
+          }
+        }
+      ]
     },
     "meter_power.session": {
       "type": "number",
