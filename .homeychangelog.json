@@ -16,5 +16,8 @@
   },
   "1.1.2": {
     "en": "Text and translation updates"
+  },
+  "1.2.0": {
+    "en": "Enhance User card picker UI, now displays the RFID card name. Enhanced power metering with max charging power."
   }
 }
