@@ -19,8 +19,46 @@ const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const AUTO_SPL3_THRESHOLD_W = 4140;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
-const GOE_TRANSACTION_IDS = new Set(Object.values(GOE_TRANSACTION));
 const GOE_NAME_TRIGGER_CAPABILITIES = new Set(['goe_transaction', 'goe_transaction_name']);
+
+const GOE_TRANSACTION_BASE_VALUES = [
+  {
+    id: GOE_TRANSACTION.NONE,
+    title: {
+      en: 'No authentication',
+      nl: 'Geen authenticatie',
+      da: 'Ingen godkendelse',
+      de: 'Keine Authentifizierung',
+      es: 'Sin autenticación',
+      fr: "Pas d'authentification",
+      it: 'Nessuna autenticazione',
+      no: 'Ingen autentisering',
+      sv: 'Ingen autentisering',
+      pl: 'Brak uwierzytelniania',
+      ru: 'Без аутентификации',
+      ko: '인증 없음',
+      ar: 'بدون مصادقة'
+    }
+  },
+  {
+    id: GOE_TRANSACTION.ANONYMOUS,
+    title: {
+      en: 'Anonymous',
+      nl: 'Anoniem',
+      da: 'Anonym',
+      de: 'Anonym',
+      es: 'Anónimo',
+      fr: 'Anonyme',
+      it: 'Anonimo',
+      no: 'Anonym',
+      sv: 'Anonym',
+      pl: 'Anonimowa',
+      ru: 'Анонимно',
+      ko: '익명',
+      ar: 'مجهول'
+    }
+  }
+];
 
 class evChargerDevice extends Homey.Device {
   getClockTimezone() {
@@ -191,6 +229,8 @@ class evChargerDevice extends Homey.Device {
     });
 
     this.cardConfiguredFlags = Array(10).fill(undefined);
+    this.transactionSlotById = {};
+    this.lastTransactionValuesSignature = null;
     this.api.apiKeys = getStatusAttributes(this.getCapabilities(), {
       firmwareVersion: this.getSettings().version,
       cardConfiguredFlags: this.cardConfiguredFlags
@@ -200,6 +240,105 @@ class evChargerDevice extends Homey.Device {
     this.transactionStartTimestamp = null;
     this.pollIntervalMs = null;
     this.registerCapabilityListeners();
+  }
+
+  getConfiguredTransactionId(status, statusIndex) {
+    const configured = this.isCardConfigured(status[`c${statusIndex}i`]);
+    if (!configured) return null;
+
+    const rawName = status[`c${statusIndex}n`];
+    if (typeof rawName === 'string') {
+      const normalized = rawName.trim();
+      if (normalized && normalized.toLowerCase() !== 'n/a') {
+        return normalized;
+      }
+    }
+
+    // Keep a stable fallback ID if charger name is empty.
+    return `card_${statusIndex + 1}`;
+  }
+
+  getConfiguredTransactionEntries(status = {}) {
+    const entries = [];
+    const usedIds = new Set(GOE_TRANSACTION_BASE_VALUES.map((entry) => entry.id));
+
+    for (let statusIndex = 0; statusIndex < 10; statusIndex += 1) {
+      const baseId = this.getConfiguredTransactionId(status, statusIndex);
+      if (!baseId) continue;
+
+      let dedupIndex = 1;
+      let id = baseId;
+      while (usedIds.has(id)) {
+        dedupIndex += 1;
+        id = `${baseId}_${dedupIndex}`;
+      }
+
+      usedIds.add(id);
+      entries.push({
+        slot: statusIndex + 1,
+        id,
+        title: `Card: ${baseId}`
+      });
+    }
+
+    return entries;
+  }
+
+  getDynamicTransactionValues(status = {}) {
+    const values = [...GOE_TRANSACTION_BASE_VALUES];
+
+    for (const entry of this.getConfiguredTransactionEntries(status)) {
+      values.push({
+        id: entry.id,
+        title: {
+          en: entry.title
+        }
+      });
+    }
+
+    return values;
+  }
+
+  refreshTransactionSlotLookup(status = {}) {
+    const lookup = {};
+    for (const entry of this.getConfiguredTransactionEntries(status)) {
+      lookup[entry.id] = entry.slot;
+    }
+
+    this.transactionSlotById = lookup;
+  }
+
+  getDynamicTransactionCapabilityValue(status = {}) {
+    const trx = status.trx;
+
+    if (trx === null || trx === undefined || trx === '') {
+      return GOE_TRANSACTION.NONE;
+    }
+
+    const parsed = Number(trx);
+    if (!Number.isInteger(parsed) || parsed < 0 || parsed > 10) {
+      return GOE_TRANSACTION.NONE;
+    }
+
+    if (parsed === 0) {
+      return GOE_TRANSACTION.ANONYMOUS;
+    }
+
+    const dynamicEntry = this.getConfiguredTransactionEntries(status).find((entry) => entry.slot === parsed);
+    return dynamicEntry?.id || `card_${parsed}`;
+  }
+
+  async syncDynamicTransactionOptions(status = {}) {
+    if (!this.hasCapability('goe_transaction')) return;
+
+    this.refreshTransactionSlotLookup(status);
+
+    const values = this.getDynamicTransactionValues(status);
+    const signature = JSON.stringify(values);
+    if (signature === this.lastTransactionValuesSignature) return;
+
+    await this.setCapabilityOptions('goe_transaction', { values });
+    this.lastTransactionValuesSignature = signature;
   }
 
   setPendingChargingState(value) {
@@ -502,6 +641,7 @@ class evChargerDevice extends Homey.Device {
       this.lastStatus = status;
 
       await this.syncDynamicCardCapabilities(status);
+      await this.syncDynamicTransactionOptions(status);
 
       if (this.pollErrorMessage) {
         this.pollErrorMessage = null;
@@ -522,6 +662,9 @@ class evChargerDevice extends Homey.Device {
       }
 
       const nextValues = mapStatusToCapabilities(status, this.getCapabilities(), this.api);
+      if (this.hasCapability('goe_transaction')) {
+        nextValues.goe_transaction = this.getDynamicTransactionCapabilityValue(status);
+      }
 
       if (this.hasCapability('goe_pv_surplus_enabled') && status.fup !== undefined) {
         nextValues.goe_pv_surplus_enabled = Boolean(status.fup);
@@ -633,16 +776,23 @@ class evChargerDevice extends Homey.Device {
 
   async onCapability_SET_TRANSACTION(transaction) {
     const normalizedTransaction = typeof transaction === 'string' ? transaction.trim() : '';
-    if (!GOE_TRANSACTION_IDS.has(normalizedTransaction)) {
-      throw new Error(`Unsupported transaction: ${transaction}`);
+
+    this.apiValue = null;
+    if (normalizedTransaction === GOE_TRANSACTION.ANONYMOUS) {
+      this.apiValue = 0;
+    } else if (normalizedTransaction === GOE_TRANSACTION.NONE) {
+      this.apiValue = null;
+    } else if (Number.isInteger(this.transactionSlotById[normalizedTransaction])) {
+      this.apiValue = this.transactionSlotById[normalizedTransaction];
+    } else {
+      this.apiValue = getTransactionApiValue(normalizedTransaction);
     }
 
-    const apiValue = getTransactionApiValue(normalizedTransaction);
-    if (apiValue === null) {
+    if (this.apiValue === null) {
       throw new Error(`Unsupported writable transaction: ${transaction}`);
     }
 
-    await this.applyApiValues({ trx: apiValue });
+    await this.applyApiValues({ trx: this.apiValue });
   }
 
   applyMeterPowerNameForSession(status, nextValues) {
