@@ -37,7 +37,7 @@ Primary sources:
 | measure_power.prev_max      | Local read   | n/a                  | Captures final measure_power.max on unplug transition               | Persists previous session max power until next unplug transition                                     |
 | goe_charger_mode            | Read + write | lmo, fup, awe        | Maps go-e charger mode combinations to enum values                  | Primary charger mode capability                                                                      |
 | goe_pv_surplus_enabled      | Read + write | fup                  | Read mirrors `fup`; write true sets automatic PV parameters         | Write true sets `lmo=4`, `fup=true`, `awe=false`; write false sets `lmo=3`, `fup=false`, `awe=false` |
-| goe_transaction             | Read + write | trx, c0n..c9i        | Read maps `trx` to `card_none`/`card_0..10`; names use RFID keys    | Writing `card_none` follows legacy behavior and falls back to anonymous transaction `trx=0`          |
+| goe_transaction             | Read + write | trx, c0n..c9i        | Read maps `trx` to `anonymous`/`card_1..10`; names use RFID keys    | Writing supports `anonymous` and `card_1..10`; `no_auth` is read-only                                |
 | goe_measure_phase_switching | Read         | psm                  | Enum capability for automatic / 1-phase / 3-phase status            | Capability ids are stringified `0`, `1`, `2`                                                         |
 | goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code         | Capability id is the stringified status code                                                         |
 | measure_power.pakku         | Read         | pakku                | Reads charger PV optimization average battery power                 | Rounded to 2 decimals                                                                                |
@@ -82,7 +82,7 @@ Additional mode/power mappings:
 - If charging is turned on and `goe_charger_mode` is `basic_charging`, command flow sends `frc=2` (homey).
 - Inverter/grid/battery telemetry can be sent via the `set_pv_surplus_info` flow action, which calls `onCapability_SET_PV_SURPLUS_INFO` and writes the `ids` payload only when `goe_pv_surplus_enabled` is true.
 - The `set_charger_mode` flow action writes `goe_charger_mode`; `is_charger_mode` checks the current enum value.
-- The `set_transaction` flow action writes `goe_transaction`; device-side validation accepts `card_none` and `card_0..10`, with `card_none` mapped to anonymous transaction `trx=0`.
+- The `set_transaction` flow action writes `goe_transaction`; device-side validation accepts enum IDs, but writable values are `anonymous` and `card_1..10`; `no_auth` is read-only and not written to charger.
 - `goe_transaction` requests the 60.0 RFID card key groups `c0n..c9n`, `c0e..c9e`, and `c0i..c9i` so transaction card names can be derived from charger status.
 - `goe_transaction_name` and `goe_meter_power_name` both derive the active RFID card name from the 60.0 RFID key groups.
 - The `goe_charger_mode_changed` trigger uses Homey's custom capability changed trigger for enum capabilities and exposes the current mode token.

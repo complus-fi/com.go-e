@@ -32,7 +32,7 @@
   },
   "values": [
     {
-      "id": "card_none",
+      "id": "no_auth",
       "title": {
         "en": "No authentication",
         "nl": "Geen authenticatie",
@@ -50,7 +50,7 @@
       }
     },
     {
-      "id": "card_0",
+      "id": "anonymous",
       "title": {
         "en": "Anonymous",
         "nl": "Anoniem",

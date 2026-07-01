@@ -637,7 +637,12 @@ class evChargerDevice extends Homey.Device {
       throw new Error(`Unsupported transaction: ${transaction}`);
     }
 
-    await this.applyApiValues({ trx: getTransactionApiValue(normalizedTransaction) });
+    const apiValue = getTransactionApiValue(normalizedTransaction);
+    if (apiValue === null) {
+      throw new Error(`Unsupported writable transaction: ${transaction}`);
+    }
+
+    await this.applyApiValues({ trx: apiValue });
   }
 
   applyMeterPowerNameForSession(status, nextValues) {
