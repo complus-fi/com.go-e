@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Flexible Price Limit"
+  },
+  "uiComponent": "sensor",
+  "icon": "/assets/goe_flexible_rate.svg",
+  "getable": true,
+  "setable": true,
+  "insights": true,
+  "units": {
+    "en": "€"
+  },
+  "decimals": 3
+}

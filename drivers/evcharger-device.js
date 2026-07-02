@@ -553,10 +553,10 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction', 'target_power'],
-      async ({ evcharger_charging, goe_charger_mode, goe_transaction, target_power }) => {
+      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction', 'target_power', 'goe_flexible_rate_limit'],
+      async ({ evcharger_charging, goe_charger_mode, goe_transaction, target_power, goe_flexible_rate_limit }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_charger_mode, goe_transaction, target_power });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_charger_mode, goe_transaction, target_power, goe_flexible_rate_limit });
 
           const context = {
             api: this.api,
@@ -579,6 +579,11 @@ class evChargerDevice extends Homey.Device {
 
           if (target_power !== undefined) {
             const apiValues = mapHomeyToApiValues({ target_power }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+            await this.applyApiValues(apiValues);
+          }
+
+          if (goe_flexible_rate_limit !== undefined) {
+            const apiValues = mapHomeyToApiValues({ goe_flexible_rate_limit }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
             await this.applyApiValues(apiValues);
           }
 

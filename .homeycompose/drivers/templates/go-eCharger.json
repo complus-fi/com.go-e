@@ -26,6 +26,8 @@
     "goe_transaction_start",
     "goe_transaction_end",
     "goe_transaction_duration",
+    "goe_flexible_rate",
+    "goe_flexible_rate_limit",
     "evcharger_charging_state",
     "goe_measure_modelStatus",
     "goe_measure_phase_switching",
