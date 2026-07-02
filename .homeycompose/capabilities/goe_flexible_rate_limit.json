@@ -1,7 +1,19 @@
 {
   "type": "number",
   "title": {
-    "en": "Flexible Price Limit"
+    "en": "Flexible Price Limit",
+    "nl": "Flexibele Prijslimiet",
+    "da": "Fleksibel prisgrænse",
+    "de": "Flexibles Preislimit",
+    "es": "Límite de Precio Flexible",
+    "fr": "Limite de Prix Flexible",
+    "it": "Limite di Prezzo Flessibile",
+    "no": "Fleksibel prisgrense",
+    "sv": "Flexibelt prisgräns",
+    "pl": "Elastyczny limit cenowy",
+    "ru": "Гибкий лимит цены",
+    "ko": "유연한 가격 한도",
+    "ar": "حد السعر المرن"
   },
   "uiComponent": "sensor",
   "icon": "/assets/goe_flexible_rate.svg",
@@ -9,7 +21,19 @@
   "setable": true,
   "insights": true,
   "units": {
-    "en": ""
+    "en": "",
+    "nl": "",
+    "da": "",
+    "de": "",
+    "es": "",
+    "fr": "",
+    "it": "",
+    "no": "",
+    "sv": "",
+    "pl": "",
+    "ru": "",
+    "ko": "",
+    "ar": ""
   },
   "decimals": 3
 }

@@ -1,19 +1,67 @@
 {
   "title": {
-    "en": "Set Flexible Price Limit"
+    "en": "Set Flexible Price Limit",
+    "nl": "Stel Flexibele Prijslimiet In",
+    "da": "Indstil fleksibel prisgrænse",
+    "de": "Flexibles Preislimit festlegen",
+    "es": "Establecer Límite de Precio Flexible",
+    "fr": "Définir une Limite de Prix Flexible",
+    "it": "Imposta Limite di Prezzo Flessibile",
+    "no": "Sett fleksibel prisgrense",
+    "sv": "Ange Flexibelt Prisgräns",
+    "pl": "Ustaw elastyczny limit cenowy",
+    "ru": "Установить гибкий лимит цены",
+    "ko": "유연한 가격 한도 설정",
+    "ar": "تعيين حد سعر مرن"
   },
   "titleFormatted": {
-    "en": "Set flexible price limit to [[rate]]"
+    "en": "Set flexible price limit to [[rate]]",
+    "nl": "Stel flexibele prijsgrens in op [[rate]]",
+    "da": "Indstil fleksibel prisgrænse til [[rate]]",
+    "de": "Flexibles Preislimit auf [[rate]] festlegen",
+    "es": "Establecer límite de precio flexible a [[rate]]",
+    "fr": "Définir une limite de prix flexible à [[rate]]",
+    "it": "Imposta un limite di prezzo flessibile a [[rate]]",
+    "no": "Sett fleksibel prisgrense til [[rate]]",
+    "sv": "Ställ in flexibel prisgräns till [[rate]]",
+    "pl": "Ustaw elastyczny limit ceny na [[rate]]",
+    "ru": "Установите гибкий лимит цены на [[rate]]",
+    "ko": "유연한 가격 한도를 [[rate]]로 설정하세요.",
+    "ar": "حدد حد السعر المرن إلى [[rate]]"
   },
   "hint": {
-    "en": "Sets the EV charger flexible charging maximum price."
+    "en": "Sets the EV charger flexible charging maximum price.",
+    "nl": "Stelt de flexibele laadprijs van de EV-lader in op het maximum.",
+    "da": "Indstiller den fleksible opladningsmaksimumpris for EV-laderen.",
+    "de": "Legt den maximalen Preis für flexibles Laden des EV-Ladegeräts fest.",
+    "es": "Establece el precio máximo de carga flexible del cargador de EV.",
+    "fr": "Définit le prix maximum de charge flexible pour le chargeur de VE.",
+    "it": "Imposta il prezzo massimo di ricarica flessibile per il caricatore EV.",
+    "no": "Setter maksimalpris for fleksibel lading på EV-laderen.",
+    "sv": "Ställer in det flexibla laddningspriset för elbilsladdaren.",
+    "pl": "Ustawia maksymalną cenę elastycznego ładowania ładowarki EV.",
+    "ru": "Устанавливает максимальную цену гибкой зарядки для зарядного устройства электромобиля.",
+    "ko": "EV 충전기의 유연한 충전 최대 가격을 설정합니다.",
+    "ar": "يضبط الحد الأقصى لسعر الشحن المرن لشاحن السيارة الكهربائية."
   },
   "args": [
     {
       "name": "rate",
       "type": "number",
       "title": {
-        "en": "Rate"
+        "en": "Rate",
+        "nl": "Beoordeel",
+        "da": "Bedøm",
+        "de": "Bewerten",
+        "es": "Tarifa",
+        "fr": "Taux",
+        "it": "Valuta",
+        "no": "Vurdering",
+        "sv": "Betygsätt",
+        "pl": "Oceń",
+        "ru": "Оценка",
+        "ko": "평가",
+        "ar": "تقييم"
       }
     },
     {
