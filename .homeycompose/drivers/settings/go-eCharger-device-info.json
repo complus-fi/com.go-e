@@ -2,19 +2,19 @@
   "id": "device_info",
   "type": "group",
   "label": {
-    "en": "Discovered device information.",
-    "nl": "Ontdekte apparaatinformatie.",
-    "da": "Opdaget enhedsinformation.",
-    "de": "Entdeckte Geräteinformationen.",
-    "es": "Información del dispositivo descubierto.",
-    "fr": "Informations sur l'appareil découvert.",
-    "it": "Informazioni sul dispositivo rilevato.",
-    "no": "Oppdaget enhetsinformasjon.",
-    "sv": "Upptäckt enhetsinformation.",
-    "pl": "Odkryto informacje o urządzeniu.",
-    "ru": "Обнаружена информация об устройстве.",
-    "ko": "발견된 장치 정보.",
-    "ar": "تم اكتشاف معلومات الجهاز."
+    "en": "Discovered device information",
+    "nl": "Ontdekte apparaatinformatie",
+    "da": "Opdaget enhedsinformation",
+    "de": "Entdeckte Geräteinformationen",
+    "es": "Información del dispositivo descubierto",
+    "fr": "Informations sur l'appareil découvert",
+    "it": "Informazioni sul dispositivo rilevato",
+    "no": "Oppdaget enhetsinformasjon",
+    "sv": "Upptäckt enhetsinformation",
+    "pl": "Odkryto informacje o urządzeniu",
+    "ru": "Обнаружена информация об устройстве",
+    "ko": "발견된 장치 정보",
+    "ar": "تم اكتشاف معلومات الجهاز"
   },
   "children": [
     {

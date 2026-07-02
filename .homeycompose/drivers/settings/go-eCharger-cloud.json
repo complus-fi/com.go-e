@@ -2,19 +2,19 @@
   "id": "cloud_info",
   "type": "group",
   "label": {
-    "en": "Cloud API login credentials.",
-    "nl": "Cloud API-inloggegevens.",
-    "da": "Cloud API-loginoplysninger.",
-    "de": "Cloud API-Anmeldeinformationen.",
-    "es": "Credenciales de inicio de sesión de la API de la nube.",
-    "fr": "Identifiants de connexion à l'API cloud.",
-    "it": "Credenziali di accesso all'API cloud.",
-    "no": "Cloud API-påloggingsinformasjon.",
-    "sv": "Cloud API-inloggningsuppgifter.",
-    "pl": "Dane logowania do API chmury.",
-    "ru": "Учетные данные для входа в облачный API.",
-    "ko": "Cloud API 로그인 자격 증명.",
-    "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
+    "en": "Cloud API login credentials",
+    "nl": "Cloud API-inloggegevens",
+    "da": "Cloud API-loginoplysninger",
+    "de": "Cloud API-Anmeldeinformationen",
+    "es": "Credenciales de inicio de sesión de la API de la nube",
+    "fr": "Identifiants de connexion à l'API cloud",
+    "it": "Credenziali di accesso all'API cloud",
+    "no": "Cloud API-påloggingsinformasjon",
+    "sv": "Cloud API-inloggningsuppgifter",
+    "pl": "Dane logowania do API chmury",
+    "ru": "Учетные данные для входа в облачный API",
+    "ko": "Cloud API 로그인 자격 증명",
+    "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة"
   },
   "children": [
     {

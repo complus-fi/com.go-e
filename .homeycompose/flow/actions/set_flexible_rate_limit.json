@@ -1,0 +1,25 @@
+{
+  "title": {
+    "en": "Set Flexible Price Limit"
+  },
+  "titleFormatted": {
+    "en": "Set flexible price limit to [[rate]]"
+  },
+  "hint": {
+    "en": "Sets the EV charger flexible charging maximum price."
+  },
+  "args": [
+    {
+      "name": "rate",
+      "type": "number",
+      "title": {
+        "en": "Rate"
+      }
+    },
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
+    }
+  ]
+}

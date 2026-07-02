@@ -3,6 +3,9 @@
     "$extends": "go-eCharger-local"
   },
   {
+    "$extends": "go-eCharger-options"
+  },
+  {
     "$extends": "go-eCharger-device-info"
   }
 ]

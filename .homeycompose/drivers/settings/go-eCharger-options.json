@@ -1,0 +1,32 @@
+{
+  "id": "options",
+  "type": "group",
+  "label": {
+    "en": "Configuration options",
+    "nl": "Configuratieopties",
+    "da": "Konfigurationsmuligheder",
+    "de": "Konfigurationsoptionen",
+    "es": "Opciones de configuración",
+    "fr": "Options de configuration",
+    "it": "Opzioni di configurazione",
+    "no": "Konfigurasjonsalternativer",
+    "sv": "Konfigurationsalternativ",
+    "pl": "Opcje konfiguracji",
+    "ru": "Параметры конфигурации",
+    "ko": "구성 옵션",
+    "ar": "خيارات التكوين"
+  },
+  "children": [
+    {
+      "id": "currency",
+      "type": "text",
+      "label": {
+        "en": "Currency"
+      },
+      "value": "€",
+      "hint": {
+        "en": "Currency for displaying prices."
+      }
+    }
+  ]
+}

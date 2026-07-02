@@ -583,8 +583,7 @@ class evChargerDevice extends Homey.Device {
           }
 
           if (goe_flexible_rate_limit !== undefined) {
-            const apiValues = mapHomeyToApiValues({ goe_flexible_rate_limit }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
-            await this.applyApiValues(apiValues);
+            await this.onCapability_SET_FLEXIBLE_RATE_LIMIT(goe_flexible_rate_limit);
           }
 
           if (evcharger_charging === false) {
@@ -798,6 +797,25 @@ class evChargerDevice extends Homey.Device {
     }
 
     await this.applyApiValues({ trx: this.apiValue });
+  }
+
+  async onCapability_SET_FLEXIBLE_RATE_LIMIT(rate) {
+    const parsedRate = Number(rate);
+    if (!Number.isFinite(parsedRate) || parsedRate < 0) {
+      throw new Error('Flexible rate limit must be a non-negative number');
+    }
+
+    const context = {
+      api: this.api,
+      maxAmps: this.maxAmps,
+      firmwareVersion: this.getSettings().version,
+      status: this.lastStatus,
+      spl3Threshold: AUTO_SPL3_THRESHOLD_W,
+      targetPower: this.getCapabilityValue('target_power')
+    };
+
+    const apiValues = mapHomeyToApiValues({ goe_flexible_rate_limit: parsedRate }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+    await this.applyApiValues(apiValues);
   }
 
   applyMeterPowerNameForSession(status, nextValues) {

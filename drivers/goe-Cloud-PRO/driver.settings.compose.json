@@ -3,6 +3,9 @@
     "$extends": "go-eCharger-cloud"
   },
   {
+    "$extends": "go-eCharger-options"
+  },
+  {
     "$extends": "go-eCharger-device-info"
   }
 ]
