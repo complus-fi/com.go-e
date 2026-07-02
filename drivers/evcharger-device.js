@@ -378,6 +378,7 @@ class evChargerDevice extends Homey.Device {
    */
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} settings where changed: ${changedKeys}`);
+
     const newAddress = typeof newSettings.address === 'string' ? newSettings.address.trim() : '';
     const oldAddress = typeof oldSettings.address === 'string' ? oldSettings.address.trim() : '';
 

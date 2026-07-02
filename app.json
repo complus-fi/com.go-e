@@ -692,6 +692,32 @@
       },
       {
         "title": {
+          "en": "Set Flexible Price Limit"
+        },
+        "titleFormatted": {
+          "en": "Set flexible price limit to [[rate]]"
+        },
+        "hint": {
+          "en": "Sets the EV charger flexible charging maximum price."
+        },
+        "args": [
+          {
+            "name": "rate",
+            "type": "number",
+            "title": {
+              "en": "Rate"
+            }
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
+          }
+        ],
+        "id": "set_flexible_rate_limit"
+      },
+      {
+        "title": {
           "en": "Set PV surplus information",
           "nl": "Stel PV-overschot informatie in",
           "da": "Indstil PV-overskudsoplysninger",
@@ -1109,6 +1135,8 @@
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
+        "goe_flexible_rate",
+        "goe_flexible_rate_limit",
         "evcharger_charging_state",
         "goe_measure_modelStatus",
         "goe_measure_phase_switching",
@@ -2333,22 +2361,54 @@
           "highlight": true
         },
         {
+          "id": "options",
+          "type": "group",
+          "label": {
+            "en": "Configuration options",
+            "nl": "Configuratieopties",
+            "da": "Konfigurationsmuligheder",
+            "de": "Konfigurationsoptionen",
+            "es": "Opciones de configuración",
+            "fr": "Options de configuration",
+            "it": "Opzioni di configurazione",
+            "no": "Konfigurasjonsalternativer",
+            "sv": "Konfigurationsalternativ",
+            "pl": "Opcje konfiguracji",
+            "ru": "Параметры конфигурации",
+            "ko": "구성 옵션",
+            "ar": "خيارات التكوين"
+          },
+          "children": [
+            {
+              "id": "currency",
+              "type": "text",
+              "label": {
+                "en": "Currency"
+              },
+              "value": "€",
+              "hint": {
+                "en": "Currency for displaying prices."
+              }
+            }
+          ]
+        },
+        {
           "id": "device_info",
           "type": "group",
           "label": {
-            "en": "Discovered device information.",
-            "nl": "Ontdekte apparaatinformatie.",
-            "da": "Opdaget enhedsinformation.",
-            "de": "Entdeckte Geräteinformationen.",
-            "es": "Información del dispositivo descubierto.",
-            "fr": "Informations sur l'appareil découvert.",
-            "it": "Informazioni sul dispositivo rilevato.",
-            "no": "Oppdaget enhetsinformasjon.",
-            "sv": "Upptäckt enhetsinformation.",
-            "pl": "Odkryto informacje o urządzeniu.",
-            "ru": "Обнаружена информация об устройстве.",
-            "ko": "발견된 장치 정보.",
-            "ar": "تم اكتشاف معلومات الجهاز."
+            "en": "Discovered device information",
+            "nl": "Ontdekte apparaatinformatie",
+            "da": "Opdaget enhedsinformation",
+            "de": "Entdeckte Geräteinformationen",
+            "es": "Información del dispositivo descubierto",
+            "fr": "Informations sur l'appareil découvert",
+            "it": "Informazioni sul dispositivo rilevato",
+            "no": "Oppdaget enhetsinformasjon",
+            "sv": "Upptäckt enhetsinformation",
+            "pl": "Odkryto informacje o urządzeniu",
+            "ru": "Обнаружена информация об устройстве",
+            "ko": "발견된 장치 정보",
+            "ar": "تم اكتشاف معلومات الجهاز"
           },
           "children": [
             {
@@ -2453,6 +2513,8 @@
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
+        "goe_flexible_rate",
+        "goe_flexible_rate_limit",
         "evcharger_charging_state",
         "goe_measure_modelStatus",
         "goe_measure_phase_switching",
@@ -3677,22 +3739,54 @@
           "highlight": true
         },
         {
+          "id": "options",
+          "type": "group",
+          "label": {
+            "en": "Configuration options",
+            "nl": "Configuratieopties",
+            "da": "Konfigurationsmuligheder",
+            "de": "Konfigurationsoptionen",
+            "es": "Opciones de configuración",
+            "fr": "Options de configuration",
+            "it": "Opzioni di configurazione",
+            "no": "Konfigurasjonsalternativer",
+            "sv": "Konfigurationsalternativ",
+            "pl": "Opcje konfiguracji",
+            "ru": "Параметры конфигурации",
+            "ko": "구성 옵션",
+            "ar": "خيارات التكوين"
+          },
+          "children": [
+            {
+              "id": "currency",
+              "type": "text",
+              "label": {
+                "en": "Currency"
+              },
+              "value": "€",
+              "hint": {
+                "en": "Currency for displaying prices."
+              }
+            }
+          ]
+        },
+        {
           "id": "device_info",
           "type": "group",
           "label": {
-            "en": "Discovered device information.",
-            "nl": "Ontdekte apparaatinformatie.",
-            "da": "Opdaget enhedsinformation.",
-            "de": "Entdeckte Geräteinformationen.",
-            "es": "Información del dispositivo descubierto.",
-            "fr": "Informations sur l'appareil découvert.",
-            "it": "Informazioni sul dispositivo rilevato.",
-            "no": "Oppdaget enhetsinformasjon.",
-            "sv": "Upptäckt enhetsinformation.",
-            "pl": "Odkryto informacje o urządzeniu.",
-            "ru": "Обнаружена информация об устройстве.",
-            "ko": "발견된 장치 정보.",
-            "ar": "تم اكتشاف معلومات الجهاز."
+            "en": "Discovered device information",
+            "nl": "Ontdekte apparaatinformatie",
+            "da": "Opdaget enhedsinformation",
+            "de": "Entdeckte Geräteinformationen",
+            "es": "Información del dispositivo descubierto",
+            "fr": "Informations sur l'appareil découvert",
+            "it": "Informazioni sul dispositivo rilevato",
+            "no": "Oppdaget enhetsinformasjon",
+            "sv": "Upptäckt enhetsinformation",
+            "pl": "Odkryto informacje o urządzeniu",
+            "ru": "Обнаружена информация об устройстве",
+            "ko": "발견된 장치 정보",
+            "ar": "تم اكتشاف معلومات الجهاز"
           },
           "children": [
             {
@@ -3797,6 +3891,8 @@
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
+        "goe_flexible_rate",
+        "goe_flexible_rate_limit",
         "evcharger_charging_state",
         "goe_measure_modelStatus",
         "goe_measure_phase_switching",
@@ -5021,22 +5117,54 @@
           "highlight": true
         },
         {
+          "id": "options",
+          "type": "group",
+          "label": {
+            "en": "Configuration options",
+            "nl": "Configuratieopties",
+            "da": "Konfigurationsmuligheder",
+            "de": "Konfigurationsoptionen",
+            "es": "Opciones de configuración",
+            "fr": "Options de configuration",
+            "it": "Opzioni di configurazione",
+            "no": "Konfigurasjonsalternativer",
+            "sv": "Konfigurationsalternativ",
+            "pl": "Opcje konfiguracji",
+            "ru": "Параметры конфигурации",
+            "ko": "구성 옵션",
+            "ar": "خيارات التكوين"
+          },
+          "children": [
+            {
+              "id": "currency",
+              "type": "text",
+              "label": {
+                "en": "Currency"
+              },
+              "value": "€",
+              "hint": {
+                "en": "Currency for displaying prices."
+              }
+            }
+          ]
+        },
+        {
           "id": "device_info",
           "type": "group",
           "label": {
-            "en": "Discovered device information.",
-            "nl": "Ontdekte apparaatinformatie.",
-            "da": "Opdaget enhedsinformation.",
-            "de": "Entdeckte Geräteinformationen.",
-            "es": "Información del dispositivo descubierto.",
-            "fr": "Informations sur l'appareil découvert.",
-            "it": "Informazioni sul dispositivo rilevato.",
-            "no": "Oppdaget enhetsinformasjon.",
-            "sv": "Upptäckt enhetsinformation.",
-            "pl": "Odkryto informacje o urządzeniu.",
-            "ru": "Обнаружена информация об устройстве.",
-            "ko": "발견된 장치 정보.",
-            "ar": "تم اكتشاف معلومات الجهاز."
+            "en": "Discovered device information",
+            "nl": "Ontdekte apparaatinformatie",
+            "da": "Opdaget enhedsinformation",
+            "de": "Entdeckte Geräteinformationen",
+            "es": "Información del dispositivo descubierto",
+            "fr": "Informations sur l'appareil découvert",
+            "it": "Informazioni sul dispositivo rilevato",
+            "no": "Oppdaget enhetsinformasjon",
+            "sv": "Upptäckt enhetsinformation",
+            "pl": "Odkryto informacje o urządzeniu",
+            "ru": "Обнаружена информация об устройстве",
+            "ko": "발견된 장치 정보",
+            "ar": "تم اكتشاف معلومات الجهاز"
           },
           "children": [
             {
@@ -5141,6 +5269,8 @@
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
+        "goe_flexible_rate",
+        "goe_flexible_rate_limit",
         "evcharger_charging_state",
         "goe_measure_modelStatus",
         "goe_measure_phase_switching",
@@ -6365,22 +6495,54 @@
           "highlight": true
         },
         {
+          "id": "options",
+          "type": "group",
+          "label": {
+            "en": "Configuration options",
+            "nl": "Configuratieopties",
+            "da": "Konfigurationsmuligheder",
+            "de": "Konfigurationsoptionen",
+            "es": "Opciones de configuración",
+            "fr": "Options de configuration",
+            "it": "Opzioni di configurazione",
+            "no": "Konfigurasjonsalternativer",
+            "sv": "Konfigurationsalternativ",
+            "pl": "Opcje konfiguracji",
+            "ru": "Параметры конфигурации",
+            "ko": "구성 옵션",
+            "ar": "خيارات التكوين"
+          },
+          "children": [
+            {
+              "id": "currency",
+              "type": "text",
+              "label": {
+                "en": "Currency"
+              },
+              "value": "€",
+              "hint": {
+                "en": "Currency for displaying prices."
+              }
+            }
+          ]
+        },
+        {
           "id": "device_info",
           "type": "group",
           "label": {
-            "en": "Discovered device information.",
-            "nl": "Ontdekte apparaatinformatie.",
-            "da": "Opdaget enhedsinformation.",
-            "de": "Entdeckte Geräteinformationen.",
-            "es": "Información del dispositivo descubierto.",
-            "fr": "Informations sur l'appareil découvert.",
-            "it": "Informazioni sul dispositivo rilevato.",
-            "no": "Oppdaget enhetsinformasjon.",
-            "sv": "Upptäckt enhetsinformation.",
-            "pl": "Odkryto informacje o urządzeniu.",
-            "ru": "Обнаружена информация об устройстве.",
-            "ko": "발견된 장치 정보.",
-            "ar": "تم اكتشاف معلومات الجهاز."
+            "en": "Discovered device information",
+            "nl": "Ontdekte apparaatinformatie",
+            "da": "Opdaget enhedsinformation",
+            "de": "Entdeckte Geräteinformationen",
+            "es": "Información del dispositivo descubierto",
+            "fr": "Informations sur l'appareil découvert",
+            "it": "Informazioni sul dispositivo rilevato",
+            "no": "Oppdaget enhetsinformasjon",
+            "sv": "Upptäckt enhetsinformation",
+            "pl": "Odkryto informacje o urządzeniu",
+            "ru": "Обнаружена информация об устройстве",
+            "ko": "발견된 장치 정보",
+            "ar": "تم اكتشاف معلومات الجهاز"
           },
           "children": [
             {
@@ -6485,6 +6647,8 @@
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
+        "goe_flexible_rate",
+        "goe_flexible_rate_limit",
         "evcharger_charging_state",
         "goe_measure_modelStatus",
         "goe_measure_phase_switching",
@@ -7761,19 +7925,19 @@
           "id": "cloud_info",
           "type": "group",
           "label": {
-            "en": "Cloud API login credentials.",
-            "nl": "Cloud API-inloggegevens.",
-            "da": "Cloud API-loginoplysninger.",
-            "de": "Cloud API-Anmeldeinformationen.",
-            "es": "Credenciales de inicio de sesión de la API de la nube.",
-            "fr": "Identifiants de connexion à l'API cloud.",
-            "it": "Credenziali di accesso all'API cloud.",
-            "no": "Cloud API-påloggingsinformasjon.",
-            "sv": "Cloud API-inloggningsuppgifter.",
-            "pl": "Dane logowania do API chmury.",
-            "ru": "Учетные данные для входа в облачный API.",
-            "ko": "Cloud API 로그인 자격 증명.",
-            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
+            "en": "Cloud API login credentials",
+            "nl": "Cloud API-inloggegevens",
+            "da": "Cloud API-loginoplysninger",
+            "de": "Cloud API-Anmeldeinformationen",
+            "es": "Credenciales de inicio de sesión de la API de la nube",
+            "fr": "Identifiants de connexion à l'API cloud",
+            "it": "Credenziali di accesso all'API cloud",
+            "no": "Cloud API-påloggingsinformasjon",
+            "sv": "Cloud API-inloggningsuppgifter",
+            "pl": "Dane logowania do API chmury",
+            "ru": "Учетные данные для входа в облачный API",
+            "ko": "Cloud API 로그인 자격 증명",
+            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة"
           },
           "children": [
             {
@@ -7851,22 +8015,54 @@
           ]
         },
         {
+          "id": "options",
+          "type": "group",
+          "label": {
+            "en": "Configuration options",
+            "nl": "Configuratieopties",
+            "da": "Konfigurationsmuligheder",
+            "de": "Konfigurationsoptionen",
+            "es": "Opciones de configuración",
+            "fr": "Options de configuration",
+            "it": "Opzioni di configurazione",
+            "no": "Konfigurasjonsalternativer",
+            "sv": "Konfigurationsalternativ",
+            "pl": "Opcje konfiguracji",
+            "ru": "Параметры конфигурации",
+            "ko": "구성 옵션",
+            "ar": "خيارات التكوين"
+          },
+          "children": [
+            {
+              "id": "currency",
+              "type": "text",
+              "label": {
+                "en": "Currency"
+              },
+              "value": "€",
+              "hint": {
+                "en": "Currency for displaying prices."
+              }
+            }
+          ]
+        },
+        {
           "id": "device_info",
           "type": "group",
           "label": {
-            "en": "Discovered device information.",
-            "nl": "Ontdekte apparaatinformatie.",
-            "da": "Opdaget enhedsinformation.",
-            "de": "Entdeckte Geräteinformationen.",
-            "es": "Información del dispositivo descubierto.",
-            "fr": "Informations sur l'appareil découvert.",
-            "it": "Informazioni sul dispositivo rilevato.",
-            "no": "Oppdaget enhetsinformasjon.",
-            "sv": "Upptäckt enhetsinformation.",
-            "pl": "Odkryto informacje o urządzeniu.",
-            "ru": "Обнаружена информация об устройстве.",
-            "ko": "발견된 장치 정보.",
-            "ar": "تم اكتشاف معلومات الجهاز."
+            "en": "Discovered device information",
+            "nl": "Ontdekte apparaatinformatie",
+            "da": "Opdaget enhedsinformation",
+            "de": "Entdeckte Geräteinformationen",
+            "es": "Información del dispositivo descubierto",
+            "fr": "Informations sur l'appareil découvert",
+            "it": "Informazioni sul dispositivo rilevato",
+            "no": "Oppdaget enhetsinformasjon",
+            "sv": "Upptäckt enhetsinformation",
+            "pl": "Odkryto informacje o urządzeniu",
+            "ru": "Обнаружена информация об устройстве",
+            "ko": "발견된 장치 정보",
+            "ar": "تم اكتشاف معلومات الجهاز"
           },
           "children": [
             {
@@ -7971,6 +8167,8 @@
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
+        "goe_flexible_rate",
+        "goe_flexible_rate_limit",
         "evcharger_charging_state",
         "goe_measure_modelStatus",
         "goe_measure_phase_switching",
@@ -9247,19 +9445,19 @@
           "id": "cloud_info",
           "type": "group",
           "label": {
-            "en": "Cloud API login credentials.",
-            "nl": "Cloud API-inloggegevens.",
-            "da": "Cloud API-loginoplysninger.",
-            "de": "Cloud API-Anmeldeinformationen.",
-            "es": "Credenciales de inicio de sesión de la API de la nube.",
-            "fr": "Identifiants de connexion à l'API cloud.",
-            "it": "Credenziali di accesso all'API cloud.",
-            "no": "Cloud API-påloggingsinformasjon.",
-            "sv": "Cloud API-inloggningsuppgifter.",
-            "pl": "Dane logowania do API chmury.",
-            "ru": "Учетные данные для входа в облачный API.",
-            "ko": "Cloud API 로그인 자격 증명.",
-            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
+            "en": "Cloud API login credentials",
+            "nl": "Cloud API-inloggegevens",
+            "da": "Cloud API-loginoplysninger",
+            "de": "Cloud API-Anmeldeinformationen",
+            "es": "Credenciales de inicio de sesión de la API de la nube",
+            "fr": "Identifiants de connexion à l'API cloud",
+            "it": "Credenziali di accesso all'API cloud",
+            "no": "Cloud API-påloggingsinformasjon",
+            "sv": "Cloud API-inloggningsuppgifter",
+            "pl": "Dane logowania do API chmury",
+            "ru": "Учетные данные для входа в облачный API",
+            "ko": "Cloud API 로그인 자격 증명",
+            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة"
           },
           "children": [
             {
@@ -9337,22 +9535,54 @@
           ]
         },
         {
+          "id": "options",
+          "type": "group",
+          "label": {
+            "en": "Configuration options",
+            "nl": "Configuratieopties",
+            "da": "Konfigurationsmuligheder",
+            "de": "Konfigurationsoptionen",
+            "es": "Opciones de configuración",
+            "fr": "Options de configuration",
+            "it": "Opzioni di configurazione",
+            "no": "Konfigurasjonsalternativer",
+            "sv": "Konfigurationsalternativ",
+            "pl": "Opcje konfiguracji",
+            "ru": "Параметры конфигурации",
+            "ko": "구성 옵션",
+            "ar": "خيارات التكوين"
+          },
+          "children": [
+            {
+              "id": "currency",
+              "type": "text",
+              "label": {
+                "en": "Currency"
+              },
+              "value": "€",
+              "hint": {
+                "en": "Currency for displaying prices."
+              }
+            }
+          ]
+        },
+        {
           "id": "device_info",
           "type": "group",
           "label": {
-            "en": "Discovered device information.",
-            "nl": "Ontdekte apparaatinformatie.",
-            "da": "Opdaget enhedsinformation.",
-            "de": "Entdeckte Geräteinformationen.",
-            "es": "Información del dispositivo descubierto.",
-            "fr": "Informations sur l'appareil découvert.",
-            "it": "Informazioni sul dispositivo rilevato.",
-            "no": "Oppdaget enhetsinformasjon.",
-            "sv": "Upptäckt enhetsinformation.",
-            "pl": "Odkryto informacje o urządzeniu.",
-            "ru": "Обнаружена информация об устройстве.",
-            "ko": "발견된 장치 정보.",
-            "ar": "تم اكتشاف معلومات الجهاز."
+            "en": "Discovered device information",
+            "nl": "Ontdekte apparaatinformatie",
+            "da": "Opdaget enhedsinformation",
+            "de": "Entdeckte Geräteinformationen",
+            "es": "Información del dispositivo descubierto",
+            "fr": "Informations sur l'appareil découvert",
+            "it": "Informazioni sul dispositivo rilevato",
+            "no": "Oppdaget enhetsinformasjon",
+            "sv": "Upptäckt enhetsinformation",
+            "pl": "Odkryto informacje o urządzeniu",
+            "ru": "Обнаружена информация об устройстве",
+            "ko": "발견된 장치 정보",
+            "ar": "تم اكتشاف معلومات الجهاز"
           },
           "children": [
             {
@@ -9457,6 +9687,8 @@
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
+        "goe_flexible_rate",
+        "goe_flexible_rate_limit",
         "evcharger_charging_state",
         "goe_measure_modelStatus",
         "goe_measure_phase_switching",
@@ -10733,19 +10965,19 @@
           "id": "cloud_info",
           "type": "group",
           "label": {
-            "en": "Cloud API login credentials.",
-            "nl": "Cloud API-inloggegevens.",
-            "da": "Cloud API-loginoplysninger.",
-            "de": "Cloud API-Anmeldeinformationen.",
-            "es": "Credenciales de inicio de sesión de la API de la nube.",
-            "fr": "Identifiants de connexion à l'API cloud.",
-            "it": "Credenziali di accesso all'API cloud.",
-            "no": "Cloud API-påloggingsinformasjon.",
-            "sv": "Cloud API-inloggningsuppgifter.",
-            "pl": "Dane logowania do API chmury.",
-            "ru": "Учетные данные для входа в облачный API.",
-            "ko": "Cloud API 로그인 자격 증명.",
-            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
+            "en": "Cloud API login credentials",
+            "nl": "Cloud API-inloggegevens",
+            "da": "Cloud API-loginoplysninger",
+            "de": "Cloud API-Anmeldeinformationen",
+            "es": "Credenciales de inicio de sesión de la API de la nube",
+            "fr": "Identifiants de connexion à l'API cloud",
+            "it": "Credenziali di accesso all'API cloud",
+            "no": "Cloud API-påloggingsinformasjon",
+            "sv": "Cloud API-inloggningsuppgifter",
+            "pl": "Dane logowania do API chmury",
+            "ru": "Учетные данные для входа в облачный API",
+            "ko": "Cloud API 로그인 자격 증명",
+            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة"
           },
           "children": [
             {
@@ -10823,22 +11055,54 @@
           ]
         },
         {
+          "id": "options",
+          "type": "group",
+          "label": {
+            "en": "Configuration options",
+            "nl": "Configuratieopties",
+            "da": "Konfigurationsmuligheder",
+            "de": "Konfigurationsoptionen",
+            "es": "Opciones de configuración",
+            "fr": "Options de configuration",
+            "it": "Opzioni di configurazione",
+            "no": "Konfigurasjonsalternativer",
+            "sv": "Konfigurationsalternativ",
+            "pl": "Opcje konfiguracji",
+            "ru": "Параметры конфигурации",
+            "ko": "구성 옵션",
+            "ar": "خيارات التكوين"
+          },
+          "children": [
+            {
+              "id": "currency",
+              "type": "text",
+              "label": {
+                "en": "Currency"
+              },
+              "value": "€",
+              "hint": {
+                "en": "Currency for displaying prices."
+              }
+            }
+          ]
+        },
+        {
           "id": "device_info",
           "type": "group",
           "label": {
-            "en": "Discovered device information.",
-            "nl": "Ontdekte apparaatinformatie.",
-            "da": "Opdaget enhedsinformation.",
-            "de": "Entdeckte Geräteinformationen.",
-            "es": "Información del dispositivo descubierto.",
-            "fr": "Informations sur l'appareil découvert.",
-            "it": "Informazioni sul dispositivo rilevato.",
-            "no": "Oppdaget enhetsinformasjon.",
-            "sv": "Upptäckt enhetsinformation.",
-            "pl": "Odkryto informacje o urządzeniu.",
-            "ru": "Обнаружена информация об устройстве.",
-            "ko": "발견된 장치 정보.",
-            "ar": "تم اكتشاف معلومات الجهاز."
+            "en": "Discovered device information",
+            "nl": "Ontdekte apparaatinformatie",
+            "da": "Opdaget enhedsinformation",
+            "de": "Entdeckte Geräteinformationen",
+            "es": "Información del dispositivo descubierto",
+            "fr": "Informations sur l'appareil découvert",
+            "it": "Informazioni sul dispositivo rilevato",
+            "no": "Oppdaget enhetsinformasjon",
+            "sv": "Upptäckt enhetsinformation",
+            "pl": "Odkryto informacje o urządzeniu",
+            "ru": "Обнаружена информация об устройстве",
+            "ko": "발견된 장치 정보",
+            "ar": "تم اكتشاف معلومات الجهاز"
           },
           "children": [
             {
@@ -10943,6 +11207,8 @@
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
+        "goe_flexible_rate",
+        "goe_flexible_rate_limit",
         "evcharger_charging_state",
         "goe_measure_modelStatus",
         "goe_measure_phase_switching",
@@ -12219,19 +12485,19 @@
           "id": "cloud_info",
           "type": "group",
           "label": {
-            "en": "Cloud API login credentials.",
-            "nl": "Cloud API-inloggegevens.",
-            "da": "Cloud API-loginoplysninger.",
-            "de": "Cloud API-Anmeldeinformationen.",
-            "es": "Credenciales de inicio de sesión de la API de la nube.",
-            "fr": "Identifiants de connexion à l'API cloud.",
-            "it": "Credenziali di accesso all'API cloud.",
-            "no": "Cloud API-påloggingsinformasjon.",
-            "sv": "Cloud API-inloggningsuppgifter.",
-            "pl": "Dane logowania do API chmury.",
-            "ru": "Учетные данные для входа в облачный API.",
-            "ko": "Cloud API 로그인 자격 증명.",
-            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة."
+            "en": "Cloud API login credentials",
+            "nl": "Cloud API-inloggegevens",
+            "da": "Cloud API-loginoplysninger",
+            "de": "Cloud API-Anmeldeinformationen",
+            "es": "Credenciales de inicio de sesión de la API de la nube",
+            "fr": "Identifiants de connexion à l'API cloud",
+            "it": "Credenziali di accesso all'API cloud",
+            "no": "Cloud API-påloggingsinformasjon",
+            "sv": "Cloud API-inloggningsuppgifter",
+            "pl": "Dane logowania do API chmury",
+            "ru": "Учетные данные для входа в облачный API",
+            "ko": "Cloud API 로그인 자격 증명",
+            "ar": "بيانات اعتماد تسجيل الدخول إلى واجهة برمجة تطبيقات السحابة"
           },
           "children": [
             {
@@ -12309,22 +12575,54 @@
           ]
         },
         {
+          "id": "options",
+          "type": "group",
+          "label": {
+            "en": "Configuration options",
+            "nl": "Configuratieopties",
+            "da": "Konfigurationsmuligheder",
+            "de": "Konfigurationsoptionen",
+            "es": "Opciones de configuración",
+            "fr": "Options de configuration",
+            "it": "Opzioni di configurazione",
+            "no": "Konfigurasjonsalternativer",
+            "sv": "Konfigurationsalternativ",
+            "pl": "Opcje konfiguracji",
+            "ru": "Параметры конфигурации",
+            "ko": "구성 옵션",
+            "ar": "خيارات التكوين"
+          },
+          "children": [
+            {
+              "id": "currency",
+              "type": "text",
+              "label": {
+                "en": "Currency"
+              },
+              "value": "€",
+              "hint": {
+                "en": "Currency for displaying prices."
+              }
+            }
+          ]
+        },
+        {
           "id": "device_info",
           "type": "group",
           "label": {
-            "en": "Discovered device information.",
-            "nl": "Ontdekte apparaatinformatie.",
-            "da": "Opdaget enhedsinformation.",
-            "de": "Entdeckte Geräteinformationen.",
-            "es": "Información del dispositivo descubierto.",
-            "fr": "Informations sur l'appareil découvert.",
-            "it": "Informazioni sul dispositivo rilevato.",
-            "no": "Oppdaget enhetsinformasjon.",
-            "sv": "Upptäckt enhetsinformation.",
-            "pl": "Odkryto informacje o urządzeniu.",
-            "ru": "Обнаружена информация об устройстве.",
-            "ko": "발견된 장치 정보.",
-            "ar": "تم اكتشاف معلومات الجهاز."
+            "en": "Discovered device information",
+            "nl": "Ontdekte apparaatinformatie",
+            "da": "Opdaget enhedsinformation",
+            "de": "Entdeckte Geräteinformationen",
+            "es": "Información del dispositivo descubierto",
+            "fr": "Informations sur l'appareil découvert",
+            "it": "Informazioni sul dispositivo rilevato",
+            "no": "Oppdaget enhetsinformasjon",
+            "sv": "Upptäckt enhetsinformation",
+            "pl": "Odkryto informacje o urządzeniu",
+            "ru": "Обнаружена информация об устройстве",
+            "ko": "발견된 장치 정보",
+            "ar": "تم اكتشاف معلومات الجهاز"
           },
           "children": [
             {
@@ -12569,6 +12867,36 @@
           }
         }
       ]
+    },
+    "goe_flexible_rate": {
+      "type": "number",
+      "title": {
+        "en": "Current Flexible Price Rate"
+      },
+      "uiComponent": "sensor",
+      "icon": "/assets/goe_flexible_rate.svg",
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": {
+        "en": "€"
+      },
+      "decimals": 3
+    },
+    "goe_flexible_rate_limit": {
+      "type": "number",
+      "title": {
+        "en": "Flexible Price Limit"
+      },
+      "uiComponent": "sensor",
+      "icon": "/assets/goe_flexible_rate.svg",
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "units": {
+        "en": "€"
+      },
+      "decimals": 3
     },
     "goe_measure_modelStatus": {
       "type": "enum",

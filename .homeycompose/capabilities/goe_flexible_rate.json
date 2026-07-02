@@ -1,7 +1,7 @@
 {
   "type": "number",
   "title": {
-    "en": "Current Flexible Price Rate"
+    "en": "Flexible Price Rate"
   },
   "uiComponent": "sensor",
   "icon": "/assets/goe_flexible_rate.svg",
@@ -9,7 +9,7 @@
   "setable": false,
   "insights": true,
   "units": {
-    "en": "€"
+    "en": ""
   },
   "decimals": 3
 }
