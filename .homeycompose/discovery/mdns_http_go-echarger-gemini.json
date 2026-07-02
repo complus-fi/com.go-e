@@ -28,6 +28,29 @@
           "value": "go-eCharger_V4"
         }
       }
+    ],
+    [
+      {
+        "field": "txt.manufacturer",
+        "match": {
+          "type": "string",
+          "value": "go-e"
+        }
+      },
+      {
+        "field": "txt.devicefamily",
+        "match": {
+          "type": "string",
+          "value": "goecharger"
+        }
+      },
+      {
+        "field": "txt.devicetype",
+        "match": {
+          "type": "string",
+          "value": "go-eCharger_V5"
+        }
+      }
     ]
   ]
 }
