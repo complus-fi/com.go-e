@@ -867,11 +867,17 @@ class evChargerDevice extends Homey.Device {
 
     const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
     const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
-    const isNewCarConnected = previousChargingState === 'plugged_out' && nextChargingState && nextChargingState !== 'plugged_out';
+    const transactionCapabilityValue = typeof nextValues.goe_transaction === 'string' ? nextValues.goe_transaction : this.getCapabilityValue('goe_transaction');
+    const transactionName = this.getTransactionNameFromCapability(transactionCapabilityValue, status);
+    const hasMeaningfulTransaction = typeof transactionCapabilityValue === 'string' && transactionCapabilityValue !== GOE_TRANSACTION.NONE;
 
-    if (isNewCarConnected) {
-      const transactionCapabilityValue = typeof nextValues.goe_transaction === 'string' ? nextValues.goe_transaction : this.getCapabilityValue('goe_transaction');
-      nextValues.goe_transaction_name = this.getTransactionNameFromCapability(transactionCapabilityValue, status);
+    if (nextChargingState && nextChargingState !== 'plugged_out') {
+      if (hasMeaningfulTransaction || this.getCapabilityValue('goe_transaction_name') == null) {
+        nextValues.goe_transaction_name = transactionName;
+        return;
+      }
+
+      nextValues.goe_transaction_name = this.getCapabilityValue('goe_transaction_name');
       return;
     }
 
