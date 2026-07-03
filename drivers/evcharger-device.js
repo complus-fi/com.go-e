@@ -293,10 +293,10 @@ class evChargerDevice extends Homey.Device {
     return entries;
   }
 
-  getDynamicTransactionValues(status = {}) {
+  getDynamicTransactionValues(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
     const values = [...GOE_TRANSACTION_BASE_VALUES];
 
-    for (const entry of this.getConfiguredTransactionEntries(status)) {
+    for (const entry of configuredEntries) {
       values.push({
         id: entry.id,
         title: {
@@ -308,16 +308,17 @@ class evChargerDevice extends Homey.Device {
     return values;
   }
 
-  refreshTransactionSlotLookup(status = {}) {
+  refreshTransactionSlotLookup(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
     const lookup = {};
-    for (const entry of this.getConfiguredTransactionEntries(status)) {
+    for (const entry of configuredEntries) {
       lookup[entry.id] = entry.slot;
     }
 
     this.transactionSlotById = lookup;
+    return lookup;
   }
 
-  getDynamicTransactionCapabilityValue(status = {}) {
+  getDynamicTransactionCapabilityValue(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
     const trx = status.trx;
 
     if (trx === null || trx === undefined || trx === '') {
@@ -333,16 +334,16 @@ class evChargerDevice extends Homey.Device {
       return GOE_TRANSACTION.ANONYMOUS;
     }
 
-    const dynamicEntry = this.getConfiguredTransactionEntries(status).find((entry) => entry.slot === parsed);
+    const dynamicEntry = configuredEntries.find((entry) => entry.slot === parsed);
     return dynamicEntry?.id || `card_${parsed}`;
   }
 
-  async syncDynamicTransactionOptions(status = {}) {
+  async syncDynamicTransactionOptions(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
     if (!this.hasCapability('goe_transaction')) return;
 
-    this.refreshTransactionSlotLookup(status);
+    this.refreshTransactionSlotLookup(status, configuredEntries);
 
-    const values = this.getDynamicTransactionValues(status);
+    const values = this.getDynamicTransactionValues(status, configuredEntries);
     const signature = JSON.stringify(values);
     if (signature === this.lastTransactionValuesSignature) return;
 
@@ -452,7 +453,6 @@ class evChargerDevice extends Homey.Device {
     await this.setAvailable();
     await this.clearIntervals();
     await this.onPoll();
-    this.updatePollInterval(this.getDynamicPollIntervalMs());
   }
 
   async onDiscoveryAddressChanged(discoveryResult) {
@@ -475,6 +475,7 @@ class evChargerDevice extends Homey.Device {
     try {
       this.log(`[Device] ${this.getName()}: ${this.getData().id} clearIntervals`);
       this.homey.clearInterval(this.onPollInterval);
+      this.onPollInterval = null;
       this.pollIntervalMs = null;
     } catch (error) {
       this.log(error);
@@ -653,9 +654,10 @@ class evChargerDevice extends Homey.Device {
       const status = await this.api.getStatus();
       this.log(`[Device] ${this.getName()} - onPoll status:\n${formatStatusForLog(status)}`);
       this.lastStatus = status;
+      const configuredTransactionEntries = this.getConfiguredTransactionEntries(status);
 
       await this.syncDynamicCardCapabilities(status);
-      await this.syncDynamicTransactionOptions(status);
+      await this.syncDynamicTransactionOptions(status, configuredTransactionEntries);
 
       if (this.pollErrorMessage) {
         this.pollErrorMessage = null;
@@ -675,9 +677,11 @@ class evChargerDevice extends Homey.Device {
         }
       }
 
-      const nextValues = mapStatusToCapabilities(status, this.getCapabilities(), this.api);
+      const deviceCapabilities = this.getCapabilities();
+      const statusCapabilities = this.hasCapability('goe_transaction') ? deviceCapabilities.filter((capability) => capability !== 'goe_transaction') : deviceCapabilities;
+      const nextValues = mapStatusToCapabilities(status, statusCapabilities, this.api);
       if (this.hasCapability('goe_transaction')) {
-        nextValues.goe_transaction = this.getDynamicTransactionCapabilityValue(status);
+        nextValues.goe_transaction = this.getDynamicTransactionCapabilityValue(status, configuredTransactionEntries);
       }
 
       this.applyTransactionNameOnCarConnect(status, nextValues);
