@@ -209,6 +209,11 @@ class evChargerDevice extends Homey.Device {
     return host ? `http://${host}/api` : null;
   }
 
+  // Set the API endpoint (and auth) from device settings. Local uses the LAN address.
+  configureApiConnection(settings) {
+    this.api.base_url = this.getApiBaseUrl(settings.address);
+  }
+
   /**
    * onInit is called when the device is initialized.
    */
@@ -218,8 +223,9 @@ class evChargerDevice extends Homey.Device {
 
     const settings = this.getSettings();
     this.api = new goeChargerAPI();
-    this.api.base_url = this.getApiBaseUrl(settings.address);
     this.api.driver = this.driver.id;
+    this.configureApiConnection(settings);   // was: this.api.base_url = this.getApiBaseUrl(settings.address);
+
 
     await this.checkCapabilities();
 
@@ -239,7 +245,12 @@ class evChargerDevice extends Homey.Device {
     this.transactionStartTimestamp = null;
     this.pollIntervalMs = null;
     this.registerCapabilityListeners();
+    await this.startConnection();
   }
+
+  // Local devices become available and start polling from onDiscoveryAvailable (mDNS).
+  // Overridden by cloud devices, which have no discovery and must start polling here.
+  async startConnection() {}
 
   getConfiguredTransactionId(status, statusIndex) {
     const configured = this.isCardConfigured(status[`c${statusIndex}i`]);
