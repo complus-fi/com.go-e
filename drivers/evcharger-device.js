@@ -675,6 +675,7 @@ class evChargerDevice extends Homey.Device {
         nextValues.goe_pv_surplus_enabled = Boolean(status.fup);
       }
 
+      this.applyTransactionNameOnCarConnect(status, nextValues);
       this.applyTransactionTimeValues(nextValues);
       this.applyMeterPowerNameForSession(status, nextValues);
       this.applyMeasurePowerSessionValues(nextValues);
@@ -839,6 +840,56 @@ class evChargerDevice extends Homey.Device {
     }
 
     nextValues.goe_meter_power_name = transactionName;
+  }
+
+  getTransactionNameFromCapability(transactionCapabilityValue, status = {}) {
+    if (transactionCapabilityValue === GOE_TRANSACTION.NONE) {
+      return 'No authentication';
+    }
+
+    if (transactionCapabilityValue === GOE_TRANSACTION.ANONYMOUS) {
+      return 'Anonymous';
+    }
+
+    const slot = this.transactionSlotById?.[transactionCapabilityValue];
+    if (Number.isInteger(slot) && slot >= 1 && slot <= 10) {
+      const cardNameKey = `c${slot - 1}n`;
+      const cardName = status[cardNameKey];
+      if (typeof cardName === 'string') {
+        const normalizedCardName = cardName.trim();
+        if (normalizedCardName && normalizedCardName.toLowerCase() !== 'n/a') {
+          return normalizedCardName;
+        }
+      }
+
+      return `Card ${slot}`;
+    }
+
+    if (typeof transactionCapabilityValue === 'string' && transactionCapabilityValue.trim()) {
+      return transactionCapabilityValue;
+    }
+
+    return 'Unknown';
+  }
+
+  applyTransactionNameOnCarConnect(status, nextValues) {
+    if (!this.hasCapability('goe_transaction_name')) return;
+    if (!this.hasCapability('evcharger_charging_state')) return;
+
+    const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
+    const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
+    const isNewCarConnected = previousChargingState === 'plugged_out' && nextChargingState && nextChargingState !== 'plugged_out';
+
+    if (isNewCarConnected) {
+      const transactionCapabilityValue = typeof nextValues.goe_transaction === 'string' ? nextValues.goe_transaction : this.getCapabilityValue('goe_transaction');
+      nextValues.goe_transaction_name = this.getTransactionNameFromCapability(transactionCapabilityValue, status);
+      return;
+    }
+
+    const currentTransactionName = this.getCapabilityValue('goe_transaction_name');
+    if (currentTransactionName !== undefined && currentTransactionName !== null) {
+      nextValues.goe_transaction_name = currentTransactionName;
+    }
   }
 
   applyMeasurePowerSessionValues(nextValues) {
