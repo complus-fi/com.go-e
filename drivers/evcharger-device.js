@@ -11,6 +11,8 @@ const {
   getStatusAttributes,
   getTransactionApiValue,
   getTransactionCardName,
+  getTransactionCardNameBySlot,
+  getTransactionCapabilityIdFromTrx,
   getTransactionLabel,
   mapHomeyToApiValues,
   mapStatusToCapabilities
@@ -320,23 +322,10 @@ class evChargerDevice extends Homey.Device {
   }
 
   getDynamicTransactionCapabilityValue(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
-    const trx = status.trx;
-
-    if (trx === null || trx === undefined || trx === '') {
-      return GOE_TRANSACTION.NONE;
-    }
-
-    const parsed = Number(trx);
-    if (!Number.isInteger(parsed) || parsed < 0 || parsed > 10) {
-      return GOE_TRANSACTION.NONE;
-    }
-
-    if (parsed === 0) {
-      return GOE_TRANSACTION.ANONYMOUS;
-    }
-
-    const dynamicEntry = configuredEntries.find((entry) => entry.slot === parsed);
-    return dynamicEntry?.id || `card_${parsed}`;
+    return getTransactionCapabilityIdFromTrx(status.trx, {
+      configuredEntries,
+      invalidFallback: GOE_TRANSACTION.NONE
+    });
   }
 
   async syncDynamicTransactionOptions(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
@@ -863,16 +852,7 @@ class evChargerDevice extends Homey.Device {
 
     const slot = this.transactionSlotById?.[transactionCapabilityValue];
     if (Number.isInteger(slot) && slot >= 1 && slot <= 10) {
-      const cardNameKey = `c${slot - 1}n`;
-      const cardName = status[cardNameKey];
-      if (typeof cardName === 'string') {
-        const normalizedCardName = cardName.trim();
-        if (normalizedCardName && normalizedCardName.toLowerCase() !== 'n/a') {
-          return normalizedCardName;
-        }
-      }
-
-      return `Card ${slot}`;
+      return getTransactionCardNameBySlot(status, slot);
     }
 
     if (typeof transactionCapabilityValue === 'string' && transactionCapabilityValue.trim()) {

@@ -35,7 +35,7 @@ latent bug fix, doc sync, and small optimizations.
       `setChargerPower` (:281), `wattsToChargerConfig` (:245), `chargerConfigToWatts` (:268),
       `setValue` (:174, only called by dead `setChargerPower`), and `static testCredentials` (:20,
       cloud validation is done inline in `evcharger-cloud-driver.js:24-27`). ~90 lines, and removes
-      a _divergent duplicate_ of the live power math in `lib/mappings.js`
+      a *divergent duplicate* of the live power math in `lib/mappings.js`
       (`targetPowerToApiValues`/`apiValuesToTargetPower`) that uses different rounding/thresholds.
 - [x] **`lib/mappings.js`** — remove `rfidCards` (:711, exported :831, never consumed),
       `getMeterPowerName` (:177, exported :827, never called), and the dead
@@ -60,7 +60,7 @@ latent bug fix, doc sync, and small optimizations.
 - [x] **Map-then-override waste:** `mapStatusToCapabilities` computes `nextValues.goe_transaction`
       (`evcharger-device.js:668`), immediately overwritten by `getDynamicTransactionCapabilityValue`
       at :669-671. Drop the wasted map computation.
-- [ ] **Duplicated helpers (lower priority):** two parallel implementations each for "resolve card
+- [x] **Duplicated helpers (lower priority):** two parallel implementations each for "resolve card
       name from `cXn`" (`evcharger-device.js:844-872` vs `mappings.js:141-175`) and "trx →
       transaction id" (`evcharger-device.js:310-328` vs `mappings.js:98-113`). Keep one home (prefer
       `lib/mappings.js`) and delete the other.
