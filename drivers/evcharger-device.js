@@ -19,7 +19,6 @@ const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const AUTO_SPL3_THRESHOLD_W = 4140;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
-const GOE_NAME_TRIGGER_CAPABILITIES = new Set(['goe_transaction', 'goe_transaction_name']);
 
 const GOE_TRANSACTION_BASE_VALUES = [
   {
@@ -378,6 +377,7 @@ class evChargerDevice extends Homey.Device {
    */
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     this.log(`[Device] ${this.getName()}: ${this.getData().id} settings where changed: ${changedKeys}`);
+
     const newAddress = typeof newSettings.address === 'string' ? newSettings.address.trim() : '';
     const oldAddress = typeof oldSettings.address === 'string' ? oldSettings.address.trim() : '';
 
@@ -553,10 +553,10 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction', 'target_power'],
-      async ({ evcharger_charging, goe_charger_mode, goe_transaction, target_power }) => {
+      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction', 'target_power', 'goe_flexible_rate_limit'],
+      async ({ evcharger_charging, goe_charger_mode, goe_transaction, target_power, goe_flexible_rate_limit }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_charger_mode, goe_transaction, target_power });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_charger_mode, goe_transaction, target_power, goe_flexible_rate_limit });
 
           const context = {
             api: this.api,
@@ -580,6 +580,10 @@ class evChargerDevice extends Homey.Device {
           if (target_power !== undefined) {
             const apiValues = mapHomeyToApiValues({ target_power }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
             await this.applyApiValues(apiValues);
+          }
+
+          if (goe_flexible_rate_limit !== undefined) {
+            await this.onCapability_SET_FLEXIBLE_RATE_LIMIT(goe_flexible_rate_limit);
           }
 
           if (evcharger_charging === false) {
@@ -670,6 +674,7 @@ class evChargerDevice extends Homey.Device {
         nextValues.goe_pv_surplus_enabled = Boolean(status.fup);
       }
 
+      this.applyTransactionNameOnCarConnect(status, nextValues);
       this.applyTransactionTimeValues(nextValues);
       this.applyMeterPowerNameForSession(status, nextValues);
       this.applyMeasurePowerSessionValues(nextValues);
@@ -707,8 +712,8 @@ class evChargerDevice extends Homey.Device {
 
         await this.setCapabilityValue(capability, value).catch((error) => this.error(error));
 
-        if (GOE_NAME_TRIGGER_CAPABILITIES.has(capability) && previousValue !== value) {
-          await this.triggerNameChanged(capability, status, value);
+        if (capability === 'goe_transaction' && previousValue !== value) {
+          await this.triggerTransactionChanged(status, value);
         }
       }
     } catch (error) {
@@ -795,6 +800,25 @@ class evChargerDevice extends Homey.Device {
     await this.applyApiValues({ trx: this.apiValue });
   }
 
+  async onCapability_SET_FLEXIBLE_RATE_LIMIT(rate) {
+    const parsedRate = Number(rate);
+    if (!Number.isFinite(parsedRate) || parsedRate < 0) {
+      throw new Error('Flexible rate limit must be a non-negative number');
+    }
+
+    const context = {
+      api: this.api,
+      maxAmps: this.maxAmps,
+      firmwareVersion: this.getSettings().version,
+      status: this.lastStatus,
+      spl3Threshold: AUTO_SPL3_THRESHOLD_W,
+      targetPower: this.getCapabilityValue('target_power')
+    };
+
+    const apiValues = mapHomeyToApiValues({ goe_flexible_rate_limit: parsedRate }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
+    await this.applyApiValues(apiValues);
+  }
+
   applyMeterPowerNameForSession(status, nextValues) {
     if (!this.hasCapability('goe_meter_power_name')) return;
 
@@ -815,6 +839,56 @@ class evChargerDevice extends Homey.Device {
     }
 
     nextValues.goe_meter_power_name = transactionName;
+  }
+
+  getTransactionNameFromCapability(transactionCapabilityValue, status = {}) {
+    if (transactionCapabilityValue === GOE_TRANSACTION.NONE) {
+      return 'No authentication';
+    }
+
+    if (transactionCapabilityValue === GOE_TRANSACTION.ANONYMOUS) {
+      return 'Anonymous';
+    }
+
+    const slot = this.transactionSlotById?.[transactionCapabilityValue];
+    if (Number.isInteger(slot) && slot >= 1 && slot <= 10) {
+      const cardNameKey = `c${slot - 1}n`;
+      const cardName = status[cardNameKey];
+      if (typeof cardName === 'string') {
+        const normalizedCardName = cardName.trim();
+        if (normalizedCardName && normalizedCardName.toLowerCase() !== 'n/a') {
+          return normalizedCardName;
+        }
+      }
+
+      return `Card ${slot}`;
+    }
+
+    if (typeof transactionCapabilityValue === 'string' && transactionCapabilityValue.trim()) {
+      return transactionCapabilityValue;
+    }
+
+    return 'Unknown';
+  }
+
+  applyTransactionNameOnCarConnect(status, nextValues) {
+    if (!this.hasCapability('goe_transaction_name')) return;
+    if (!this.hasCapability('evcharger_charging_state')) return;
+
+    const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
+    const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
+    const isNewCarConnected = previousChargingState === 'plugged_out' && nextChargingState && nextChargingState !== 'plugged_out';
+
+    if (isNewCarConnected) {
+      const transactionCapabilityValue = typeof nextValues.goe_transaction === 'string' ? nextValues.goe_transaction : this.getCapabilityValue('goe_transaction');
+      nextValues.goe_transaction_name = this.getTransactionNameFromCapability(transactionCapabilityValue, status);
+      return;
+    }
+
+    const currentTransactionName = this.getCapabilityValue('goe_transaction_name');
+    if (currentTransactionName !== undefined && currentTransactionName !== null) {
+      nextValues.goe_transaction_name = currentTransactionName;
+    }
   }
 
   applyMeasurePowerSessionValues(nextValues) {
@@ -963,12 +1037,9 @@ class evChargerDevice extends Homey.Device {
     });
   }
 
-  async triggerNameChanged(capability, status, value) {
-    const transactionCapabilityValue = capability === 'goe_transaction' ? value : this.getCapabilityValue('goe_transaction');
-    const transactionName = capability === 'goe_transaction_name' ? value : getTransactionCardName(status);
-    const triggerId = capability === 'goe_transaction_name' ? 'goe_transaction_changed' : `${capability}_changed`;
-
-    const trigger = this.homey.flow.getDeviceTriggerCard(triggerId);
+  async triggerTransactionChanged(status, transactionCapabilityValue) {
+    const transactionName = this.getCapabilityValue('goe_transaction_name') || getTransactionCardName(status);
+    const trigger = this.homey.flow.getDeviceTriggerCard('goe_transaction_changed');
     await trigger
       .trigger(this, {
         card_name: transactionName,

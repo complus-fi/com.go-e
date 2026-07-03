@@ -1,0 +1,39 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Flexible Price Rate",
+    "nl": "Flexibel Tarief",
+    "da": "Fleksibel Prissats",
+    "de": "Flexibler Tarif",
+    "es": "Tarifa de Precio Flexible",
+    "fr": "Tarif Flexible",
+    "it": "Tariffa Flessibile",
+    "no": "Fleksibel prisrate",
+    "sv": "Flexibelt prisavtal",
+    "pl": "Elastyczna stawka cenowa",
+    "ru": "Гибкий тарифный план",
+    "ko": "유연한 가격 요금제",
+    "ar": "سعر مرن"
+  },
+  "uiComponent": "sensor",
+  "icon": "/assets/goe_flexible_rate.svg",
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": {
+    "en": "",
+    "nl": "",
+    "da": "",
+    "de": "",
+    "es": "",
+    "fr": "",
+    "it": "",
+    "no": "",
+    "sv": "",
+    "pl": "",
+    "ru": "",
+    "ko": "",
+    "ar": ""
+  },
+  "decimals": 3
+}

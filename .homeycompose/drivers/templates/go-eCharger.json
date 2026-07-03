@@ -13,7 +13,6 @@
     "alarm_problem",
     "meter_power",
     "meter_power.session",
-    "meter_power.prev_session",
     "measure_power",
     "measure_power.max",
     "measure_power.prev_max",
@@ -26,6 +25,8 @@
     "goe_transaction_start",
     "goe_transaction_end",
     "goe_transaction_duration",
+    "goe_flexible_rate",
+    "goe_flexible_rate_limit",
     "evcharger_charging_state",
     "goe_measure_modelStatus",
     "goe_measure_phase_switching",
@@ -120,19 +121,19 @@
     "meter_power.session": {
       "type": "number",
       "title": {
-        "en": "Energy This Session",
-        "nl": "Energie Deze Sessie",
-        "da": "Energi denne session",
-        "de": "Energie diese Sitzung",
-        "es": "Energía de esta sesión",
-        "fr": "Énergie de cette session",
-        "it": "Energia Questa Sessione",
-        "no": "Energi denne økten",
-        "sv": "Energi denna session",
-        "pl": "Energia tej sesji",
-        "ru": "Энергия за эту сессию",
-        "ko": "이번 세션 에너지",
-        "ar": "الطاقة في هذه الجلسة"
+        "en": "Session Energy",
+        "nl": "Sessie-energie",
+        "da": "Session Energi",
+        "de": "Sitzungsenergie",
+        "es": "Energía de la sesión",
+        "fr": "Énergie de session",
+        "it": "Energia della sessione",
+        "no": "Økt Energi",
+        "sv": "Sessionsenergi",
+        "pl": "Energia sesji",
+        "ru": "Энергия за сессию",
+        "ko": "세션 에너지",
+        "ar": "طاقة الجلسة"
       },
       "hint:": {
         "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
@@ -217,7 +218,8 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
-      "insights": true
+      "insights": true,
+      "deprecated": true
     },
     "goe_transaction_name.prev_session": {
       "type": "string",

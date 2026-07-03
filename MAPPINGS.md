@@ -40,6 +40,8 @@ Primary sources:
 | goe_transaction             | Read + write | trx, c0n..c9i        | Enum values are dynamic: always `no_auth` + `anonymous`, plus configured card names from `cXn` when `cXi=true` | Writing supports `anonymous` and configured dynamic card IDs; `no_auth` is read-only                 |
 | goe_measure_phase_switching | Read         | psm                  | Enum capability for automatic / 1-phase / 3-phase status                                                       | Capability ids are stringified `0`, `1`, `2`                                                         |
 | goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code                                                    | Capability id is the stringified status code                                                         |
+| goe_flexible_rate           | Read         | awcp                 | Reads `awcp.marketprice` (cents) and converts to euros                                                         | No explicit rounding in mapping; capability precision handles display                                |
+| goe_flexible_rate_limit     | Read + write | awp                  | Reads/writes max flexible price by converting between API cents and capability euros                           | No explicit rounding in mapping; API-side changes are synced back on poll                            |
 | measure_power.pakku         | Read         | pakku                | Reads charger PV optimization average battery power                                                            | Rounded to 2 decimals                                                                                |
 | measure_power.pgrid         | Read         | pgrid                | Reads charger PV optimization average grid power                                                               | Rounded to 2 decimals                                                                                |
 | measure_power.ppv           | Read         | ppv                  | Reads charger PV optimization average PV power                                                                 | Rounded to 2 decimals                                                                                |
@@ -71,9 +73,11 @@ Additional mode/power mappings:
   - `goe_charger_mode`
   - `goe_pv_surplus_enabled`
   - `goe_transaction`
+  - `goe_flexible_rate_limit`
 - If `goe_charger_mode` is included in a batch, it is processed first.
 - If `goe_pv_surplus_enabled` is included in a batch, it is processed next and the listener returns immediately.
 - If `goe_transaction` is included, it writes `trx` directly and allows any charging command in the same batch to continue.
+- If `goe_flexible_rate_limit` is included, it writes `awp` after converting capability euros to API cents.
 - If `target_power` is included and `goe_charger_mode` is `basic_charging`, writes use `amp` and `fsp` with integer amps and a 4140W single/three-phase switch threshold.
 - If `target_power` is included and `goe_charger_mode` is not `basic_charging`, Homey still accepts and stores the setpoint, but no `amp`/`fsp` write is sent to charger.
 - Polling only syncs `target_power` from `amp`/`fsp` while in `basic_charging`; in other modes the stored setpoint is preserved.
