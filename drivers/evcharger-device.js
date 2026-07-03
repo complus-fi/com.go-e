@@ -19,7 +19,6 @@ const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const AUTO_SPL3_THRESHOLD_W = 4140;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
-const GOE_NAME_TRIGGER_CAPABILITIES = new Set(['goe_transaction', 'goe_transaction_name']);
 
 const GOE_TRANSACTION_BASE_VALUES = [
   {
@@ -713,8 +712,8 @@ class evChargerDevice extends Homey.Device {
 
         await this.setCapabilityValue(capability, value).catch((error) => this.error(error));
 
-        if (GOE_NAME_TRIGGER_CAPABILITIES.has(capability) && previousValue !== value) {
-          await this.triggerNameChanged(capability, status, value);
+        if (capability === 'goe_transaction' && previousValue !== value) {
+          await this.triggerTransactionChanged(status, value);
         }
       }
     } catch (error) {
@@ -1038,12 +1037,9 @@ class evChargerDevice extends Homey.Device {
     });
   }
 
-  async triggerNameChanged(capability, status, value) {
-    const transactionCapabilityValue = capability === 'goe_transaction' ? value : this.getCapabilityValue('goe_transaction');
-    const transactionName = capability === 'goe_transaction_name' ? value : getTransactionCardName(status);
-    const triggerId = capability === 'goe_transaction_name' ? 'goe_transaction_changed' : `${capability}_changed`;
-
-    const trigger = this.homey.flow.getDeviceTriggerCard(triggerId);
+  async triggerTransactionChanged(status, transactionCapabilityValue) {
+    const transactionName = this.getCapabilityValue('goe_transaction_name') || getTransactionCardName(status);
+    const trigger = this.homey.flow.getDeviceTriggerCard('goe_transaction_changed');
     await trigger
       .trigger(this, {
         card_name: transactionName,
