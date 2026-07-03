@@ -35,7 +35,7 @@ latent bug fix, doc sync, and small optimizations.
       `setChargerPower` (:281), `wattsToChargerConfig` (:245), `chargerConfigToWatts` (:268),
       `setValue` (:174, only called by dead `setChargerPower`), and `static testCredentials` (:20,
       cloud validation is done inline in `evcharger-cloud-driver.js:24-27`). ~90 lines, and removes
-      a *divergent duplicate* of the live power math in `lib/mappings.js`
+      a _divergent duplicate_ of the live power math in `lib/mappings.js`
       (`targetPowerToApiValues`/`apiValuesToTargetPower`) that uses different rounding/thresholds.
 - [x] **`lib/mappings.js`** — remove `rfidCards` (:711, exported :831, never consumed),
       `getMeterPowerName` (:177, exported :827, never called), and the dead
@@ -64,7 +64,7 @@ latent bug fix, doc sync, and small optimizations.
       name from `cXn`" (`evcharger-device.js:844-872` vs `mappings.js:141-175`) and "trx →
       transaction id" (`evcharger-device.js:310-328` vs `mappings.js:98-113`). Keep one home (prefer
       `lib/mappings.js`) and delete the other.
-- [ ] **Magic-number consolidation:** `4140` appears in 4 places (`evcharger-device.js:20`
+- [x] **Magic-number consolidation:** `4140` appears in 4 places (`evcharger-device.js:20`
       `AUTO_SPL3_THRESHOLD_W`, `mappings.js:33`, and `?? 4140` fallbacks at `mappings.js:303` and
       `:387`); phase-voltage constants `690`/`230` are likewise scattered. Centralize as named
       constants exported from `lib/mappings.js`.

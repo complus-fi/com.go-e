@@ -4,8 +4,10 @@ const Homey = require('homey');
 const goeChargerAPI = require('../lib/go-eCharger-API-v2');
 const { formatStatusForLog } = require('../lib/helpers');
 const {
+  DEFAULT_SPL3_THRESHOLD_W,
   GOE_CHARGER_MODE,
   GOE_TRANSACTION,
+  THREE_PHASE_VOLTAGE,
   getStatusAttributes,
   getTransactionApiValue,
   getTransactionCardName,
@@ -17,7 +19,6 @@ const {
 const POLL_INTERVAL = 5000;
 const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
-const AUTO_SPL3_THRESHOLD_W = 4140;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
 const GOE_TRANSACTION_BASE_VALUES = [
@@ -574,7 +575,7 @@ class evChargerDevice extends Homey.Device {
             maxAmps: this.maxAmps,
             firmwareVersion: this.getSettings().version,
             status: this.lastStatus,
-            spl3Threshold: AUTO_SPL3_THRESHOLD_W,
+            spl3Threshold: DEFAULT_SPL3_THRESHOLD_W,
             targetPower: this.getCapabilityValue('target_power')
           };
 
@@ -693,7 +694,7 @@ class evChargerDevice extends Homey.Device {
       // Update target_power max capability option based on ama (ampere max limit)
       if (this.hasCapability('target_power') && status.ama !== undefined && Number.isFinite(Number(status.ama))) {
         const currentOptions = this.getCapabilityOptions('target_power');
-        const newMax = Math.floor(Number(status.ama) * 690);
+        const newMax = Math.floor(Number(status.ama) * THREE_PHASE_VOLTAGE);
 
         if (!currentOptions.max || currentOptions.max !== newMax) {
           const newOptions = { ...currentOptions, max: newMax };
@@ -781,7 +782,7 @@ class evChargerDevice extends Homey.Device {
 
     const context = {
       status: this.lastStatus,
-      spl3Threshold: AUTO_SPL3_THRESHOLD_W,
+      spl3Threshold: DEFAULT_SPL3_THRESHOLD_W,
       targetPower: this.getCapabilityValue('target_power')
     };
 
@@ -821,7 +822,7 @@ class evChargerDevice extends Homey.Device {
       maxAmps: this.maxAmps,
       firmwareVersion: this.getSettings().version,
       status: this.lastStatus,
-      spl3Threshold: AUTO_SPL3_THRESHOLD_W,
+      spl3Threshold: DEFAULT_SPL3_THRESHOLD_W,
       targetPower: this.getCapabilityValue('target_power')
     };
 
