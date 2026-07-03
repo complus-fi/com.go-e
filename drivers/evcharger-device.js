@@ -224,8 +224,7 @@ class evChargerDevice extends Homey.Device {
     const settings = this.getSettings();
     this.api = new goeChargerAPI();
     this.api.driver = this.driver.id;
-    this.configureApiConnection(settings);   // was: this.api.base_url = this.getApiBaseUrl(settings.address);
-
+    this.configureApiConnection(settings); // was: this.api.base_url = this.getApiBaseUrl(settings.address);
 
     await this.checkCapabilities();
 
@@ -625,7 +624,7 @@ class evChargerDevice extends Homey.Device {
   }
 
   async applyApiValues(apiValues = {}) {
-    const orderedKeys = ['ids', 'lmo', 'fup', 'psm', 'pgt', 'frm', 'spl3', 'fst', 'trx', 'frc', 'amp'];
+    const orderedKeys = ['ids', 'lmo', 'fup', 'psm', 'pgt', 'frm', 'spl3', 'trx', 'frc', 'amp'];
 
     const orderedApiValues = {};
     for (const key of orderedKeys) {
@@ -679,10 +678,6 @@ class evChargerDevice extends Homey.Device {
       const nextValues = mapStatusToCapabilities(status, this.getCapabilities(), this.api);
       if (this.hasCapability('goe_transaction')) {
         nextValues.goe_transaction = this.getDynamicTransactionCapabilityValue(status);
-      }
-
-      if (this.hasCapability('goe_pv_surplus_enabled') && status.fup !== undefined) {
-        nextValues.goe_pv_surplus_enabled = Boolean(status.fup);
       }
 
       this.applyTransactionNameOnCarConnect(status, nextValues);
