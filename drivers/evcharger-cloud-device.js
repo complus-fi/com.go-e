@@ -1,45 +1,22 @@
 'use strict';
 
 const evChargerDevice = require('./evcharger-device');
-const goeChargerAPI = require('../lib/go-eCharger-API-v2');
-const { getStatusAttributes } = require('../lib/mappings');
 
 class evCloudChargerDevice extends evChargerDevice {
   getApiBaseUrl(serialnumber) {
     const host = typeof serialnumber === 'string' ? serialnumber.trim() : '';
-    return host ? `https://${serialnumber}.api.v3.go-e.io/api` : null;
+    return host ? `https://${host}.api.v3.go-e.io/api` : null;
   }
 
-  /**
-   * onInit is called when the device is initialized.
-   */
-  async onInit() {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} start init.`);
-    this.setUnavailable(`Initializing ${this.getName()}`).catch(() => {});
-
-    const settings = this.getSettings();
-    this.api = new goeChargerAPI();
+  // Cloud connects via serial number + bearer token instead of a LAN address.
+  configureApiConnection(settings) {
     this.api.base_url = this.getApiBaseUrl(settings.serialnumber);
     this.api.cloud_api_token = settings.token;
-    this.api.driver = this.driver.id;
+  }
 
-    await this.checkCapabilities();
-
-    await this.setSettings({
-      driver: this.api.driver
-    });
-
-    this.cardConfiguredFlags = Array(10).fill(undefined);
-    this.api.apiKeys = getStatusAttributes(this.getCapabilities(), {
-      firmwareVersion: this.getSettings().version,
-      cardConfiguredFlags: this.cardConfiguredFlags
-    });
-    this.pollErrorMessage = null;
-    this.pendingChargingState = null;
-    this.transactionStartTimestamp = null;
-    this.pollIntervalMs = null;
-    this.registerCapabilityListeners();
-
+  // No mDNS discovery for cloud devices: become available and start polling now.
+  // onPoll() reschedules the interval at its tail via updatePollInterval().
+  async startConnection() {
     await this.setAvailable();
     await this.clearIntervals();
     await this.onPoll();

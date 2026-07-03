@@ -1172,13 +1172,11 @@
         "meter_power.session",
         "measure_power",
         "measure_power.max",
-        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "measure_temperature",
         "goe_transaction_name",
-        "goe_transaction_name.prev_session",
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
@@ -1413,7 +1411,8 @@
           "uiComponent": null,
           "getable": true,
           "setable": false,
-          "insights": false
+          "insights": false,
+          "deprecated": true
         },
         "meter_power.1": {
           "type": "number",
@@ -2109,7 +2108,8 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": "sensor"
+          "uiComponent": "sensor",
+          "deprecated": true
         },
         "measure_power.pakku": {
           "type": "number",
@@ -2518,13 +2518,11 @@
         "meter_power.session",
         "measure_power",
         "measure_power.max",
-        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "measure_temperature",
         "goe_transaction_name",
-        "goe_transaction_name.prev_session",
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
@@ -2759,7 +2757,8 @@
           "uiComponent": null,
           "getable": true,
           "setable": false,
-          "insights": false
+          "insights": false,
+          "deprecated": true
         },
         "meter_power.1": {
           "type": "number",
@@ -3455,7 +3454,8 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": "sensor"
+          "uiComponent": "sensor",
+          "deprecated": true
         },
         "measure_power.pakku": {
           "type": "number",
@@ -3864,13 +3864,11 @@
         "meter_power.session",
         "measure_power",
         "measure_power.max",
-        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "measure_temperature",
         "goe_transaction_name",
-        "goe_transaction_name.prev_session",
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
@@ -4105,7 +4103,8 @@
           "uiComponent": null,
           "getable": true,
           "setable": false,
-          "insights": false
+          "insights": false,
+          "deprecated": true
         },
         "meter_power.1": {
           "type": "number",
@@ -4801,7 +4800,8 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": "sensor"
+          "uiComponent": "sensor",
+          "deprecated": true
         },
         "measure_power.pakku": {
           "type": "number",
@@ -5210,13 +5210,11 @@
         "meter_power.session",
         "measure_power",
         "measure_power.max",
-        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "measure_temperature",
         "goe_transaction_name",
-        "goe_transaction_name.prev_session",
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
@@ -5451,7 +5449,8 @@
           "uiComponent": null,
           "getable": true,
           "setable": false,
-          "insights": false
+          "insights": false,
+          "deprecated": true
         },
         "meter_power.1": {
           "type": "number",
@@ -6147,7 +6146,8 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": "sensor"
+          "uiComponent": "sensor",
+          "deprecated": true
         },
         "measure_power.pakku": {
           "type": "number",
@@ -6556,13 +6556,11 @@
         "meter_power.session",
         "measure_power",
         "measure_power.max",
-        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "measure_temperature",
         "goe_transaction_name",
-        "goe_transaction_name.prev_session",
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
@@ -6797,7 +6795,8 @@
           "uiComponent": null,
           "getable": true,
           "setable": false,
-          "insights": false
+          "insights": false,
+          "deprecated": true
         },
         "meter_power.1": {
           "type": "number",
@@ -7493,7 +7492,8 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": "sensor"
+          "uiComponent": "sensor",
+          "deprecated": true
         },
         "measure_power.pakku": {
           "type": "number",
@@ -8044,13 +8044,11 @@
         "meter_power.session",
         "measure_power",
         "measure_power.max",
-        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "measure_temperature",
         "goe_transaction_name",
-        "goe_transaction_name.prev_session",
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
@@ -8285,7 +8283,8 @@
           "uiComponent": null,
           "getable": true,
           "setable": false,
-          "insights": false
+          "insights": false,
+          "deprecated": true
         },
         "meter_power.1": {
           "type": "number",
@@ -8981,7 +8980,8 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": "sensor"
+          "uiComponent": "sensor",
+          "deprecated": true
         },
         "measure_power.pakku": {
           "type": "number",
@@ -9532,13 +9532,11 @@
         "meter_power.session",
         "measure_power",
         "measure_power.max",
-        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "measure_temperature",
         "goe_transaction_name",
-        "goe_transaction_name.prev_session",
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
@@ -9773,7 +9771,8 @@
           "uiComponent": null,
           "getable": true,
           "setable": false,
-          "insights": false
+          "insights": false,
+          "deprecated": true
         },
         "meter_power.1": {
           "type": "number",
@@ -10469,7 +10468,8 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": "sensor"
+          "uiComponent": "sensor",
+          "deprecated": true
         },
         "measure_power.pakku": {
           "type": "number",
@@ -11020,13 +11020,11 @@
         "meter_power.session",
         "measure_power",
         "measure_power.max",
-        "measure_power.prev_max",
         "measure_voltage",
         "measure_voltage.output",
         "measure_current",
         "measure_temperature",
         "goe_transaction_name",
-        "goe_transaction_name.prev_session",
         "goe_transaction_start",
         "goe_transaction_end",
         "goe_transaction_duration",
@@ -11261,7 +11259,8 @@
           "uiComponent": null,
           "getable": true,
           "setable": false,
-          "insights": false
+          "insights": false,
+          "deprecated": true
         },
         "meter_power.1": {
           "type": "number",
@@ -11957,7 +11956,8 @@
           },
           "decimals": 2,
           "insights": false,
-          "uiComponent": "sensor"
+          "uiComponent": "sensor",
+          "deprecated": true
         },
         "measure_power.pakku": {
           "type": "number",

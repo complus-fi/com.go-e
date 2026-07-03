@@ -15,13 +15,11 @@
     "meter_power.session",
     "measure_power",
     "measure_power.max",
-    "measure_power.prev_max",
     "measure_voltage",
     "measure_voltage.output",
     "measure_current",
     "measure_temperature",
     "goe_transaction_name",
-    "goe_transaction_name.prev_session",
     "goe_transaction_start",
     "goe_transaction_end",
     "goe_transaction_duration",
@@ -168,95 +166,6 @@
         "ar": "كيلوواط ساعة"
       },
       "insights": true
-    },
-    "meter_power.prev_session": {
-      "type": "number",
-      "title": {
-        "en": "Energy Previous Session",
-        "nl": "Energie Vorige Sessie",
-        "da": "Energi forrige session",
-        "de": "Energie vorherige Sitzung",
-        "es": "Energía de la sesión anterior",
-        "fr": "Énergie de la session précédente",
-        "it": "Energia sessione precedente",
-        "no": "Energi forrige økt",
-        "sv": "Energi föregående session",
-        "pl": "Energia poprzedniej sesji",
-        "ru": "Энергия за предыдущую сессию",
-        "ko": "이전 세션 에너지",
-        "ar": "الطاقة في الجلسة السابقة"
-      },
-      "hint": {
-        "en": "Energy (kWh) delivered during the previous session. Captured when the car gets disconnected.",
-        "nl": "Energie (kWh) geleverd tijdens de vorige sessie. Vastgelegd wanneer de auto wordt losgekoppeld.",
-        "da": "Energi (kWh) leveret under den forrige session. Gemmes når bilen frakobles.",
-        "de": "Energie (kWh), die in der vorherigen Sitzung geliefert wurde. Wird gespeichert, wenn das Auto getrennt wird.",
-        "es": "Energía (kWh) entregada durante la sesión anterior. Se guarda cuando el coche se desconecta.",
-        "fr": "Énergie (kWh) délivrée lors de la session précédente. Enregistrée lorsque la voiture est déconnectée.",
-        "it": "Energia (kWh) erogata durante la sessione precedente. Salvata quando l'auto viene scollegata.",
-        "no": "Energi (kWh) levert i forrige økt. Lagres når bilen kobles fra.",
-        "sv": "Energi (kWh) levererad under föregående session. Sparas när bilen kopplas från.",
-        "pl": "Energia (kWh) dostarczona podczas poprzedniej sesji. Zapisywana po odłączeniu samochodu.",
-        "ru": "Энергия (кВтч), переданная за предыдущую сессию. Сохраняется при отключении автомобиля.",
-        "ko": "이전 세션 동안 전달된 에너지(kWh). 자동차가 분리되면 저장됩니다.",
-        "ar": "الطاقة (كيلوواط ساعة) التي تم تسليمها خلال الجلسة السابقة. يتم حفظها عند فصل السيارة."
-      },
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "kWh",
-        "nl": "kWh",
-        "da": "kWh",
-        "de": "kWh",
-        "es": "kWh",
-        "fr": "kWh",
-        "it": "kWh",
-        "no": "kWh",
-        "sv": "kWh",
-        "pl": "kWh",
-        "ru": "кВтч",
-        "ko": "kWh",
-        "ar": "كيلوواط ساعة"
-      },
-      "insights": true,
-      "deprecated": true
-    },
-    "goe_transaction_name.prev_session": {
-      "type": "string",
-      "title": {
-        "en": "User Previous Session",
-        "nl": "Vorige sessie gebruiker",
-        "da": "Brugerens tidligere session",
-        "de": "Benutzersitzung vorheriger Sitzung",
-        "es": "Sesión Anterior del Usuario",
-        "fr": "Session précédente de l'utilisateur",
-        "it": "Sessione Utente Precedente",
-        "no": "Brukerens forrige økt",
-        "sv": "Användarens föregående session",
-        "pl": "Poprzednia sesja użytkownika",
-        "ru": "Предыдущая сессия пользователя",
-        "ko": "이전 사용자 세션",
-        "ar": "الجلسة السابقة للمستخدم"
-      },
-      "hint": {
-        "en": "The user card name for prevous session.",
-        "nl": "De gebruikerskaartnaam voor de vorige sessie.",
-        "da": "Brugerkortnavnet for den tidligere session.",
-        "de": "Der Benutzerkartenname für die vorherige Sitzung.",
-        "es": "El nombre de la tarjeta de usuario para la sesión anterior.",
-        "fr": "Le nom de la carte utilisateur pour la session précédente.",
-        "it": "Il nome della scheda utente per la sessione precedente.",
-        "no": "Brukerkortnavnet for forrige økt.",
-        "sv": "Användarkortets namn för föregående session.",
-        "pl": "Nazwa karty użytkownika z poprzedniej sesji.",
-        "ru": "Имя карты пользователя для предыдущей сессии.",
-        "ko": "이전 세션의 사용자 카드 이름.",
-        "ar": "اسم بطاقة المستخدم للجلسة السابقة."
-      },
-      "uiComponent": null,
-      "getable": true,
-      "setable": false,
-      "insights": false
     },
     "meter_power.1": {
       "type": "number",
@@ -897,60 +806,7 @@
         "ko": "W",
         "ar": "W"
       },
-      "decimals": 2,
-      "insights": false,
-      "uiComponent": "sensor"
-    },
-    "measure_power.prev_max": {
-      "type": "number",
-      "title": {
-        "en": "Max Power Previous",
-        "nl": "Maximaal vermogen vorige",
-        "da": "Maksimal effekt tidligere",
-        "de": "Maximale Leistung Vorherige",
-        "es": "Potencia Máxima Anterior",
-        "fr": "Puissance Max Précédente",
-        "it": "Potenza Massima Precedente",
-        "no": "Maksimal effekt tidligere",
-        "sv": "Maxeffekt tidigare",
-        "pl": "Moc maksymalna poprzednia",
-        "ru": "Максимальная мощность предыдущая",
-        "ko": "최대 전력 이전",
-        "ar": "الطاقة القصوى السابقة"
-      },
-      "hint": {
-        "en": "Max power used in the previous session.",
-        "nl": "Maximaal vermogen gebruikt in de vorige sessie.",
-        "da": "Maksimal effekt brugt i den tidligere session.",
-        "de": "Maximale Leistung im vorherigen Ladevorgang.",
-        "es": "Potencia máxima utilizada en la sesión anterior.",
-        "fr": "Puissance maximale utilisée lors de la session précédente.",
-        "it": "Potenza massima utilizzata nella sessione precedente.",
-        "no": "Maksimal effekt brukt i forrige økt.",
-        "sv": "Maximal effekt som användes i föregående session.",
-        "pl": "Maksymalna moc użyta w poprzedniej sesji.",
-        "ru": "Максимальная мощность, использованная в предыдущей сессии.",
-        "ko": "이전 세션에서 사용된 최대 전력.",
-        "ar": "أقصى طاقة مستخدمة في الجلسة السابقة."
-      },
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "W",
-        "nl": "W",
-        "da": "W",
-        "de": "W",
-        "es": "W",
-        "fr": "W",
-        "it": "W",
-        "no": "W",
-        "sv": "W",
-        "pl": "W",
-        "ru": "W",
-        "ko": "W",
-        "ar": "W"
-      },
-      "decimals": 2,
+      "decimals": 0,
       "insights": false,
       "uiComponent": "sensor"
     },
@@ -1003,7 +859,7 @@
         "ko": "W",
         "ar": "W"
       },
-      "decimals": 2,
+      "decimals": 0,
       "insights": false,
       "uiComponent": null
     },
@@ -1056,7 +912,7 @@
         "ko": "W",
         "ar": "W"
       },
-      "decimals": 2,
+      "decimals": 0,
       "insights": false,
       "uiComponent": null
     },
@@ -1109,7 +965,7 @@
         "ko": "W",
         "ar": "W"
       },
-      "decimals": 2,
+      "decimals": 0,
       "insights": false,
       "uiComponent": null
     },
