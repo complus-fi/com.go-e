@@ -1170,7 +1170,6 @@
         "alarm_problem",
         "meter_power",
         "meter_power.session",
-        "meter_power.prev_session",
         "measure_power",
         "measure_power.max",
         "measure_power.prev_max",
@@ -1279,19 +1278,19 @@
         "meter_power.session": {
           "type": "number",
           "title": {
-            "en": "Energy This Session",
-            "nl": "Energie Deze Sessie",
-            "da": "Energi denne session",
-            "de": "Energie diese Sitzung",
-            "es": "Energía de esta sesión",
-            "fr": "Énergie de cette session",
-            "it": "Energia Questa Sessione",
-            "no": "Energi denne økten",
-            "sv": "Energi denna session",
-            "pl": "Energia tej sesji",
-            "ru": "Энергия за эту сессию",
-            "ko": "이번 세션 에너지",
-            "ar": "الطاقة في هذه الجلسة"
+            "en": "Session Energy",
+            "nl": "Sessie-energie",
+            "da": "Session Energi",
+            "de": "Sitzungsenergie",
+            "es": "Energía de la sesión",
+            "fr": "Énergie de session",
+            "it": "Energia della sessione",
+            "no": "Økt Energi",
+            "sv": "Sessionsenergi",
+            "pl": "Energia sesji",
+            "ru": "Энергия за сессию",
+            "ko": "세션 에너지",
+            "ar": "طاقة الجلسة"
           },
           "hint:": {
             "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
@@ -1376,7 +1375,8 @@
             "ko": "kWh",
             "ar": "كيلوواط ساعة"
           },
-          "insights": true
+          "insights": true,
+          "deprecated": true
         },
         "goe_transaction_name.prev_session": {
           "type": "string",
@@ -2516,7 +2516,6 @@
         "alarm_problem",
         "meter_power",
         "meter_power.session",
-        "meter_power.prev_session",
         "measure_power",
         "measure_power.max",
         "measure_power.prev_max",
@@ -2625,19 +2624,19 @@
         "meter_power.session": {
           "type": "number",
           "title": {
-            "en": "Energy This Session",
-            "nl": "Energie Deze Sessie",
-            "da": "Energi denne session",
-            "de": "Energie diese Sitzung",
-            "es": "Energía de esta sesión",
-            "fr": "Énergie de cette session",
-            "it": "Energia Questa Sessione",
-            "no": "Energi denne økten",
-            "sv": "Energi denna session",
-            "pl": "Energia tej sesji",
-            "ru": "Энергия за эту сессию",
-            "ko": "이번 세션 에너지",
-            "ar": "الطاقة في هذه الجلسة"
+            "en": "Session Energy",
+            "nl": "Sessie-energie",
+            "da": "Session Energi",
+            "de": "Sitzungsenergie",
+            "es": "Energía de la sesión",
+            "fr": "Énergie de session",
+            "it": "Energia della sessione",
+            "no": "Økt Energi",
+            "sv": "Sessionsenergi",
+            "pl": "Energia sesji",
+            "ru": "Энергия за сессию",
+            "ko": "세션 에너지",
+            "ar": "طاقة الجلسة"
           },
           "hint:": {
             "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
@@ -2722,7 +2721,8 @@
             "ko": "kWh",
             "ar": "كيلوواط ساعة"
           },
-          "insights": true
+          "insights": true,
+          "deprecated": true
         },
         "goe_transaction_name.prev_session": {
           "type": "string",
@@ -3862,7 +3862,6 @@
         "alarm_problem",
         "meter_power",
         "meter_power.session",
-        "meter_power.prev_session",
         "measure_power",
         "measure_power.max",
         "measure_power.prev_max",
@@ -3971,19 +3970,19 @@
         "meter_power.session": {
           "type": "number",
           "title": {
-            "en": "Energy This Session",
-            "nl": "Energie Deze Sessie",
-            "da": "Energi denne session",
-            "de": "Energie diese Sitzung",
-            "es": "Energía de esta sesión",
-            "fr": "Énergie de cette session",
-            "it": "Energia Questa Sessione",
-            "no": "Energi denne økten",
-            "sv": "Energi denna session",
-            "pl": "Energia tej sesji",
-            "ru": "Энергия за эту сессию",
-            "ko": "이번 세션 에너지",
-            "ar": "الطاقة في هذه الجلسة"
+            "en": "Session Energy",
+            "nl": "Sessie-energie",
+            "da": "Session Energi",
+            "de": "Sitzungsenergie",
+            "es": "Energía de la sesión",
+            "fr": "Énergie de session",
+            "it": "Energia della sessione",
+            "no": "Økt Energi",
+            "sv": "Sessionsenergi",
+            "pl": "Energia sesji",
+            "ru": "Энергия за сессию",
+            "ko": "세션 에너지",
+            "ar": "طاقة الجلسة"
           },
           "hint:": {
             "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
@@ -4068,7 +4067,8 @@
             "ko": "kWh",
             "ar": "كيلوواط ساعة"
           },
-          "insights": true
+          "insights": true,
+          "deprecated": true
         },
         "goe_transaction_name.prev_session": {
           "type": "string",
@@ -5208,7 +5208,6 @@
         "alarm_problem",
         "meter_power",
         "meter_power.session",
-        "meter_power.prev_session",
         "measure_power",
         "measure_power.max",
         "measure_power.prev_max",
@@ -5317,19 +5316,19 @@
         "meter_power.session": {
           "type": "number",
           "title": {
-            "en": "Energy This Session",
-            "nl": "Energie Deze Sessie",
-            "da": "Energi denne session",
-            "de": "Energie diese Sitzung",
-            "es": "Energía de esta sesión",
-            "fr": "Énergie de cette session",
-            "it": "Energia Questa Sessione",
-            "no": "Energi denne økten",
-            "sv": "Energi denna session",
-            "pl": "Energia tej sesji",
-            "ru": "Энергия за эту сессию",
-            "ko": "이번 세션 에너지",
-            "ar": "الطاقة في هذه الجلسة"
+            "en": "Session Energy",
+            "nl": "Sessie-energie",
+            "da": "Session Energi",
+            "de": "Sitzungsenergie",
+            "es": "Energía de la sesión",
+            "fr": "Énergie de session",
+            "it": "Energia della sessione",
+            "no": "Økt Energi",
+            "sv": "Sessionsenergi",
+            "pl": "Energia sesji",
+            "ru": "Энергия за сессию",
+            "ko": "세션 에너지",
+            "ar": "طاقة الجلسة"
           },
           "hint:": {
             "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
@@ -5414,7 +5413,8 @@
             "ko": "kWh",
             "ar": "كيلوواط ساعة"
           },
-          "insights": true
+          "insights": true,
+          "deprecated": true
         },
         "goe_transaction_name.prev_session": {
           "type": "string",
@@ -6554,7 +6554,6 @@
         "alarm_problem",
         "meter_power",
         "meter_power.session",
-        "meter_power.prev_session",
         "measure_power",
         "measure_power.max",
         "measure_power.prev_max",
@@ -6663,19 +6662,19 @@
         "meter_power.session": {
           "type": "number",
           "title": {
-            "en": "Energy This Session",
-            "nl": "Energie Deze Sessie",
-            "da": "Energi denne session",
-            "de": "Energie diese Sitzung",
-            "es": "Energía de esta sesión",
-            "fr": "Énergie de cette session",
-            "it": "Energia Questa Sessione",
-            "no": "Energi denne økten",
-            "sv": "Energi denna session",
-            "pl": "Energia tej sesji",
-            "ru": "Энергия за эту сессию",
-            "ko": "이번 세션 에너지",
-            "ar": "الطاقة في هذه الجلسة"
+            "en": "Session Energy",
+            "nl": "Sessie-energie",
+            "da": "Session Energi",
+            "de": "Sitzungsenergie",
+            "es": "Energía de la sesión",
+            "fr": "Énergie de session",
+            "it": "Energia della sessione",
+            "no": "Økt Energi",
+            "sv": "Sessionsenergi",
+            "pl": "Energia sesji",
+            "ru": "Энергия за сессию",
+            "ko": "세션 에너지",
+            "ar": "طاقة الجلسة"
           },
           "hint:": {
             "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
@@ -6760,7 +6759,8 @@
             "ko": "kWh",
             "ar": "كيلوواط ساعة"
           },
-          "insights": true
+          "insights": true,
+          "deprecated": true
         },
         "goe_transaction_name.prev_session": {
           "type": "string",
@@ -8042,7 +8042,6 @@
         "alarm_problem",
         "meter_power",
         "meter_power.session",
-        "meter_power.prev_session",
         "measure_power",
         "measure_power.max",
         "measure_power.prev_max",
@@ -8151,19 +8150,19 @@
         "meter_power.session": {
           "type": "number",
           "title": {
-            "en": "Energy This Session",
-            "nl": "Energie Deze Sessie",
-            "da": "Energi denne session",
-            "de": "Energie diese Sitzung",
-            "es": "Energía de esta sesión",
-            "fr": "Énergie de cette session",
-            "it": "Energia Questa Sessione",
-            "no": "Energi denne økten",
-            "sv": "Energi denna session",
-            "pl": "Energia tej sesji",
-            "ru": "Энергия за эту сессию",
-            "ko": "이번 세션 에너지",
-            "ar": "الطاقة في هذه الجلسة"
+            "en": "Session Energy",
+            "nl": "Sessie-energie",
+            "da": "Session Energi",
+            "de": "Sitzungsenergie",
+            "es": "Energía de la sesión",
+            "fr": "Énergie de session",
+            "it": "Energia della sessione",
+            "no": "Økt Energi",
+            "sv": "Sessionsenergi",
+            "pl": "Energia sesji",
+            "ru": "Энергия за сессию",
+            "ko": "세션 에너지",
+            "ar": "طاقة الجلسة"
           },
           "hint:": {
             "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
@@ -8248,7 +8247,8 @@
             "ko": "kWh",
             "ar": "كيلوواط ساعة"
           },
-          "insights": true
+          "insights": true,
+          "deprecated": true
         },
         "goe_transaction_name.prev_session": {
           "type": "string",
@@ -9530,7 +9530,6 @@
         "alarm_problem",
         "meter_power",
         "meter_power.session",
-        "meter_power.prev_session",
         "measure_power",
         "measure_power.max",
         "measure_power.prev_max",
@@ -9639,19 +9638,19 @@
         "meter_power.session": {
           "type": "number",
           "title": {
-            "en": "Energy This Session",
-            "nl": "Energie Deze Sessie",
-            "da": "Energi denne session",
-            "de": "Energie diese Sitzung",
-            "es": "Energía de esta sesión",
-            "fr": "Énergie de cette session",
-            "it": "Energia Questa Sessione",
-            "no": "Energi denne økten",
-            "sv": "Energi denna session",
-            "pl": "Energia tej sesji",
-            "ru": "Энергия за эту сессию",
-            "ko": "이번 세션 에너지",
-            "ar": "الطاقة في هذه الجلسة"
+            "en": "Session Energy",
+            "nl": "Sessie-energie",
+            "da": "Session Energi",
+            "de": "Sitzungsenergie",
+            "es": "Energía de la sesión",
+            "fr": "Énergie de session",
+            "it": "Energia della sessione",
+            "no": "Økt Energi",
+            "sv": "Sessionsenergi",
+            "pl": "Energia sesji",
+            "ru": "Энергия за сессию",
+            "ko": "세션 에너지",
+            "ar": "طاقة الجلسة"
           },
           "hint:": {
             "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
@@ -9736,7 +9735,8 @@
             "ko": "kWh",
             "ar": "كيلوواط ساعة"
           },
-          "insights": true
+          "insights": true,
+          "deprecated": true
         },
         "goe_transaction_name.prev_session": {
           "type": "string",
@@ -11018,7 +11018,6 @@
         "alarm_problem",
         "meter_power",
         "meter_power.session",
-        "meter_power.prev_session",
         "measure_power",
         "measure_power.max",
         "measure_power.prev_max",
@@ -11127,19 +11126,19 @@
         "meter_power.session": {
           "type": "number",
           "title": {
-            "en": "Energy This Session",
-            "nl": "Energie Deze Sessie",
-            "da": "Energi denne session",
-            "de": "Energie diese Sitzung",
-            "es": "Energía de esta sesión",
-            "fr": "Énergie de cette session",
-            "it": "Energia Questa Sessione",
-            "no": "Energi denne økten",
-            "sv": "Energi denna session",
-            "pl": "Energia tej sesji",
-            "ru": "Энергия за эту сессию",
-            "ko": "이번 세션 에너지",
-            "ar": "الطاقة في هذه الجلسة"
+            "en": "Session Energy",
+            "nl": "Sessie-energie",
+            "da": "Session Energi",
+            "de": "Sitzungsenergie",
+            "es": "Energía de la sesión",
+            "fr": "Énergie de session",
+            "it": "Energia della sessione",
+            "no": "Økt Energi",
+            "sv": "Sessionsenergi",
+            "pl": "Energia sesji",
+            "ru": "Энергия за сессию",
+            "ko": "세션 에너지",
+            "ar": "طاقة الجلسة"
           },
           "hint:": {
             "en": "Energy (kWh) delivered during this session. Reset automatically when a car is connected.",
@@ -11224,7 +11223,8 @@
             "ko": "kWh",
             "ar": "كيلوواط ساعة"
           },
-          "insights": true
+          "insights": true,
+          "deprecated": true
         },
         "goe_transaction_name.prev_session": {
           "type": "string",
@@ -13710,34 +13710,34 @@
     "goe_transaction_duration": {
       "type": "string",
       "title": {
-        "en": "Transaction Duration",
-        "nl": "Transactieduur",
-        "da": "Transaktionsvarighed",
-        "de": "Transaktionsdauer",
-        "es": "Duración de la transacción",
-        "fr": "Durée de la transaction",
-        "it": "Durata della transazione",
-        "no": "Transaksjonsvarighet",
-        "sv": "Transaktionens varaktighet",
-        "pl": "Czas trwania transakcji",
-        "ru": "Продолжительность транзакции",
-        "ko": "거래 기간",
-        "ar": "مدة المعاملة"
+        "en": "Session Duration",
+        "nl": "Sessieduur",
+        "da": "Sessionsvarighed",
+        "de": "Sitzungsdauer",
+        "es": "Duración de la sesión",
+        "fr": "Durée de la session",
+        "it": "Durata della sessione",
+        "no": "Øktvarighet",
+        "sv": "Sessionens varaktighet",
+        "pl": "Czas trwania sesji",
+        "ru": "Продолжительность сеанса",
+        "ko": "세션 기간",
+        "ar": "مدة الجلسة"
       },
       "hint": {
-        "en": "The duration of this transaction.",
-        "nl": "De duur van deze transactie.",
-        "da": "Varigheden af denne transaktion.",
-        "de": "Die Dauer dieser Transaktion.",
-        "es": "La duración de esta transacción.",
-        "fr": "La durée de cette transaction.",
-        "it": "La durata di questa transazione.",
-        "no": "Varigheten av denne transaksjonen.",
-        "sv": "Varaktigheten för denna transaktion.",
-        "pl": "Czas trwania tej transakcji.",
-        "ru": "Продолжительность этой транзакции.",
-        "ko": "이 거래의 기간.",
-        "ar": "مدة هذه المعاملة."
+        "en": "The duration of this session.",
+        "nl": "De duur van deze sessie.",
+        "da": "Varigheden af denne session.",
+        "de": "Die Dauer dieser Sitzung.",
+        "es": "La duración de esta sesión.",
+        "fr": "La durée de cette session.",
+        "it": "La durata di questa sessione.",
+        "no": "Varigheten av denne økten.",
+        "sv": "Varaktigheten för denna session.",
+        "pl": "Czas trwania tej sesji.",
+        "ru": "Продолжительность этой сессии.",
+        "ko": "이 세션의 기간.",
+        "ar": "مدة هذه الجلسة."
       },
       "icon": "/assets/goe_transaction_time.svg",
       "uiComponent": "sensor",
@@ -13748,34 +13748,34 @@
     "goe_transaction_end": {
       "type": "string",
       "title": {
-        "en": "Transaction End Time",
-        "nl": "Transactietijd Einde",
-        "da": "Transaktionens sluttidspunkt",
-        "de": "Transaktionsendzeit",
-        "es": "Hora de finalización de la transacción",
-        "fr": "Heure de fin de transaction",
-        "it": "Ora di fine transazione",
-        "no": "Transaksjonens sluttidspunkt",
-        "sv": "Transaktionens sluttid",
-        "pl": "Czas zakończenia transakcji",
-        "ru": "Время окончания транзакции",
-        "ko": "거래 종료 시간",
-        "ar": "وقت انتهاء المعاملة"
+        "en": "Session End Time",
+        "nl": "Sessie Eindtijd",
+        "da": "Sessionens sluttidspunkt",
+        "de": "Sitzungsendzeit",
+        "es": "Hora de finalización de la sesión",
+        "fr": "Heure de fin de session",
+        "it": "Ora di fine sessione",
+        "no": "Øktens sluttidspunkt",
+        "sv": "Sessionens sluttid",
+        "pl": "Czas zakończenia sesji",
+        "ru": "Время окончания сессии",
+        "ko": "세션 종료 시간",
+        "ar": "وقت انتهاء الجلسة"
       },
       "hint": {
-        "en": "The end time of this transaction.",
-        "nl": "De eindtijd van deze transactie.",
-        "da": "Sluttidspunktet for denne transaktion.",
-        "de": "Die Endzeit dieser Transaktion.",
-        "es": "La hora de finalización de esta transacción.",
-        "fr": "L'heure de fin de cette transaction.",
-        "it": "L'orario di fine di questa transazione.",
-        "no": "Slutttidspunktet for denne transaksjonen.",
-        "sv": "Sluttiden för denna transaktion.",
-        "pl": "Czas zakończenia tej transakcji.",
-        "ru": "Время окончания этой транзакции.",
-        "ko": "이 거래의 종료 시간.",
-        "ar": "وقت انتهاء هذه المعاملة."
+        "en": "The end time of this session.",
+        "nl": "De eindtijd van deze sessie.",
+        "da": "Sluttidspunktet for denne session.",
+        "de": "Die Endzeit dieser Sitzung.",
+        "es": "La hora de finalización de esta sesión.",
+        "fr": "L'heure de fin de cette session.",
+        "it": "L'orario di fine di questa sessione.",
+        "no": "Slutttidspunktet for denne økten.",
+        "sv": "Sluttiden för denna session.",
+        "pl": "Czas zakończenia tej sesji.",
+        "ru": "Время окончания этой сессии.",
+        "ko": "이 세션의 종료 시간.",
+        "ar": "وقت انتهاء هذه الجلسة."
       },
       "icon": "/assets/goe_transaction_time.svg",
       "uiComponent": "sensor",
@@ -13786,19 +13786,19 @@
     "goe_transaction_name": {
       "type": "string",
       "title": {
-        "en": "User This Session",
-        "nl": "Gebruiker Deze Sessie",
-        "da": "Bruger Denne Session",
-        "de": "Benutzer Diese Sitzung",
-        "es": "Usuario Esta Sesión",
-        "fr": "Utilisateur de cette session",
-        "it": "Utente Questa Sessione",
-        "no": "Bruker Denne Økten",
-        "sv": "Användare Denna Session",
-        "pl": "Użytkownik tej sesji",
-        "ru": "Пользователь этой сессии",
-        "ko": "사용자 이 세션",
-        "ar": "المستخدم هذه الجلسة"
+        "en": "Session User",
+        "nl": "Sessie Gebruiker",
+        "da": "Session Bruger",
+        "de": "Sitzungsbenutzer",
+        "es": "Usuario de sesión",
+        "fr": "Utilisateur de session",
+        "it": "Utente Sessione",
+        "no": "Øktbruker",
+        "sv": "Sessionsanvändare",
+        "pl": "Sesja użytkownika",
+        "ru": "Пользователь сессии",
+        "ko": "세션 사용자",
+        "ar": "مستخدم الجلسة"
       },
       "hint": {
         "en": "The user card name for this session.",
@@ -13824,34 +13824,34 @@
     "goe_transaction_start": {
       "type": "string",
       "title": {
-        "en": "Transaction Start Time",
-        "nl": "Transactietijd Start",
-        "da": "Transaktionens starttidspunkt",
-        "de": "Transaktionsstartzeit",
-        "es": "Hora de inicio de la transacción",
-        "fr": "Heure de début de transaction",
-        "it": "Ora di inizio transazione",
-        "no": "Transaksjonens starttidspunkt",
-        "sv": "Transaktionens starttid",
-        "pl": "Czas rozpoczęcia transakcji",
-        "ru": "Время начала транзакции",
-        "ko": "거래 시작 시간",
-        "ar": "وقت بدء المعاملة"
+        "en": "Session Start Time",
+        "nl": "Starttijd sessie",
+        "da": "Sessionens starttid",
+        "de": "Sitzungsbeginn",
+        "es": "Hora de inicio de la sesión",
+        "fr": "Heure de début de session",
+        "it": "Ora di inizio sessione",
+        "no": "Starttid for økt",
+        "sv": "Starttid för session",
+        "pl": "Czas rozpoczęcia sesji",
+        "ru": "Время начала сеанса",
+        "ko": "세션 시작 시간",
+        "ar": "وقت بدء الجلسة"
       },
       "hint": {
-        "en": "The start time of this transaction.",
-        "nl": "De starttijd van deze transactie.",
-        "da": "Starttidspunktet for denne transaktion.",
-        "de": "Die Startzeit dieser Transaktion.",
-        "es": "La hora de inicio de esta transacción.",
-        "fr": "L'heure de début de cette transaction.",
-        "it": "L'orario di inizio di questa transazione.",
-        "no": "Starttidspunktet for denne transaksjonen.",
-        "sv": "Starttiden för denna transaktion.",
-        "pl": "Czas rozpoczęcia tej transakcji.",
-        "ru": "Время начала этой транзакции.",
-        "ko": "이 거래의 시작 시간.",
-        "ar": "وقت بدء هذه المعاملة."
+        "en": "The start time of this session.",
+        "nl": "De starttijd van deze sessie.",
+        "da": "Starttidspunktet for denne session.",
+        "de": "Die Startzeit dieser Sitzung.",
+        "es": "La hora de inicio de esta sesión.",
+        "fr": "L'heure de début de cette session.",
+        "it": "L'orario di inizio di questa sessione.",
+        "no": "Starttidspunktet for denne økten.",
+        "sv": "Starttiden för denna session.",
+        "pl": "Czas rozpoczęcia tej sesji.",
+        "ru": "Время начала этой сессии.",
+        "ko": "이 세션의 시작 시간.",
+        "ar": "وقت بدء هذه الجلسة."
       },
       "icon": "/assets/goe_transaction_time.svg",
       "uiComponent": "sensor",

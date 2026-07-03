@@ -1,19 +1,19 @@
 {
   "type": "string",
   "title": {
-    "en": "User This Session",
-    "nl": "Gebruiker Deze Sessie",
-    "da": "Bruger Denne Session",
-    "de": "Benutzer Diese Sitzung",
-    "es": "Usuario Esta Sesión",
-    "fr": "Utilisateur de cette session",
-    "it": "Utente Questa Sessione",
-    "no": "Bruker Denne Økten",
-    "sv": "Användare Denna Session",
-    "pl": "Użytkownik tej sesji",
-    "ru": "Пользователь этой сессии",
-    "ko": "사용자 이 세션",
-    "ar": "المستخدم هذه الجلسة"
+    "en": "Session User",
+    "nl": "Sessie Gebruiker",
+    "da": "Session Bruger",
+    "de": "Sitzungsbenutzer",
+    "es": "Usuario de sesión",
+    "fr": "Utilisateur de session",
+    "it": "Utente Sessione",
+    "no": "Øktbruker",
+    "sv": "Sessionsanvändare",
+    "pl": "Sesja użytkownika",
+    "ru": "Пользователь сессии",
+    "ko": "세션 사용자",
+    "ar": "مستخدم الجلسة"
   },
   "hint": {
     "en": "The user card name for this session.",
