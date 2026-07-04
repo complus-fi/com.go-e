@@ -27,8 +27,7 @@
 
 ## Validation
 
-- VScode does the main validation internally if .js files.
-- Validate changed JSON/compose files are syntactically correct.
+- VScode does the main validation automatically. No need for additional validation.
 
 ## Driver Notes
 
