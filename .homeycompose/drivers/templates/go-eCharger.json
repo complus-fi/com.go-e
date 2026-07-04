@@ -123,90 +123,306 @@
     "meter_power.pv": {
       "type": "number",
       "title": {
-        "en": "PV Surplus Energy"
+        "en": "PV Surplus Energy",
+        "nl": "PV Overtollige Energie",
+        "da": "PV Overskudsenergi",
+        "de": "PV-Überschussenergie",
+        "es": "Energía excedente de PV",
+        "fr": "Surplus d'énergie PV",
+        "it": "Energia in eccesso da fotovoltaico",
+        "no": "PV Overskuddsenergi",
+        "sv": "PV-överskottsenergi",
+        "pl": "Nadwyżka energii z PV",
+        "ru": "Избыток энергии от солнечных панелей",
+        "ko": "PV 잉여 에너지",
+        "ar": "الطاقة الفائضة من الألواح الشمسية"
       },
       "desc:": {
-        "en": "PV Surplus Energy usage in kilowatt-hour (kWh)."
+        "en": "PV Surplus Energy usage in kilowatt-hour (kWh).",
+        "nl": "PV Overschot Energieverbruik in kilowattuur (kWh).",
+        "da": "PV Overskudsenergi brugt i kilowatt-time (kWh).",
+        "de": "PV-Überschussenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Uso de energía excedente de PV en kilovatios-hora (kWh).",
+        "fr": "Utilisation de l'énergie excédentaire PV en kilowattheure (kWh).",
+        "it": "Utilizzo dell'energia in surplus da fotovoltaico in kilowattora (kWh).",
+        "no": "PV-overskuddsenergi bruk i kilowatt-time (kWh).",
+        "sv": "PV-överskottsenergi i kilowattimmar (kWh).",
+        "pl": "Zużycie nadwyżki energii PV w kilowatogodzinach (kWh).",
+        "ru": "Использование избыточной энергии от солнечных панелей в киловатт-часах (кВт·ч).",
+        "ko": "PV 잉여 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "استخدام الطاقة الفائضة من الألواح الشمسية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true
     },
     "meter_power.grid": {
       "type": "number",
       "title": {
-        "en": "Grid Energy"
+        "en": "Grid Energy",
+        "nl": "Netstroom",
+        "da": "Netenergi",
+        "de": "Netzenergie",
+        "es": "Energía de la Red",
+        "fr": "Énergie du réseau",
+        "it": "Energia di rete",
+        "no": "Nettenergi",
+        "sv": "Nätenergi",
+        "pl": "Energia z sieci",
+        "ru": "Энергия сети",
+        "ko": "그리드 에너지",
+        "ar": "طاقة الشبكة"
       },
       "desc:": {
-        "en": "Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Netstroomverbruik in kilowattuur (kWh).",
+        "da": "Netforbrug i kilowatt-time (kWh).",
+        "de": "Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Uso de energía de la red en kilovatios-hora (kWh).",
+        "fr": "Consommation d'énergie du réseau en kilowattheures (kWh).",
+        "it": "Consumo di energia dalla rete in kilowattora (kWh).",
+        "no": "Nettforbruk av energi i kilowatt-time (kWh).",
+        "sv": "Nätets energianvändning i kilowattimmar (kWh).",
+        "pl": "Zużycie energii z sieci w kilowatogodzinach (kWh).",
+        "ru": "Потребление энергии из сети в киловатт-часах (кВт·ч).",
+        "ko": "그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "استخدام الطاقة من الشبكة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true
     },
     "meter_power.session": {
       "type": "number",
       "title": {
-        "en": "Session Energy"
+        "en": "Session Energy",
+        "nl": "Sessie-energie",
+        "da": "Sessionsenergi",
+        "de": "Sitzungsenergie",
+        "es": "Energía de la sesión",
+        "fr": "Énergie de session",
+        "it": "Energia della sessione",
+        "no": "Økt Energi",
+        "sv": "Sessionsenergi",
+        "pl": "Energia sesji",
+        "ru": "Энергия за сессию",
+        "ko": "세션 에너지",
+        "ar": "طاقة الجلسة"
       },
       "desc:": {
-        "en": "Energy usage in kilowatt-hour (kWh) during this session. Reset automatically when a car is connected."
+        "en": "Energy usage in kilowatt-hour (kWh) during this session. Reset automatically when a car is connected.",
+        "nl": "Energieverbruik in kilowattuur (kWh) tijdens deze sessie. Wordt automatisch gereset wanneer een auto is aangesloten.",
+        "da": "Energiforbrug i kilowatt-timer (kWh) under denne session. Nulstilles automatisk, når en bil tilsluttes.",
+        "de": "Energieverbrauch in Kilowattstunden (kWh) während dieser Sitzung. Wird automatisch zurückgesetzt, wenn ein Auto angeschlossen wird.",
+        "es": "Uso de energía en kilovatios-hora (kWh) durante esta sesión. Se restablece automáticamente cuando se conecta un coche.",
+        "fr": "Consommation d'énergie en kilowattheure (kWh) pendant cette session. Réinitialisation automatique lorsqu'une voiture est connectée.",
+        "it": "Consumo energetico in kilowattora (kWh) durante questa sessione. Si azzera automaticamente quando un'auto è collegata.",
+        "no": "Energiforbruk i kilowatt-time (kWh) under denne økten. Nullstilles automatisk når en bil kobles til.",
+        "sv": "Energiförbrukning i kilowatt-timmar (kWh) under denna session. Återställs automatiskt när en bil ansluts.",
+        "pl": "Zużycie energii w kilowatogodzinach (kWh) podczas tej sesji. Resetuje się automatycznie po podłączeniu samochodu.",
+        "ru": "Потребление энергии в киловатт-часах (кВт·ч) за эту сессию. Сбрасывается автоматически при подключении автомобиля.",
+        "ko": "이 세션 동안의 에너지 사용량(킬로와트시, kWh). 자동차가 연결되면 자동으로 초기화됩니다.",
+        "ar": "استهلاك الطاقة بالكيلوواط ساعة (kWh) خلال هذه الجلسة. يتم إعادة التعيين تلقائيًا عند توصيل سيارة."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true
     },
     "meter_power.session_pv": {
       "type": "number",
       "title": {
-        "en": "Session PV Energy"
+        "en": "Session PV Energy",
+        "nl": "Sessie PV Energie",
+        "da": "Session PV Energi",
+        "de": "Sitzung PV-Energie",
+        "es": "Energía PV de la sesión",
+        "fr": "Session Énergie PV",
+        "it": "Sessione Energia PV",
+        "no": "Økt PV-energi",
+        "sv": "Session PV-energi",
+        "pl": "Sesja energii PV",
+        "ru": "Сессия солнечной энергии",
+        "ko": "세션 PV 에너지",
+        "ar": "طاقة الجلسة الشمسية"
       },
       "desc:": {
-        "en": "PV Surplus Energy usage in kilowatt-hour (kWh) during this session. Reset automatically when a car is connected."
+        "en": "PV Surplus Energy usage in kilowatt-hour (kWh) during this session. Reset automatically when a car is connected.",
+        "nl": "PV Overschot Energieverbruik in kilowattuur (kWh) tijdens deze sessie. Wordt automatisch gereset wanneer een auto is aangesloten.",
+        "da": "PV Overskudsenergi brugt i kilowatt-time (kWh) under denne session. Nulstilles automatisk, når en bil tilsluttes.",
+        "de": "PV-Überschussenergieverbrauch in Kilowattstunden (kWh) während dieser Sitzung. Wird automatisch zurückgesetzt, wenn ein Auto angeschlossen wird.",
+        "es": "Uso de energía excedente de PV en kilovatios-hora (kWh) durante esta sesión. Se restablece automáticamente cuando se conecta un coche.",
+        "fr": "Utilisation de l'énergie excédentaire PV en kilowattheures (kWh) pendant cette session. Réinitialisation automatique lorsqu'une voiture est connectée.",
+        "it": "Utilizzo dell'energia in surplus fotovoltaico in kilowattora (kWh) durante questa sessione. Si resetta automaticamente quando un'auto è collegata.",
+        "no": "PV Overskuddsenergi bruk i kilowatt-time (kWh) under denne økten. Nullstilles automatisk når en bil kobles til.",
+        "sv": "PV-överskottsenergi i kilowattimmar (kWh) under denna session. Återställs automatiskt när en bil ansluts.",
+        "pl": "Zużycie nadwyżki energii PV w kilowatogodzinach (kWh) podczas tej sesji. Resetuje się automatycznie po podłączeniu samochodu.",
+        "ru": "Использование избыточной энергии от солнечных панелей в киловатт-часах (кВтч) за эту сессию. Сбрасывается автоматически при подключении автомобиля.",
+        "ko": "이 세션 동안의 PV 잉여 에너지 사용량(킬로와트시, kWh). 자동차가 연결되면 자동으로 초기화됩니다.",
+        "ar": "استخدام الطاقة الفائضة من الألواح الشمسية بالكيلوواط ساعة (kWh) خلال هذه الجلسة. يتم إعادة التعيين تلقائيًا عند توصيل سيارة."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true
     },
     "meter_power.session_grid": {
       "type": "number",
       "title": {
-        "en": "Session Grid Energy"
+        "en": "Session Grid Energy",
+        "nl": "Sessie Netstroom",
+        "da": "Session Gitterenergi",
+        "de": "Sitzung Netzenergie",
+        "es": "Energía de la Red de Sesión",
+        "fr": "Énergie du réseau de session",
+        "it": "Energia della Rete Sessione",
+        "no": "Økt nettenergi",
+        "sv": "Sessionnätenergi",
+        "pl": "Sesja Energia z Sieci",
+        "ru": "Сеанс Сетевой Энергии",
+        "ko": "세션 그리드 에너지",
+        "ar": "شبكة الطاقة للجلسة"
       },
       "desc:": {
-        "en": "Grid Energy usage in kilowatt-hour (kWh) during this session. Reset automatically when a car is connected."
+        "en": "Grid Energy usage in kilowatt-hour (kWh) during this session. Reset automatically when a car is connected.",
+        "nl": "Energieverbruik van het net in kilowattuur (kWh) tijdens deze sessie. Wordt automatisch gereset wanneer een auto wordt aangesloten.",
+        "da": "Netforbrug i kilowatt-timer (kWh) under denne session. Nulstilles automatisk, når en bil tilsluttes.",
+        "de": "Netzenergieverbrauch in Kilowattstunden (kWh) während dieser Sitzung. Wird automatisch zurückgesetzt, wenn ein Auto angeschlossen wird.",
+        "es": "Uso de energía de la red en kilovatios-hora (kWh) durante esta sesión. Se restablece automáticamente cuando se conecta un coche.",
+        "fr": "Consommation d'énergie du réseau en kilowattheures (kWh) pendant cette session. Réinitialisation automatique lorsqu'une voiture est connectée.",
+        "it": "Consumo di energia dalla rete in kilowattora (kWh) durante questa sessione. Si azzera automaticamente quando un'auto è collegata.",
+        "no": "Nettbruksenergi i kilowatt-timer (kWh) under denne økten. Nullstilles automatisk når en bil kobles til.",
+        "sv": "Nätets energianvändning i kilowattimmar (kWh) under denna session. Återställs automatiskt när en bil ansluts.",
+        "pl": "Zużycie energii z sieci w kilowatogodzinach (kWh) podczas tej sesji. Resetuje się automatycznie po podłączeniu samochodu.",
+        "ru": "Потребление энергии из сети в киловатт-часах (кВт·ч) за эту сессию. Сбрасывается автоматически при подключении автомобиля.",
+        "ko": "이 세션 동안의 그리드 에너지 사용량(킬로와트시, kWh)입니다. 자동차가 연결되면 자동으로 초기화됩니다.",
+        "ar": "استخدام الطاقة من الشبكة بالكيلوواط ساعة (kWh) خلال هذه الجلسة. يتم إعادة التعيين تلقائيًا عند توصيل سيارة."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true
     },
     "meter_power.1": {
       "type": "number",
       "title": {
-        "en": "Card 1 Energy"
+        "en": "Card 1 Energy",
+        "nl": "Kaart 1 Energie",
+        "da": "Kort 1 Energi",
+        "de": "Karte 1 Energie",
+        "es": "Tarjeta 1 Energía",
+        "fr": "Carte 1 Énergie",
+        "it": "Scheda 1 Energia",
+        "no": "Kort 1 Energi",
+        "sv": "Kort 1 Energi",
+        "pl": "Karta 1 Energia",
+        "ru": "Карта 1 Энергия",
+        "ko": "카드 1 에너지",
+        "ar": "البطاقة 1 الطاقة"
       },
       "desc:": {
-        "en": "Card 1 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 1 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 1 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 1 Energi samlet forbrug i kilowatt-time (kWh).",
+        "de": "Karte 1 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 1 Consumo total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 1 Consommation totale d'énergie en kilowattheures (kWh).",
+        "it": "Scheda 1 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 1 Energi totalforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 1 Total energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 1 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 1 Общий расход энергии в киловатт-часах (кВтч).",
+        "ko": "카드 1 총 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 1 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -214,15 +430,51 @@
     "meter_power.1_pv": {
       "type": "number",
       "title": {
-        "en": "Card 1 PV Energy"
+        "en": "Card 1 PV Energy",
+        "nl": "Kaart 1 PV Energie",
+        "da": "Kort 1 PV Energi",
+        "de": "Karte 1 PV-Energie",
+        "es": "Tarjeta 1 Energía Solar Fotovoltaica",
+        "fr": "Carte 1 Énergie PV",
+        "it": "Scheda 1 Energia PV",
+        "no": "Kort 1 PV Energi",
+        "sv": "Kort 1 PV Energi",
+        "pl": "Karta 1 Energia PV",
+        "ru": "Карта 1 Энергия Солнечных Панелей",
+        "ko": "카드 1 태양광 에너지",
+        "ar": "البطاقة 1 طاقة الألواح الشمسية"
       },
       "desc:": {
-        "en": "Card 1 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 1 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 1 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 1 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 1 PV-Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 1 Uso de energía fotovoltaica en kilovatios-hora (kWh).",
+        "fr": "Carte 1 Utilisation d'énergie PV en kilowattheure (kWh).",
+        "it": "Scheda 1 Consumo energetico PV in kilowattora (kWh).",
+        "no": "Kort 1 PV Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 1 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 1 Zużycie energii PV w kilowatogodzinach (kWh).",
+        "ru": "Карта 1 Энергопотребление фотоэлектрической системы в киловатт-часах (кВтч).",
+        "ko": "카드 1 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 1 استخدام الطاقة الشمسية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -230,15 +482,51 @@
     "meter_power.1_grid": {
       "type": "number",
       "title": {
-        "en": "Card 1 Grid Energy"
+        "en": "Card 1 Grid Energy",
+        "nl": "Kaart 1 Netstroom",
+        "da": "Kort 1 Netenergi",
+        "de": "Karte 1 Netzenergie",
+        "es": "Tarjeta 1 Energía de la Red",
+        "fr": "Carte 1 Énergie du Réseau",
+        "it": "Scheda 1 Energia di Rete",
+        "no": "Kort 1 Nettenergi",
+        "sv": "Kort 1 Nätenergi",
+        "pl": "Karta 1 Energia Sieciowa",
+        "ru": "Карта 1 Энергия Сети",
+        "ko": "카드 1 그리드 에너지",
+        "ar": "بطاقة 1 طاقة الشبكة"
       },
       "desc:": {
-        "en": "Card 1 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 1 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 1 Netwerkenergieverbruik in kilowattuur (kWh).",
+        "da": "Kort 1 Netforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 1 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 1 Consumo de energía de la red en kilovatios-hora (kWh).",
+        "fr": "Carte 1 Consommation d'énergie du réseau en kilowattheure (kWh).",
+        "it": "Scheda 1 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 1 Strømforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 1 Nätenergiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 1 Zużycie energii z sieci w kilowatogodzinach (kWh).",
+        "ru": "Карта 1 Потребление энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 1 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 1 استهلاك الطاقة في الشبكة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -246,15 +534,51 @@
     "meter_power.2": {
       "type": "number",
       "title": {
-        "en": "Card 2 Energy"
+        "en": "Card 2 Energy",
+        "nl": "Kaart 2 Energie",
+        "da": "Kort 2 Energi",
+        "de": "Karte 2 Energie",
+        "es": "Tarjeta 2 Energía",
+        "fr": "Carte 2 Énergie",
+        "it": "Scheda 2 Energia",
+        "no": "Kort 2 Energi",
+        "sv": "Kort 2 Energi",
+        "pl": "Karta 2 Energia",
+        "ru": "Карта 2 Энергия",
+        "ko": "카드 2 에너지",
+        "ar": "البطاقة 2 الطاقة"
       },
       "desc:": {
-        "en": "Card 2 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 2 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 2 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 2 Energi samlet forbrug i kilowatt-time (kWh).",
+        "de": "Karte 2 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 2 Uso total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 2 Consommation totale d'énergie en kilowattheures (kWh).",
+        "it": "Scheda 2 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 2 Energi totalforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 2 Total energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 2 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 2 Общий расход энергии в киловатт-часах (кВтч).",
+        "ko": "카드 2 에너지 총 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 2 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -262,15 +586,51 @@
     "meter_power.2_pv": {
       "type": "number",
       "title": {
-        "en": "Card 2 PV Energy"
+        "en": "Card 2 PV Energy",
+        "nl": "Kaart 2 PV Energie",
+        "da": "Kort 2 PV Energi",
+        "de": "Karte 2 PV-Energie",
+        "es": "Tarjeta 2 Energía PV",
+        "fr": "Carte 2 Énergie PV",
+        "it": "Scheda 2 Energia PV",
+        "no": "Kort 2 PV Energi",
+        "sv": "Kort 2 PV Energi",
+        "pl": "Karta 2 Energia PV",
+        "ru": "Карта 2 PV Энергия",
+        "ko": "카드 2 PV 에너지",
+        "ar": "بطاقة 2 طاقة PV"
       },
       "desc:": {
-        "en": "Card 2 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 2 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 2 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 2 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 2 PV-Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 2 Uso de energía fotovoltaica en kilovatios-hora (kWh).",
+        "fr": "Carte 2 Utilisation d'énergie PV en kilowattheure (kWh).",
+        "it": "Scheda 2 Consumo energetico PV in kilowattora (kWh).",
+        "no": "Kort 2 PV Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 2 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 2 Zużycie energii PV w kilowatogodzinach (kWh).",
+        "ru": "Карта 2 Энергопотребление фотоэлектрической системы в киловатт-часах (кВт·ч).",
+        "ko": "카드 2 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 2 استخدام الطاقة الكهروضوئية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -278,15 +638,51 @@
     "meter_power.2_grid": {
       "type": "number",
       "title": {
-        "en": "Card 2 Grid Energy"
+        "en": "Card 2 Grid Energy",
+        "nl": "Kaart 2 Netstroom",
+        "da": "Kort 2 Netenergi",
+        "de": "Karte 2 Netzenergie",
+        "es": "Tarjeta 2 Energía de la Red",
+        "fr": "Carte 2 Énergie du Réseau",
+        "it": "Scheda 2 Energia di Rete",
+        "no": "Kort 2 Nettenergi",
+        "sv": "Kort 2 Nätenergi",
+        "pl": "Karta 2 Energia Sieciowa",
+        "ru": "Карта 2 Сетевой Энергии",
+        "ko": "카드 2 그리드 에너지",
+        "ar": "بطاقة 2 شبكة الطاقة"
       },
       "desc:": {
-        "en": "Card 2 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 2 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 2 Netstroomverbruik in kilowattuur (kWh).",
+        "da": "Kort 2 Net Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 2 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 2 Consumo de energía de la red en kilovatios-hora (kWh).",
+        "fr": "Carte 2 Consommation d'énergie du réseau en kilowattheure (kWh).",
+        "it": "Scheda 2 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 2 Nett Energibruk i kilowatt-time (kWh).",
+        "sv": "Kort 2 Nätenergiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 2 Zużycie energii z sieci w kilowatogodzinach (kWh).",
+        "ru": "Карта 2 Энергопотребление в киловатт-часах (кВт·ч).",
+        "ko": "카드 2 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 2 شبكة استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -294,15 +690,51 @@
     "meter_power.3": {
       "type": "number",
       "title": {
-        "en": "Card 3 Energy"
+        "en": "Card 3 Energy",
+        "nl": "Kaart 3 Energie",
+        "da": "Kort 3 Energi",
+        "de": "Karte 3 Energie",
+        "es": "Tarjeta 3 Energía",
+        "fr": "Carte 3 Énergie",
+        "it": "Scheda 3 Energia",
+        "no": "Kort 3 Energi",
+        "sv": "Kort 3 Energi",
+        "pl": "Karta 3 Energia",
+        "ru": "Карта 3 Энергия",
+        "ko": "카드 3 에너지",
+        "ar": "بطاقة 3 الطاقة"
       },
       "desc:": {
-        "en": "Card 3 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 3 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 3 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 3 Energiforbrug i alt i kilowatt-timer (kWh).",
+        "de": "Karte 3 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 3 Uso total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 3 Consommation totale d'énergie en kilowattheures (kWh).",
+        "it": "Scheda 3 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 3 Energi totalforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 3 Energi total användning i kilowattimmar (kWh).",
+        "pl": "Karta 3 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 3 Общий расход энергии в киловатт-часах (кВтч).",
+        "ko": "카드 3 총 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 3 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -310,15 +742,51 @@
     "meter_power.3_pv": {
       "type": "number",
       "title": {
-        "en": "Card 3 PV Energy"
+        "en": "Card 3 PV Energy",
+        "nl": "Kaart 3 PV Energie",
+        "da": "Kort 3 PV Energi",
+        "de": "Karte 3 PV-Energie",
+        "es": "Tarjeta 3 Energía PV",
+        "fr": "Carte 3 Énergie PV",
+        "it": "Scheda 3 Energia PV",
+        "no": "Kort 3 PV Energi",
+        "sv": "Kort 3 PV Energi",
+        "pl": "Karta 3 Energia PV",
+        "ru": "Карта 3 PV Энергия",
+        "ko": "카드 3 PV 에너지",
+        "ar": "بطاقة 3 طاقة PV"
       },
       "desc:": {
-        "en": "Card 3 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 3 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 3 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 3 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 3 PV-Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 3 Uso de energía fotovoltaica en kilovatios-hora (kWh).",
+        "fr": "Carte 3 Utilisation d'énergie PV en kilowattheures (kWh).",
+        "it": "Scheda 3 Consumo energetico PV in kilowattora (kWh).",
+        "no": "Kort 3 PV Energiforbruk i kilowatt-timer (kWh).",
+        "sv": "Kort 3 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 3 Zużycie energii PV w kilowatogodzinach (kWh).",
+        "ru": "Карта 3 Энергопотребление фотоэлектрической системы в киловатт-часах (кВт·ч).",
+        "ko": "카드 3 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 3 استخدام الطاقة الشمسية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -326,15 +794,51 @@
     "meter_power.3_grid": {
       "type": "number",
       "title": {
-        "en": "Card 3 Grid Energy"
+        "en": "Card 3 Grid Energy",
+        "nl": "Kaart 3 Netstroom",
+        "da": "Kort 3 Netenergi",
+        "de": "Karte 3 Netzenergie",
+        "es": "Tarjeta 3 Energía de Red",
+        "fr": "Carte 3 Énergie du Réseau",
+        "it": "Scheda 3 Energia di Rete",
+        "no": "Kort 3 Nettenergi",
+        "sv": "Kort 3 Rutnätsenergi",
+        "pl": "Karta 3 Energia Sieciowa",
+        "ru": "Карта 3 Сетевой Энергии",
+        "ko": "카드 3 그리드 에너지",
+        "ar": "بطاقة 3 شبكة الطاقة"
       },
       "desc:": {
-        "en": "Card 3 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 3 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 3 Netstroomverbruik in kilowattuur (kWh).",
+        "da": "Kort 3 Netforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 3 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 3 Consumo de energía de la red en kilovatios-hora (kWh).",
+        "fr": "Carte 3 Consommation d'énergie du réseau en kilowattheures (kWh).",
+        "it": "Scheda 3 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 3 Rutenett Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 3 Rutnätsenergiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 3 Zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карточка 3 Энергопотребление в киловатт-часах (кВт·ч).",
+        "ko": "카드 3 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 3 شبكة استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -342,15 +846,51 @@
     "meter_power.4": {
       "type": "number",
       "title": {
-        "en": "Card 4 Energy"
+        "en": "Card 4 Energy",
+        "nl": "Kaart 4 Energie",
+        "da": "Kort 4 Energi",
+        "de": "Karte 4 Energie",
+        "es": "Tarjeta 4 Energía",
+        "fr": "Carte 4 Énergie",
+        "it": "Scheda 4 Energia",
+        "no": "Kort 4 Energi",
+        "sv": "Kort 4 Energi",
+        "pl": "Karta 4 Energia",
+        "ru": "Карта 4 Энергия",
+        "ko": "카드 4 에너지",
+        "ar": "بطاقة 4 الطاقة"
       },
       "desc:": {
-        "en": "Card 4 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 4 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 4 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 4 Energi samlet forbrug i kilowatt-time (kWh).",
+        "de": "Karte 4 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 4 Uso total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 4 Consommation totale d'énergie en kilowattheure (kWh).",
+        "it": "Scheda 4 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 4 Energi totalforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 4 Total energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 4 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 4 Общий расход энергии в киловатт-часах (кВтч).",
+        "ko": "카드 4 총 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 4 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -358,15 +898,51 @@
     "meter_power.4_pv": {
       "type": "number",
       "title": {
-        "en": "Card 4 PV Energy"
+        "en": "Card 4 PV Energy",
+        "nl": "Kaart 4 PV Energie",
+        "da": "Kort 4 PV Energi",
+        "de": "Karte 4 PV-Energie",
+        "es": "Tarjeta 4 Energía FV",
+        "fr": "Carte 4 Énergie PV",
+        "it": "Scheda 4 Energia PV",
+        "no": "Kort 4 PV Energi",
+        "sv": "Kort 4 PV Energi",
+        "pl": "Karta 4 Energia PV",
+        "ru": "Карта 4 Энергия Солнечных Панелей",
+        "ko": "카드 4 PV 에너지",
+        "ar": "بطاقة 4 طاقة PV"
       },
       "desc:": {
-        "en": "Card 4 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 4 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 4 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 4 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 4 PV-Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 4 Uso de energía fotovoltaica en kilovatios-hora (kWh).",
+        "fr": "Carte 4 Utilisation d'énergie PV en kilowattheure (kWh).",
+        "it": "Scheda 4 Consumo energetico PV in kilowattora (kWh).",
+        "no": "Kort 4 PV Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 4 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 4 Zużycie energii PV w kilowatogodzinach (kWh).",
+        "ru": "Карта 4 Энергопотребление фотоэлектрической системы в киловатт-часах (кВт·ч).",
+        "ko": "카드 4 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 4 استخدام الطاقة الشمسية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -374,15 +950,51 @@
     "meter_power.4_grid": {
       "type": "number",
       "title": {
-        "en": "Card 4 Grid Energy"
+        "en": "Card 4 Grid Energy",
+        "nl": "Kaart 4 Netstroom",
+        "da": "Kort 4 Netenergi",
+        "de": "Karte 4 Netzenergie",
+        "es": "Tarjeta 4 Energía de la Red",
+        "fr": "Carte 4 Énergie du Réseau",
+        "it": "Scheda 4 Energia di Rete",
+        "no": "Kort 4 Nettenergi",
+        "sv": "Kort 4 Rutnätsenergi",
+        "pl": "Karta 4 Energia Sieciowa",
+        "ru": "Карта 4 Сетевой Энергии",
+        "ko": "카드 4 그리드 에너지",
+        "ar": "بطاقة 4 شبكة الطاقة"
       },
       "desc:": {
-        "en": "Card 4 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 4 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 4 Netstroomverbruik in kilowattuur (kWh).",
+        "da": "Kort 4 Netforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 4 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 4 Consumo de energía de la red en kilovatios-hora (kWh).",
+        "fr": "Carte 4 Consommation d'énergie du réseau en kilowattheure (kWh).",
+        "it": "Scheda 4 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 4 Nett Energibruk i kilowatt-time (kWh).",
+        "sv": "Kort 4 Rutnät Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 4 Zużycie energii z sieci w kilowatogodzinach (kWh).",
+        "ru": "Карта 4 Энергопотребление в киловатт-часах (кВт·ч).",
+        "ko": "카드 4 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 4 شبكة استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -390,15 +1002,51 @@
     "meter_power.5": {
       "type": "number",
       "title": {
-        "en": "Card 5 Energy"
+        "en": "Card 5 Energy",
+        "nl": "Kaart 5 Energie",
+        "da": "Kort 5 Energi",
+        "de": "Karte 5 Energie",
+        "es": "Tarjeta 5 Energía",
+        "fr": "Carte 5 Énergie",
+        "it": "Scheda 5 Energia",
+        "no": "Kort 5 Energi",
+        "sv": "Kort 5 Energi",
+        "pl": "Karta 5 Energia",
+        "ru": "Карта 5 Энергия",
+        "ko": "카드 5 에너지",
+        "ar": "بطاقة 5 الطاقة"
       },
       "desc:": {
-        "en": "Card 5 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 5 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 5 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 5 Energiforbrug i alt i kilowatt-timer (kWh).",
+        "de": "Karte 5 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 5 Uso total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 5 Consommation totale d'énergie en kilowattheures (kWh).",
+        "it": "Scheda 5 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 5 Energiforbruk totalt i kilowatt-timer (kWh).",
+        "sv": "Kort 5 Energitotalanvändning i kilowattimmar (kWh).",
+        "pl": "Karta 5 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 5 Общий расход энергии в киловатт-часах (кВтч).",
+        "ko": "카드 5 총 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 5 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -406,15 +1054,51 @@
     "meter_power.5_pv": {
       "type": "number",
       "title": {
-        "en": "Card 5 PV Energy"
+        "en": "Card 5 PV Energy",
+        "nl": "Kaart 5 PV Energie",
+        "da": "Kort 5 PV Energi",
+        "de": "Karte 5 PV Energie",
+        "es": "Tarjeta 5 Energía PV",
+        "fr": "Carte 5 Énergie PV",
+        "it": "Scheda 5 Energia PV",
+        "no": "Kort 5 PV Energi",
+        "sv": "Kort 5 PV Energi",
+        "pl": "Karta 5 Energia PV",
+        "ru": "Карта 5 PV Энергия",
+        "ko": "카드 5 PV 에너지",
+        "ar": "بطاقة 5 طاقة PV"
       },
       "desc:": {
-        "en": "Card 5 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 5 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 5 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 5 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 5 PV-Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 5 Uso de energía fotovoltaica en kilovatios-hora (kWh).",
+        "fr": "Carte 5 Utilisation d'énergie PV en kilowattheure (kWh).",
+        "it": "Scheda 5 Consumo energetico PV in kilowattora (kWh).",
+        "no": "Kort 5 PV Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 5 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 5 Zużycie energii PV w kilowatogodzinach (kWh).",
+        "ru": "Карта 5 Потребление энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 5 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 5 استخدام الطاقة الكهروضوئية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "킬로와트시 (kWh)",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -422,15 +1106,51 @@
     "meter_power.5_grid": {
       "type": "number",
       "title": {
-        "en": "Card 5 Grid Energy"
+        "en": "Card 5 Grid Energy",
+        "nl": "Kaart 5 Netstroom",
+        "da": "Kort 5 Netenergi",
+        "de": "Karte 5 Netzenergie",
+        "es": "Tarjeta 5 Energía de la Red",
+        "fr": "Carte 5 Énergie du Réseau",
+        "it": "Scheda 5 Energia di Rete",
+        "no": "Kort 5 Nettenergi",
+        "sv": "Kort 5 Rutnätsenergi",
+        "pl": "Karta 5 Energia Sieciowa",
+        "ru": "Карта 5 Сетевой Энергии",
+        "ko": "카드 5 그리드 에너지",
+        "ar": "بطاقة 5 شبكة الطاقة"
       },
       "desc:": {
-        "en": "Card 5 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 5 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 5 Netstroomverbruik in kilowattuur (kWh).",
+        "da": "Kort 5 Netforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 5 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 5 Consumo de energía de la red en kilovatios-hora (kWh).",
+        "fr": "Carte 5 Consommation d'énergie du réseau en kilowattheures (kWh).",
+        "it": "Scheda 5 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 5 Rutenett Energiforbruk i kilowatt-timer (kWh).",
+        "sv": "Kort 5 Rutnätsenergi användning i kilowatt-timmar (kWh).",
+        "pl": "Karta 5 Zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 5 Энергопотребление в киловатт-часах (кВт·ч).",
+        "ko": "카드 5 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 5 شبكة استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -438,15 +1158,51 @@
     "meter_power.6": {
       "type": "number",
       "title": {
-        "en": "Card 6 Energy"
+        "en": "Card 6 Energy",
+        "nl": "Kaart 6 Energie",
+        "da": "Kort 6 Energi",
+        "de": "Karte 6 Energie",
+        "es": "Tarjeta 6 Energía",
+        "fr": "Carte 6 Énergie",
+        "it": "Scheda 6 Energia",
+        "no": "Kort 6 Energi",
+        "sv": "Kort 6 Energi",
+        "pl": "Karta 6 Energia",
+        "ru": "Карта 6 Энергия",
+        "ko": "카드 6 에너지",
+        "ar": "بطاقة 6 الطاقة"
       },
       "desc:": {
-        "en": "Card 6 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 6 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 6 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 6 Energiforbrug i alt i kilowatt-timer (kWh).",
+        "de": "Karte 6 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 6 Uso total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 6 Consommation totale d'énergie en kilowattheures (kWh).",
+        "it": "Scheda 6 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 6 Energi totalforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 6 Total energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 6 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 6 Общий расход энергии в киловатт-часах (кВтч).",
+        "ko": "카드 6 총 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 6 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -454,15 +1210,51 @@
     "meter_power.6_pv": {
       "type": "number",
       "title": {
-        "en": "Card 6 PV Energy"
+        "en": "Card 6 PV Energy",
+        "nl": "Kaart 6 PV Energie",
+        "da": "Kort 6 PV Energi",
+        "de": "Karte 6 PV Energie",
+        "es": "Tarjeta 6 Energía PV",
+        "fr": "Carte 6 Énergie PV",
+        "it": "Scheda 6 Energia PV",
+        "no": "Kort 6 PV Energi",
+        "sv": "Kort 6 PV Energi",
+        "pl": "Karta 6 Energia PV",
+        "ru": "Карта 6 Энергия Солнечных Панелей",
+        "ko": "카드 6 PV 에너지",
+        "ar": "بطاقة 6 طاقة PV"
       },
       "desc:": {
-        "en": "Card 6 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 6 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 6 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 6 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 6 PV-Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 6 Uso de energía fotovoltaica en kilovatios-hora (kWh).",
+        "fr": "Carte 6 Utilisation d'énergie PV en kilowattheure (kWh).",
+        "it": "Scheda 6 Consumo energetico PV in kilowattora (kWh).",
+        "no": "Kort 6 PV Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 6 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 6 Zużycie energii PV w kilowatogodzinach (kWh).",
+        "ru": "Карта 6 Энергопотребление фотоэлектрической системы в киловатт-часах (кВт·ч).",
+        "ko": "카드 6 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 6 استخدام الطاقة الشمسية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -470,15 +1262,51 @@
     "meter_power.6_grid": {
       "type": "number",
       "title": {
-        "en": "Card 6 Grid Energy"
+        "en": "Card 6 Grid Energy",
+        "nl": "Kaart 6 Netstroom",
+        "da": "Kort 6 Netenergi",
+        "de": "Karte 6 Netzenergie",
+        "es": "Tarjeta 6 Energía de la Red",
+        "fr": "Carte 6 Énergie du Réseau",
+        "it": "Carta 6 Energia di Rete",
+        "no": "Kort 6 Nettenergi",
+        "sv": "Kort 6 Nätenergi",
+        "pl": "Karta 6 Energia Sieciowa",
+        "ru": "Карта 6 Сетевой Энергии",
+        "ko": "카드 6 그리드 에너지",
+        "ar": "بطاقة 6 شبكة الطاقة"
       },
       "desc:": {
-        "en": "Card 6 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 6 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 6 Netstroomverbruik in kilowattuur (kWh).",
+        "da": "Kort 6 Netforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 6 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 6 Consumo de energía de la red en kilovatios-hora (kWh).",
+        "fr": "Carte 6 Consommation d'énergie du réseau en kilowattheures (kWh).",
+        "it": "Scheda 6 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 6 Nettforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 6 Rutnätsenergiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 6 Zużycie energii z sieci w kilowatogodzinach (kWh).",
+        "ru": "Карточка 6 Потребление энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 6 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 6 شبكة استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -486,15 +1314,51 @@
     "meter_power.7": {
       "type": "number",
       "title": {
-        "en": "Card 7 Energy"
+        "en": "Card 7 Energy",
+        "nl": "Kaart 7 Energie",
+        "da": "Kort 7 Energi",
+        "de": "Karte 7 Energie",
+        "es": "Tarjeta 7 Energía",
+        "fr": "Carte 7 Énergie",
+        "it": "Scheda 7 Energia",
+        "no": "Kort 7 Energi",
+        "sv": "Kort 7 Energi",
+        "pl": "Karta 7 Energia",
+        "ru": "Карта 7 Энергия",
+        "ko": "카드 7 에너지",
+        "ar": "البطاقة 7 الطاقة"
       },
       "desc:": {
-        "en": "Card 7 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 7 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 7 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 7 Energiforbrug i alt i kilowatt-timer (kWh).",
+        "de": "Karte 7 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 7 Uso total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 7 Consommation totale d'énergie en kilowattheures (kWh).",
+        "it": "Scheda 7 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 7 Energi totalforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 7 Total energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 7 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 7 Общий расход энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 7 에너지 총 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 7 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -502,15 +1366,51 @@
     "meter_power.7_pv": {
       "type": "number",
       "title": {
-        "en": "Card 7 PV Energy"
+        "en": "Card 7 PV Energy",
+        "nl": "Kaart 7 PV Energie",
+        "da": "Kort 7 PV Energi",
+        "de": "Karte 7 PV Energie",
+        "es": "Tarjeta 7 Energía PV",
+        "fr": "Carte 7 Énergie PV",
+        "it": "Scheda 7 Energia PV",
+        "no": "Kort 7 PV Energi",
+        "sv": "Kort 7 PV Energi",
+        "pl": "Karta 7 Energia PV",
+        "ru": "Карта 7 PV Энергия",
+        "ko": "카드 7 PV 에너지",
+        "ar": "بطاقة 7 طاقة PV"
       },
       "desc:": {
-        "en": "Card 7 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 7 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 7 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 7 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 7 PV Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 7 Consumo de energía fotovoltaica en kilovatios-hora (kWh).",
+        "fr": "Carte 7 Utilisation d'énergie PV en kilowattheure (kWh).",
+        "it": "Scheda 7 PV Consumo energetico in kilowattora (kWh).",
+        "no": "Kort 7 PV Energiforbruk i kilowatt-timer (kWh).",
+        "sv": "Kort 7 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 7 PV Zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 7 Энергопотребление фотоэлектрической системы в киловатт-часах (кВт·ч).",
+        "ko": "카드 7 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 7 استهلاك الطاقة الكهروضوئية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -518,15 +1418,51 @@
     "meter_power.7_grid": {
       "type": "number",
       "title": {
-        "en": "Card 7 Grid Energy"
+        "en": "Card 7 Grid Energy",
+        "nl": "Kaart 7 Netstroom",
+        "da": "Kort 7 Netenergi",
+        "de": "Karte 7 Netzenergie",
+        "es": "Tarjeta 7 Energía de la Red",
+        "fr": "Carte 7 Énergie du Réseau",
+        "it": "Scheda 7 Energia di Rete",
+        "no": "Kort 7 Nettstrøm",
+        "sv": "Kort 7 Nätenergi",
+        "pl": "Karta 7 Energia Sieciowa",
+        "ru": "Карта 7 Сетевой Энергии",
+        "ko": "카드 7 그리드 에너지",
+        "ar": "بطاقة 7 شبكة الطاقة"
       },
       "desc:": {
-        "en": "Card 7 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 7 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 7 Netstroomverbruik in kilowattuur (kWh).",
+        "da": "Kort 7 Net Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 7 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 7 Consumo de energía de la red en kilovatios-hora (kWh).",
+        "fr": "Carte 7 Consommation d'énergie du réseau en kilowattheures (kWh).",
+        "it": "Scheda 7 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 7 Nettforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 7 Rutnätsenergiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 7 Zużycie energii z sieci w kilowatogodzinach (kWh).",
+        "ru": "Карта 7 Энергопотребление в киловатт-часах (кВт·ч).",
+        "ko": "카드 7 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 7 شبكة استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -534,15 +1470,51 @@
     "meter_power.8": {
       "type": "number",
       "title": {
-        "en": "Card 8 Energy"
+        "en": "Card 8 Energy",
+        "nl": "Kaart 8 Energie",
+        "da": "Kort 8 Energi",
+        "de": "Karte 8 Energie",
+        "es": "Tarjeta 8 Energía",
+        "fr": "Carte 8 Énergie",
+        "it": "Scheda 8 Energia",
+        "no": "Kort 8 Energi",
+        "sv": "Kort 8 Energi",
+        "pl": "Karta 8 Energia",
+        "ru": "Карта 8 Энергия",
+        "ko": "카드 8 에너지",
+        "ar": "بطاقة 8 الطاقة"
       },
       "desc:": {
-        "en": "Card 8 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 8 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 8 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 8 Energiforbrug i alt i kilowatt-timer (kWh).",
+        "de": "Karte 8 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 8 Uso total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 8 Consommation totale d'énergie en kilowattheures (kWh).",
+        "it": "Scheda 8 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 8 Total energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 8 Total energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 8 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 8 Общий расход энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 8 총 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 8 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -550,15 +1522,51 @@
     "meter_power.8_pv": {
       "type": "number",
       "title": {
-        "en": "Card 8 PV Energy"
+        "en": "Card 8 PV Energy",
+        "nl": "Kaart 8 PV Energie",
+        "da": "Kort 8 PV Energi",
+        "de": "Karte 8 PV-Energie",
+        "es": "Tarjeta 8 Energía PV",
+        "fr": "Carte 8 Énergie PV",
+        "it": "Scheda 8 Energia PV",
+        "no": "Kort 8 PV Energi",
+        "sv": "Kort 8 PV Energi",
+        "pl": "Karta 8 Energia PV",
+        "ru": "Карта 8 PV Энергия",
+        "ko": "카드 8 PV 에너지",
+        "ar": "بطاقة 8 طاقة PV"
       },
       "desc:": {
-        "en": "Card 8 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 8 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 8 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 8 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 8 PV-Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 8 Uso de energía fotovoltaica en kilovatios-hora (kWh).",
+        "fr": "Carte 8 Utilisation d'énergie PV en kilowattheure (kWh).",
+        "it": "Scheda 8 Consumo energetico PV in kilowattora (kWh).",
+        "no": "Kort 8 PV Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 8 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 8 Zużycie energii PV w kilowatogodzinach (kWh).",
+        "ru": "Карта 8 Энергопотребление фотоэлектрической системы в киловатт-часах (кВт·ч).",
+        "ko": "카드 8 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 8 استخدام الطاقة الشمسية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -566,15 +1574,51 @@
     "meter_power.8_grid": {
       "type": "number",
       "title": {
-        "en": "Card 8 Grid Energy"
+        "en": "Card 8 Grid Energy",
+        "nl": "Kaart 8 Netstroom",
+        "da": "Kort 8 Netenergi",
+        "de": "Karte 8 Netzenergie",
+        "es": "Tarjeta 8 Energía de la Red",
+        "fr": "Carte 8 Énergie du Réseau",
+        "it": "Scheda 8 Energia di Rete",
+        "no": "Kort 8 Nettenergi",
+        "sv": "Kort 8 Rutnätsenergi",
+        "pl": "Karta 8 Energia Sieciowa",
+        "ru": "Карта 8 Сетевой Энергии",
+        "ko": "카드 8 그리드 에너지",
+        "ar": "بطاقة 8 شبكة الطاقة"
       },
       "desc:": {
-        "en": "Card 8 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 8 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 8 Netstroomverbruik in kilowattuur (kWh).",
+        "da": "Kort 8 Net Energiforbrug i kilowatt-time (kWh).",
+        "de": "Karte 8 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 8 Consumo de energía de la red en kilovatios-hora (kWh).",
+        "fr": "Carte 8 Consommation d'énergie du réseau en kilowattheures (kWh).",
+        "it": "Scheda 8 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 8 Rutenett Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 8 Rutnätsenergiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 8 Zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 8 Энергопотребление в киловатт-часах (кВт·ч).",
+        "ko": "카드 8 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 8 شبكة استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -582,15 +1626,51 @@
     "meter_power.9": {
       "type": "number",
       "title": {
-        "en": "Card 9 Energy"
+        "en": "Card 9 Energy",
+        "nl": "Kaart 9 Energie",
+        "da": "Kort 9 Energi",
+        "de": "Karte 9 Energie",
+        "es": "Tarjeta 9 Energía",
+        "fr": "Carte 9 Énergie",
+        "it": "Scheda 9 Energia",
+        "no": "Kort 9 Energi",
+        "sv": "Kort 9 Energi",
+        "pl": "Karta 9 Energia",
+        "ru": "Карта 9 Энергия",
+        "ko": "카드 9 에너지",
+        "ar": "بطاقة 9 الطاقة"
       },
       "desc:": {
-        "en": "Card 9 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 9 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 9 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 9 Samlet energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 9 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 9 Uso total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 9 Consommation totale d'énergie en kilowattheures (kWh).",
+        "it": "Scheda 9 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 9 Total energiforbruk i kilowatt-timer (kWh).",
+        "sv": "Kort 9 Total energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 9 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 9 Общий расход энергии в киловатт-часах (кВтч).",
+        "ko": "카드 9 총 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 9 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -598,15 +1678,51 @@
     "meter_power.9_pv": {
       "type": "number",
       "title": {
-        "en": "Card 9 PV Energy"
+        "en": "Card 9 PV Energy",
+        "nl": "Kaart 9 PV Energie",
+        "da": "Kort 9 PV Energi",
+        "de": "Karte 9 PV Energie",
+        "es": "Tarjeta 9 Energía PV",
+        "fr": "Carte 9 Énergie PV",
+        "it": "Carta 9 Energia PV",
+        "no": "Kort 9 PV Energi",
+        "sv": "Kort 9 PV Energi",
+        "pl": "Karta 9 Energia PV",
+        "ru": "Карта 9 PV Energy",
+        "ko": "카드 9 PV 에너지",
+        "ar": "بطاقة 9 طاقة PV"
       },
       "desc:": {
-        "en": "Card 9 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 9 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 9 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 9 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 9 PV Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 9 PV Consumo de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 9 Consommation d'énergie PV en kilowattheure (kWh).",
+        "it": "Carta 9 PV Consumo energetico in kilowattora (kWh).",
+        "no": "Kort 9 PV Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 9 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 9 Zużycie energii PV w kilowatogodzinach (kWh).",
+        "ru": "Карта 9 Потребление энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 9 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 9 استخدام الطاقة الكهروضوئية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -614,15 +1730,51 @@
     "meter_power.9_grid": {
       "type": "number",
       "title": {
-        "en": "Card 9 Grid Energy"
+        "en": "Card 9 Grid Energy",
+        "nl": "Kaart 9 Netstroom",
+        "da": "Kort 9 Net Energi",
+        "de": "Karte 9 Netzenergie",
+        "es": "Tarjeta 9 Energía de la Red",
+        "fr": "Carte 9 Énergie du Réseau",
+        "it": "Scheda 9 Energia di Rete",
+        "no": "Kort 9 Rutenett Energi",
+        "sv": "Kort 9 Rutnätsenergi",
+        "pl": "Karta 9 Energia Sieciowa",
+        "ru": "Карта 9 Сетевой Энергии",
+        "ko": "카드 9 그리드 에너지",
+        "ar": "بطاقة 9 شبكة الطاقة"
       },
       "desc:": {
-        "en": "Card 9 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 9 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 9 Raster Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 9 Gitter Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 9 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 9 Consumo de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 9 Énergie du réseau en kilowattheures (kWh).",
+        "it": "Scheda 9 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 9 Rutenett Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 9 Rutnätsenergiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 9 Zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 9 Потребление энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 9 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 9 شبكة استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -630,15 +1782,51 @@
     "meter_power.10": {
       "type": "number",
       "title": {
-        "en": "Card 10 Energy"
+        "en": "Card 10 Energy",
+        "nl": "Kaart 10 Energie",
+        "da": "Kort 10 Energi",
+        "de": "Karte 10 Energie",
+        "es": "Tarjeta 10 Energía",
+        "fr": "Carte 10 Énergie",
+        "it": "Scheda 10 Energia",
+        "no": "Kort 10 Energi",
+        "sv": "Kort 10 Energi",
+        "pl": "Karta 10 Energia",
+        "ru": "Карта 10 Энергия",
+        "ko": "카드 10 에너지",
+        "ar": "بطاقة 10 الطاقة"
       },
       "desc:": {
-        "en": "Card 10 Energy total usage in kilowatt-hour (kWh)."
+        "en": "Card 10 Energy total usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 10 Totale energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 10 Energiforbrug i alt i kilowatt-timer (kWh).",
+        "de": "Karte 10 Gesamtenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 10 Uso total de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 10 Consommation totale d'énergie en kilowattheures (kWh).",
+        "it": "Scheda 10 Consumo totale di energia in kilowattora (kWh).",
+        "no": "Kort 10 Energi totalforbruk i kilowatt-timer (kWh).",
+        "sv": "Kort 10 Energiförbrukning totalt i kilowattimmar (kWh).",
+        "pl": "Karta 10 Całkowite zużycie energii w kilowatogodzinach (kWh).",
+        "ru": "Карта 10 Общий расход энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 10 에너지 총 사용량 (킬로와트시, kWh).",
+        "ar": "البطاقة 10 إجمالي استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -646,15 +1834,51 @@
     "meter_power.10_pv": {
       "type": "number",
       "title": {
-        "en": "Card 10 PV Energy"
+        "en": "Card 10 PV Energy",
+        "nl": "Kaart 10 PV Energie",
+        "da": "Kort 10 PV Energi",
+        "de": "Karte 10 PV Energie",
+        "es": "Tarjeta 10 Energía PV",
+        "fr": "Carte 10 Énergie PV",
+        "it": "Scheda 10 Energia PV",
+        "no": "Kort 10 PV Energi",
+        "sv": "Kort 10 PV Energi",
+        "pl": "Karta 10 PV Energia",
+        "ru": "Карта 10 PV Energy",
+        "ko": "카드 10 PV 에너지",
+        "ar": "بطاقة 10 طاقة PV"
       },
       "desc:": {
-        "en": "Card 10 PV Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 10 PV Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 10 PV Energieverbruik in kilowattuur (kWh).",
+        "da": "Kort 10 PV Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 10 PV Energieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 10 PV Consumo de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 10 Utilisation d'énergie PV en kilowattheure (kWh).",
+        "it": "Scheda 10 PV Consumo energetico in kilowattora (kWh).",
+        "no": "Kort 10 PV Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 10 PV Energiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 10 Zużycie energii PV w kilowatogodzinach (kWh).",
+        "ru": "Карта 10 Потребление энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 10 PV 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 10 استخدام الطاقة الكهروضوئية بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
@@ -662,15 +1886,51 @@
     "meter_power.10_grid": {
       "type": "number",
       "title": {
-        "en": "Card 10 Grid Energy"
+        "en": "Card 10 Grid Energy",
+        "nl": "Kaart 10 Netstroom",
+        "da": "Kort 10 Netenergi",
+        "de": "Karte 10 Netzenergie",
+        "es": "Tarjeta 10 Energía de Red",
+        "fr": "Carte 10 Énergie du Réseau",
+        "it": "Scheda 10 Energia di Rete",
+        "no": "Kort 10 Nettenergi",
+        "sv": "Kort 10 Rutnätsenergi",
+        "pl": "Karta 10 Energia Sieciowa",
+        "ru": "Карта 10 Сетевой Энергии",
+        "ko": "카드 10 그리드 에너지",
+        "ar": "بطاقة 10 شبكة الطاقة"
       },
       "desc:": {
-        "en": "Card 10 Grid Energy usage in kilowatt-hour (kWh)."
+        "en": "Card 10 Grid Energy usage in kilowatt-hour (kWh).",
+        "nl": "Kaart 10 Netstroomverbruik in kilowattuur (kWh).",
+        "da": "Kort 10 Gitter Energiforbrug i kilowatt-timer (kWh).",
+        "de": "Karte 10 Netzenergieverbrauch in Kilowattstunden (kWh).",
+        "es": "Tarjeta 10 Consumo de energía en kilovatios-hora (kWh).",
+        "fr": "Carte 10 Consommation d'énergie du réseau en kilowattheures (kWh).",
+        "it": "Scheda 10 Consumo energetico della rete in kilowattora (kWh).",
+        "no": "Kort 10 Rutenett Energiforbruk i kilowatt-time (kWh).",
+        "sv": "Kort 10 Rutnätsenergiförbrukning i kilowattimmar (kWh).",
+        "pl": "Karta 10 Zużycie energii z sieci w kilowatogodzinach (kWh).",
+        "ru": "Карта 10 Потребление энергии в киловатт-часах (кВт·ч).",
+        "ko": "카드 10 그리드 에너지 사용량 (킬로와트시, kWh).",
+        "ar": "بطاقة 10 شبكة استهلاك الطاقة بالكيلوواط ساعة (kWh)."
       },
       "getable": true,
       "setable": false,
       "units": {
-        "en": "kWh"
+        "en": "kWh",
+        "nl": "kWh",
+        "da": "kWh",
+        "de": "kWh",
+        "es": "kWh",
+        "fr": "kWh",
+        "it": "kWh",
+        "no": "kWh",
+        "sv": "kWh",
+        "pl": "kWh",
+        "ru": "кВтч",
+        "ko": "kWh",
+        "ar": "كيلوواط ساعة"
       },
       "insights": true,
       "uiComponent": null
