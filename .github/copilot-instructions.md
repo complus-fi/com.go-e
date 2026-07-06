@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # General rules
 
 ## Project Overview
@@ -22,15 +20,12 @@
 - Preserve existing coding style and naming patterns.
 - Avoid unrelated refactors.
 
->>>>>>> origin/main
 # JavaScript Style Guidelines
 
 - **Input Sanitization**: Always validate and cast external API inputs (like numbers from JSON payloads) at the entry point or top of the function.
 - **Avoid Defensive Clutter**: Do not aggressively repeat `Number.isFinite()` or `typeof === 'number'` checks on variables that have already been initialized or sanitized within the same block context.
 - **Defaults**: Prefer concise inline expressions like `const value = Number(raw) || 0;` to handle fallback values cleanly.
 - **No Formatting or Linting**: Do not attempt to style, lint, format, or beautify code chunks. Write raw, dense, functional logic. Trust that VS Code's local formatting extensions (like Prettier or ESLint) will handle formatting on save.
-<<<<<<< HEAD
-=======
 
 # Driver Notes
 
@@ -52,4 +47,3 @@
 - **Unsupported on Homey Cloud**: Do not implement or depend on App Web API, app-to-app communication permissions (`homey:app:<appId>`), `homey:manager:api`/`ManagerApi`, custom app settings views, or local LAN discovery assumptions (mDNS/SSDP/MAC, `ManagerCloud#getLocalAddress()`).
 - **Path Portability**: Use relative paths and `__dirname`-based joins (for example `require('./assets/foo')`, `path.join(__dirname, '...')`). Do not assume `/` points to the app directory.
 - **Cloud Driver Connectivity Metadata**: For Cloud-capable drivers, ensure `connectivity` metadata is accurate in `driver.compose.json` and avoid unsupported network assumptions for Homey Bridge.
->>>>>>> origin/main
