@@ -1,0 +1,18 @@
+# JavaScript Style Guidelines
+
+- **Input Sanitization**: Always validate and cast external API inputs (like numbers from JSON payloads) at the entry point or top of the function.
+- **Avoid Defensive Clutter**: Do not aggressively repeat `Number.isFinite()` or `typeof === 'number'` checks on variables that have already been initialized or sanitized within the same block context.
+- **Defaults**: Prefer concise inline expressions like `const value = Number(raw) || 0;` to handle fallback values cleanly.
+- **No Formatting or Linting**: Do not attempt to style, lint, format, or beautify code chunks. Write raw, dense, functional logic. Trust that VS Code's local formatting extensions (like Prettier or ESLint) will handle formatting on save.
+
+# Homey Cloud Rules
+
+- **Target Platforms via Compose Sources**: When adding or changing Cloud support, set `platforms` in compose sources (such as `.homeycompose/**`, `drivers/*/driver.compose.json`, and flow compose files). Do not edit generated `app.json` directly.
+- **SDK Requirement**: Keep the app on Homey SDK v3 for Homey Cloud compatibility.
+- **Multi-Tenancy Safety**: Do not use mutable module/global state for runtime instance data. Store state on `this` (`App`, `Driver`, `Device`) so instances do not leak data across tenants.
+- **Lifecycle Cleanup Required**: Release resources in `onUninit()` (`App#onUninit()`, `Driver#onUninit()`, `Device#onUninit()`) to avoid leaks when instances are destroyed.
+- **Use Homey Timers**: Never use raw `setInterval()` or `setTimeout()` in app runtime code; use `this.homey.setInterval()` and `this.homey.setTimeout()` so timers are auto-cleared on teardown.
+- **No Unhandled Promises**: Homey Cloud treats unhandled rejections as crash-worthy. Always handle Promise-returning calls (for ignored results use `.catch(this.error)`).
+- **Unsupported on Homey Cloud**: Do not implement or depend on App Web API, app-to-app communication permissions (`homey:app:<appId>`), `homey:manager:api`/`ManagerApi`, custom app settings views, or local LAN discovery assumptions (mDNS/SSDP/MAC, `ManagerCloud#getLocalAddress()`).
+- **Path Portability**: Use relative paths and `__dirname`-based joins (for example `require('./assets/foo')`, `path.join(__dirname, '...')`). Do not assume `/` points to the app directory.
+- **Cloud Driver Connectivity Metadata**: For Cloud-capable drivers, ensure `connectivity` metadata is accurate in `driver.compose.json` and avoid unsupported network assumptions for Homey Bridge.
