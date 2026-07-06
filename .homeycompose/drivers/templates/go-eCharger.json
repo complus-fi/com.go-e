@@ -169,6 +169,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true
     },
     "meter_power.grid": {
@@ -220,6 +221,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true
     },
     "meter_power.session": {
@@ -271,6 +273,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true
     },
     "meter_power.session_pv": {
@@ -322,6 +325,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true
     },
     "meter_power.session_grid": {
@@ -373,6 +377,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true
     },
     "meter_power.1": {
@@ -424,6 +429,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -476,6 +482,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -528,6 +535,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -580,6 +588,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -632,6 +641,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -684,6 +694,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -736,6 +747,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -788,6 +800,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -840,6 +853,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -892,6 +906,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -944,6 +959,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -996,6 +1012,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1048,6 +1065,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1100,6 +1118,7 @@
         "ko": "킬로와트시 (kWh)",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1152,6 +1171,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1204,6 +1224,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1256,6 +1277,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1308,6 +1330,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1360,6 +1383,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1412,6 +1436,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1464,6 +1489,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1516,6 +1542,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1568,6 +1595,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1620,6 +1648,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1672,6 +1701,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1724,6 +1754,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1776,6 +1807,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1828,6 +1860,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1880,6 +1913,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
@@ -1932,6 +1966,7 @@
         "ko": "kWh",
         "ar": "كيلوواط ساعة"
       },
+      "decimals": 3,
       "insights": true,
       "uiComponent": null
     },
