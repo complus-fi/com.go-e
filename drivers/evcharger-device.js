@@ -21,6 +21,7 @@ const {
 const POLL_INTERVAL = 5000;
 const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
+const SESSION_COUNTER_RESET_WINDOW_WH = 100;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
 const GOE_TRANSACTION_BASE_VALUES = [
@@ -759,6 +760,14 @@ class evChargerDevice extends Homey.Device {
         const deltaWh = normalizedTotalWh - previousMasterWh;
 
         if (deltaWh < 0) {
+          if (definition.id === 'meter_power.session') {
+            const sessionCounterReset = normalizedTotalWh <= SESSION_COUNTER_RESET_WINDOW_WH && previousMasterWh > SESSION_COUNTER_RESET_WINDOW_WH;
+            if (!sessionCounterReset) {
+              // Ignore transient negative deltas so session split counters are not reset during an active session.
+              continue;
+            }
+          }
+
           if (this.hasCapability(definition.pvCapability)) {
             await this.setCapabilityValue(definition.pvCapability, 0).catch((error) => this.error(error));
           }
@@ -777,13 +786,13 @@ class evChargerDevice extends Homey.Device {
 
         if (this.hasCapability(definition.pvCapability)) {
           const normalizedPvWh = Math.max(0, Number(this.getCapabilityValue(definition.pvCapability)) || 0) * 1000;
-          const nextPvKwh = Number(((normalizedPvWh + pvDeltaWh) / 1000).toFixed(2));
+          const nextPvKwh = (normalizedPvWh + pvDeltaWh) / 1000;
           await this.setCapabilityValue(definition.pvCapability, nextPvKwh).catch((error) => this.error(error));
         }
 
         if (this.hasCapability(definition.gridCapability)) {
           const normalizedGridWh = Math.max(0, Number(this.getCapabilityValue(definition.gridCapability)) || 0) * 1000;
-          const nextGridKwh = Number(((normalizedGridWh + gridDeltaWh) / 1000).toFixed(2));
+          const nextGridKwh = (normalizedGridWh + gridDeltaWh) / 1000;
           await this.setCapabilityValue(definition.gridCapability, nextGridKwh).catch((error) => this.error(error));
         }
 
