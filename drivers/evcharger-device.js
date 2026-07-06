@@ -22,6 +22,7 @@ const POLL_INTERVAL = 5000;
 const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const SESSION_COUNTER_RESET_WINDOW_WH = 100;
+const PV_RATIO_WINDOW_MS = 3 * 60 * 1000;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
 const GOE_TRANSACTION_BASE_VALUES = [
@@ -248,8 +249,7 @@ class evChargerDevice extends Homey.Device {
     this.transactionStartTimestamp = null;
     this.pollIntervalMs = null;
 
-    this.volatilePvWh = 0;
-    this.volatileTotalWh = 0;
+    this.volatileEnergySamples = [];
     this.volatileLastSampleTs = 0;
 
     this.registerCapabilityListeners();
@@ -693,7 +693,10 @@ class evChargerDevice extends Homey.Device {
       const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
       const resetSessionAccumulator = previousChargingState === 'plugged_out' && nextChargingState && nextChargingState !== 'plugged_out';
       const nowTs = Date.now();
-      const elapsedMs = Number.isFinite(this.volatileLastSampleTs) && this.volatileLastSampleTs > 0 && nowTs > this.volatileLastSampleTs ? nowTs - this.volatileLastSampleTs : 0;
+      const isActivelyCharging = nextChargingState === 'plugged_in_charging' && currentPowerW > 0;
+      const hasContinuousChargingSample = isActivelyCharging && previousChargingState === 'plugged_in_charging';
+      const elapsedMs =
+        hasContinuousChargingSample && Number.isFinite(this.volatileLastSampleTs) && this.volatileLastSampleTs > 0 && nowTs > this.volatileLastSampleTs ? nowTs - this.volatileLastSampleTs : 0;
       const estimatedWh = (currentPowerW * elapsedMs) / 3600000;
       const splitDefinitions = [];
 
@@ -702,11 +705,34 @@ class evChargerDevice extends Homey.Device {
       }
 
       if (estimatedWh > 0) {
-        this.volatileTotalWh += estimatedWh;
-        this.volatilePvWh += estimatedWh * pvRatio;
+        this.volatileEnergySamples.push({
+          ts: nowTs,
+          totalWh: estimatedWh,
+          pvWh: estimatedWh * pvRatio
+        });
       }
 
-      const stablePvRatioRaw = this.volatileTotalWh > 0 ? this.volatilePvWh / this.volatileTotalWh : pvRatio;
+      const ratioWindowStartTs = nowTs - PV_RATIO_WINDOW_MS;
+      this.volatileEnergySamples = this.volatileEnergySamples.filter((sample) => {
+        return Number.isFinite(sample?.ts) && sample.ts >= ratioWindowStartTs;
+      });
+
+      const ratioWindowTotals = this.volatileEnergySamples.reduce(
+        (totals, sample) => {
+          const sampleTotalWh = Number(sample.totalWh);
+          const samplePvWh = Number(sample.pvWh);
+          if (!Number.isFinite(sampleTotalWh) || sampleTotalWh <= 0) {
+            return totals;
+          }
+
+          totals.totalWh += sampleTotalWh;
+          totals.pvWh += Number.isFinite(samplePvWh) ? Math.max(0, samplePvWh) : 0;
+          return totals;
+        },
+        { totalWh: 0, pvWh: 0 }
+      );
+
+      const stablePvRatioRaw = ratioWindowTotals.totalWh > 0 ? ratioWindowTotals.pvWh / ratioWindowTotals.totalWh : pvRatio;
       const stablePvRatio = Number.isFinite(stablePvRatioRaw) ? Math.max(0, Math.min(1, stablePvRatioRaw)) : 0;
 
       if (this.hasCapability('meter_power.pv') || this.hasCapability('meter_power.grid') || this.hasCapability('meter_power')) {
@@ -750,6 +776,31 @@ class evChargerDevice extends Homey.Device {
         delete nextValues[definition.gridCapability];
 
         const normalizedTotalWh = definition.totalWh;
+
+        const currentPvValue = this.hasCapability(definition.pvCapability) ? this.getCapabilityValue(definition.pvCapability) : null;
+        const currentGridValue = this.hasCapability(definition.gridCapability) ? this.getCapabilityValue(definition.gridCapability) : null;
+        const currentPvKwh = Number(currentPvValue);
+        const currentGridKwh = Number(currentGridValue);
+        const pvUninitialized = currentPvValue === null || currentPvValue === undefined || (Number.isFinite(currentPvKwh) && currentPvKwh <= 0);
+        const gridUninitialized = currentGridValue === null || currentGridValue === undefined || (Number.isFinite(currentGridKwh) && currentGridKwh <= 0);
+        const currentPvNormalizedKwh = Number.isFinite(currentPvKwh) && currentPvKwh > 0 ? currentPvKwh : 0;
+        const currentGridNormalizedKwh = Number.isFinite(currentGridKwh) && currentGridKwh > 0 ? currentGridKwh : 0;
+        const splitCombinedKwh = currentPvNormalizedKwh + currentGridNormalizedKwh;
+        const masterKwh = normalizedTotalWh / 1000;
+        const isSessionSplit = definition.id === 'meter_power.session';
+        const supportsBootstrapReset = !isSessionSplit;
+        const forceReinitializeFromMaster = Number.isFinite(masterKwh) && masterKwh > 40 && splitCombinedKwh < masterKwh / 2;
+
+        if (supportsBootstrapReset && ((pvUninitialized && gridUninitialized) || forceReinitializeFromMaster)) {
+          if (this.hasCapability(definition.pvCapability)) {
+            await this.setCapabilityValue(definition.pvCapability, 0).catch((error) => this.error(error));
+          }
+          if (this.hasCapability(definition.gridCapability)) {
+            await this.setCapabilityValue(definition.gridCapability, masterKwh).catch((error) => this.error(error));
+          }
+          this.resetVolatileEnergySplit();
+          continue;
+        }
 
         const previousMasterKwh = Number(this.getCapabilityValue(definition.masterCapability));
         if (!Number.isFinite(previousMasterKwh)) {
@@ -1059,8 +1110,7 @@ class evChargerDevice extends Homey.Device {
   }
 
   resetVolatileEnergySplit() {
-    this.volatilePvWh = 0;
-    this.volatileTotalWh = 0;
+    this.volatileEnergySamples = [];
   }
 
   isCardConfigured(value) {

@@ -71,6 +71,11 @@ Additional mode/power mappings:
 - Dynamic per-card energy/name values map from `c0e..c9e` and `c0n..c9n` respectively.
 - `meter_power.1_pv..10_pv` and `meter_power.1_grid..10_grid`: local split counters derived from each card's `cXe` delta and the same per-poll PV ratio used for total/session split counters.
 - Split counters (`meter_power.pv/grid`, `meter_power.session_pv/grid`, `meter_power.N_pv/grid`) are stateful and persisted via device store; if a source counter decreases (charger reset), its split counters reset to `0` for that counter scope.
+- For non-session split counters only (`meter_power.pv/grid` and `meter_power.N_pv/grid`):
+  - On first creation (both split counters null/zero), initialization sets `pv=0` and `grid=master`.
+  - If master energy is above `50` and `pv+grid` is less than half of master, split counters are reinitialized to `pv=0` and `grid=master`.
+  - Session split counters (`meter_power.session_pv/grid`) are excluded from this bootstrap/reinitialization logic.
+- Elapsed-time PV ratio accumulation is only computed across consecutive active charging polls (`plugged_in_charging` with positive charger power) and uses a rolling 3-minute sample window to estimate current PV/grid share.
 
 ## Control Behavior
 
