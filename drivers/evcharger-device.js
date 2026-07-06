@@ -246,6 +246,11 @@ class evChargerDevice extends Homey.Device {
     this.pendingChargingState = null;
     this.transactionStartTimestamp = null;
     this.pollIntervalMs = null;
+
+    this.volatilePvWh = 0;
+    this.volatileTotalWh = 0;
+    this.volatileLastSampleTs = 0;
+
     this.registerCapabilityListeners();
     await this.startConnection();
   }
@@ -497,6 +502,7 @@ class evChargerDevice extends Homey.Device {
         if (driverCapabilities.includes(d)) return false;
         // Dynamic RFID card capabilities are reconciled on poll from cXi state.
         if (/^meter_power\.(10|[1-9])$/.test(d)) return false;
+        if (/^meter_power\.(10|[1-9])_(pv|grid)$/.test(d)) return false;
         if (/^goe_meter_power_name\.(10|[1-9])$/.test(d)) return false;
         return true;
       });
@@ -678,6 +684,118 @@ class evChargerDevice extends Homey.Device {
       this.applyTransactionTimeValues(nextValues);
       this.applyMeterPowerNameForSession(status, nextValues);
       this.applyMeasurePowerSessionValues(nextValues);
+
+      const pvRatio = this.getPvEnergyRatio(status);
+      const statusNrg = Array.isArray(status.nrg) ? status.nrg : [];
+      const currentPowerW = Math.max(0, Number(statusNrg[11]) || 0);
+      const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
+      const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
+      const resetSessionAccumulator = previousChargingState === 'plugged_out' && nextChargingState && nextChargingState !== 'plugged_out';
+      const nowTs = Date.now();
+      const elapsedMs = Number.isFinite(this.volatileLastSampleTs) && this.volatileLastSampleTs > 0 && nowTs > this.volatileLastSampleTs ? nowTs - this.volatileLastSampleTs : 0;
+      const estimatedWh = (currentPowerW * elapsedMs) / 3600000;
+      const splitDefinitions = [];
+
+      if (resetSessionAccumulator) {
+        this.resetVolatileEnergySplit();
+      }
+
+      if (estimatedWh > 0) {
+        this.volatileTotalWh += estimatedWh;
+        this.volatilePvWh += estimatedWh * pvRatio;
+      }
+
+      const stablePvRatioRaw = this.volatileTotalWh > 0 ? this.volatilePvWh / this.volatileTotalWh : pvRatio;
+      const stablePvRatio = Number.isFinite(stablePvRatioRaw) ? Math.max(0, Math.min(1, stablePvRatioRaw)) : 0;
+
+      if (this.hasCapability('meter_power.pv') || this.hasCapability('meter_power.grid') || this.hasCapability('meter_power')) {
+        splitDefinitions.push({
+          id: 'meter_power',
+          masterCapability: 'meter_power',
+          totalWh: Math.max(0, Number(status.eto) || 0),
+          pvCapability: 'meter_power.pv',
+          gridCapability: 'meter_power.grid'
+        });
+      }
+
+      if (this.hasCapability('meter_power.session_pv') || this.hasCapability('meter_power.session_grid') || this.hasCapability('meter_power.session')) {
+        splitDefinitions.push({
+          id: 'meter_power.session',
+          masterCapability: 'meter_power.session',
+          totalWh: Math.max(0, Number(status.wh) || 0),
+          pvCapability: 'meter_power.session_pv',
+          gridCapability: 'meter_power.session_grid'
+        });
+      }
+
+      for (let cardIndex = 1; cardIndex <= 10; cardIndex += 1) {
+        const pvCapability = `meter_power.${cardIndex}_pv`;
+        const gridCapability = `meter_power.${cardIndex}_grid`;
+        if (!this.hasCapability(pvCapability) && !this.hasCapability(gridCapability)) {
+          continue;
+        }
+
+        splitDefinitions.push({
+          id: `meter_power.${cardIndex}`,
+          masterCapability: `meter_power.${cardIndex}`,
+          totalWh: Math.max(0, Number(status[`c${cardIndex - 1}e`]) || 0),
+          pvCapability,
+          gridCapability
+        });
+      }
+
+      let committedHardwareTick = false;
+      for (const definition of splitDefinitions) {
+        delete nextValues[definition.pvCapability];
+        delete nextValues[definition.gridCapability];
+
+        const normalizedTotalWh = definition.totalWh;
+
+        const previousMasterKwh = Number(this.getCapabilityValue(definition.masterCapability));
+        if (!Number.isFinite(previousMasterKwh)) {
+          continue;
+        }
+
+        const previousMasterWh = Math.max(0, previousMasterKwh) * 1000;
+        const deltaWh = normalizedTotalWh - previousMasterWh;
+
+        if (deltaWh < 0) {
+          if (this.hasCapability(definition.pvCapability)) {
+            await this.setCapabilityValue(definition.pvCapability, 0).catch((error) => this.error(error));
+          }
+          if (this.hasCapability(definition.gridCapability)) {
+            await this.setCapabilityValue(definition.gridCapability, 0).catch((error) => this.error(error));
+          }
+          continue;
+        }
+
+        if (deltaWh <= 0) {
+          continue;
+        }
+
+        const pvDeltaWh = deltaWh * stablePvRatio;
+        const gridDeltaWh = deltaWh - pvDeltaWh;
+
+        if (this.hasCapability(definition.pvCapability)) {
+          const normalizedPvWh = Math.max(0, Number(this.getCapabilityValue(definition.pvCapability)) || 0) * 1000;
+          const nextPvKwh = Number(((normalizedPvWh + pvDeltaWh) / 1000).toFixed(2));
+          await this.setCapabilityValue(definition.pvCapability, nextPvKwh).catch((error) => this.error(error));
+        }
+
+        if (this.hasCapability(definition.gridCapability)) {
+          const normalizedGridWh = Math.max(0, Number(this.getCapabilityValue(definition.gridCapability)) || 0) * 1000;
+          const nextGridKwh = Number(((normalizedGridWh + gridDeltaWh) / 1000).toFixed(2));
+          await this.setCapabilityValue(definition.gridCapability, nextGridKwh).catch((error) => this.error(error));
+        }
+
+        committedHardwareTick = true;
+      }
+
+      if (committedHardwareTick || resetSessionAccumulator) {
+        this.resetVolatileEnergySplit();
+      }
+
+      this.volatileLastSampleTs = nowTs;
 
       // Update target_power max capability option based on ama (ampere max limit)
       if (this.hasCapability('target_power') && status.ama !== undefined && Number.isFinite(Number(status.ama))) {
@@ -909,6 +1027,36 @@ class evChargerDevice extends Homey.Device {
     nextValues['measure_power.max'] = Math.max(normalizedSessionMax, currentPower);
   }
 
+  getPvEnergyRatio(status = {}) {
+    const evPower = Number(Array.isArray(status.nrg) ? status.nrg[11] : null);
+    if (!Number.isFinite(evPower) || evPower <= 0) {
+      return 0;
+    }
+
+    const pGrid = Number(status.pgrid);
+    const pPv = Number(status.ppv);
+
+    if (Number.isFinite(pGrid) && pGrid <= 0) {
+      return 1;
+    }
+
+    let pvPower = 0;
+    if (Number.isFinite(pPv)) {
+      pvPower = Math.min(evPower, Math.max(0, pPv));
+    } else if (Number.isFinite(pGrid)) {
+      pvPower = Math.max(0, evPower - Math.max(0, pGrid));
+    }
+
+    const ratio = pvPower / evPower;
+    if (!Number.isFinite(ratio)) return 0;
+    return Math.max(0, Math.min(1, ratio));
+  }
+
+  resetVolatileEnergySplit() {
+    this.volatilePvWh = 0;
+    this.volatileTotalWh = 0;
+  }
+
   isCardConfigured(value) {
     if (typeof value === 'boolean') return value;
     if (typeof value === 'number') return value !== 0;
@@ -935,19 +1083,35 @@ class evChargerDevice extends Homey.Device {
       const configured = this.isCardConfigured(status[configKey]);
       const previousConfigured = this.cardConfiguredFlags[index];
       const meterCapability = `meter_power.${cardNumber}`;
+      const meterPvCapability = `meter_power.${cardNumber}_pv`;
+      const meterGridCapability = `meter_power.${cardNumber}_grid`;
       const nameCapability = `goe_meter_power_name.${cardNumber}`;
+      const hasMeterCapability = this.hasCapability(meterCapability);
+      const hasMeterPvCapability = this.hasCapability(meterPvCapability);
+      const hasMeterGridCapability = this.hasCapability(meterGridCapability);
+      const hasNameCapability = this.hasCapability(nameCapability);
 
       // On first seen value, reconcile only if device capability state does not match charger state.
       if (previousConfigured !== undefined && previousConfigured === configured) {
-        continue;
+        const isCapabilityStateInSync = configured
+          ? hasMeterCapability && hasMeterPvCapability && hasMeterGridCapability && hasNameCapability
+          : !hasMeterCapability && !hasMeterPvCapability && !hasMeterGridCapability && !hasNameCapability;
+
+        if (isCapabilityStateInSync) {
+          continue;
+        }
       }
 
       if (configured) {
-        if (!this.hasCapability(meterCapability)) capsToAdd.push(meterCapability);
-        if (!this.hasCapability(nameCapability)) capsToAdd.push(nameCapability);
+        if (!hasMeterCapability) capsToAdd.push(meterCapability);
+        if (!hasMeterPvCapability) capsToAdd.push(meterPvCapability);
+        if (!hasMeterGridCapability) capsToAdd.push(meterGridCapability);
+        if (!hasNameCapability) capsToAdd.push(nameCapability);
       } else {
-        if (this.hasCapability(meterCapability)) capsToRemove.push(meterCapability);
-        if (this.hasCapability(nameCapability)) capsToRemove.push(nameCapability);
+        if (hasMeterCapability) capsToRemove.push(meterCapability);
+        if (hasMeterPvCapability) capsToRemove.push(meterPvCapability);
+        if (hasMeterGridCapability) capsToRemove.push(meterGridCapability);
+        if (hasNameCapability) capsToRemove.push(nameCapability);
       }
 
       nextCardConfiguredFlags[index] = configured;
