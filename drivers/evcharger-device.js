@@ -744,7 +744,6 @@ class evChargerDevice extends Homey.Device {
         });
       }
 
-      let committedHardwareTick = false;
       for (const definition of splitDefinitions) {
         delete nextValues[definition.pvCapability];
         delete nextValues[definition.gridCapability];
@@ -788,11 +787,9 @@ class evChargerDevice extends Homey.Device {
           await this.setCapabilityValue(definition.gridCapability, nextGridKwh).catch((error) => this.error(error));
         }
 
-        committedHardwareTick = true;
-      }
-
-      if (committedHardwareTick || resetSessionAccumulator) {
-        this.resetVolatileEnergySplit();
+        if (definition.id === 'meter_power') {
+          this.resetVolatileEnergySplit();
+        }
       }
 
       this.volatileLastSampleTs = nowTs;
