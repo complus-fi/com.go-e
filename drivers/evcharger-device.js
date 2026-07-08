@@ -21,7 +21,6 @@ const {
 const POLL_INTERVAL = 5000;
 const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
-const SESSION_COUNTER_RESET_WINDOW_WH = 100;
 const PV_RATIO_WINDOW_MS = 1 * 60 * 1000;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
@@ -65,13 +64,9 @@ const GOE_TRANSACTION_BASE_VALUES = [
 ];
 
 class evChargerDevice extends Homey.Device {
-  getClockTimezone() {
-    const timezone = this.homey?.clock?.getTimezone?.();
-    return typeof timezone === 'string' && timezone.trim() ? timezone.trim() : null;
-  }
-
   formatTransactionDateTime(date = new Date()) {
-    const timezone = this.getClockTimezone();
+    const timezoneRaw = this.homey?.clock?.getTimezone?.();
+    const timezone = typeof timezoneRaw === 'string' && timezoneRaw.trim() ? timezoneRaw.trim() : null;
     const options = {
       year: 'numeric',
       month: '2-digit',
@@ -177,7 +172,12 @@ class evChargerDevice extends Homey.Device {
 
       const durationMs = Number.isFinite(parsedStart) && Number.isFinite(parsedEnd) ? parsedEnd - parsedStart : endTimestamp - this.transactionStartTimestamp;
 
-      nextValues.goe_transaction_duration = this.formatTransactionDuration(durationMs);
+      const safeDuration = Number.isFinite(durationMs) ? Math.max(0, durationMs) : 0;
+      const totalSeconds = Math.floor(safeDuration / 1000);
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      nextValues.goe_transaction_duration = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     }
   }
 
@@ -260,28 +260,28 @@ class evChargerDevice extends Homey.Device {
   // Overridden by cloud devices, which have no discovery and must start polling here.
   async startConnection() {}
 
-  getConfiguredTransactionId(status, statusIndex) {
-    const configured = this.isCardConfigured(status[`c${statusIndex}i`]);
-    if (!configured) return null;
-
-    const rawName = status[`c${statusIndex}n`];
-    if (typeof rawName === 'string') {
-      const normalized = rawName.trim();
-      if (normalized && normalized.toLowerCase() !== 'n/a') {
-        return normalized;
-      }
-    }
-
-    // Keep a stable fallback ID if charger name is empty.
-    return `card_${statusIndex + 1}`;
-  }
-
   getConfiguredTransactionEntries(status = {}) {
     const entries = [];
     const usedIds = new Set(GOE_TRANSACTION_BASE_VALUES.map((entry) => entry.id));
 
     for (let statusIndex = 0; statusIndex < 10; statusIndex += 1) {
-      const baseId = this.getConfiguredTransactionId(status, statusIndex);
+      const configured = this.isCardConfigured(status[`c${statusIndex}i`]);
+      if (!configured) continue;
+
+      let baseId = null;
+      const rawName = status[`c${statusIndex}n`];
+      if (typeof rawName === 'string') {
+        const normalized = rawName.trim();
+        if (normalized && normalized.toLowerCase() !== 'n/a') {
+          baseId = normalized;
+        }
+      }
+
+      if (!baseId) {
+        // Keep a stable fallback ID if charger name is empty.
+        baseId = `card_${statusIndex + 1}`;
+      }
+
       if (!baseId) continue;
 
       let dedupIndex = 1;
@@ -302,9 +302,16 @@ class evChargerDevice extends Homey.Device {
     return entries;
   }
 
-  getDynamicTransactionValues(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
-    const values = [...GOE_TRANSACTION_BASE_VALUES];
+  async syncDynamicTransactionOptions(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
+    if (!this.hasCapability('goe_transaction')) return;
 
+    const lookup = {};
+    for (const entry of configuredEntries) {
+      lookup[entry.id] = entry.slot;
+    }
+    this.transactionSlotById = lookup;
+
+    const values = [...GOE_TRANSACTION_BASE_VALUES];
     for (const entry of configuredEntries) {
       values.push({
         id: entry.id,
@@ -314,32 +321,6 @@ class evChargerDevice extends Homey.Device {
       });
     }
 
-    return values;
-  }
-
-  refreshTransactionSlotLookup(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
-    const lookup = {};
-    for (const entry of configuredEntries) {
-      lookup[entry.id] = entry.slot;
-    }
-
-    this.transactionSlotById = lookup;
-    return lookup;
-  }
-
-  getDynamicTransactionCapabilityValue(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
-    return getTransactionCapabilityIdFromTrx(status.trx, {
-      configuredEntries,
-      invalidFallback: GOE_TRANSACTION.NONE
-    });
-  }
-
-  async syncDynamicTransactionOptions(status = {}, configuredEntries = this.getConfiguredTransactionEntries(status)) {
-    if (!this.hasCapability('goe_transaction')) return;
-
-    this.refreshTransactionSlotLookup(status, configuredEntries);
-
-    const values = this.getDynamicTransactionValues(status, configuredEntries);
     const signature = JSON.stringify(values);
     if (signature === this.lastTransactionValuesSignature) return;
 
@@ -561,10 +542,22 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction', 'target_power', 'goe_flexible_rate_limit'],
-      async ({ evcharger_charging, goe_charger_mode, goe_transaction, target_power, goe_flexible_rate_limit }) => {
+      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction', 'target_power', 'goe_flexible_rate_limit', 'button.reset_subcounters'],
+      async ({ evcharger_charging, goe_charger_mode, goe_transaction, target_power, goe_flexible_rate_limit, 'button.reset_subcounters': button_reset_subcounters }) => {
         try {
-          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, { evcharger_charging, goe_charger_mode, goe_transaction, target_power, goe_flexible_rate_limit });
+          this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, {
+            evcharger_charging,
+            goe_charger_mode,
+            goe_transaction,
+            target_power,
+            goe_flexible_rate_limit,
+            button_reset_subcounters
+          });
+
+          if (button_reset_subcounters === true) {
+            await this.onCapability_RESET_METER_SUBCOUNTERS();
+            return;
+          }
 
           const context = {
             api: this.api,
@@ -678,15 +671,87 @@ class evChargerDevice extends Homey.Device {
       const statusCapabilities = this.hasCapability('goe_transaction') ? deviceCapabilities.filter((capability) => capability !== 'goe_transaction') : deviceCapabilities;
       const nextValues = mapStatusToCapabilities(status, statusCapabilities, this.api);
       if (this.hasCapability('goe_transaction')) {
-        nextValues.goe_transaction = this.getDynamicTransactionCapabilityValue(status, configuredTransactionEntries);
+        nextValues.goe_transaction = getTransactionCapabilityIdFromTrx(status.trx, {
+          configuredEntries: configuredTransactionEntries,
+          invalidFallback: GOE_TRANSACTION.NONE
+        });
       }
 
-      this.applyTransactionNameOnCarConnect(status, nextValues);
-      this.applyTransactionTimeValues(nextValues);
-      this.applyMeterPowerNameForSession(status, nextValues);
-      this.applyMeasurePowerSessionValues(nextValues);
+      if (this.hasCapability('goe_transaction_name') && this.hasCapability('evcharger_charging_state')) {
+        const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
+        const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
+        const transactionCapabilityValue = typeof nextValues.goe_transaction === 'string' ? nextValues.goe_transaction : this.getCapabilityValue('goe_transaction');
+        let transactionName = 'Unknown';
 
-      const pvRatio = this.getPvEnergyRatio(status);
+        if (transactionCapabilityValue === GOE_TRANSACTION.NONE) {
+          transactionName = 'No authentication';
+        } else if (transactionCapabilityValue === GOE_TRANSACTION.ANONYMOUS) {
+          transactionName = 'Anonymous';
+        } else {
+          const slot = this.transactionSlotById?.[transactionCapabilityValue];
+          if (Number.isInteger(slot) && slot >= 1 && slot <= 10) {
+            transactionName = getTransactionCardNameBySlot(status, slot);
+          } else if (typeof transactionCapabilityValue === 'string' && transactionCapabilityValue.trim()) {
+            transactionName = transactionCapabilityValue;
+          }
+        }
+
+        const hasMeaningfulTransaction = typeof transactionCapabilityValue === 'string' && transactionCapabilityValue !== GOE_TRANSACTION.NONE;
+        if (nextChargingState && nextChargingState !== 'plugged_out') {
+          if (hasMeaningfulTransaction || this.getCapabilityValue('goe_transaction_name') == null) {
+            nextValues.goe_transaction_name = transactionName;
+          } else {
+            nextValues.goe_transaction_name = this.getCapabilityValue('goe_transaction_name');
+          }
+        } else {
+          const currentTransactionName = this.getCapabilityValue('goe_transaction_name');
+          if (currentTransactionName !== undefined && currentTransactionName !== null) {
+            nextValues.goe_transaction_name = currentTransactionName;
+          }
+        }
+      }
+
+      this.applyTransactionTimeValues(nextValues);
+      if (this.hasCapability('goe_meter_power_name')) {
+        const transactionName = typeof nextValues.goe_transaction_name === 'string' ? nextValues.goe_transaction_name : getTransactionCardName(status);
+        const currentMeterPowerName = this.getCapabilityValue('goe_meter_power_name');
+        const sessionEnergyValue = nextValues['meter_power.session'] ?? this.getCapabilityValue('meter_power.session');
+        const sessionEnergy = Number(sessionEnergyValue);
+
+        // Match old app behavior: bind name at session start and keep it while session energy is accumulating.
+        if (!Number.isFinite(sessionEnergy) || sessionEnergy <= 0) {
+          nextValues.goe_meter_power_name = transactionName;
+        } else if (typeof currentMeterPowerName === 'string' && currentMeterPowerName.trim() !== '') {
+          nextValues.goe_meter_power_name = currentMeterPowerName;
+        } else {
+          nextValues.goe_meter_power_name = transactionName;
+        }
+      }
+
+      if (this.hasCapability('measure_power.max') && this.hasCapability('evcharger_charging_state')) {
+        const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
+
+        if (previousChargingState === 'plugged_out') {
+          nextValues['measure_power.max'] = 0;
+        } else {
+          const currentPowerValue = nextValues.measure_power ?? this.getCapabilityValue('measure_power');
+          const currentPower = Number(currentPowerValue);
+          if (Number.isFinite(currentPower) && currentPower >= 0) {
+            const currentSessionMaxValue = this.getCapabilityValue('measure_power.max');
+            const currentSessionMax = Number(currentSessionMaxValue);
+            const normalizedSessionMax = Number.isFinite(currentSessionMax) && currentSessionMax >= 0 ? currentSessionMax : 0;
+
+            nextValues['measure_power.max'] = Math.max(normalizedSessionMax, currentPower);
+          }
+        }
+      }
+
+      const evPower = Number(Array.isArray(status.nrg) ? status.nrg[11] : null);
+      const pGrid = Number(status.pgrid);
+      const pvRatio =
+        Number.isFinite(evPower) && evPower > 0 && Number.isFinite(pGrid)
+          ? Math.max(0, Math.min(1, 1 - Math.max(0, Math.min(evPower, pGrid)) / evPower))
+          : 0;
       const statusNrg = Array.isArray(status.nrg) ? status.nrg : [];
       const currentPowerW = Math.max(0, Number(statusNrg[11]) || 0);
       const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
@@ -701,6 +766,12 @@ class evChargerDevice extends Homey.Device {
       const splitDefinitions = [];
 
       if (resetSessionAccumulator) {
+        if (this.hasCapability('meter_power.session_pv')) {
+          await this.setCapabilityValue('meter_power.session_pv', 0).catch((error) => this.error(error));
+        }
+        if (this.hasCapability('meter_power.session_grid')) {
+          await this.setCapabilityValue('meter_power.session_grid', 0).catch((error) => this.error(error));
+        }
         this.resetVolatileEnergySplit();
       }
 
@@ -777,31 +848,6 @@ class evChargerDevice extends Homey.Device {
 
         const normalizedTotalWh = definition.totalWh;
 
-        const currentPvValue = this.hasCapability(definition.pvCapability) ? this.getCapabilityValue(definition.pvCapability) : null;
-        const currentGridValue = this.hasCapability(definition.gridCapability) ? this.getCapabilityValue(definition.gridCapability) : null;
-        const currentPvKwh = Number(currentPvValue);
-        const currentGridKwh = Number(currentGridValue);
-        const pvUninitialized = currentPvValue === null || currentPvValue === undefined || (Number.isFinite(currentPvKwh) && currentPvKwh <= 0);
-        const gridUninitialized = currentGridValue === null || currentGridValue === undefined || (Number.isFinite(currentGridKwh) && currentGridKwh <= 0);
-        const currentPvNormalizedKwh = Number.isFinite(currentPvKwh) && currentPvKwh > 0 ? currentPvKwh : 0;
-        const currentGridNormalizedKwh = Number.isFinite(currentGridKwh) && currentGridKwh > 0 ? currentGridKwh : 0;
-        const splitCombinedKwh = currentPvNormalizedKwh + currentGridNormalizedKwh;
-        const masterKwh = normalizedTotalWh / 1000;
-        const isSessionSplit = definition.id === 'meter_power.session';
-        const supportsBootstrapReset = !isSessionSplit;
-        const forceReinitializeFromMaster = Number.isFinite(masterKwh) && masterKwh > 40 && splitCombinedKwh < masterKwh / 2;
-
-        if (supportsBootstrapReset && ((pvUninitialized && gridUninitialized) || forceReinitializeFromMaster)) {
-          if (this.hasCapability(definition.pvCapability)) {
-            await this.setCapabilityValue(definition.pvCapability, 0).catch((error) => this.error(error));
-          }
-          if (this.hasCapability(definition.gridCapability)) {
-            await this.setCapabilityValue(definition.gridCapability, masterKwh).catch((error) => this.error(error));
-          }
-          this.resetVolatileEnergySplit();
-          continue;
-        }
-
         const previousMasterKwh = Number(this.getCapabilityValue(definition.masterCapability));
         if (!Number.isFinite(previousMasterKwh)) {
           continue;
@@ -812,11 +858,8 @@ class evChargerDevice extends Homey.Device {
 
         if (deltaWh < 0) {
           if (definition.id === 'meter_power.session') {
-            const sessionCounterReset = normalizedTotalWh <= SESSION_COUNTER_RESET_WINDOW_WH && previousMasterWh > SESSION_COUNTER_RESET_WINDOW_WH;
-            if (!sessionCounterReset) {
-              // Ignore transient negative deltas so session split counters are not reset during an active session.
-              continue;
-            }
+            // Session split counters are reset only on plugged_out -> connected transition.
+            continue;
           }
 
           if (this.hasCapability(definition.pvCapability)) {
@@ -993,120 +1036,36 @@ class evChargerDevice extends Homey.Device {
     await this.applyApiValues(apiValues);
   }
 
-  applyMeterPowerNameForSession(status, nextValues) {
-    if (!this.hasCapability('goe_meter_power_name')) return;
-
-    const transactionName = typeof nextValues.goe_transaction_name === 'string' ? nextValues.goe_transaction_name : getTransactionCardName(status);
-    const currentMeterPowerName = this.getCapabilityValue('goe_meter_power_name');
-    const sessionEnergyValue = nextValues['meter_power.session'] ?? this.getCapabilityValue('meter_power.session');
-    const sessionEnergy = Number(sessionEnergyValue);
-
-    // Match old app behavior: bind name at session start and keep it while session energy is accumulating.
-    if (!Number.isFinite(sessionEnergy) || sessionEnergy <= 0) {
-      nextValues.goe_meter_power_name = transactionName;
-      return;
-    }
-
-    if (typeof currentMeterPowerName === 'string' && currentMeterPowerName.trim() !== '') {
-      nextValues.goe_meter_power_name = currentMeterPowerName;
-      return;
-    }
-
-    nextValues.goe_meter_power_name = transactionName;
-  }
-
-  getTransactionNameFromCapability(transactionCapabilityValue, status = {}) {
-    if (transactionCapabilityValue === GOE_TRANSACTION.NONE) {
-      return 'No authentication';
-    }
-
-    if (transactionCapabilityValue === GOE_TRANSACTION.ANONYMOUS) {
-      return 'Anonymous';
-    }
-
-    const slot = this.transactionSlotById?.[transactionCapabilityValue];
-    if (Number.isInteger(slot) && slot >= 1 && slot <= 10) {
-      return getTransactionCardNameBySlot(status, slot);
-    }
-
-    if (typeof transactionCapabilityValue === 'string' && transactionCapabilityValue.trim()) {
-      return transactionCapabilityValue;
-    }
-
-    return 'Unknown';
-  }
-
-  applyTransactionNameOnCarConnect(status, nextValues) {
-    if (!this.hasCapability('goe_transaction_name')) return;
-    if (!this.hasCapability('evcharger_charging_state')) return;
-
-    const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
-    const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
-    const transactionCapabilityValue = typeof nextValues.goe_transaction === 'string' ? nextValues.goe_transaction : this.getCapabilityValue('goe_transaction');
-    const transactionName = this.getTransactionNameFromCapability(transactionCapabilityValue, status);
-    const hasMeaningfulTransaction = typeof transactionCapabilityValue === 'string' && transactionCapabilityValue !== GOE_TRANSACTION.NONE;
-
-    if (nextChargingState && nextChargingState !== 'plugged_out') {
-      if (hasMeaningfulTransaction || this.getCapabilityValue('goe_transaction_name') == null) {
-        nextValues.goe_transaction_name = transactionName;
-        return;
+  async onCapability_RESET_METER_SUBCOUNTERS() {
+    // Handle main meter_power split
+    if (this.hasCapability('meter_power')) {
+      const masterValue = Number(this.getCapabilityValue('meter_power')) || 0;
+      if (this.hasCapability('meter_power.pv')) {
+        await this.setCapabilityValue('meter_power.pv', 0).catch((error) => this.error(error));
       }
-
-      nextValues.goe_transaction_name = this.getCapabilityValue('goe_transaction_name');
-      return;
+      if (this.hasCapability('meter_power.grid')) {
+        await this.setCapabilityValue('meter_power.grid', masterValue).catch((error) => this.error(error));
+      }
     }
 
-    const currentTransactionName = this.getCapabilityValue('goe_transaction_name');
-    if (currentTransactionName !== undefined && currentTransactionName !== null) {
-      nextValues.goe_transaction_name = currentTransactionName;
-    }
-  }
+    // Handle card meter_power splits (1-10)
+    for (let i = 1; i <= 10; i += 1) {
+      const masterCap = `meter_power.${i}`;
+      const pvCap = `meter_power.${i}_pv`;
+      const gridCap = `meter_power.${i}_grid`;
 
-  applyMeasurePowerSessionValues(nextValues) {
-    if (!this.hasCapability('measure_power.max')) return;
-    if (!this.hasCapability('evcharger_charging_state')) return;
+      if (!this.hasCapability(masterCap)) continue;
 
-    const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
-
-    if (previousChargingState === 'plugged_out') {
-      nextValues['measure_power.max'] = 0;
-      return;
-    }
-
-    const currentPowerValue = nextValues.measure_power ?? this.getCapabilityValue('measure_power');
-    const currentPower = Number(currentPowerValue);
-    if (!Number.isFinite(currentPower) || currentPower < 0) return;
-
-    const currentSessionMaxValue = this.getCapabilityValue('measure_power.max');
-    const currentSessionMax = Number(currentSessionMaxValue);
-    const normalizedSessionMax = Number.isFinite(currentSessionMax) && currentSessionMax >= 0 ? currentSessionMax : 0;
-
-    nextValues['measure_power.max'] = Math.max(normalizedSessionMax, currentPower);
-  }
-
-  getPvEnergyRatio(status = {}) {
-    const evPower = Number(Array.isArray(status.nrg) ? status.nrg[11] : null);
-    if (!Number.isFinite(evPower) || evPower <= 0) {
-      return 0;
+      const masterValue = Number(this.getCapabilityValue(masterCap)) || 0;
+      if (this.hasCapability(pvCap)) {
+        await this.setCapabilityValue(pvCap, 0).catch((error) => this.error(error));
+      }
+      if (this.hasCapability(gridCap)) {
+        await this.setCapabilityValue(gridCap, masterValue).catch((error) => this.error(error));
+      }
     }
 
-    const pGrid = Number(status.pgrid);
-    const pPv = Number(status.ppv);
-
-    if (Number.isFinite(pGrid) && pGrid <= 0) {
-      return 1;
-    }
-
-    let pvPower = 0;
-    if (Number.isFinite(pPv)) {
-      pvPower = Math.min(evPower, Math.max(0, pPv));
-    } else if (Number.isFinite(pGrid)) {
-      pvPower = Math.max(0, evPower - Math.max(0, pGrid));
-    }
-
-    const ratio = pvPower / evPower;
-    if (!Number.isFinite(ratio)) return 0;
-    return Math.max(0, Math.min(1, ratio));
+    this.resetVolatileEnergySplit();
   }
 
   resetVolatileEnergySplit() {

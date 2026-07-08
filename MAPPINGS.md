@@ -1,6 +1,6 @@
 # Capability to API Mappings
 
-This document describes how Homey capabilities map to go-e API keys and behavior in this project.
+This document describes how Homey capabilities map to go-e API keys and runtime behavior in this project.
 
 Primary sources:
 
@@ -14,106 +14,117 @@ Primary sources:
 
 ## Runtime Flow
 
-1. The device initializes API key filtering from active capabilities.
-2. Polling fetches charger status every 5 seconds.
-3. Status values are converted to capability values.
-4. Capability writes are converted back to API key/value commands.
-5. API command ordering prioritizes `ids`, `lmo`, `fup`, `psm`, `pgt`, `frm`, `spl3`, `trx`, `frc`, `amp`.
+1. On init, status filter keys are built from active capabilities via `getStatusAttributes()`.
+2. Polling fetches charger status with a filtered `status?filter=...` request.
+3. Status values are converted to Homey capability values via `mapStatusToCapabilities()` plus device-level enrichments.
+4. Changed Homey control values are converted back to API writes via `mapHomeyToApiValues()` and `applyApiValues()`.
+5. API command ordering prioritizes: `ids`, `lmo`, `fup`, `psm`, `pgt`, `frm`, `spl3`, `trx`, `frc`, `amp`.
 
 ## Capability Matrix
 
-| Homey capability            | Direction    | API keys used        | Mapping behavior                                                                                               | Notes                                                                                |
-| --------------------------- | ------------ | -------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| evcharger_charging          | Read + write | alw (read), trx, frc | Read: `alw` bool. Write true -> `trx=0` when null; false -> `frc=1`                                            | `alw` is read-only in API; transaction enables anonymous charging                    |
-| evcharger_charging_state    | Read         | car                  | car state mapped to enum values                                                                                | When `car === 5`, state becomes null and `alarm_problem` is true                     |
-| alarm_problem               | Read         | car                  | true when `car === 5`                                                                                          | Fault indicator                                                                      |
-| meter_power                 | Read         | eto                  | Wh to kWh conversion                                                                                           | Returns null if value is not positive                                                |
-| meter_power.pv              | Local read   | eto, nrg, pgrid, ppv | Splits `meter_power` delta into PV share using per-poll ratio                                                  | Uses persisted split state; no extra API read                                        |
-| meter_power.grid            | Local read   | eto, nrg, pgrid, ppv | Splits `meter_power` delta into grid share using per-poll ratio                                                | Uses persisted split state; no extra API read                                        |
-| meter_power.session         | Read         | wh                   | Session Wh to kWh conversion                                                                                   | Capability options are defined in compose template                                   |
-| meter_power.session_pv      | Local read   | wh, nrg, pgrid, ppv  | Splits `meter_power.session` delta into PV share using per-poll ratio                                          | Resets on charger session counter reset                                              |
-| meter_power.session_grid    | Local read   | wh, nrg, pgrid, ppv  | Splits `meter_power.session` delta into grid share using per-poll ratio                                        | Resets on charger session counter reset                                              |
-| meter_power.prev_session    | Local read   | n/a                  | Snapshots meter_power.session on unplug transition                                                             | Persists previous session energy across new sessions until next unplug event         |
-| measure_temperature         | Read         | tma                  | Averages non-zero temperatures from array                                                                      | 0 when all values are zero or missing                                                |
-| measure_power               | Read         | nrg                  | Uses `nrg[11]` total power                                                                                     | No explicit rounding in mapping                                                      |
-| measure_current             | Read         | nrg                  | Average of non-zero phase currents (`nrg[4..6]`)                                                               | 0 when no active phases                                                              |
-| measure_voltage             | Read         | nrg, pha             | Phase-aware input voltage calculation                                                                          | 3-phase uses sqrt(3) scaling                                                         |
-| measure_voltage.output      | Read         | nrg, pha             | Phase-aware output voltage calculation                                                                         | 0 if no output phases active                                                         |
-| measure_power.max           | Local read   | n/a                  | Tracks highest measure_power value during active session                                                       | Reset to 0 when charging state becomes unplugged                                     |
-| measure_power.prev_max      | Local read   | n/a                  | Captures final measure_power.max on unplug transition                                                          | Persists previous session max power until next unplug transition                     |
-| goe_charger_mode            | Read + write | lmo, fup, awe        | Maps go-e charger mode combinations to enum values                                                             | Primary charger mode capability                                                      |
-| goe_transaction             | Read + write | trx, c0n..c9i        | Enum values are dynamic: always `no_auth` + `anonymous`, plus configured card names from `cXn` when `cXi=true` | Writing supports `anonymous` and configured dynamic card IDs; `no_auth` is read-only |
-| goe_measure_phase_switching | Read         | psm                  | Enum capability for automatic / 1-phase / 3-phase status                                                       | Capability ids are stringified `0`, `1`, `2`                                         |
-| goe_measure_modelStatus     | Read         | modelStatus          | Enum capability reflecting charger model status reason code                                                    | Capability id is the stringified status code                                         |
-| goe_flexible_rate           | Read         | awcp                 | Reads `awcp.marketprice` (cents) and converts to euros                                                         | No explicit rounding in mapping; capability precision handles display                |
-| goe_flexible_rate_limit     | Read + write | awp                  | Reads/writes max flexible price by converting between API cents and capability euros                           | No explicit rounding in mapping; API-side changes are synced back on poll            |
-| measure_power.pakku         | Read         | pakku                | Reads charger PV optimization average battery power                                                            | No explicit rounding in mapping                                                      |
-| measure_power.pgrid         | Read         | pgrid                | Reads charger PV optimization average grid power                                                               | No explicit rounding in mapping                                                      |
-| measure_power.ppv           | Read         | ppv                  | Reads charger PV optimization average PV power                                                                 | No explicit rounding in mapping                                                      |
+| Homey capability                                      | Direction    | API keys used                           | Mapping behavior                                                                                                                 | Notes                                                                           |
+| ----------------------------------------------------- | ------------ | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `evcharger_charging`                                  | Read + write | `alw` (read), `frc`, `trx` (write path) | Read from `Boolean(alw)`. Write false -> `frc=1`; write true -> `frc=2` and if `trx` is missing in last status then also `trx=0` | Listener may override `frc` to `0` for Eco/Trip modes                           |
+| `evcharger_charging_state`                            | Read         | `car`                                   | `car`: `1->plugged_out`, `2->plugged_in_charging`, `3->plugged_in_paused`, `4->plugged_in`; `5` maps to `null`                   | `car===5` also sets `alarm_problem=true`                                        |
+| `alarm_problem`                                       | Read         | `car`                                   | `true` when `car===5`                                                                                                            | Fault indicator                                                                 |
+| `meter_power`                                         | Read         | `eto`                                   | `eto` Wh -> kWh, only if positive else `null`                                                                                    | Source counter for total split counters                                         |
+| `meter_power.pv` / `meter_power.grid`                 | Local read   | `eto`, `nrg`, `pgrid`                   | Split from `meter_power` deltas using rolling PV ratio                                                                           | Stateful counters in capabilities                                               |
+| `meter_power.session`                                 | Read         | `wh`                                    | `wh` Wh -> kWh                                                                                                                   | Session source counter                                                          |
+| `meter_power.session_pv` / `meter_power.session_grid` | Local read   | `wh`, `nrg`, `pgrid`                    | Split from session deltas using same rolling PV ratio                                                                            | Session reset handling differs from total                                       |
+| `measure_temperature`                                 | Read         | `tma`                                   | Average of non-zero `tma[]` values                                                                                               | Returns `0` if all zero/missing                                                 |
+| `measure_power`                                       | Read         | `nrg`                                   | Uses `nrg[11]`                                                                                                                   | Defaults to `0` if invalid                                                      |
+| `measure_current`                                     | Read         | `nrg`                                   | Average of non-zero `nrg[4..6]` phase currents                                                                                   | Returns `0` when no active phases                                               |
+| `measure_voltage`                                     | Read         | `nrg`, `pha`                            | Phase-aware input voltage calculation                                                                                            | 3-phase uses `sqrt(3)` scaling                                                  |
+| `measure_voltage.output`                              | Read         | `nrg`, `pha`                            | Phase-aware output voltage calculation                                                                                           | Returns `0` when no output phases                                               |
+| `measure_power.max`                                   | Local read   | none                                    | Tracks session max of `measure_power` while connected                                                                            | Reset to `0` when previous state is `plugged_out`                               |
+| `target_power`                                        | Read + write | `amp`, `psm`                            | Read: `psm===1 ? amp*230 : amp*690`. Write: `<0` rejected, `0` -> no write, `>0` -> `{psm, amp}`                                 | `amp` is floored and clamped `6..maxAmps` (`maxAmps` defaults to `16` if unset) |
+| `goe_charger_mode`                                    | Read + write | `lmo`, `fup`, `awe` (+ write extras)    | Maps mode combinations to enum and back                                                                                          | Write adds `psm`; PV-surplus modes also add `pgt=-200`, `frm=2`, `spl3=4140`    |
+| `goe_transaction`                                     | Read + write | `trx`, dynamic `c0i..c9i`, `c0n..c9n`   | Read maps `trx` to dynamic enum value IDs. Write accepts `anonymous` or configured card IDs and writes numeric `trx`             | `no_auth` is read-only                                                          |
+| `goe_transaction_name`                                | Local read   | dynamic `trx` + card name keys          | Resolved from current transaction/card slot                                                                                      | Kept stable while connected; refreshed on connect                               |
+| `goe_transaction_start`                               | Local read   | none                                    | Local timestamp (`YYYY-MM-DD HH:mm:ss`) when transaction becomes active                                                          | Uses Homey timezone when available                                              |
+| `goe_transaction_end`                                 | Local read   | none                                    | Local timestamp for latest polled active transaction state                                                                       | Updated each poll while transaction active                                      |
+| `goe_transaction_duration`                            | Local read   | none                                    | Local `HH:mm:ss` duration from start to latest end time                                                                          | Updated each poll while transaction active                                      |
+| `goe_flexible_rate`                                   | Read         | `awcp`                                  | Uses `awcp.marketprice` (or `awcp` numeric fallback) and converts cents to euros                                                 | Read-only market price                                                          |
+| `goe_flexible_rate_limit`                             | Read + write | `awp`                                   | Cents <-> euros conversion                                                                                                       | Write rejects negative/non-numeric values                                       |
+| `goe_measure_phase_switching`                         | Read         | `psm`                                   | Maps integer `0..2` to string enum IDs                                                                                           | Invalid values ignored                                                          |
+| `goe_measure_modelStatus`                             | Read         | `modelStatus`                           | Maps integer `0..41` to string enum IDs                                                                                          | Invalid values ignored                                                          |
+| `measure_power.pakku`                                 | Read         | `pakku`                                 | Numeric passthrough, default `0`                                                                                                 | PV optimization telemetry                                                       |
+| `measure_power.pgrid`                                 | Read         | `pgrid`                                 | Numeric passthrough, default `0`                                                                                                 | PV optimization telemetry                                                       |
+| `measure_power.ppv`                                   | Read         | `ppv`                                   | Numeric passthrough, default `0`                                                                                                 | PV optimization telemetry                                                       |
+| `button.reset_subcounters`                            | Write action | none                                    | Maintenance action resets split counters: PV -> `0`, Grid -> master counter                                                      | Applies to total and configured card counters                                   |
 
-Additional mode/power mappings:
+## Dynamic RFID Card Capabilities
 
-- `target_power`: read/write mapping with API keys `amp` and `psm`.
-  - Read derives watts from charger config: single-phase (`psm=1`) => `amp*230`, three-phase (`psm=2`) => `amp*690`.
-  - Write is unidirectional only: values `<0` are rejected, `0` sends no API write, and positive values map to integer `amp` + `psm` using a `4140W` phase switch threshold.
-- `goe_charger_mode`: read/write enum with these combinations:
-  - `basic_charging` => `lmo=3`, `fup=false`, `awe=false`
-  - `eco_pv_surplus` => `lmo=4`, `fup=true`, `awe=false`
-  - `eco_flexible_price` => `lmo=4`, `fup=false`, `awe=true`
-  - `eco_pv_and_flexible_price` => `lmo=4`, `fup=true`, `awe=true`
-  - `trip_pv_surplus` => `lmo=5`, `fup=true`, `awe=false`
-  - `trip_flexible_price` => `lmo=5`, `fup=false`, `awe=true`
-  - `trip_pv_and_flexible_price` => `lmo=5`, `fup=true`, `awe=true`
-  - `trip_no_pv_no_flexible_price` => `lmo=5`, `fup=false`, `awe=false`
-- `goe_transaction_name.prev_session`: local read-only value; snapshots `goe_transaction_name` when charging state transitions to unplugged and keeps that value until the next unplug transition.
-- `meter_power.1..10` and `goe_meter_power_name.1..10`: dynamic per-card capabilities controlled by `c0i..c9i` (configured=true adds capabilities, configured=false removes capabilities).
-- For configured cards, capability reconciliation also ensures `meter_power.N_pv` and `meter_power.N_grid` exist when `meter_power.N` exists (and removes them when card is not configured).
-- Dynamic per-card energy/name values map from `c0e..c9e` and `c0n..c9n` respectively.
-- `meter_power.1_pv..10_pv` and `meter_power.1_grid..10_grid`: local split counters derived from each card's `cXe` delta and the same per-poll PV ratio used for total/session split counters.
-- Split counters (`meter_power.pv/grid`, `meter_power.session_pv/grid`, `meter_power.N_pv/grid`) are stateful and persisted via device store; if a source counter decreases (charger reset), its split counters reset to `0` for that counter scope.
-- For non-session split counters only (`meter_power.pv/grid` and `meter_power.N_pv/grid`):
-  - On first creation (both split counters null/zero), initialization sets `pv=0` and `grid=master`.
-  - If master energy is above `50` and `pv+grid` is less than half of master, split counters are reinitialized to `pv=0` and `grid=master`.
-  - Session split counters (`meter_power.session_pv/grid`) are excluded from this bootstrap/reinitialization logic.
-- Elapsed-time PV ratio accumulation is only computed across consecutive active charging polls (`plugged_in_charging` with positive charger power) and uses a rolling 3-minute sample window to estimate current PV/grid share.
+- Card capabilities are reconciled from `c0i..c9i` on each poll.
+- For each configured card `N`, these capabilities are added:
+  - `meter_power.N`
+  - `meter_power.N_pv`
+  - `meter_power.N_grid`
+  - `goe_meter_power_name.N`
+- When a card is no longer configured, the same capabilities are removed.
+- Card energy values map from `c0e..c9e` (Wh -> kWh).
+- Card name values map from `c0n..c9n` with fallback naming (`Card N`).
+- `goe_transaction` enum options are dynamic: base values (`no_auth`, `anonymous`) plus configured card IDs.
+
+## Charger Mode Mapping
+
+Mode to API values:
+
+- `basic_charging` -> `lmo=3`, `fup=false`, `awe=false`, plus `psm` derived from `target_power` (`<4140 -> 1`, `>=4140 -> 2`, no target -> `0`)
+- `eco_pv_surplus` -> `lmo=4`, `fup=true`, `awe=false`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`
+- `eco_flexible_price` -> `lmo=4`, `fup=false`, `awe=true`, `psm=0`
+- `eco_pv_and_flexible_price` -> `lmo=4`, `fup=true`, `awe=true`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`
+- `trip_pv_surplus` -> `lmo=5`, `fup=true`, `awe=false`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`
+- `trip_flexible_price` -> `lmo=5`, `fup=false`, `awe=true`, `psm=0`
+- `trip_pv_and_flexible_price` -> `lmo=5`, `fup=true`, `awe=true`, `psm=0`, `pgt=-200`, `frm=2`, `spl3=4140`
+- `trip_no_pv_no_flexible_price` -> `lmo=5`, `fup=false`, `awe=false`, `psm=0`
 
 ## Control Behavior
 
-- Listener handles control capabilities in one debounced batch:
-  - `target_power`
+- Debounced multi-capability listener handles:
   - `evcharger_charging`
   - `goe_charger_mode`
   - `goe_transaction`
+  - `target_power`
   - `goe_flexible_rate_limit`
-- If `goe_charger_mode` is included in a batch, it is processed first.
-- If `goe_transaction` is included, it writes `trx` directly and allows any charging command in the same batch to continue.
-- If `goe_flexible_rate_limit` is included, it writes `awp` after converting capability euros to API cents.
-- If `target_power` is included and `goe_charger_mode` is `basic_charging`, writes use `amp` and `psm` with integer amps and a 4140W single/three-phase switch threshold.
-- If `target_power` is included and `goe_charger_mode` is not `basic_charging`, Homey still accepts and stores the setpoint, but no `amp`/`psm` write is sent to charger.
-- Polling only syncs `target_power` from `amp`/`psm` while in `basic_charging`; in other modes the stored setpoint is preserved.
-- If charging is turned off, command flow sends force-off behavior (`frc=1`).
-- If charging is turned on and `goe_charger_mode` is any Eco/Trip mode, command flow sends `frc=0` (automatic).
-- If charging is turned on and `goe_charger_mode` is `basic_charging`, command flow sends `frc=2` (homey).
-- Inverter/grid/battery telemetry can be sent via the `set_pv_surplus_info` flow action, which calls `onCapability_SET_PV_SURPLUS_INFO` and writes the `ids` payload only when the charger is in a PV-surplus mode and connected.
-- The `set_charger_mode` flow action writes `goe_charger_mode`; `is_charger_mode` checks the current enum value.
-- The `set_transaction` flow action writes `goe_transaction`; writable values are `anonymous` and configured dynamic card IDs (derived from `cXn` where `cXi=true`), while `no_auth` remains read-only and is not written to charger.
-- `goe_transaction` requests the 60.0 RFID card key groups `c0n..c9n`, `c0e..c9e`, and `c0i..c9i` so transaction card names can be derived from charger status.
-- `goe_transaction_name` and `goe_meter_power_name` both derive the active RFID card name from the 60.0 RFID key groups.
-- The `goe_charger_mode_changed` trigger uses Homey's custom capability changed trigger for enum capabilities and exposes the current mode token.
-- The `goe_transaction_changed` trigger fires on polled charger-state changes and exposes the current card name token, with the raw transaction label still available as an extra token.
-- After a UI toggle of `evcharger_charging`, one mismatching poll value is ignored to prevent temporary switch bounce.
+  - `button.reset_subcounters`
+- Processing order in listener:
+  1. `goe_charger_mode`
+  2. `goe_transaction`
+  3. `target_power`
+  4. `goe_flexible_rate_limit`
+  5. `evcharger_charging`
+- `evcharger_charging=true` sets `frc=0` for Eco/Trip modes and `frc=2` for `basic_charging`.
+- `evcharger_charging=false` sets `frc=1`.
+- `set_pv_surplus_info` flow action writes `ids` only when charger mode is PV-surplus mode and charging state is not `plugged_out`.
+- `set_charger_mode`, `set_transaction`, and `set_flexible_rate_limit` flow actions map to their corresponding device handlers.
+- `is_charger_mode` flow condition compares current `goe_charger_mode` enum value.
 
-## Polling and Availability
+## Polling, Availability, and Status Filtering
 
 - Poll interval is dynamic:
-  - 5000 ms while charging (`car === 2` or `evcharger_charging_state === plugged_in_charging`).
-  - 30000 ms while idle.
-- `target_power` capability max is updated from charger `ama` via `setCapabilityOptions()`:
-  - `ama=16` => `max=11000`
-  - `ama=32` => `max=22000`
-- Poll failures set device unavailable with connection issue text.
-- Recovery sets device available on next successful poll.
-- Firmware version changes update settings and API key filtering.
+  - `5000 ms` while charging (`car===2` or capability state `plugged_in_charging`)
+  - `30000 ms` otherwise
+- Poll errors set device unavailable with `Connection issue: ...`; next successful poll restores availability.
+- Firmware changes (`fwv`) update settings and rebuild status filter keys.
+- Status filter key generation:
+  - Always includes `frc`, `ama`, `fwv`
+  - Adds keys required by active capabilities
+  - Adds transaction/card key groups depending on card configuration awareness
+- API client prunes unsupported filter keys if payload indicates missing keys (including partial HTTP 400 payload behavior).
+
+## PV/Grid Split Logic
+
+- PV share ratio uses only:
+  - EV power `nrg[11]`
+  - Grid power `pgrid` (`+` import, `-` export)
+- Instant ratio is stabilized using a rolling `1-minute` sample window (`PV_RATIO_WINDOW_MS = 60000`).
+- Samples are added only during continuous active charging (`plugged_in_charging` with positive power and a previous charging poll).
+- Split counters are incremented from source delta energy, not absolute ratios.
+- Negative source deltas:
+  - Total/card counters: reset corresponding split counters to `0`
+  - Session counter: reset `meter_power.session_pv` and `meter_power.session_grid` only when `evcharger_charging_state` changes from `plugged_out` to any connected state; ignore all transient negative session deltas
+- `button.reset_subcounters` sets PV split counters to `0` and Grid split counters to current source totals.
 
 ## Maintenance Rules
 
@@ -122,6 +133,7 @@ This file must be updated whenever behavior changes in any of these files:
 - [drivers/evcharger-device.js](drivers/evcharger-device.js)
 - [lib/mappings.js](lib/mappings.js)
 - [lib/go-eCharger-API-v2.js](lib/go-eCharger-API-v2.js)
+- [lib/flows/actions.js](lib/flows/actions.js)
 - [.homeycompose/drivers/templates/go-eCharger.json](.homeycompose/drivers/templates/go-eCharger.json)
 - [.homeycompose/drivers/templates/go-eCharger-local.json](.homeycompose/drivers/templates/go-eCharger-local.json)
 - [.homeycompose/drivers/templates/go-eCharger-cloud.json](.homeycompose/drivers/templates/go-eCharger-cloud.json)
@@ -130,15 +142,16 @@ Update this file when:
 
 - A capability is added, removed, or renamed.
 - An API key mapping changes.
-- Read or write conversion logic changes.
-- Control semantics change for `trx`, `frc`, `amp`, or `psm`.
-- Runtime constraints such as power limits or polling behavior change.
+- Read/write conversion logic changes.
+- Dynamic RFID card capability behavior changes.
+- Control semantics change for `trx`, `frc`, `amp`, `psm`, `ids`, `awp`, or mode writes.
+- Polling behavior, filter behavior, or availability handling changes.
 
 ## Development Checklist
 
 Before committing mapping-related changes:
 
 1. Update this document.
-2. Verify capability names match compose templates.
-3. Verify API key dependencies match mapping code.
+2. Verify capability names match compose templates and dynamic runtime additions.
+3. Verify API key dependencies match mapping and listener code paths.
 4. Keep commits small and focused.
