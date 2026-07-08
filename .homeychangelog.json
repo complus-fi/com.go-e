@@ -31,5 +31,8 @@
   },
   "1.5.0": {
     "en": "Add: Sub metering for PV vs Grid energy usage. Main Energy meter, Session Energy and RFID card Energy meters have now PV and Grid additional metes. This can be useful when evaluating costs based on energy source. The capabilities can be used in flows, but are not present in the device sensors UI."
+  },
+  "1.5.1": {
+    "en": "Add: Settings -> Maintenance action to reset PV/Grid metering."
   }
 }
