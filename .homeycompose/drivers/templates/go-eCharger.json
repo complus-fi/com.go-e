@@ -41,10 +41,34 @@
     "button.reset_subcounters": {
       "maintenanceAction": true,
       "title": {
-        "en": "Reset PV/Grid Meters"
+        "en": "Reset PV/Grid Meters",
+        "nl": "Reset PV/netmeters",
+        "da": "Nulstil PV/Grid-målere",
+        "de": "PV-/Netzzähler zurücksetzen",
+        "es": "Restablecer medidores PV/Red",
+        "fr": "Réinitialiser les compteurs PV/Réseau",
+        "it": "Reimposta contatori PV/Rete",
+        "no": "Nullstill PV-/nett-målere",
+        "sv": "Återställ PV/nätmätare",
+        "pl": "Zresetuj liczniki PV/Sieci",
+        "ru": "Сбросить счетчики PV/сети",
+        "ko": "PV/그리드 미터 초기화",
+        "ar": "إعادة تعيين عدادات الطاقة الشمسية/الشبكة"
       },
       "desc": {
-        "en": "Reset the PV subcounters to zero and grid subcounters to the source meter."
+        "en": "Reset the PV subcounters to zero and grid subcounters to the source meter.",
+        "nl": "Stel de PV-subtellers in op nul en de netsubtellers op de bronmeter.",
+        "da": "Nulstil PV-underoptællerne til nul og net-underoptællerne til kildemåleren.",
+        "de": "Setze die PV-Unterzähler auf null und die Netz-Unterzähler auf den Quellzähler zurück.",
+        "es": "Restablece los subcontadores de PV a cero y los subcontadores de la red al medidor de origen.",
+        "fr": "Réinitialisez les sous-compteurs PV à zéro et les sous-compteurs de réseau au compteur source.",
+        "it": "Reimposta i sottocontatori PV a zero e i sottocontatori della rete al contatore di origine.",
+        "no": "Nullstill PV-deltellerne til null og nett-deltellerne til kildemåleren.",
+        "sv": "Återställ PV-delmätarna till noll och nätverksdelmätarna till källmätaren.",
+        "pl": "Zresetuj podliczniki PV do zera i podliczniki sieci do licznika źródłowego.",
+        "ru": "Сбросьте субсчетчики солнечной энергии до нуля и субсчетчики сети до исходного счетчика.",
+        "ko": "PV 서브카운터를 0으로 재설정하고 그리드 서브카운터를 소스 미터로 재설정하세요.",
+        "ar": "إعادة تعيين العدادات الفرعية للطاقة الشمسية إلى الصفر والعدادات الفرعية للشبكة إلى عداد المصدر."
       }
     },
     "target_power": {
