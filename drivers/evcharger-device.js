@@ -24,6 +24,13 @@ const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const PV_RATIO_WINDOW_MS = 1 * 60 * 1000;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
+// Maximum age of the most recent PV-surplus info push (`ids`/`pgrid`) before `pgrid` is treated as
+// stale. `pgrid` is only trustworthy while an external controller actively feeds it (expected every
+// few seconds, tracking live household consumption); if the feed stops the charger keeps reporting a
+// default/last value, so beyond this window charging is attributed entirely to grid regardless of
+// charger mode. Aligned with the PV-ratio averaging window so both reason over the same minute.
+const PV_SURPLUS_STALE_MS = PV_RATIO_WINDOW_MS;
+
 const GOE_TRANSACTION_BASE_VALUES = [
   {
     id: GOE_TRANSACTION.NONE,
@@ -248,6 +255,7 @@ class evChargerDevice extends Homey.Device {
     this.pendingChargingState = null;
     this.transactionStartTimestamp = null;
     this.pollIntervalMs = null;
+    this.lastPvSurplusInfoTs = 0;
 
     this.volatileEnergySamples = [];
     this.volatileLastSampleTs = 0;
@@ -748,8 +756,13 @@ class evChargerDevice extends Homey.Device {
 
       const evPower = Number(Array.isArray(status.nrg) ? status.nrg[11] : null);
       const pGrid = Number(status.pgrid);
+      // `pgrid` (+ import / - export) is only trustworthy while an external controller is actively
+      // pushing it via `ids`. Attribute PV only when a push arrived recently; otherwise `pgrid` is
+      // stale (feed stopped, charger reporting a default/last value) and all charging counts as grid.
+      const pvSurplusInfoAgeMs = this.lastPvSurplusInfoTs > 0 ? Date.now() - this.lastPvSurplusInfoTs : Infinity;
+      const pvAttributionActive = pvSurplusInfoAgeMs <= PV_SURPLUS_STALE_MS;
       const pvRatio =
-        Number.isFinite(evPower) && evPower > 0 && Number.isFinite(pGrid)
+        pvAttributionActive && Number.isFinite(evPower) && evPower > 0 && Number.isFinite(pGrid)
           ? Math.max(0, Math.min(1, 1 - Math.max(0, Math.min(evPower, pGrid)) / evPower))
           : 0;
       const statusNrg = Array.isArray(status.nrg) ? status.nrg : [];
@@ -806,6 +819,11 @@ class evChargerDevice extends Homey.Device {
       const stablePvRatioRaw = ratioWindowTotals.totalWh > 0 ? ratioWindowTotals.pvWh / ratioWindowTotals.totalWh : pvRatio;
       const stablePvRatio = Number.isFinite(stablePvRatioRaw) ? Math.max(0, Math.min(1, stablePvRatioRaw)) : 0;
 
+      // Surface the smoothed solar-to-grid ratio (0 = all grid, 1 = all solar) for the sensor capability.
+      if (this.hasCapability('goe_solargrid_ratio')) {
+        await this.setCapabilityValue('goe_solargrid_ratio', stablePvRatio).catch(this.error);
+      }
+
       if (this.hasCapability('meter_power.pv') || this.hasCapability('meter_power.grid') || this.hasCapability('meter_power')) {
         splitDefinitions.push({
           id: 'meter_power',
@@ -846,7 +864,12 @@ class evChargerDevice extends Homey.Device {
         delete nextValues[definition.pvCapability];
         delete nextValues[definition.gridCapability];
 
-        const normalizedTotalWh = definition.totalWh;
+        // Guard against missing/invalid source readings (e.g. a partial status response right after
+        // connect). Never derive a delta from a bad reading; skip so counters are left untouched.
+        const normalizedTotalWh = Number(definition.totalWh);
+        if (!Number.isFinite(normalizedTotalWh) || normalizedTotalWh <= 0) {
+          continue;
+        }
 
         const previousMasterKwh = Number(this.getCapabilityValue(definition.masterCapability));
         if (!Number.isFinite(previousMasterKwh)) {
@@ -856,21 +879,9 @@ class evChargerDevice extends Homey.Device {
         const previousMasterWh = Math.max(0, previousMasterKwh) * 1000;
         const deltaWh = normalizedTotalWh - previousMasterWh;
 
-        if (deltaWh < 0) {
-          if (definition.id === 'meter_power.session') {
-            // Session split counters are reset only on plugged_out -> connected transition.
-            continue;
-          }
-
-          if (this.hasCapability(definition.pvCapability)) {
-            await this.setCapabilityValue(definition.pvCapability, 0).catch((error) => this.error(error));
-          }
-          if (this.hasCapability(definition.gridCapability)) {
-            await this.setCapabilityValue(definition.gridCapability, 0).catch((error) => this.error(error));
-          }
-          continue;
-        }
-
+        // Split counters only ever increase or are reset via button.reset_subcounters. A flat or
+        // negative delta (transient dip or a charger-side meter reset) must not wipe the counters;
+        // skip and let the master baseline re-sync on the next poll.
         if (deltaWh <= 0) {
           continue;
         }
@@ -946,10 +957,10 @@ class evChargerDevice extends Homey.Device {
   }
 
   async onCapability_SET_PV_SURPLUS_INFO({ pGrid, pPv, pAkku }) {
-    const chargerMode = this.getCapabilityValue('goe_charger_mode');
+    // Keep `pgrid` current in every charger mode; the PV/grid split trusts it only while freshly
+    // pushed (see PV_SURPLUS_STALE_MS). Skip only when nothing is connected to charge.
     const chargingState = this.getCapabilityValue('evcharger_charging_state');
-    const pvSurplusModes = new Set(['eco_pv_surplus', 'eco_pv_and_flexible_price', 'trip_pv_surplus', 'trip_pv_and_flexible_price']);
-    if (!pvSurplusModes.has(chargerMode) || chargingState === 'plugged_out') {
+    if (chargingState === 'plugged_out') {
       return;
     }
 
@@ -978,6 +989,7 @@ class evChargerDevice extends Homey.Device {
     }
 
     await this.applyApiValues({ ids: payload });
+    this.lastPvSurplusInfoTs = Date.now();
   }
 
   async onCapability_SET_CHARGER_MODE(mode) {

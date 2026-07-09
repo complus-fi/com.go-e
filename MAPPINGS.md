@@ -31,6 +31,7 @@ Primary sources:
 | `meter_power.pv` / `meter_power.grid`                 | Local read   | `eto`, `nrg`, `pgrid`                   | Split from `meter_power` deltas using rolling PV ratio                                                                           | Stateful counters in capabilities                                               |
 | `meter_power.session`                                 | Read         | `wh`                                    | `wh` Wh -> kWh                                                                                                                   | Session source counter                                                          |
 | `meter_power.session_pv` / `meter_power.session_grid` | Local read   | `wh`, `nrg`, `pgrid`                    | Split from session deltas using same rolling PV ratio                                                                            | Session reset handling differs from total                                       |
+| `goe_solargrid_ratio`                                 | Local read   | `nrg`, `pgrid`                          | Rolling PV ratio (`0` = all grid, `1` = all solar), same window as split counters                                                | `0` when no PV data (`pgrid` absent) or not charging                            |
 | `measure_temperature`                                 | Read         | `tma`                                   | Average of non-zero `tma[]` values                                                                                               | Returns `0` if all zero/missing                                                 |
 | `measure_power`                                       | Read         | `nrg`                                   | Uses `nrg[11]`                                                                                                                   | Defaults to `0` if invalid                                                      |
 | `measure_current`                                     | Read         | `nrg`                                   | Average of non-zero `nrg[4..6]` phase currents                                                                                   | Returns `0` when no active phases                                               |
@@ -96,7 +97,7 @@ Mode to API values:
   5. `evcharger_charging`
 - `evcharger_charging=true` sets `frc=0` for Eco/Trip modes and `frc=2` for `basic_charging`.
 - `evcharger_charging=false` sets `frc=1`.
-- `set_pv_surplus_info` flow action writes `ids` only when charger mode is PV-surplus mode and charging state is not `plugged_out`.
+- `set_pv_surplus_info` flow action writes `ids` in any charger mode (skipped only when charging state is `plugged_out`) and stamps the push time used for PV-ratio freshness.
 - `set_charger_mode`, `set_transaction`, and `set_flexible_rate_limit` flow actions map to their corresponding device handlers.
 - `is_charger_mode` flow condition compares current `goe_charger_mode` enum value.
 
@@ -118,12 +119,15 @@ Mode to API values:
 - PV share ratio uses only:
   - EV power `nrg[11]`
   - Grid power `pgrid` (`+` import, `-` export)
+- PV is attributed only while `pgrid` is fresh: a `set_pv_surplus_info` push must have arrived within `PV_SURPLUS_STALE_MS`, which is aligned with the 1-minute PV-ratio window (`PV_RATIO_WINDOW_MS`). The controller is expected to push every few seconds (tracking live household consumption); if the feed stops, `pgrid` is considered stale and the ratio is `0` (all grid), regardless of charger mode.
 - Instant ratio is stabilized using a rolling `1-minute` sample window (`PV_RATIO_WINDOW_MS = 60000`).
+- The stabilized ratio is both used to split the meter counters and surfaced directly via the `goe_solargrid_ratio` sensor capability (`0` = all grid, `1` = all solar).
 - Samples are added only during continuous active charging (`plugged_in_charging` with positive power and a previous charging poll).
 - Split counters are incremented from source delta energy, not absolute ratios.
-- Negative source deltas:
-  - Total/card counters: reset corresponding split counters to `0`
-  - Session counter: reset `meter_power.session_pv` and `meter_power.session_grid` only when `evcharger_charging_state` changes from `plugged_out` to any connected state; ignore all transient negative session deltas
+- Split counters only ever increase or are reset by `button.reset_subcounters`; they are never auto-zeroed.
+- Invalid/missing source readings (non-finite or `<= 0`, e.g. a partial status right after connect) are skipped so counters are left untouched.
+- Flat or negative source deltas (transient dip or a charger-side meter reset) are skipped; the master baseline re-syncs on the next poll instead of wiping the counters.
+- Session counters are additionally reset to `0` when `evcharger_charging_state` changes from `plugged_out` to any connected state.
 - `button.reset_subcounters` sets PV split counters to `0` and Grid split counters to current source totals.
 
 ## Maintenance Rules

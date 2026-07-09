@@ -1,5 +1,7 @@
 # General rules
 
+> See also [CLAUDE.md](../CLAUDE.md) for hard-won domain knowledge (notably the PV/grid energy split and its invariants).
+
 ## Project Overview
 
 - Homey app for go-e chargers (Home+, Gemini, CORE, PRO) using the V2 API.
