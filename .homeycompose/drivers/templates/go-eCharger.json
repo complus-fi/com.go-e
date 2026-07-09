@@ -35,7 +35,8 @@
     "button.reset_subcounters",
     "measure_power.pakku",
     "measure_power.pgrid",
-    "measure_power.ppv"
+    "measure_power.ppv",
+	"goe_solargrid_ratio"
   ],
   "capabilitiesOptions": {
     "button.reset_subcounters": {
