@@ -24,12 +24,10 @@ const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const PV_RATIO_WINDOW_MS = 1 * 60 * 1000;
 const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
-// Maximum age of the most recent PV-surplus info push (`ids`/`pgrid`) before `pgrid` is treated as
-// stale. `pgrid` is only trustworthy while an external controller actively feeds it (expected every
-// few seconds, tracking live household consumption); if the feed stops the charger keeps reporting a
-// default/last value, so beyond this window charging is attributed entirely to grid regardless of
-// charger mode. Aligned with the PV-ratio averaging window so both reason over the same minute.
-const PV_SURPLUS_STALE_MS = PV_RATIO_WINDOW_MS;
+// Max age of the last `pgrid` push before it's treated as stale (all charging → grid). Kept much
+// longer than PV_RATIO_WINDOW_MS: the change-triggered P1 feed goes quiet during steady-state
+// surplus, but only a dead feed (overnight) is truly stale. See CLAUDE.md "Freshness gating".
+const PV_SURPLUS_STALE_MS = 5 * 60 * 1000;
 
 const GOE_TRANSACTION_BASE_VALUES = [
   {
@@ -756,7 +754,7 @@ class evChargerDevice extends Homey.Device {
 
       const evPower = Number(Array.isArray(status.nrg) ? status.nrg[11] : null);
       const pGrid = Number(status.pgrid);
-      // `pgrid` (+ import / - export) is only trustworthy while an external controller is actively
+      // `pgrid` (+ import / - export) is only trustworthy while the P1-meter flow is actively
       // pushing it via `ids`. Attribute PV only when a push arrived recently; otherwise `pgrid` is
       // stale (feed stopped, charger reporting a default/last value) and all charging counts as grid.
       const pvSurplusInfoAgeMs = this.lastPvSurplusInfoTs > 0 ? Date.now() - this.lastPvSurplusInfoTs : Infinity;
