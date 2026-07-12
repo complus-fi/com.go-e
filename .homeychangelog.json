@@ -37,5 +37,8 @@
   },
   "1.5.2": {
     "en": "Updated translations"
+  },
+  "1.6.0": {
+    "en": "ADD: Daily Trip planning support using Go-e's Daily Trip mode."
   }
 }
