@@ -62,7 +62,12 @@
         "ru": "Оценка",
         "ko": "평가",
         "ar": "تقييم"
-      }
+      },
+      "placeholder": {
+        "en": "Price limit in local curency (0.25 for 25 cents)"
+      },
+      "min": 0,
+      "step": 0.01
     },
     {
       "type": "device",

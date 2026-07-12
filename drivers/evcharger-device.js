@@ -110,6 +110,54 @@ class evChargerDevice extends Homey.Device {
     return timestamp;
   }
 
+  /**
+   * Parse a Homey flow time argument to seconds since local midnight.
+   *
+   * @param {string|Date|object} value Flow card time value.
+   * @returns {number} Seconds since midnight.
+   */
+  parseTimeArgToLocalSeconds(value) {
+    let hours = null;
+    let minutes = null;
+    let seconds = 0;
+
+    if (value instanceof Date) {
+      hours = value.getHours();
+      minutes = value.getMinutes();
+      seconds = value.getSeconds();
+    } else if (typeof value === 'string') {
+      const normalized = value.trim();
+      const match = /^(\d{1,2}):(\d{2})(?::(\d{2}))?$/.exec(normalized);
+      if (!match) {
+        throw new Error('target_time must be in HH:mm or HH:mm:ss format');
+      }
+      hours = Number(match[1]);
+      minutes = Number(match[2]);
+      seconds = match[3] !== undefined ? Number(match[3]) : 0;
+    } else if (value && typeof value === 'object') {
+      const rawHours = value.hour ?? value.hours ?? value.h;
+      const rawMinutes = value.minute ?? value.minutes ?? value.min ?? value.m;
+      const rawSeconds = value.second ?? value.seconds ?? value.s;
+      hours = Number(rawHours);
+      minutes = Number(rawMinutes);
+      seconds = rawSeconds === undefined ? 0 : Number(rawSeconds);
+    }
+
+    if (!Number.isFinite(hours) || !Number.isFinite(minutes) || !Number.isFinite(seconds)) {
+      throw new Error('target_time must contain numeric time values');
+    }
+
+    const normalizedHours = Math.floor(hours);
+    const normalizedMinutes = Math.floor(minutes);
+    const normalizedSeconds = Math.floor(seconds);
+
+    if (normalizedHours < 0 || normalizedHours > 23 || normalizedMinutes < 0 || normalizedMinutes > 59 || normalizedSeconds < 0 || normalizedSeconds > 59) {
+      throw new Error('target_time must be a valid local time');
+    }
+
+    return normalizedHours * 3600 + normalizedMinutes * 60 + normalizedSeconds;
+  }
+
   formatTransactionDuration(durationMs) {
     const safeDuration = Number.isFinite(durationMs) ? Math.max(0, durationMs) : 0;
     const totalSeconds = Math.floor(safeDuration / 1000);
@@ -1041,6 +1089,41 @@ class evChargerDevice extends Homey.Device {
 
     const apiValues = mapHomeyToApiValues({ goe_flexible_rate_limit: parsedRate }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
     await this.applyApiValues(apiValues);
+  }
+
+  /**
+   * Set Daily Trip targets directly from kWh and time.
+   *
+   * @param {object} params Action params.
+   * @param {number} params.targetEnergyKWh Target energy in kWh.
+   * @param {string|Date|object} params.targetTime Target time (local).
+   */
+  async onCapability_SET_DAILY_TRIP_KWH_TARGET({ targetEnergyKWh, targetTime }) {
+    const parsedTargetEnergyKWh = Number(targetEnergyKWh);
+    const att = this.parseTimeArgToLocalSeconds(targetTime);
+    const ate = Math.ceil(parsedTargetEnergyKWh) * 1000;
+    await this.applyApiValues({ att, ate });
+  }
+
+  /**
+   * Set Daily Trip targets from SoC values and battery capacity.
+   *
+   * @param {object} params Action params.
+   * @param {number} params.startSoc Start SoC in percent.
+   * @param {number} params.targetSoc Target SoC in percent.
+   * @param {number} params.batteryCapacityKWh Battery capacity in kWh.
+   * @param {string|Date|object} params.targetTime Target time (local).
+   */
+  async onCapability_SET_DAILY_TRIP_PCT_TARGET({ startSoc, targetSoc, batteryCapacityKWh, targetTime }) {
+    const parsedStartSoc = Number(startSoc);
+    const parsedTargetSoc = Number(targetSoc);
+    const parsedBatteryCapacityKWh = Number(batteryCapacityKWh);
+
+    const att = this.parseTimeArgToLocalSeconds(targetTime);
+    const requiredKWh = ((parsedTargetSoc - parsedStartSoc) / 100) * parsedBatteryCapacityKWh;
+    const ate = Math.ceil(requiredKWh) * 1000;
+
+    await this.applyApiValues({ att, ate });
   }
 
   async onCapability_RESET_METER_SUBCOUNTERS() {
