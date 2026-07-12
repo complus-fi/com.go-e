@@ -759,10 +759,7 @@ class evChargerDevice extends Homey.Device {
       // stale (feed stopped, charger reporting a default/last value) and all charging counts as grid.
       const pvSurplusInfoAgeMs = this.lastPvSurplusInfoTs > 0 ? Date.now() - this.lastPvSurplusInfoTs : Infinity;
       const pvAttributionActive = pvSurplusInfoAgeMs <= PV_SURPLUS_STALE_MS;
-      const pvRatio =
-        pvAttributionActive && Number.isFinite(evPower) && evPower > 0 && Number.isFinite(pGrid)
-          ? Math.max(0, Math.min(1, 1 - Math.max(0, Math.min(evPower, pGrid)) / evPower))
-          : 0;
+      const pvRatio = pvAttributionActive && Number.isFinite(evPower) && evPower > 0 && Number.isFinite(pGrid) ? Math.max(0, Math.min(1, 1 - Math.max(0, Math.min(evPower, pGrid)) / evPower)) : 0;
       const statusNrg = Array.isArray(status.nrg) ? status.nrg : [];
       const currentPowerW = Math.max(0, Number(statusNrg[11]) || 0);
       const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
