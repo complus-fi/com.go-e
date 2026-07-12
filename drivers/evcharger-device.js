@@ -22,7 +22,6 @@ const POLL_INTERVAL = 5000;
 const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const PV_RATIO_WINDOW_MS = 1 * 60 * 1000;
-const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
 // Max age of the last `pgrid` push before it's treated as stale (all charging → grid). Kept much
 // longer than PV_RATIO_WINDOW_MS: the change-triggered P1 feed goes quiet during steady-state
@@ -128,12 +127,11 @@ class evChargerDevice extends Homey.Device {
     } else if (typeof value === 'string') {
       const normalized = value.trim();
       const match = /^(\d{1,2}):(\d{2})(?::(\d{2}))?$/.exec(normalized);
-      if (!match) {
-        throw new Error('target_time must be in HH:mm or HH:mm:ss format');
+      if (match) {
+        hours = Number(match[1]);
+        minutes = Number(match[2]);
+        seconds = match[3] !== undefined ? Number(match[3]) : 0;
       }
-      hours = Number(match[1]);
-      minutes = Number(match[2]);
-      seconds = match[3] !== undefined ? Number(match[3]) : 0;
     } else if (value && typeof value === 'object') {
       const rawHours = value.hour ?? value.hours ?? value.h;
       const rawMinutes = value.minute ?? value.minutes ?? value.min ?? value.m;
@@ -143,19 +141,7 @@ class evChargerDevice extends Homey.Device {
       seconds = rawSeconds === undefined ? 0 : Number(rawSeconds);
     }
 
-    if (!Number.isFinite(hours) || !Number.isFinite(minutes) || !Number.isFinite(seconds)) {
-      throw new Error('target_time must contain numeric time values');
-    }
-
-    const normalizedHours = Math.floor(hours);
-    const normalizedMinutes = Math.floor(minutes);
-    const normalizedSeconds = Math.floor(seconds);
-
-    if (normalizedHours < 0 || normalizedHours > 23 || normalizedMinutes < 0 || normalizedMinutes > 59 || normalizedSeconds < 0 || normalizedSeconds > 59) {
-      throw new Error('target_time must be a valid local time');
-    }
-
-    return normalizedHours * 3600 + normalizedMinutes * 60 + normalizedSeconds;
+    return (Number(hours) || 0) * 3600 + (Number(minutes) || 0) * 60 + (Number(seconds) || 0);
   }
 
   formatTransactionDuration(durationMs) {
@@ -1011,24 +997,12 @@ class evChargerDevice extends Homey.Device {
       pGrid: Number(pGrid)
     };
 
-    if (!Number.isFinite(payload.pGrid)) {
-      throw new Error('pGrid must be a number');
-    }
-
     if (pPv !== undefined && pPv !== null && pPv !== '') {
-      const parsedPPv = Number(pPv);
-      if (!Number.isFinite(parsedPPv)) {
-        throw new Error('pPv must be a number when provided');
-      }
-      payload.pPv = parsedPPv;
+      payload.pPv = Number(pPv);
     }
 
     if (pAkku !== undefined && pAkku !== null && pAkku !== '') {
-      const parsedPAkku = Number(pAkku);
-      if (!Number.isFinite(parsedPAkku)) {
-        throw new Error('pAkku must be a number when provided');
-      }
-      payload.pAkku = parsedPAkku;
+      payload.pAkku = Number(pAkku);
     }
 
     await this.applyApiValues({ ids: payload });
@@ -1037,9 +1011,6 @@ class evChargerDevice extends Homey.Device {
 
   async onCapability_SET_CHARGER_MODE(mode) {
     const normalizedMode = typeof mode === 'string' ? mode.trim() : '';
-    if (!GOE_CHARGER_MODE_IDS.has(normalizedMode)) {
-      throw new Error(`Unsupported charger mode: ${mode}`);
-    }
 
     const context = {
       status: this.lastStatus,
@@ -1065,8 +1036,8 @@ class evChargerDevice extends Homey.Device {
       this.apiValue = getTransactionApiValue(normalizedTransaction);
     }
 
-    if (this.apiValue === null) {
-      throw new Error(`Unsupported writable transaction: ${transaction}`);
+    if (this.apiValue === null || this.apiValue === undefined) {
+      return;
     }
 
     await this.applyApiValues({ trx: this.apiValue });
@@ -1074,9 +1045,6 @@ class evChargerDevice extends Homey.Device {
 
   async onCapability_SET_FLEXIBLE_RATE_LIMIT(rate) {
     const parsedRate = Number(rate);
-    if (!Number.isFinite(parsedRate) || parsedRate < 0) {
-      throw new Error('Flexible rate limit must be a non-negative number');
-    }
 
     const context = {
       api: this.api,
