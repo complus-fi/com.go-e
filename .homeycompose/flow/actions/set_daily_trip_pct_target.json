@@ -1,0 +1,58 @@
+{
+  "title": {
+    "en": "Set Daily Trip SoC target"
+  },
+  "titleFormatted": {
+    "en": "Set Daily Trip SoC from [[start_soc]]% to [[target_soc]]% with [[bat_kWh]] kWh by [[target_time]]"
+  },
+  "hint": {
+    "en": "Sets Daily Trip SoC with start SoC, target SoC, and target time. Enter the EV's current SoC as Start SoC."
+  },
+  "args": [
+    {
+      "name": "start_soc",
+      "type": "number",
+      "title": {
+        "en": "Start SoC"
+      },
+      "placeholder": { "en": "Start SoC (%)" },
+      "min": 1,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "name": "target_soc",
+      "type": "number",
+      "title": {
+        "en": "Target SoC"
+      },
+      "placeholder": { "en": "Target SoC (%)" },
+      "min": 1,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "name": "bat_kWh",
+      "type": "number",
+      "title": {
+        "en": "Battery"
+      },
+      "placeholder": { "en": "Battery capacity (kWh)" },
+      "min": 1,
+      "step": 1
+    },
+    {
+      "name": "target_time",
+      "type": "time",
+      "title": {
+        "en": "Time"
+      },
+      "placeholder": { "en": "13:37" }
+    },
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
+    }
+  ]
+}

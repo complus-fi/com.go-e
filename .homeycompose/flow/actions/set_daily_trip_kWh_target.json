@@ -1,0 +1,36 @@
+{
+  "title": {
+    "en": "Set Daily Trip kWh target"
+  },
+  "titleFormatted": {
+    "en": "Set Daily Trip energy to [[target_energy]] kWh by [[target_time]]"
+  },
+  "hint": {
+    "en": "Sets Daily Trip energy target (kWh) and target time."
+  },
+  "args": [
+    {
+      "name": "target_energy",
+      "type": "number",
+      "title": {
+        "en": "Energy"
+      },
+      "placeholder": { "en": "Target energy (kWh)" },
+      "min": 1,
+      "step": 1
+    },
+    {
+      "name": "target_time",
+      "type": "time",
+      "title": {
+        "en": "Time"
+      },
+      "placeholder": { "en": "13:37" }
+    },
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=go-eCharger-CORE|go-eCharger-Gemini|go-eCharger-Homeplus|go-eCharger-PRO|goe-Cloud-CORE|goe-Cloud-Gemini|goe-Cloud-Homeplus|goe-Cloud-PRO"
+    }
+  ]
+}

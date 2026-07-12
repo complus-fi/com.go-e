@@ -22,7 +22,6 @@ const POLL_INTERVAL = 5000;
 const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
 const PV_RATIO_WINDOW_MS = 1 * 60 * 1000;
-const GOE_CHARGER_MODE_IDS = new Set(Object.values(GOE_CHARGER_MODE));
 
 // Max age of the last `pgrid` push before it's treated as stale (all charging → grid). Kept much
 // longer than PV_RATIO_WINDOW_MS: the change-triggered P1 feed goes quiet during steady-state
@@ -108,6 +107,41 @@ class evChargerDevice extends Homey.Device {
     const timestamp = parsed.getTime();
     if (!Number.isFinite(timestamp)) return null;
     return timestamp;
+  }
+
+  /**
+   * Parse a Homey flow time argument to seconds since local midnight.
+   *
+   * @param {string|Date|object} value Flow card time value.
+   * @returns {number} Seconds since midnight.
+   */
+  parseTimeArgToLocalSeconds(value) {
+    let hours = null;
+    let minutes = null;
+    let seconds = 0;
+
+    if (value instanceof Date) {
+      hours = value.getHours();
+      minutes = value.getMinutes();
+      seconds = value.getSeconds();
+    } else if (typeof value === 'string') {
+      const normalized = value.trim();
+      const match = /^(\d{1,2}):(\d{2})(?::(\d{2}))?$/.exec(normalized);
+      if (match) {
+        hours = Number(match[1]);
+        minutes = Number(match[2]);
+        seconds = match[3] !== undefined ? Number(match[3]) : 0;
+      }
+    } else if (value && typeof value === 'object') {
+      const rawHours = value.hour ?? value.hours ?? value.h;
+      const rawMinutes = value.minute ?? value.minutes ?? value.min ?? value.m;
+      const rawSeconds = value.second ?? value.seconds ?? value.s;
+      hours = Number(rawHours);
+      minutes = Number(rawMinutes);
+      seconds = rawSeconds === undefined ? 0 : Number(rawSeconds);
+    }
+
+    return (Number(hours) || 0) * 3600 + (Number(minutes) || 0) * 60 + (Number(seconds) || 0);
   }
 
   formatTransactionDuration(durationMs) {
@@ -963,24 +997,12 @@ class evChargerDevice extends Homey.Device {
       pGrid: Number(pGrid)
     };
 
-    if (!Number.isFinite(payload.pGrid)) {
-      throw new Error('pGrid must be a number');
-    }
-
     if (pPv !== undefined && pPv !== null && pPv !== '') {
-      const parsedPPv = Number(pPv);
-      if (!Number.isFinite(parsedPPv)) {
-        throw new Error('pPv must be a number when provided');
-      }
-      payload.pPv = parsedPPv;
+      payload.pPv = Number(pPv);
     }
 
     if (pAkku !== undefined && pAkku !== null && pAkku !== '') {
-      const parsedPAkku = Number(pAkku);
-      if (!Number.isFinite(parsedPAkku)) {
-        throw new Error('pAkku must be a number when provided');
-      }
-      payload.pAkku = parsedPAkku;
+      payload.pAkku = Number(pAkku);
     }
 
     await this.applyApiValues({ ids: payload });
@@ -989,9 +1011,6 @@ class evChargerDevice extends Homey.Device {
 
   async onCapability_SET_CHARGER_MODE(mode) {
     const normalizedMode = typeof mode === 'string' ? mode.trim() : '';
-    if (!GOE_CHARGER_MODE_IDS.has(normalizedMode)) {
-      throw new Error(`Unsupported charger mode: ${mode}`);
-    }
 
     const context = {
       status: this.lastStatus,
@@ -1017,8 +1036,8 @@ class evChargerDevice extends Homey.Device {
       this.apiValue = getTransactionApiValue(normalizedTransaction);
     }
 
-    if (this.apiValue === null) {
-      throw new Error(`Unsupported writable transaction: ${transaction}`);
+    if (this.apiValue === null || this.apiValue === undefined) {
+      return;
     }
 
     await this.applyApiValues({ trx: this.apiValue });
@@ -1026,9 +1045,6 @@ class evChargerDevice extends Homey.Device {
 
   async onCapability_SET_FLEXIBLE_RATE_LIMIT(rate) {
     const parsedRate = Number(rate);
-    if (!Number.isFinite(parsedRate) || parsedRate < 0) {
-      throw new Error('Flexible rate limit must be a non-negative number');
-    }
 
     const context = {
       api: this.api,
@@ -1041,6 +1057,41 @@ class evChargerDevice extends Homey.Device {
 
     const apiValues = mapHomeyToApiValues({ goe_flexible_rate_limit: parsedRate }, this.getCapabilities(), (cap) => this.getCapabilityValue(cap), context);
     await this.applyApiValues(apiValues);
+  }
+
+  /**
+   * Set Daily Trip targets directly from kWh and time.
+   *
+   * @param {object} params Action params.
+   * @param {number} params.targetEnergyKWh Target energy in kWh.
+   * @param {string|Date|object} params.targetTime Target time (local).
+   */
+  async onCapability_SET_DAILY_TRIP_KWH_TARGET({ targetEnergyKWh, targetTime }) {
+    const parsedTargetEnergyKWh = Number(targetEnergyKWh);
+    const att = this.parseTimeArgToLocalSeconds(targetTime);
+    const ate = Math.ceil(parsedTargetEnergyKWh) * 1000;
+    await this.applyApiValues({ att, ate });
+  }
+
+  /**
+   * Set Daily Trip targets from SoC values and battery capacity.
+   *
+   * @param {object} params Action params.
+   * @param {number} params.startSoc Start SoC in percent.
+   * @param {number} params.targetSoc Target SoC in percent.
+   * @param {number} params.batteryCapacityKWh Battery capacity in kWh.
+   * @param {string|Date|object} params.targetTime Target time (local).
+   */
+  async onCapability_SET_DAILY_TRIP_PCT_TARGET({ startSoc, targetSoc, batteryCapacityKWh, targetTime }) {
+    const parsedStartSoc = Number(startSoc);
+    const parsedTargetSoc = Number(targetSoc);
+    const parsedBatteryCapacityKWh = Number(batteryCapacityKWh);
+
+    const att = this.parseTimeArgToLocalSeconds(targetTime);
+    const requiredKWh = ((parsedTargetSoc - parsedStartSoc) / 100) * parsedBatteryCapacityKWh;
+    const ate = Math.ceil(requiredKWh) * 1000;
+
+    await this.applyApiValues({ att, ate });
   }
 
   async onCapability_RESET_METER_SUBCOUNTERS() {
