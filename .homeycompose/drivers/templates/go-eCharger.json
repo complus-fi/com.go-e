@@ -13,11 +13,7 @@
     "alarm_problem",
     "alarm_problem.time",
     "meter_power",
-    "meter_power.pv",
-    "meter_power.grid",
     "meter_power.session",
-    "meter_power.session_pv",
-    "meter_power.session_grid",
     "measure_power",
     "measure_power.max",
     "measure_voltage",
@@ -33,11 +29,9 @@
     "evcharger_charging_state",
     "goe_measure_modelStatus",
     "goe_measure_phase_switching",
-    "button.reset_subcounters",
     "measure_power.pakku",
     "measure_power.pgrid",
-    "measure_power.ppv",
-    "goe_solargrid_ratio"
+    "measure_power.ppv"
   ],
   "capabilitiesOptions": {
     "alarm_problem.time": {
@@ -46,39 +40,6 @@
       },
       "desc": {
         "en": "True when there is not enough time to fully charge for the daily trip plan."
-      }
-    },
-    "button.reset_subcounters": {
-      "maintenanceAction": true,
-      "title": {
-        "en": "Reset PV/Grid Meters",
-        "nl": "Reset PV/netmeters",
-        "da": "Nulstil PV/Grid-målere",
-        "de": "PV-/Netzzähler zurücksetzen",
-        "es": "Restablecer medidores PV/Red",
-        "fr": "Réinitialiser les compteurs PV/Réseau",
-        "it": "Reimposta contatori PV/Rete",
-        "no": "Nullstill PV-/nett-målere",
-        "sv": "Återställ PV/nätmätare",
-        "pl": "Zresetuj liczniki PV/Sieci",
-        "ru": "Сбросить счетчики PV/сети",
-        "ko": "PV/그리드 미터 초기화",
-        "ar": "إعادة تعيين عدادات الطاقة الشمسية/الشبكة"
-      },
-      "desc": {
-        "en": "Reset the PV subcounters to zero and grid subcounters to the source meter.",
-        "nl": "Stel de PV-subtellers in op nul en de netsubtellers op de bronmeter.",
-        "da": "Nulstil PV-underoptællerne til nul og net-underoptællerne til kildemåleren.",
-        "de": "Setze die PV-Unterzähler auf null und die Netz-Unterzähler auf den Quellzähler zurück.",
-        "es": "Restablece los subcontadores de PV a cero y los subcontadores de la red al medidor de origen.",
-        "fr": "Réinitialisez les sous-compteurs PV à zéro et les sous-compteurs de réseau au compteur source.",
-        "it": "Reimposta i sottocontatori PV a zero e i sottocontatori della rete al contatore di origine.",
-        "no": "Nullstill PV-deltellerne til null og nett-deltellerne til kildemåleren.",
-        "sv": "Återställ PV-delmätarna till noll och nätverksdelmätarna till källmätaren.",
-        "pl": "Zresetuj podliczniki PV do zera i podliczniki sieci do licznika źródłowego.",
-        "ru": "Сбросьте субсчетчики солнечной энергии до нуля и субсчетчики сети до исходного счетчика.",
-        "ko": "PV 서브카운터를 0으로 재설정하고 그리드 서브카운터를 소스 미터로 재설정하세요.",
-        "ar": "إعادة تعيين العدادات الفرعية للطاقة الشمسية إلى الصفر والعدادات الفرعية للشبكة إلى عداد المصدر."
       }
     },
     "target_power": {
@@ -164,50 +125,6 @@
         }
       ]
     },
-    "meter_power.pv": {
-      "type": "number",
-      "title": {
-        "en": "PV Energy",
-        "nl": "PV Energie",
-        "da": "PV Energi",
-        "de": "PV-Energie",
-        "es": "Energía PV",
-        "fr": "Énergie PV",
-        "it": "Energia PV",
-        "no": "PV Energi",
-        "sv": "PV Energi",
-        "pl": "Energia PV",
-        "ru": "Энергия PV",
-        "ko": "PV 에너지",
-        "ar": "الطاقة من الألواح الشمسية"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true
-    },
-    "meter_power.grid": {
-      "type": "number",
-      "title": {
-        "en": "Grid Energy",
-        "nl": "Netstroom",
-        "da": "Netenergi",
-        "de": "Netzenergie",
-        "es": "Energía de la Red",
-        "fr": "Énergie du réseau",
-        "it": "Energia di rete",
-        "no": "Nettenergi",
-        "sv": "Nätenergi",
-        "pl": "Energia z sieci",
-        "ru": "Энергия сети",
-        "ko": "그리드 에너지",
-        "ar": "طاقة الشبكة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true
-    },
     "meter_power.session": {
       "type": "number",
       "title": {
@@ -230,50 +147,6 @@
       "decimals": 3,
       "insights": true
     },
-    "meter_power.session_pv": {
-      "type": "number",
-      "title": {
-        "en": "Session PV Energy",
-        "nl": "Sessie PV Energie",
-        "da": "Session PV Energi",
-        "de": "Sitzung PV-Energie",
-        "es": "Energía PV de la sesión",
-        "fr": "Session Énergie PV",
-        "it": "Sessione Energia PV",
-        "no": "Økt PV-energi",
-        "sv": "Session PV-energi",
-        "pl": "Sesja energii PV",
-        "ru": "Сессия солнечной энергии",
-        "ko": "세션 PV 에너지",
-        "ar": "طاقة الجلسة الشمسية"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true
-    },
-    "meter_power.session_grid": {
-      "type": "number",
-      "title": {
-        "en": "Session Grid Energy",
-        "nl": "Sessie Netstroom",
-        "da": "Session Gitterenergi",
-        "de": "Sitzung Netzenergie",
-        "es": "Energía de la Red de Sesión",
-        "fr": "Énergie du réseau de session",
-        "it": "Energia della Rete Sessione",
-        "no": "Økt nettenergi",
-        "sv": "Sessionnätenergi",
-        "pl": "Sesja Energia z Sieci",
-        "ru": "Сеанс Сетевой Энергии",
-        "ko": "세션 그리드 에너지",
-        "ar": "شبكة الطاقة للجلسة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true
-    },
     "meter_power.1": {
       "type": "number",
       "title": {
@@ -290,52 +163,6 @@
         "ru": "Карта 1 Энергия",
         "ko": "카드 1 에너지",
         "ar": "البطاقة 1 الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.1_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 1 PV Energy",
-        "nl": "Kaart 1 PV Energie",
-        "da": "Kort 1 PV Energi",
-        "de": "Karte 1 PV-Energie",
-        "es": "Tarjeta 1 Energía Solar Fotovoltaica",
-        "fr": "Carte 1 Énergie PV",
-        "it": "Scheda 1 Energia PV",
-        "no": "Kort 1 PV Energi",
-        "sv": "Kort 1 PV Energi",
-        "pl": "Karta 1 Energia PV",
-        "ru": "Карта 1 Энергия Солнечных Панелей",
-        "ko": "카드 1 태양광 에너지",
-        "ar": "البطاقة 1 طاقة الألواح الشمسية"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.1_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 1 Grid Energy",
-        "nl": "Kaart 1 Netstroom",
-        "da": "Kort 1 Netenergi",
-        "de": "Karte 1 Netzenergie",
-        "es": "Tarjeta 1 Energía de la Red",
-        "fr": "Carte 1 Énergie du Réseau",
-        "it": "Scheda 1 Energia di Rete",
-        "no": "Kort 1 Nettenergi",
-        "sv": "Kort 1 Nätenergi",
-        "pl": "Karta 1 Energia Sieciowa",
-        "ru": "Карта 1 Энергия Сети",
-        "ko": "카드 1 그리드 에너지",
-        "ar": "بطاقة 1 طاقة الشبكة"
       },
       "getable": true,
       "setable": false,
@@ -366,52 +193,6 @@
       "insights": true,
       "uiComponent": null
     },
-    "meter_power.2_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 2 PV Energy",
-        "nl": "Kaart 2 PV Energie",
-        "da": "Kort 2 PV Energi",
-        "de": "Karte 2 PV-Energie",
-        "es": "Tarjeta 2 Energía PV",
-        "fr": "Carte 2 Énergie PV",
-        "it": "Scheda 2 Energia PV",
-        "no": "Kort 2 PV Energi",
-        "sv": "Kort 2 PV Energi",
-        "pl": "Karta 2 Energia PV",
-        "ru": "Карта 2 PV Энергия",
-        "ko": "카드 2 PV 에너지",
-        "ar": "بطاقة 2 طاقة PV"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.2_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 2 Grid Energy",
-        "nl": "Kaart 2 Netstroom",
-        "da": "Kort 2 Netenergi",
-        "de": "Karte 2 Netzenergie",
-        "es": "Tarjeta 2 Energía de la Red",
-        "fr": "Carte 2 Énergie du Réseau",
-        "it": "Scheda 2 Energia di Rete",
-        "no": "Kort 2 Nettenergi",
-        "sv": "Kort 2 Nätenergi",
-        "pl": "Karta 2 Energia Sieciowa",
-        "ru": "Карта 2 Сетевой Энергии",
-        "ko": "카드 2 그리드 에너지",
-        "ar": "بطاقة 2 شبكة الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
     "meter_power.3": {
       "type": "number",
       "title": {
@@ -428,52 +209,6 @@
         "ru": "Карта 3 Энергия",
         "ko": "카드 3 에너지",
         "ar": "بطاقة 3 الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.3_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 3 PV Energy",
-        "nl": "Kaart 3 PV Energie",
-        "da": "Kort 3 PV Energi",
-        "de": "Karte 3 PV-Energie",
-        "es": "Tarjeta 3 Energía PV",
-        "fr": "Carte 3 Énergie PV",
-        "it": "Scheda 3 Energia PV",
-        "no": "Kort 3 PV Energi",
-        "sv": "Kort 3 PV Energi",
-        "pl": "Karta 3 Energia PV",
-        "ru": "Карта 3 PV Энергия",
-        "ko": "카드 3 PV 에너지",
-        "ar": "بطاقة 3 طاقة PV"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.3_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 3 Grid Energy",
-        "nl": "Kaart 3 Netstroom",
-        "da": "Kort 3 Netenergi",
-        "de": "Karte 3 Netzenergie",
-        "es": "Tarjeta 3 Energía de Red",
-        "fr": "Carte 3 Énergie du Réseau",
-        "it": "Scheda 3 Energia di Rete",
-        "no": "Kort 3 Nettenergi",
-        "sv": "Kort 3 Rutnätsenergi",
-        "pl": "Karta 3 Energia Sieciowa",
-        "ru": "Карта 3 Сетевой Энергии",
-        "ko": "카드 3 그리드 에너지",
-        "ar": "بطاقة 3 شبكة الطاقة"
       },
       "getable": true,
       "setable": false,
@@ -504,52 +239,6 @@
       "insights": true,
       "uiComponent": null
     },
-    "meter_power.4_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 4 PV Energy",
-        "nl": "Kaart 4 PV Energie",
-        "da": "Kort 4 PV Energi",
-        "de": "Karte 4 PV-Energie",
-        "es": "Tarjeta 4 Energía FV",
-        "fr": "Carte 4 Énergie PV",
-        "it": "Scheda 4 Energia PV",
-        "no": "Kort 4 PV Energi",
-        "sv": "Kort 4 PV Energi",
-        "pl": "Karta 4 Energia PV",
-        "ru": "Карта 4 Энергия Солнечных Панелей",
-        "ko": "카드 4 PV 에너지",
-        "ar": "بطاقة 4 طاقة PV"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.4_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 4 Grid Energy",
-        "nl": "Kaart 4 Netstroom",
-        "da": "Kort 4 Netenergi",
-        "de": "Karte 4 Netzenergie",
-        "es": "Tarjeta 4 Energía de la Red",
-        "fr": "Carte 4 Énergie du Réseau",
-        "it": "Scheda 4 Energia di Rete",
-        "no": "Kort 4 Nettenergi",
-        "sv": "Kort 4 Rutnätsenergi",
-        "pl": "Karta 4 Energia Sieciowa",
-        "ru": "Карта 4 Сетевой Энергии",
-        "ko": "카드 4 그리드 에너지",
-        "ar": "بطاقة 4 شبكة الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
     "meter_power.5": {
       "type": "number",
       "title": {
@@ -566,52 +255,6 @@
         "ru": "Карта 5 Энергия",
         "ko": "카드 5 에너지",
         "ar": "بطاقة 5 الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.5_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 5 PV Energy",
-        "nl": "Kaart 5 PV Energie",
-        "da": "Kort 5 PV Energi",
-        "de": "Karte 5 PV Energie",
-        "es": "Tarjeta 5 Energía PV",
-        "fr": "Carte 5 Énergie PV",
-        "it": "Scheda 5 Energia PV",
-        "no": "Kort 5 PV Energi",
-        "sv": "Kort 5 PV Energi",
-        "pl": "Karta 5 Energia PV",
-        "ru": "Карта 5 PV Энергия",
-        "ko": "카드 5 PV 에너지",
-        "ar": "بطاقة 5 طاقة PV"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.5_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 5 Grid Energy",
-        "nl": "Kaart 5 Netstroom",
-        "da": "Kort 5 Netenergi",
-        "de": "Karte 5 Netzenergie",
-        "es": "Tarjeta 5 Energía de la Red",
-        "fr": "Carte 5 Énergie du Réseau",
-        "it": "Scheda 5 Energia di Rete",
-        "no": "Kort 5 Nettenergi",
-        "sv": "Kort 5 Rutnätsenergi",
-        "pl": "Karta 5 Energia Sieciowa",
-        "ru": "Карта 5 Сетевой Энергии",
-        "ko": "카드 5 그리드 에너지",
-        "ar": "بطاقة 5 شبكة الطاقة"
       },
       "getable": true,
       "setable": false,
@@ -642,52 +285,6 @@
       "insights": true,
       "uiComponent": null
     },
-    "meter_power.6_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 6 PV Energy",
-        "nl": "Kaart 6 PV Energie",
-        "da": "Kort 6 PV Energi",
-        "de": "Karte 6 PV Energie",
-        "es": "Tarjeta 6 Energía PV",
-        "fr": "Carte 6 Énergie PV",
-        "it": "Scheda 6 Energia PV",
-        "no": "Kort 6 PV Energi",
-        "sv": "Kort 6 PV Energi",
-        "pl": "Karta 6 Energia PV",
-        "ru": "Карта 6 Энергия Солнечных Панелей",
-        "ko": "카드 6 PV 에너지",
-        "ar": "بطاقة 6 طاقة PV"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.6_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 6 Grid Energy",
-        "nl": "Kaart 6 Netstroom",
-        "da": "Kort 6 Netenergi",
-        "de": "Karte 6 Netzenergie",
-        "es": "Tarjeta 6 Energía de la Red",
-        "fr": "Carte 6 Énergie du Réseau",
-        "it": "Carta 6 Energia di Rete",
-        "no": "Kort 6 Nettenergi",
-        "sv": "Kort 6 Nätenergi",
-        "pl": "Karta 6 Energia Sieciowa",
-        "ru": "Карта 6 Сетевой Энергии",
-        "ko": "카드 6 그리드 에너지",
-        "ar": "بطاقة 6 شبكة الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
     "meter_power.7": {
       "type": "number",
       "title": {
@@ -704,52 +301,6 @@
         "ru": "Карта 7 Энергия",
         "ko": "카드 7 에너지",
         "ar": "البطاقة 7 الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.7_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 7 PV Energy",
-        "nl": "Kaart 7 PV Energie",
-        "da": "Kort 7 PV Energi",
-        "de": "Karte 7 PV Energie",
-        "es": "Tarjeta 7 Energía PV",
-        "fr": "Carte 7 Énergie PV",
-        "it": "Scheda 7 Energia PV",
-        "no": "Kort 7 PV Energi",
-        "sv": "Kort 7 PV Energi",
-        "pl": "Karta 7 Energia PV",
-        "ru": "Карта 7 PV Энергия",
-        "ko": "카드 7 PV 에너지",
-        "ar": "بطاقة 7 طاقة PV"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.7_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 7 Grid Energy",
-        "nl": "Kaart 7 Netstroom",
-        "da": "Kort 7 Netenergi",
-        "de": "Karte 7 Netzenergie",
-        "es": "Tarjeta 7 Energía de la Red",
-        "fr": "Carte 7 Énergie du Réseau",
-        "it": "Scheda 7 Energia di Rete",
-        "no": "Kort 7 Nettstrøm",
-        "sv": "Kort 7 Nätenergi",
-        "pl": "Karta 7 Energia Sieciowa",
-        "ru": "Карта 7 Сетевой Энергии",
-        "ko": "카드 7 그리드 에너지",
-        "ar": "بطاقة 7 شبكة الطاقة"
       },
       "getable": true,
       "setable": false,
@@ -780,52 +331,6 @@
       "insights": true,
       "uiComponent": null
     },
-    "meter_power.8_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 8 PV Energy",
-        "nl": "Kaart 8 PV Energie",
-        "da": "Kort 8 PV Energi",
-        "de": "Karte 8 PV-Energie",
-        "es": "Tarjeta 8 Energía PV",
-        "fr": "Carte 8 Énergie PV",
-        "it": "Scheda 8 Energia PV",
-        "no": "Kort 8 PV Energi",
-        "sv": "Kort 8 PV Energi",
-        "pl": "Karta 8 Energia PV",
-        "ru": "Карта 8 PV Энергия",
-        "ko": "카드 8 PV 에너지",
-        "ar": "بطاقة 8 طاقة PV"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.8_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 8 Grid Energy",
-        "nl": "Kaart 8 Netstroom",
-        "da": "Kort 8 Netenergi",
-        "de": "Karte 8 Netzenergie",
-        "es": "Tarjeta 8 Energía de la Red",
-        "fr": "Carte 8 Énergie du Réseau",
-        "it": "Scheda 8 Energia di Rete",
-        "no": "Kort 8 Nettenergi",
-        "sv": "Kort 8 Rutnätsenergi",
-        "pl": "Karta 8 Energia Sieciowa",
-        "ru": "Карта 8 Сетевой Энергии",
-        "ko": "카드 8 그리드 에너지",
-        "ar": "بطاقة 8 شبكة الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
     "meter_power.9": {
       "type": "number",
       "title": {
@@ -849,52 +354,6 @@
       "insights": true,
       "uiComponent": null
     },
-    "meter_power.9_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 9 PV Energy",
-        "nl": "Kaart 9 PV Energie",
-        "da": "Kort 9 PV Energi",
-        "de": "Karte 9 PV Energie",
-        "es": "Tarjeta 9 Energía PV",
-        "fr": "Carte 9 Énergie PV",
-        "it": "Carta 9 Energia PV",
-        "no": "Kort 9 PV Energi",
-        "sv": "Kort 9 PV Energi",
-        "pl": "Karta 9 Energia PV",
-        "ru": "Карта 9 PV Energy",
-        "ko": "카드 9 PV 에너지",
-        "ar": "بطاقة 9 طاقة PV"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.9_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 9 Grid Energy",
-        "nl": "Kaart 9 Netstroom",
-        "da": "Kort 9 Net Energi",
-        "de": "Karte 9 Netzenergie",
-        "es": "Tarjeta 9 Energía de la Red",
-        "fr": "Carte 9 Énergie du Réseau",
-        "it": "Scheda 9 Energia di Rete",
-        "no": "Kort 9 Rutenett Energi",
-        "sv": "Kort 9 Rutnätsenergi",
-        "pl": "Karta 9 Energia Sieciowa",
-        "ru": "Карта 9 Сетевой Энергии",
-        "ko": "카드 9 그리드 에너지",
-        "ar": "بطاقة 9 شبكة الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
     "meter_power.10": {
       "type": "number",
       "title": {
@@ -911,52 +370,6 @@
         "ru": "Карта 10 Энергия",
         "ko": "카드 10 에너지",
         "ar": "بطاقة 10 الطاقة"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.10_pv": {
-      "type": "number",
-      "title": {
-        "en": "Card 10 PV Energy",
-        "nl": "Kaart 10 PV Energie",
-        "da": "Kort 10 PV Energi",
-        "de": "Karte 10 PV Energie",
-        "es": "Tarjeta 10 Energía PV",
-        "fr": "Carte 10 Énergie PV",
-        "it": "Scheda 10 Energia PV",
-        "no": "Kort 10 PV Energi",
-        "sv": "Kort 10 PV Energi",
-        "pl": "Karta 10 PV Energia",
-        "ru": "Карта 10 PV Energy",
-        "ko": "카드 10 PV 에너지",
-        "ar": "بطاقة 10 طاقة PV"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 3,
-      "insights": true,
-      "uiComponent": null
-    },
-    "meter_power.10_grid": {
-      "type": "number",
-      "title": {
-        "en": "Card 10 Grid Energy",
-        "nl": "Kaart 10 Netstroom",
-        "da": "Kort 10 Netenergi",
-        "de": "Karte 10 Netzenergie",
-        "es": "Tarjeta 10 Energía de Red",
-        "fr": "Carte 10 Énergie du Réseau",
-        "it": "Scheda 10 Energia di Rete",
-        "no": "Kort 10 Nettenergi",
-        "sv": "Kort 10 Rutnätsenergi",
-        "pl": "Karta 10 Energia Sieciowa",
-        "ru": "Карта 10 Сетевой Энергии",
-        "ko": "카드 10 그리드 에너지",
-        "ar": "بطاقة 10 شبكة الطاقة"
       },
       "getable": true,
       "setable": false,

@@ -21,12 +21,6 @@ const {
 const POLL_INTERVAL = 5000;
 const POLL_INTERVAL_IDLE = 30000;
 const CHARGING_UI_DEBOUNCE_POLLS = 1;
-const PV_RATIO_WINDOW_MS = 1 * 60 * 1000;
-
-// Max age of the last `pgrid` push before it's treated as stale (all charging → grid). Kept much
-// longer than PV_RATIO_WINDOW_MS: the change-triggered P1 feed goes quiet during steady-state
-// surplus, but only a dead feed (overnight) is truly stale. See CLAUDE.md "Freshness gating".
-const PV_SURPLUS_STALE_MS = 5 * 60 * 1000;
 
 const GOE_TRANSACTION_BASE_VALUES = [
   {
@@ -287,10 +281,6 @@ class evChargerDevice extends Homey.Device {
     this.pendingChargingState = null;
     this.transactionStartTimestamp = null;
     this.pollIntervalMs = null;
-    this.lastPvSurplusInfoTs = 0;
-
-    this.volatileEnergySamples = [];
-    this.volatileLastSampleTs = 0;
 
     this.registerCapabilityListeners();
     await this.startConnection();
@@ -524,7 +514,6 @@ class evChargerDevice extends Homey.Device {
         if (driverCapabilities.includes(d)) return false;
         // Dynamic RFID card capabilities are reconciled on poll from cXi state.
         if (/^meter_power\.(10|[1-9])$/.test(d)) return false;
-        if (/^meter_power\.(10|[1-9])_(pv|grid)$/.test(d)) return false;
         if (/^goe_meter_power_name\.(10|[1-9])$/.test(d)) return false;
         return true;
       });
@@ -582,22 +571,16 @@ class evChargerDevice extends Homey.Device {
 
   registerCapabilityListeners() {
     this.registerMultipleCapabilityListener(
-      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction', 'target_power', 'goe_flexible_rate_limit', 'button.reset_subcounters'],
-      async ({ evcharger_charging, goe_charger_mode, goe_transaction, target_power, goe_flexible_rate_limit, 'button.reset_subcounters': button_reset_subcounters }) => {
+      ['evcharger_charging', 'goe_charger_mode', 'goe_transaction', 'target_power', 'goe_flexible_rate_limit'],
+      async ({ evcharger_charging, goe_charger_mode, goe_transaction, target_power, goe_flexible_rate_limit }) => {
         try {
           this.log(`[Device] ${this.getName()} - Capability listener triggered with:`, {
             evcharger_charging,
             goe_charger_mode,
             goe_transaction,
             target_power,
-            goe_flexible_rate_limit,
-            button_reset_subcounters
+            goe_flexible_rate_limit
           });
-
-          if (button_reset_subcounters === true) {
-            await this.onCapability_RESET_METER_SUBCOUNTERS();
-            return;
-          }
 
           const context = {
             api: this.api,
@@ -786,157 +769,6 @@ class evChargerDevice extends Homey.Device {
         }
       }
 
-      const evPower = Number(Array.isArray(status.nrg) ? status.nrg[11] : null);
-      const pGrid = Number(status.pgrid);
-      // `pgrid` (+ import / - export) is only trustworthy while the P1-meter flow is actively
-      // pushing it via `ids`. Attribute PV only when a push arrived recently; otherwise `pgrid` is
-      // stale (feed stopped, charger reporting a default/last value) and all charging counts as grid.
-      const pvSurplusInfoAgeMs = this.lastPvSurplusInfoTs > 0 ? Date.now() - this.lastPvSurplusInfoTs : Infinity;
-      const pvAttributionActive = pvSurplusInfoAgeMs <= PV_SURPLUS_STALE_MS;
-      const pvRatio = pvAttributionActive && Number.isFinite(evPower) && evPower > 0 && Number.isFinite(pGrid) ? Math.max(0, Math.min(1, 1 - Math.max(0, Math.min(evPower, pGrid)) / evPower)) : 0;
-      const statusNrg = Array.isArray(status.nrg) ? status.nrg : [];
-      const currentPowerW = Math.max(0, Number(statusNrg[11]) || 0);
-      const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
-      const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
-      const resetSessionAccumulator = previousChargingState === 'plugged_out' && nextChargingState && nextChargingState !== 'plugged_out';
-      const nowTs = Date.now();
-      const isActivelyCharging = nextChargingState === 'plugged_in_charging' && currentPowerW > 0;
-      const hasContinuousChargingSample = isActivelyCharging && previousChargingState === 'plugged_in_charging';
-      const elapsedMs =
-        hasContinuousChargingSample && Number.isFinite(this.volatileLastSampleTs) && this.volatileLastSampleTs > 0 && nowTs > this.volatileLastSampleTs ? nowTs - this.volatileLastSampleTs : 0;
-      const estimatedWh = (currentPowerW * elapsedMs) / 3600000;
-      const splitDefinitions = [];
-
-      if (resetSessionAccumulator) {
-        if (this.hasCapability('meter_power.session_pv')) {
-          await this.setCapabilityValue('meter_power.session_pv', 0).catch((error) => this.error(error));
-        }
-        if (this.hasCapability('meter_power.session_grid')) {
-          await this.setCapabilityValue('meter_power.session_grid', 0).catch((error) => this.error(error));
-        }
-        this.resetVolatileEnergySplit();
-      }
-
-      if (estimatedWh > 0) {
-        this.volatileEnergySamples.push({
-          ts: nowTs,
-          totalWh: estimatedWh,
-          pvWh: estimatedWh * pvRatio
-        });
-      }
-
-      const ratioWindowStartTs = nowTs - PV_RATIO_WINDOW_MS;
-      this.volatileEnergySamples = this.volatileEnergySamples.filter((sample) => {
-        return Number.isFinite(sample?.ts) && sample.ts >= ratioWindowStartTs;
-      });
-
-      const ratioWindowTotals = this.volatileEnergySamples.reduce(
-        (totals, sample) => {
-          const sampleTotalWh = Number(sample.totalWh);
-          const samplePvWh = Number(sample.pvWh);
-          if (!Number.isFinite(sampleTotalWh) || sampleTotalWh <= 0) {
-            return totals;
-          }
-
-          totals.totalWh += sampleTotalWh;
-          totals.pvWh += Number.isFinite(samplePvWh) ? Math.max(0, samplePvWh) : 0;
-          return totals;
-        },
-        { totalWh: 0, pvWh: 0 }
-      );
-
-      const stablePvRatioRaw = ratioWindowTotals.totalWh > 0 ? ratioWindowTotals.pvWh / ratioWindowTotals.totalWh : pvRatio;
-      const stablePvRatio = Number.isFinite(stablePvRatioRaw) ? Math.max(0, Math.min(1, stablePvRatioRaw)) : 0;
-
-      // Surface the smoothed solar-to-grid ratio (0 = all grid, 1 = all solar) for the sensor capability.
-      if (this.hasCapability('goe_solargrid_ratio')) {
-        await this.setCapabilityValue('goe_solargrid_ratio', stablePvRatio).catch(this.error);
-      }
-
-      if (this.hasCapability('meter_power.pv') || this.hasCapability('meter_power.grid') || this.hasCapability('meter_power')) {
-        splitDefinitions.push({
-          id: 'meter_power',
-          masterCapability: 'meter_power',
-          totalWh: Math.max(0, Number(status.eto) || 0),
-          pvCapability: 'meter_power.pv',
-          gridCapability: 'meter_power.grid'
-        });
-      }
-
-      if (this.hasCapability('meter_power.session_pv') || this.hasCapability('meter_power.session_grid') || this.hasCapability('meter_power.session')) {
-        splitDefinitions.push({
-          id: 'meter_power.session',
-          masterCapability: 'meter_power.session',
-          totalWh: Math.max(0, Number(status.wh) || 0),
-          pvCapability: 'meter_power.session_pv',
-          gridCapability: 'meter_power.session_grid'
-        });
-      }
-
-      for (let cardIndex = 1; cardIndex <= 10; cardIndex += 1) {
-        const pvCapability = `meter_power.${cardIndex}_pv`;
-        const gridCapability = `meter_power.${cardIndex}_grid`;
-        if (!this.hasCapability(pvCapability) && !this.hasCapability(gridCapability)) {
-          continue;
-        }
-
-        splitDefinitions.push({
-          id: `meter_power.${cardIndex}`,
-          masterCapability: `meter_power.${cardIndex}`,
-          totalWh: Math.max(0, Number(status[`c${cardIndex - 1}e`]) || 0),
-          pvCapability,
-          gridCapability
-        });
-      }
-
-      for (const definition of splitDefinitions) {
-        delete nextValues[definition.pvCapability];
-        delete nextValues[definition.gridCapability];
-
-        // Guard against missing/invalid source readings (e.g. a partial status response right after
-        // connect). Never derive a delta from a bad reading; skip so counters are left untouched.
-        const normalizedTotalWh = Number(definition.totalWh);
-        if (!Number.isFinite(normalizedTotalWh) || normalizedTotalWh <= 0) {
-          continue;
-        }
-
-        const previousMasterKwh = Number(this.getCapabilityValue(definition.masterCapability));
-        if (!Number.isFinite(previousMasterKwh)) {
-          continue;
-        }
-
-        const previousMasterWh = Math.max(0, previousMasterKwh) * 1000;
-        const deltaWh = normalizedTotalWh - previousMasterWh;
-
-        // Split counters only ever increase or are reset via button.reset_subcounters. A flat or
-        // negative delta (transient dip or a charger-side meter reset) must not wipe the counters;
-        // skip and let the master baseline re-sync on the next poll.
-        if (deltaWh <= 0) {
-          continue;
-        }
-
-        const pvDeltaWh = deltaWh * stablePvRatio;
-        const gridDeltaWh = deltaWh - pvDeltaWh;
-
-        if (this.hasCapability(definition.pvCapability)) {
-          const normalizedPvWh = Math.max(0, Number(this.getCapabilityValue(definition.pvCapability)) || 0) * 1000;
-          const nextPvKwh = (normalizedPvWh + pvDeltaWh) / 1000;
-          await this.setCapabilityValue(definition.pvCapability, nextPvKwh).catch((error) => this.error(error));
-        }
-
-        if (this.hasCapability(definition.gridCapability)) {
-          const normalizedGridWh = Math.max(0, Number(this.getCapabilityValue(definition.gridCapability)) || 0) * 1000;
-          const nextGridKwh = (normalizedGridWh + gridDeltaWh) / 1000;
-          await this.setCapabilityValue(definition.gridCapability, nextGridKwh).catch((error) => this.error(error));
-        }
-
-        if (definition.id === 'meter_power') {
-          this.resetVolatileEnergySplit();
-        }
-      }
-
-      this.volatileLastSampleTs = nowTs;
-
       // Update target_power max capability option based on ama (ampere max limit)
       if (this.hasCapability('target_power') && status.ama !== undefined && Number.isFinite(Number(status.ama))) {
         const currentOptions = this.getCapabilityOptions('target_power');
@@ -986,8 +818,7 @@ class evChargerDevice extends Homey.Device {
   }
 
   async onCapability_SET_PV_SURPLUS_INFO({ pGrid, pPv, pAkku }) {
-    // Keep `pgrid` current in every charger mode; the PV/grid split trusts it only while freshly
-    // pushed (see PV_SURPLUS_STALE_MS). Skip only when nothing is connected to charge.
+    // Keep `pgrid` current in every charger mode. Skip only when nothing is connected to charge.
     const chargingState = this.getCapabilityValue('evcharger_charging_state');
     if (chargingState === 'plugged_out') {
       return;
@@ -1006,7 +837,6 @@ class evChargerDevice extends Homey.Device {
     }
 
     await this.applyApiValues({ ids: payload });
-    this.lastPvSurplusInfoTs = Date.now();
   }
 
   async onCapability_SET_CHARGER_MODE(mode) {
@@ -1094,42 +924,6 @@ class evChargerDevice extends Homey.Device {
     await this.applyApiValues({ att, ate });
   }
 
-  async onCapability_RESET_METER_SUBCOUNTERS() {
-    // Handle main meter_power split
-    if (this.hasCapability('meter_power')) {
-      const masterValue = Number(this.getCapabilityValue('meter_power')) || 0;
-      if (this.hasCapability('meter_power.pv')) {
-        await this.setCapabilityValue('meter_power.pv', 0).catch((error) => this.error(error));
-      }
-      if (this.hasCapability('meter_power.grid')) {
-        await this.setCapabilityValue('meter_power.grid', masterValue).catch((error) => this.error(error));
-      }
-    }
-
-    // Handle card meter_power splits (1-10)
-    for (let i = 1; i <= 10; i += 1) {
-      const masterCap = `meter_power.${i}`;
-      const pvCap = `meter_power.${i}_pv`;
-      const gridCap = `meter_power.${i}_grid`;
-
-      if (!this.hasCapability(masterCap)) continue;
-
-      const masterValue = Number(this.getCapabilityValue(masterCap)) || 0;
-      if (this.hasCapability(pvCap)) {
-        await this.setCapabilityValue(pvCap, 0).catch((error) => this.error(error));
-      }
-      if (this.hasCapability(gridCap)) {
-        await this.setCapabilityValue(gridCap, masterValue).catch((error) => this.error(error));
-      }
-    }
-
-    this.resetVolatileEnergySplit();
-  }
-
-  resetVolatileEnergySplit() {
-    this.volatileEnergySamples = [];
-  }
-
   isCardConfigured(value) {
     if (typeof value === 'boolean') return value;
     if (typeof value === 'number') return value !== 0;
@@ -1156,19 +950,13 @@ class evChargerDevice extends Homey.Device {
       const configured = this.isCardConfigured(status[configKey]);
       const previousConfigured = this.cardConfiguredFlags[index];
       const meterCapability = `meter_power.${cardNumber}`;
-      const meterPvCapability = `meter_power.${cardNumber}_pv`;
-      const meterGridCapability = `meter_power.${cardNumber}_grid`;
       const nameCapability = `goe_meter_power_name.${cardNumber}`;
       const hasMeterCapability = this.hasCapability(meterCapability);
-      const hasMeterPvCapability = this.hasCapability(meterPvCapability);
-      const hasMeterGridCapability = this.hasCapability(meterGridCapability);
       const hasNameCapability = this.hasCapability(nameCapability);
 
       // On first seen value, reconcile only if device capability state does not match charger state.
       if (previousConfigured !== undefined && previousConfigured === configured) {
-        const isCapabilityStateInSync = configured
-          ? hasMeterCapability && hasMeterPvCapability && hasMeterGridCapability && hasNameCapability
-          : !hasMeterCapability && !hasMeterPvCapability && !hasMeterGridCapability && !hasNameCapability;
+        const isCapabilityStateInSync = configured ? hasMeterCapability && hasNameCapability : !hasMeterCapability && !hasNameCapability;
 
         if (isCapabilityStateInSync) {
           continue;
@@ -1177,13 +965,9 @@ class evChargerDevice extends Homey.Device {
 
       if (configured) {
         if (!hasMeterCapability) capsToAdd.push(meterCapability);
-        if (!hasMeterPvCapability) capsToAdd.push(meterPvCapability);
-        if (!hasMeterGridCapability) capsToAdd.push(meterGridCapability);
         if (!hasNameCapability) capsToAdd.push(nameCapability);
       } else {
         if (hasMeterCapability) capsToRemove.push(meterCapability);
-        if (hasMeterPvCapability) capsToRemove.push(meterPvCapability);
-        if (hasMeterGridCapability) capsToRemove.push(meterGridCapability);
         if (hasNameCapability) capsToRemove.push(nameCapability);
       }
 
