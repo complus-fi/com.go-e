@@ -40,5 +40,8 @@
   },
   "1.6.0": {
     "en": "ADD: Daily Trip planning support using Go-e's Daily Trip mode."
+  },
+  "1.7.0": {
+    "en": "BREAK: Removes calculated PV vs Grid charging energy counters. Need a better way to estimate the ratio if PV and Grid power in relation to used power."
   }
 }
