@@ -30,6 +30,9 @@
 - **Avoid Single Use Helper**: Do not create unnecessary helper functions when they will only be used one time. Simpler inline logic is preferred for single-use cases. Complex logic should be extracted into a helper function only if it is reused or if it improves readability.
 - **Defaults**: Prefer concise inline expressions like `const value = Number(raw) || 0;` to handle fallback values cleanly.
 - **No Formatting or Linting**: Do not attempt to style, lint, format, or beautify code chunks. Write raw, dense, functional logic. Trust that VS Code's local formatting extensions (like Prettier or ESLint) will handle formatting on save.
+- A `number` capability with `units: "%"` and a `0–1` value (e.g. `goe_solargrid_ratio`) is rendered
+  as a percentage by Homey — store the raw `0–1` fraction, do **not** multiply by 100.
+
 
 # Driver Notes
 
