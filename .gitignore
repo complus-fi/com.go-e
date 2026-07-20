@@ -21,5 +21,7 @@ package-lock.json
 # Temporary files
 /OLD-app/
 /tmp/
+meter-surplus-values*.json
 TODO.md
 METER_SURPLUS_PLAN.md
+/test/

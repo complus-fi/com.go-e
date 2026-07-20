@@ -2,7 +2,7 @@
 
 const Homey = require('homey');
 const goeChargerAPI = require('../lib/go-eCharger-API-v2');
-const { formatStatusForLog } = require('../lib/helpers');
+const { formatStatusForLog, formatTransactionDateTime, formatTransactionDuration, parseTimeArgToLocalSeconds, parseTransactionStart } = require('../lib/helpers');
 const {
   DEFAULT_SPL3_THRESHOLD_W,
   GOE_CHARGER_MODE,
@@ -62,196 +62,6 @@ const GOE_TRANSACTION_BASE_VALUES = [
 ];
 
 class evChargerDevice extends Homey.Device {
-  formatTransactionDateTime(date = new Date()) {
-    const timezoneRaw = this.homey?.clock?.getTimezone?.();
-    const timezone = typeof timezoneRaw === 'string' && timezoneRaw.trim() ? timezoneRaw.trim() : null;
-    const options = {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false,
-      hourCycle: 'h23'
-    };
-
-    if (timezone) {
-      options.timeZone = timezone;
-    }
-
-    const formatter = new Intl.DateTimeFormat('en-GB', options);
-    const parts = formatter.formatToParts(date);
-    const byType = {};
-
-    for (const part of parts) {
-      byType[part.type] = part.value;
-    }
-
-    return `${byType.year}-${byType.month}-${byType.day} ${byType.hour}:${byType.minute}:${byType.second}`;
-  }
-
-  parseTransactionStart(value) {
-    if (typeof value !== 'string') return null;
-    const normalized = value.trim();
-    const match = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/.exec(normalized);
-    if (!match) return null;
-
-    const parsed = new Date(`${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`);
-    const timestamp = parsed.getTime();
-    if (!Number.isFinite(timestamp)) return null;
-    return timestamp;
-  }
-
-  /**
-   * Parse a Homey flow time argument to seconds since local midnight.
-   *
-   * @param {string|Date|object} value Flow card time value.
-   * @returns {number} Seconds since midnight.
-   */
-  parseTimeArgToLocalSeconds(value) {
-    let hours = null;
-    let minutes = null;
-    let seconds = 0;
-
-    if (value instanceof Date) {
-      hours = value.getHours();
-      minutes = value.getMinutes();
-      seconds = value.getSeconds();
-    } else if (typeof value === 'string') {
-      const normalized = value.trim();
-      const match = /^(\d{1,2}):(\d{2})(?::(\d{2}))?$/.exec(normalized);
-      if (match) {
-        hours = Number(match[1]);
-        minutes = Number(match[2]);
-        seconds = match[3] !== undefined ? Number(match[3]) : 0;
-      }
-    } else if (value && typeof value === 'object') {
-      const rawHours = value.hour ?? value.hours ?? value.h;
-      const rawMinutes = value.minute ?? value.minutes ?? value.min ?? value.m;
-      const rawSeconds = value.second ?? value.seconds ?? value.s;
-      hours = Number(rawHours);
-      minutes = Number(rawMinutes);
-      seconds = rawSeconds === undefined ? 0 : Number(rawSeconds);
-    }
-
-    return (Number(hours) || 0) * 3600 + (Number(minutes) || 0) * 60 + (Number(seconds) || 0);
-  }
-
-  formatTransactionDuration(durationMs) {
-    const safeDuration = Number.isFinite(durationMs) ? Math.max(0, durationMs) : 0;
-    const totalSeconds = Math.floor(safeDuration / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-  }
-
-  applyTransactionTimeValues(nextValues = {}) {
-    const hasStart = this.hasCapability('goe_transaction_start');
-    const hasEnd = this.hasCapability('goe_transaction_end');
-    const hasDuration = this.hasCapability('goe_transaction_duration');
-    if (!hasStart && !hasEnd && !hasDuration) return;
-
-    // Only update transaction timers from a fresh polled transaction value.
-    if (typeof nextValues.goe_transaction !== 'string') {
-      return;
-    }
-
-    const previousTransaction = this.getCapabilityValue('goe_transaction');
-    const nextTransaction = nextValues.goe_transaction;
-    const isTransactionActive = typeof nextTransaction === 'string' && nextTransaction !== GOE_TRANSACTION.NONE;
-
-    if (previousTransaction === GOE_TRANSACTION.NONE && isTransactionActive) {
-      this.transactionStartTimestamp = Date.now();
-      if (hasStart) {
-        nextValues.goe_transaction_start = this.formatTransactionDateTime(new Date(this.transactionStartTimestamp));
-      }
-    }
-
-    if (!isTransactionActive) {
-      this.transactionStartTimestamp = null;
-      return;
-    }
-
-    if (!Number.isFinite(this.transactionStartTimestamp)) {
-      const startCandidate = nextValues.goe_transaction_start ?? this.getCapabilityValue('goe_transaction_start');
-      const parsedStart = this.parseTransactionStart(startCandidate);
-      if (parsedStart !== null) {
-        this.transactionStartTimestamp = parsedStart;
-      }
-    }
-
-    if (!Number.isFinite(this.transactionStartTimestamp)) {
-      this.transactionStartTimestamp = Date.now();
-      if (hasStart) {
-        nextValues.goe_transaction_start = this.formatTransactionDateTime(new Date(this.transactionStartTimestamp));
-      }
-    }
-
-    const now = new Date();
-    const endTimestamp = now.getTime();
-    let endValue;
-    if (hasEnd) {
-      endValue = this.formatTransactionDateTime(now);
-      nextValues.goe_transaction_end = endValue;
-    } else {
-      endValue = this.formatTransactionDateTime(now);
-    }
-    if (hasDuration) {
-      const startValue = nextValues.goe_transaction_start ?? this.getCapabilityValue('goe_transaction_start');
-      const parsedStart = this.parseTransactionStart(startValue);
-      const parsedEnd = this.parseTransactionStart(endValue);
-
-      const durationMs = Number.isFinite(parsedStart) && Number.isFinite(parsedEnd) ? parsedEnd - parsedStart : endTimestamp - this.transactionStartTimestamp;
-
-      const safeDuration = Number.isFinite(durationMs) ? Math.max(0, durationMs) : 0;
-      const totalSeconds = Math.floor(safeDuration / 1000);
-      const hours = Math.floor(totalSeconds / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-      nextValues.goe_transaction_duration = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    }
-  }
-
-  getDynamicPollIntervalMs(status = this.lastStatus) {
-    if (Number(status?.car) === 2) {
-      return POLL_INTERVAL;
-    }
-
-    if (this.hasCapability('evcharger_charging_state')) {
-      const chargingState = this.getCapabilityValue('evcharger_charging_state');
-      if (chargingState === 'plugged_in_charging') {
-        return POLL_INTERVAL;
-      }
-    }
-
-    return POLL_INTERVAL_IDLE;
-  }
-
-  updatePollInterval(intervalMs) {
-    if (this.pollIntervalMs === intervalMs && this.onPollInterval) {
-      return;
-    }
-
-    if (this.onPollInterval) {
-      this.homey.clearInterval(this.onPollInterval);
-    }
-
-    this.onPollInterval = this.homey.setInterval(this.onPoll.bind(this), intervalMs);
-    this.pollIntervalMs = intervalMs;
-  }
-
-  getApiBaseUrl(address) {
-    const host = typeof address === 'string' ? address.trim() : '';
-    return host ? `http://${host}/api` : null;
-  }
-
-  // Set the API endpoint (and auth) from device settings. Local uses the LAN address.
-  configureApiConnection(settings) {
-    this.api.base_url = this.getApiBaseUrl(settings.address);
-  }
-
   /**
    * onInit is called when the device is initialized.
    */
@@ -284,6 +94,202 @@ class evChargerDevice extends Homey.Device {
 
     this.registerCapabilityListeners();
     await this.startConnection();
+  }
+
+  /**
+   * onAdded is called when the user adds the device, called just after pairing.
+   */
+  async onAdded() {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} has been added.`);
+  }
+
+  /**
+   * onRenamed is called when the user updates the device's name.
+   * This method can be used this to synchronise the name to the device.
+   * @param {string} name The new name
+   */
+  async onRenamed(name) {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} was renamed to ${name}.`);
+  }
+
+  /**
+   * onDeleted is called when the user deleted the device.
+   */
+  async onDeleted() {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} has been deleted.`);
+  }
+
+  async onUninit() {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} has been uninitialized.`);
+    await this.clearIntervals();
+    if (this.api && typeof this.api.destroy === 'function') {
+      this.api.destroy();
+    }
+  }
+
+  onDiscoveryResult(discoveryResult) {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} discovered - result: ${discoveryResult.id}.`);
+    // Return a truthy value here if the discovery result matches your device.
+    return discoveryResult.id === this.getData().id;
+  }
+
+  // This method will be executed once when the device has been found (onDiscoveryResult returned true)
+  async onDiscoveryAvailable(discoveryResult) {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} available - result: ${discoveryResult.address}.`);
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} type: ${discoveryResult.txt.devicetype}.`);
+    this.api.base_url = this.getApiBaseUrl(discoveryResult.address);
+    await this.setSettings({
+      address: discoveryResult.address
+    });
+    await this.setAvailable();
+    await this.clearIntervals();
+    await this.onPoll();
+  }
+
+  async onDiscoveryAddressChanged(discoveryResult) {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.address}.`);
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.name}.`);
+    // Update your connection details here, reconnect when the device is offline
+    this.api.base_url = this.getApiBaseUrl(discoveryResult.address);
+    await this.setSettings({
+      address: discoveryResult.address
+    });
+    await this.setAvailable();
+  }
+
+  onDiscoveryLastSeenChanged(discoveryResult) {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} LastSeenChanged - result: ${discoveryResult.address}.`);
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} LastSeenChanged - result: ${discoveryResult.name}.`);
+  }
+
+  /**
+   * onSettings is called when the user updates the device's settings.
+   * @param {object} event the onSettings event data
+   * @param {object} event.oldSettings The old settings object
+   * @param {object} event.newSettings The new settings object
+   * @param {string[]} event.changedKeys An array of keys changed since the previous version
+   * @returns {Promise<string|void>} return a custom message that will be displayed
+   */
+  async onSettings({ oldSettings, newSettings, changedKeys }) {
+    this.log(`[Device] ${this.getName()}: ${this.getData().id} settings where changed: ${changedKeys}`);
+
+    const newAddress = typeof newSettings.address === 'string' ? newSettings.address.trim() : '';
+    const oldAddress = typeof oldSettings.address === 'string' ? oldSettings.address.trim() : '';
+
+    if (!newAddress || newAddress === oldAddress) {
+      return;
+    }
+
+    this.api.base_url = this.getApiBaseUrl(newAddress);
+    try {
+      const isConnected = await this.api.testConnection();
+      if (!isConnected) {
+        const error = `Could not connect to go-eCharger at ${newAddress}`;
+        this.setUnavailable(error).catch(() => {});
+        throw new Error(error);
+      }
+      this.log(`[Device] ${this.getName()}: ${this.getData().id} new settings OK.`);
+      await this.setAvailable();
+    } catch (error) {
+      await this.setUnavailable(error);
+      throw error;
+    }
+  }
+
+  applyTransactionTimeValues(nextValues = {}) {
+    const hasStart = this.hasCapability('goe_transaction_start');
+    const hasEnd = this.hasCapability('goe_transaction_end');
+    const hasDuration = this.hasCapability('goe_transaction_duration');
+    if (!hasStart && !hasEnd && !hasDuration) return;
+
+    // Only update transaction timers from a fresh polled transaction value.
+    if (typeof nextValues.goe_transaction !== 'string') {
+      return;
+    }
+
+    const previousTransaction = this.getCapabilityValue('goe_transaction');
+    const nextTransaction = nextValues.goe_transaction;
+    const isTransactionActive = typeof nextTransaction === 'string' && nextTransaction !== GOE_TRANSACTION.NONE;
+    const timezone = this.homey?.clock?.getTimezone?.();
+
+    if (previousTransaction === GOE_TRANSACTION.NONE && isTransactionActive) {
+      this.transactionStartTimestamp = Date.now();
+      if (hasStart) {
+        nextValues.goe_transaction_start = formatTransactionDateTime(new Date(this.transactionStartTimestamp), timezone);
+      }
+    }
+
+    if (!isTransactionActive) {
+      this.transactionStartTimestamp = null;
+      return;
+    }
+
+    if (!Number.isFinite(this.transactionStartTimestamp)) {
+      const startCandidate = nextValues.goe_transaction_start ?? this.getCapabilityValue('goe_transaction_start');
+      const parsedStart = parseTransactionStart(startCandidate);
+      if (parsedStart !== null) {
+        this.transactionStartTimestamp = parsedStart;
+      }
+    }
+
+    if (!Number.isFinite(this.transactionStartTimestamp)) {
+      this.transactionStartTimestamp = Date.now();
+      if (hasStart) {
+        nextValues.goe_transaction_start = formatTransactionDateTime(new Date(this.transactionStartTimestamp), timezone);
+      }
+    }
+
+    const now = new Date();
+    const endTimestamp = now.getTime();
+    let endValue;
+    if (hasEnd) {
+      endValue = formatTransactionDateTime(now, timezone);
+      nextValues.goe_transaction_end = endValue;
+    } else {
+      endValue = formatTransactionDateTime(now, timezone);
+    }
+    if (hasDuration) {
+      const startValue = nextValues.goe_transaction_start ?? this.getCapabilityValue('goe_transaction_start');
+      const parsedStart = parseTransactionStart(startValue);
+      const parsedEnd = parseTransactionStart(endValue);
+
+      const durationMs = Number.isFinite(parsedStart) && Number.isFinite(parsedEnd) ? parsedEnd - parsedStart : endTimestamp - this.transactionStartTimestamp;
+      nextValues.goe_transaction_duration = formatTransactionDuration(durationMs);
+    }
+  }
+
+  getDynamicPollIntervalMs() {
+    if (this.hasCapability('evcharger_charging_state')) {
+      const chargingState = this.getCapabilityValue('evcharger_charging_state');
+      if (chargingState === 'plugged_in_charging' || chargingState === 'plugged_in_paused' || chargingState === 'plugged_in') {
+        return POLL_INTERVAL;
+      }
+    }
+
+    return POLL_INTERVAL_IDLE;
+  }
+
+  updatePollInterval(intervalMs) {
+    if (this.pollIntervalMs === intervalMs && this.onPollInterval) {
+      return;
+    }
+
+    if (this.onPollInterval) {
+      this.homey.clearInterval(this.onPollInterval);
+    }
+
+    this.onPollInterval = this.homey.setInterval(this.onPoll.bind(this), intervalMs);
+    this.pollIntervalMs = intervalMs;
+  }
+
+  getApiBaseUrl(address) {
+    const host = typeof address === 'string' ? address.trim() : '';
+    return host ? `http://${host}/api` : null;
+  }
+
+  // Set the API endpoint (and auth) from device settings. Local uses the LAN address.
+  configureApiConnection(settings) {
+    this.api.base_url = this.getApiBaseUrl(settings.address);
   }
 
   // Local devices become available and start polling from onDiscoveryAvailable (mDNS).
@@ -358,6 +364,37 @@ class evChargerDevice extends Homey.Device {
     this.lastTransactionValuesSignature = signature;
   }
 
+  /**
+   * Resolve the display name for a transaction capability value.
+   *
+   * @param {object} status Latest charger status payload.
+   * @param {string} transactionCapabilityValue Homey transaction capability value.
+   * @returns {string} Transaction display name.
+   */
+  resolveTransactionName(status = {}, transactionCapabilityValue) {
+    if (transactionCapabilityValue === GOE_TRANSACTION.NONE) {
+      return 'No authentication';
+    }
+
+    if (transactionCapabilityValue === GOE_TRANSACTION.ANONYMOUS) {
+      return 'Anonymous';
+    }
+
+    const dynamicSlot = this.transactionSlotById?.[transactionCapabilityValue];
+    const staticSlotMatch = /^card_(\d+)$/.exec(String(transactionCapabilityValue || ''));
+    const staticSlot = staticSlotMatch ? Number(staticSlotMatch[1]) : null;
+    const slot = Number.isInteger(dynamicSlot) ? dynamicSlot : staticSlot;
+    if (Number.isInteger(slot) && slot >= 1 && slot <= 10) {
+      return getTransactionCardNameBySlot(status, slot);
+    }
+
+    if (typeof transactionCapabilityValue === 'string' && transactionCapabilityValue.trim()) {
+      return transactionCapabilityValue;
+    }
+
+    return 'Unknown';
+  }
+
   setPendingChargingState(value) {
     this.pendingChargingState = {
       expectedValue: value,
@@ -376,106 +413,6 @@ class evChargerDevice extends Homey.Device {
     return new Promise((resolve) => {
       this.homey.setTimeout(resolve, ms);
     });
-  }
-
-  /**
-   * onAdded is called when the user adds the device, called just after pairing.
-   */
-  async onAdded() {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} has been added.`);
-  }
-
-  /**
-   * onSettings is called when the user updates the device's settings.
-   * @param {object} event the onSettings event data
-   * @param {object} event.oldSettings The old settings object
-   * @param {object} event.newSettings The new settings object
-   * @param {string[]} event.changedKeys An array of keys changed since the previous version
-   * @returns {Promise<string|void>} return a custom message that will be displayed
-   */
-  async onSettings({ oldSettings, newSettings, changedKeys }) {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} settings where changed: ${changedKeys}`);
-
-    const newAddress = typeof newSettings.address === 'string' ? newSettings.address.trim() : '';
-    const oldAddress = typeof oldSettings.address === 'string' ? oldSettings.address.trim() : '';
-
-    if (!newAddress || newAddress === oldAddress) {
-      return;
-    }
-
-    this.api.base_url = this.getApiBaseUrl(newAddress);
-    try {
-      const isConnected = await this.api.testConnection();
-      if (!isConnected) {
-        const error = `Could not connect to go-eCharger at ${newAddress}`;
-        this.setUnavailable(error).catch(() => {});
-        throw new Error(error);
-      }
-      this.log(`[Device] ${this.getName()}: ${this.getData().id} new settings OK.`);
-      await this.setAvailable();
-    } catch (error) {
-      await this.setUnavailable(error);
-      throw error;
-    }
-  }
-
-  /**
-   * onRenamed is called when the user updates the device's name.
-   * This method can be used this to synchronise the name to the device.
-   * @param {string} name The new name
-   */
-  async onRenamed(name) {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} was renamed to ${name}.`);
-  }
-
-  /**
-   * onDeleted is called when the user deleted the device.
-   */
-  async onDeleted() {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} has been deleted.`);
-  }
-
-  async onUninit() {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} has been uninitialized.`);
-    await this.clearIntervals();
-    if (this.api && typeof this.api.destroy === 'function') {
-      this.api.destroy();
-    }
-  }
-
-  onDiscoveryResult(discoveryResult) {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} discovered - result: ${discoveryResult.id}.`);
-    // Return a truthy value here if the discovery result matches your device.
-    return discoveryResult.id === this.getData().id;
-  }
-
-  // This method will be executed once when the device has been found (onDiscoveryResult returned true)
-  async onDiscoveryAvailable(discoveryResult) {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} available - result: ${discoveryResult.address}.`);
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} type: ${discoveryResult.txt.devicetype}.`);
-    this.api.base_url = this.getApiBaseUrl(discoveryResult.address);
-    await this.setSettings({
-      address: discoveryResult.address
-    });
-    await this.setAvailable();
-    await this.clearIntervals();
-    await this.onPoll();
-  }
-
-  async onDiscoveryAddressChanged(discoveryResult) {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.address}.`);
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} changed - result: ${discoveryResult.name}.`);
-    // Update your connection details here, reconnect when the device is offline
-    this.api.base_url = this.getApiBaseUrl(discoveryResult.address);
-    await this.setSettings({
-      address: discoveryResult.address
-    });
-    await this.setAvailable();
-  }
-
-  onDiscoveryLastSeenChanged(discoveryResult) {
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} LastSeenChanged - result: ${discoveryResult.address}.`);
-    this.log(`[Device] ${this.getName()}: ${this.getData().id} LastSeenChanged - result: ${discoveryResult.name}.`);
   }
 
   async clearIntervals() {
@@ -704,20 +641,7 @@ class evChargerDevice extends Homey.Device {
         const previousChargingState = this.getCapabilityValue('evcharger_charging_state');
         const nextChargingState = nextValues.evcharger_charging_state ?? previousChargingState;
         const transactionCapabilityValue = typeof nextValues.goe_transaction === 'string' ? nextValues.goe_transaction : this.getCapabilityValue('goe_transaction');
-        let transactionName = 'Unknown';
-
-        if (transactionCapabilityValue === GOE_TRANSACTION.NONE) {
-          transactionName = 'No authentication';
-        } else if (transactionCapabilityValue === GOE_TRANSACTION.ANONYMOUS) {
-          transactionName = 'Anonymous';
-        } else {
-          const slot = this.transactionSlotById?.[transactionCapabilityValue];
-          if (Number.isInteger(slot) && slot >= 1 && slot <= 10) {
-            transactionName = getTransactionCardNameBySlot(status, slot);
-          } else if (typeof transactionCapabilityValue === 'string' && transactionCapabilityValue.trim()) {
-            transactionName = transactionCapabilityValue;
-          }
-        }
+        const transactionName = this.resolveTransactionName(status, transactionCapabilityValue);
 
         const hasMeaningfulTransaction = typeof transactionCapabilityValue === 'string' && transactionCapabilityValue !== GOE_TRANSACTION.NONE;
         if (nextChargingState && nextChargingState !== 'plugged_out') {
@@ -780,6 +704,8 @@ class evChargerDevice extends Homey.Device {
         }
       }
 
+      const pendingTriggers = [];
+
       for (const [capability, value] of Object.entries(nextValues)) {
         if (!this.hasCapability(capability)) continue;
         if (value === undefined || value === null) continue;
@@ -801,8 +727,22 @@ class evChargerDevice extends Homey.Device {
 
         await this.setCapabilityValue(capability, value).catch((error) => this.error(error));
 
+        if (capability === 'goe_charger_mode' && previousValue !== value) {
+          pendingTriggers.push({ type: 'charger_mode', value });
+        }
+
         if (capability === 'goe_transaction' && previousValue !== value) {
-          await this.triggerTransactionChanged(status, value);
+          pendingTriggers.push({ type: 'transaction', value, transactionName: nextValues.goe_transaction_name });
+        }
+      }
+
+      for (const pendingTrigger of pendingTriggers) {
+        if (pendingTrigger.type === 'charger_mode') {
+          await this.triggerChargerModeChanged(pendingTrigger.value);
+        }
+
+        if (pendingTrigger.type === 'transaction') {
+          await this.triggerTransactionChanged(status, pendingTrigger.value, pendingTrigger.transactionName);
         }
       }
     } catch (error) {
@@ -871,6 +811,10 @@ class evChargerDevice extends Homey.Device {
     }
 
     await this.applyApiValues({ trx: this.apiValue });
+    if (this.hasCapability('goe_transaction_name')) {
+      const transactionName = this.resolveTransactionName(this.lastStatus, normalizedTransaction);
+      await this.setCapabilityValue('goe_transaction_name', transactionName).catch((error) => this.error(error));
+    }
   }
 
   async onCapability_SET_FLEXIBLE_RATE_LIMIT(rate) {
@@ -898,7 +842,7 @@ class evChargerDevice extends Homey.Device {
    */
   async onCapability_SET_DAILY_TRIP_KWH_TARGET({ targetEnergyKWh, targetTime }) {
     const parsedTargetEnergyKWh = Number(targetEnergyKWh);
-    const att = this.parseTimeArgToLocalSeconds(targetTime);
+    const att = parseTimeArgToLocalSeconds(targetTime);
     const ate = Math.ceil(parsedTargetEnergyKWh) * 1000;
     await this.applyApiValues({ att, ate });
   }
@@ -917,7 +861,7 @@ class evChargerDevice extends Homey.Device {
     const parsedTargetSoc = Number(targetSoc);
     const parsedBatteryCapacityKWh = Number(batteryCapacityKWh);
 
-    const att = this.parseTimeArgToLocalSeconds(targetTime);
+    const att = parseTimeArgToLocalSeconds(targetTime);
     const requiredKWh = ((parsedTargetSoc - parsedStartSoc) / 100) * parsedBatteryCapacityKWh;
     const ate = Math.ceil(requiredKWh) * 1000;
 
@@ -1017,8 +961,30 @@ class evChargerDevice extends Homey.Device {
     });
   }
 
-  async triggerTransactionChanged(status, transactionCapabilityValue) {
-    const transactionName = this.getCapabilityValue('goe_transaction_name') || getTransactionCardName(status);
+  /**
+   * Trigger the Homey flow when the charger mode changes.
+   *
+   * @param {string} chargerMode Current charger mode capability value.
+   * @returns {Promise<void>}
+   */
+  async triggerChargerModeChanged(chargerMode) {
+    const trigger = this.homey.flow.getDeviceTriggerCard('goe_charger_mode_changed');
+    await trigger
+      .trigger(this, {
+        goe_charger_mode: chargerMode
+      })
+      .catch((error) => this.error(error));
+  }
+
+  /**
+   * Trigger the Homey flow when the charger transaction changes.
+   *
+   * @param {object} status Latest charger status payload.
+   * @param {string} transactionCapabilityValue Current transaction capability value.
+   * @param {string} transactionName Current transaction display name.
+   * @returns {Promise<void>}
+   */
+  async triggerTransactionChanged(status, transactionCapabilityValue, transactionName = this.resolveTransactionName(status, transactionCapabilityValue)) {
     const trigger = this.homey.flow.getDeviceTriggerCard('goe_transaction_changed');
     await trigger
       .trigger(this, {
