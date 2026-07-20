@@ -43,5 +43,8 @@
   },
   "1.7.0": {
     "en": "BREAK: Removes calculated PV vs Grid charging energy counters. Need a better way to estimate the ratio if PV and Grid power in relation to used power."
+  },
+  "1.7.1": {
+    "en": "FIX: Session User used in a flow may have had old value when transaction changed was triggered."
   }
 }
