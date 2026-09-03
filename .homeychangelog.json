@@ -49,5 +49,8 @@
   },
   "1.7.2": {
     "en": "FIX: Automatic Discover - Better handling of no devices found"
+  },
+  "1.7.3": {
+    "en": "Enchance mDNS discovery result logging"
   }
 }
