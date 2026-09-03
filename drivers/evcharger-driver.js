@@ -41,7 +41,7 @@ class evChargerDriver extends Homey.Driver {
           });
 
         if (results.length > 0) {
-          this.log(`[Driver] ${deviceDriver} - mDNS discovery found ${results.length} device(s): ${results.map((result) => result.name).join(', ')}`);
+          this.log(`[Driver] ${deviceDriver} - mDNS discovery found ${results.length} device(s): ${results.map((result) => `${result.name} (${JSON.stringify(result.data)})`).join(', ')}`);
         } else {
           this.log(`[Driver] ${deviceDriver} - mDNS discovery found no devices`);
         }
