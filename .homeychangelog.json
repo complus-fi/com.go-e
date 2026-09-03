@@ -46,5 +46,8 @@
   },
   "1.7.1": {
     "en": "FIX: Session User used in a flow may have had old value when transaction changed was triggered."
+  },
+  "1.7.2": {
+    "en": "FIX: Automatic Discover - Better handling of no devices found"
   }
 }
