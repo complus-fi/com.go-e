@@ -25,7 +25,7 @@
         "field": "txt.devicetype",
         "match": {
           "type": "string",
-          "value": "go-eCharger_V3"
+          "value": "go-eCharger"
         }
       }
     ]
