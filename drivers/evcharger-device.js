@@ -693,10 +693,16 @@ class evChargerDevice extends Homey.Device {
         }
       }
 
+      // Track ama (installation ampere max) so target_power writes aren't clamped to the default
+      const ama = Number(status.ama);
+      if (Number.isFinite(ama)) {
+        this.maxAmps = ama;
+      }
+
       // Update target_power max capability option based on ama (ampere max limit)
-      if (this.hasCapability('target_power') && status.ama !== undefined && Number.isFinite(Number(status.ama))) {
+      if (this.hasCapability('target_power') && Number.isFinite(this.maxAmps)) {
         const currentOptions = this.getCapabilityOptions('target_power');
-        const newMax = Math.floor(Number(status.ama) * THREE_PHASE_VOLTAGE);
+        const newMax = Math.floor(this.maxAmps * THREE_PHASE_VOLTAGE);
 
         if (!currentOptions.max || currentOptions.max !== newMax) {
           const newOptions = { ...currentOptions, max: newMax };
