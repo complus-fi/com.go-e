@@ -1,6 +1,6 @@
 {
   "id": "com.go-e",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "compatibility": ">=12.13.0",
   "sdk": 3,
   "runtime": "nodejs",

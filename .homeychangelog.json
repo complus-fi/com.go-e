@@ -55,5 +55,8 @@
   },
   "1.7.4": {
     "en": "FIX: Homeplus local discovery."
+  },
+  "1.7.5": {
+    "en": "FIX: Allow 22kW targer_power."
   }
 }
